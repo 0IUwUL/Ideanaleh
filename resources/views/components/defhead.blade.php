@@ -88,7 +88,9 @@
                 Step 1 of 3
             </div>  
             <div class="mt-3">
-                <form>
+            <form method="post" action="{{route('saveItem')}}" accept-charset="UTF-8">
+             
+                @csrf
                     <div class="mb-3">
                         <label for="InputLName" class="form-label">Last Name</label>
                         <input type="text" name = "Lname" class="form-control border-info" id="InputLName"/>
@@ -167,19 +169,19 @@
                 <label class="form-label">Choose preffered categories (3 at least): </label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" value="Games" aria-label="Checkbox for following text input"> Games
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for following text input"> Games
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" value="Business" aria-label="Checkbox for following text input"> Business
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for following text input"> Business
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" value="AI" aria-label="Checkbox for following text input"> AI
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for following text input"> AI
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" value="Agriculture" aria-label="Checkbox for following text input"> Agriculture
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for following text input"> Agriculture
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" value="Music" aria-label="Checkbox for following text input"> Music
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for following text input"> Music
                     </div>
                 </div>
             </div>

@@ -17,8 +17,8 @@ function validate(){
                 equalTo: "Password doesn't match",
             },
             'Categs[]': {
-                required: "You must check at least 1 box",
-                minlength: "Check atleast {0} boxes"
+                required: "You must check at least 3 categories",
+                minlength: "Check at least {0} categories"
             },
     }
 });

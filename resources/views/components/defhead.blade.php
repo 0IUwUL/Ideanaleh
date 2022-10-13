@@ -51,11 +51,11 @@
       <form>
             <div class="mb-3">
                 <label for="InputEmail" class="form-label">Email address</label>
-                <input type="email" name = "email" class="form-control border-info" id="InputEmail" aria-describedby="emailHelp"/>
+                <input type="email" name = "LoginEmail" class="form-control border-info" id="InputEmail" aria-describedby="emailHelp"/>
             </div>
             <div class="mb-3">
                 <label for="InputPassword" class="form-label">Password</label>
-                <input type="password" name = "password" class="form-control border-info" id="InputPassword"/>
+                <input type="password" name = "LoginPassword" class="form-control border-info" id="InputPassword"/>
             </div>
             <!-- <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -86,9 +86,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="modal-body p-4">
-              <div class="fw-semibold">
+            <div class="d-flex justify-content-center fw-semibold text-danger">
                   Step 1 of 3
-              </div>  
+            </div>
+            <div class="d-flex justify-content-center display-6 text-dark">
+                      Profile Information
+            </div>
+                
               <div class="mt-3">
               
                       <div class="mb-3">
@@ -124,9 +128,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-              <div class="fw-semibold">
-                  Step 2 of 3
-              </div>  
+          <div class="d-flex justify-content-center fw-semibold text-danger">
+            Step 2 of 3
+          </div>  
+          <div class="d-flex justify-content-center display-6 text-dark">
+                Email Authentication
+          </div>
               <div class="mt-3">
                   <div class="mb-3">
                       <label for="InputEmail" class="form-label">Email</label>
@@ -134,14 +141,14 @@
                   </div>
                   <div class="mb-3">
                       <label for="InputPassword" class="form-label">Input Password</label>
-                      <input type="password" name = "password" class="form-control border-info" id="password" required/>
+                      <input type="password" name = "password" class="form-control border-info" id="password" minlength="8" required/>
                   </div>
                   <div class="mb-3">
                       <label for="InputRePassword" class="form-label">Re-Enter Password</label>
                       <input type="password" name = "rePassword" class="form-control border-info" id="rePassword" required data-rule-equalTo = '#password'/>
                   </div>
                   <div class="mb-3">
-                      <label for="InputIMG" class="form-label">Upload image as an icon:</label>
+                      <label for="InputIMG" class="form-label">Upload image as an icon (optional):</label>
                       <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
                   </div>
               </div>
@@ -162,26 +169,29 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-              <div class="fw-semibold">
-                  Step 3 of 3
-              </div>  
+            <div class="d-flex justify-content-center fw-semibold text-danger">
+              Step 3 of 3
+            </div>  
+            <div class="d-flex justify-content-center display-6 text-dark">
+                  Category Selection
+            </div>  
               <div class="mt-3">
                   <label class="form-label">Choose preffered categories (3 at least): </label>
                   <div class="input-group mb-3 d-flex justify-content-evenly">
                       <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for following text input"> Games
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
                       </div>
                       <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for following text input"> Business
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
                       </div>
                       <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for following text input"> AI
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
                       </div>
                       <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for following text input"> Agriculture
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
                       </div>
                       <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for following text input"> Music
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
                       </div>
                   </div>
                   <label for="Categs[]" class="error">Your error message will be display here.</label>

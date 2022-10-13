@@ -75,122 +75,123 @@
 </div>
 
 <!-- SignUp -->
-
-<div class="modal" id="SignUpModal" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h1 class="modal-title fs-5" id="SignUpModalToggleLabel">Sign Up</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<form method="post" action="{{route('saveItem')}}" accept-charset="UTF-8" id="myForm">
+  @csrf           
+                
+  <div class="modal" id="SignUpModal" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h1 class="modal-title fs-5" id="SignUpModalToggleLabel">Sign Up</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body p-4">
+              <div class="fw-semibold">
+                  Step 1 of 3
+              </div>  
+              <div class="mt-3">
+              
+                      <div class="mb-3">
+                          <label for="InputLName" class="form-label">Last Name</label>
+                          <input type="text" name = "Lname" class="form-control border-info" id="Lname" required/>
+                      </div>
+                      <div class="mb-3">
+                          <label for="InputFName" class="form-label">First Name</label>
+                          <input type="text" name = "Fname" class="form-control border-info" id="FName" required/>
+                      </div>
+                      <div class="mb-3">
+                          <label for="InputMName" class="form-label">Middle Name</label>
+                          <input type="text" name = "Mname" class="form-control border-info" id="MName" required/>
+                      </div>
+                      <div class="mb-3">
+                          <label for="InputAddress" class="form-label">Complete Address</label>
+                          <textarea name = "address" class="form-control border-info" id="Address" required></textarea>
+                      </div>
+              </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success next" id="next">Next</button>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <div class="modal" id="SignUpModal2" aria-hidden="true" aria-labelledby="SignUpModalToggle2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h1 class="modal-title fs-5" id="SignUpModalToggle2">Sign Up</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
         <div class="modal-body p-4">
-            <div class="fw-semibold">
-                Step 1 of 3
-            </div>  
-            <div class="mt-3">
-            <form method="post" action="{{route('saveItem')}}" accept-charset="UTF-8">
-             
-                @csrf
-                    <div class="mb-3">
-                        <label for="InputLName" class="form-label">Last Name</label>
-                        <input type="text" name = "Lname" class="form-control border-info" id="InputLName"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputFName" class="form-label">First Name</label>
-                        <input type="text" name = "Fname" class="form-control border-info" id="InputFName"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputMName" class="form-label">Middle Name</label>
-                        <input type="text" name = "Mname" class="form-control border-info" id="InputMName"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputAddress" class="form-label">Complete Address</label>
-                        <textarea name = "address" class="form-control border-info" id="InputLName"></textarea>
-                    </div>
-            </div>
+              <div class="fw-semibold">
+                  Step 2 of 3
+              </div>  
+              <div class="mt-3">
+                  <div class="mb-3">
+                      <label for="InputEmail" class="form-label">Email</label>
+                      <input type="email" name = "email" class="form-control border-info" id="email" required/>
+                  </div>
+                  <div class="mb-3">
+                      <label for="InputPassword" class="form-label">Input Password</label>
+                      <input type="password" name = "password" class="form-control border-info" id="password" required/>
+                  </div>
+                  <div class="mb-3">
+                      <label for="InputRePassword" class="form-label">Re-Enter Password</label>
+                      <input type="password" name = "rePassword" class="form-control border-info" id="rePassword" required data-rule-equalTo = '#password'/>
+                  </div>
+                  <div class="mb-3">
+                      <label for="InputIMG" class="form-label">Upload image as an icon:</label>
+                      <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
+                  </div>
+              </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-target="#SignUpModal" data-bs-toggle="modal">Back</button>
+          <button type="button" class="btn btn-success next" id="next">Next</button>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-target="#SignUpModal2" data-bs-toggle="modal">Next</button>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal" id="SignUpModal2" aria-hidden="true" aria-labelledby="SignUpModalToggle2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h1 class="modal-title fs-5" id="SignUpModalToggle2">Sign Up</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body p-4">
-            <div class="fw-semibold">
-                Step 2 of 3
-            </div>  
-            <div class="mt-3">
-                <div class="mb-3">
-                    <label for="InputEmail" class="form-label">Email</label>
-                    <input type="email" name = "email" class="form-control border-info" id="InputEmail"/>
-                </div>
-                <div class="mb-3">
-                    <label for="InputPassword" class="form-label">Input Password</label>
-                    <input type="password" name = "password" class="form-control border-info" id="InputPassword"/>
-                </div>
-                <div class="mb-3">
-                    <label for="InputRePassword" class="form-label">Re-Enter Password</label>
-                    <input type="password" name = "repassword" class="form-control border-info" id="InputRePassword"/>
-                </div>
-                <div class="mb-3">
-                    <label for="InputIMG" class="form-label">Upload image as an icon:</label>
-                    <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
-                </div>
-            </div>
+  <div class="modal" id="SignUpModal3" aria-hidden="true" aria-labelledby="SignUpModalToggle3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h1 class="modal-title fs-5" id="SignUpModalToggle3">Sign Up</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-target="#SignUpModal" data-bs-toggle="modal">Back</button>
-        <button type="button" class="btn btn-success" data-bs-target="#SignUpModal3" data-bs-toggle="modal">Next</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="SignUpModal3" aria-hidden="true" aria-labelledby="SignUpModalToggle3" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h1 class="modal-title fs-5" id="SignUpModalToggle3">Sign Up</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body p-4">
-            <div class="fw-semibold">
-                Step 3 of 3
-            </div>  
-            <div class="mt-3">
-                <label class="form-label">Choose preffered categories (3 at least): </label>
-                <div class="input-group mb-3 d-flex justify-content-evenly">
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for following text input"> Games
-                    </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for following text input"> Business
-                    </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for following text input"> AI
-                    </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for following text input"> Agriculture
-                    </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for following text input"> Music
-                    </div>
-                </div>
-            </div>
+        <div class="modal-body p-4">
+              <div class="fw-semibold">
+                  Step 3 of 3
+              </div>  
+              <div class="mt-3">
+                  <label class="form-label">Choose preffered categories (3 at least): </label>
+                  <div class="input-group mb-3 d-flex justify-content-evenly">
+                      <div class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for following text input"> Games
+                      </div>
+                      <div class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for following text input"> Business
+                      </div>
+                      <div class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for following text input"> AI
+                      </div>
+                      <div class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for following text input"> Agriculture
+                      </div>
+                      <div class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for following text input"> Music
+                      </div>
+                  </div>
+                  <label for="Categs[]" class="error">Your error message will be display here.</label>
+              </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-target="#SignUpModal2" data-bs-toggle="modal">Back</button>
+          <button type="submit" class="btn btn-success" id="submit">Submit</button>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-target="#SignUpModal2" data-bs-toggle="modal">Back</button>
-        <button type="submit" class="btn btn-success">Submit</button>
-      </div>
         </form>
+      </div>
     </div>
   </div>
-</div>

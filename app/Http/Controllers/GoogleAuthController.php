@@ -14,9 +14,6 @@ class GoogleAuthController extends Controller
         
         // Decode JWT token from google 
         $userInfo = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $request->credential)[1]))));
-        
-        // Pass the user info from token
-        $userInfo = $profile->user;
             
         $user = new User;
         $user->Lname = $userInfo->family_name;

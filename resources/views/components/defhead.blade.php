@@ -61,11 +61,11 @@
         @csrf
             <div class="mb-3">
                 <label for="InputEmail" class="form-label">Email address</label>
-                <input type="email" name = "LoginEmail" class="form-control border-info" id="InputEmail" aria-describedby="emailHelp"/>
+                <input type="email" name = "LoginEmail" class="form-control border-info" id="InputEmail" aria-describedby="emailHelp" required/>
             </div>
             <div class="mb-3">
                 <label for="InputPassword" class="form-label">Password</label>
-                <input type="password" name = "LoginPassword" class="form-control border-info" id="InputPassword"/>
+                <input type="password" name = "LoginPassword" class="form-control border-info" id="InputPassword" required/>
             </div>
             <!-- <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

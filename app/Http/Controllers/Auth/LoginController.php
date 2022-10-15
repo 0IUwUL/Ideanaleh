@@ -27,10 +27,10 @@ class LoginController extends Controller
                 
                 return (redirect('/'));
             } else {
-                return ("Incorrect Password");
+                return redirect()->back()->with('message', 'Incorrect Password');
             }
         } else {
-            return ("NotFound");
+            return redirect()->back()->with('message', 'Email not found');
         }
 
     }

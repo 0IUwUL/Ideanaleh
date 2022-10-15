@@ -18,7 +18,7 @@ class RegistrationController extends Controller
         $user->Mname = $request->Mname;
         $user->address = $request->Lname;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->icon = $request->icon;
         $user->pref_categs = implode(',', $request->Categs);
         

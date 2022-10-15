@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistrationController; // Import controller
+
+// Import controller
+use App\Http\Controllers\RegistrationController; 
+use App\Http\Controllers\GoogleAuthController; 
 use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/saveItem', [RegistrationController::class, 'saveItem'])->name('saveItem');
+// User registration routes
+Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
+
+// Google Routes
+Route::prefix('google')->name('google.')->group(function(){
+    Route::post('callback', [GoogleAuthController::class, 'googleCallback'])->name('callback');
+});
 
 Auth::routes();
 

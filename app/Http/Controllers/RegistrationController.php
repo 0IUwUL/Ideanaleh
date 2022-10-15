@@ -11,9 +11,9 @@ use Illuminate\Validation\Rule;
 
 class RegistrationController extends Controller
 {
-    public function register(Request $request){
+    public function registerUser(Request $request){
 
-        //dd(json_encode($request->all()));
+
         $validator = Validator::make($request->all(), [
             'email' => 'unique:users',
         ]);
@@ -21,19 +21,19 @@ class RegistrationController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with('message', 'Email is already registered');
         }else{
-        $newListItem = new User;
-        $newListItem->Lname = $request->Lname;
-        $newListItem->Fname = $request->Fname;
-        $newListItem->Mname = $request->Mname;
-        $newListItem->address = $request->Lname;
-        $newListItem->email = $request->email;
-        $newListItem->password = bcrypt($request->password);
-        $newListItem->icon = $request->icon;
-        $newListItem->pref_categs = implode(',', $request->Categs);
+        $user = new User;
+        $user->Lname = $request->Lname;
+        $user->Fname = $request->Fname;
+        $user->Mname = $request->Mname;
+        $user->address = $request->Lname;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->icon = $request->icon;
+        $user->pref_categs = implode(',', $request->Categs);
         
-        $newListItem->save();
+        $user->save();
         
-        return view('welcome');
+        return redirect('/');
         }
     }
 }

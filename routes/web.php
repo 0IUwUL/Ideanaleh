@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 // User registration routes
-Route::post('/register', [RegistrationController::class, 'register'])->name('register');
+Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 
 // Google Routes
 Route::prefix('google')->name('google.')->group(function(){

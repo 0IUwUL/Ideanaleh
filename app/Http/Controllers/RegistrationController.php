@@ -16,7 +16,7 @@ class RegistrationController extends Controller
         $newListItem->Mname = $request->Mname;
         $newListItem->address = $request->Lname;
         $newListItem->email = $request->email;
-        $newListItem->password = $request->password;
+        $newListItem->password = bcrypt($request->password);
         $newListItem->icon = $request->icon;
         $newListItem->pref_categs = implode(',', $request->Categs);
         

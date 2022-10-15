@@ -75,7 +75,7 @@
 </div>
 
 <!-- SignUp -->
-<form method="post" action="{{route('saveItem')}}" accept-charset="UTF-8" id="myForm">
+<form method="post" action="{{route('register')}}" accept-charset="UTF-8" id="myForm">
   @csrf           
                 
   <div class="modal" id="SignUpModal" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
@@ -114,7 +114,25 @@
               </div>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success next" id="next">Next</button>
+          <button type="button" class="btn btn-success next" >Next</button>
+          
+          <!-- Google button-->
+          <div id="g_id_onload"
+            data-client_id="858839383289-5m5kp74ondfn61no39porlmjfqdbg0lf.apps.googleusercontent.com"
+            data-login_uri="{{route('google.callback')}}"
+            data-_token="{{csrf_token()}}" 
+            data-method="post" 
+            data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-shape="rectangular"
+            data-logo_alignment="left">
+          </div>
+
         </div>
       </div>
     </div>

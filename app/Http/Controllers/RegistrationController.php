@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; //Import model
+
+//Import model
+use App\Models\User; 
 class RegistrationController extends Controller
 {
-    public function saveItem(Request $request){
+    public function register(Request $request){
 
         //dd(json_encode($request->all()));
 
-        $newListItem = new User;
-        $newListItem->Lname = $request->Lname;
-        $newListItem->Fname = $request->Fname;
-        $newListItem->Mname = $request->Mname;
-        $newListItem->address = $request->Lname;
-        $newListItem->email = $request->email;
-        $newListItem->password = $request->password;
-        $newListItem->icon = $request->icon;
-        $newListItem->pref_categs = implode(',', $request->Categs);
+        $user = new User;
+        $user->Lname = $request->Lname;
+        $user->Fname = $request->Fname;
+        $user->Mname = $request->Mname;
+        $user->address = $request->Lname;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->icon = $request->icon;
+        $user->pref_categs = implode(',', $request->Categs);
         
-        $newListItem->save();
+        $user->save();
 
         return view('welcome');
     }

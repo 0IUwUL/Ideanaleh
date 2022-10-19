@@ -24,7 +24,9 @@ class GoogleAuthController extends Controller
         // Save in database
         $user->save();
 
-        return redirect('/');
+        // Auto Login the user when they sign up with google?
+        $currentUser = User::where('email', '=', $userInfo->email)->first();
+        return $this->_loginUser($request, $currentUser);
         
     }
 
@@ -32,15 +34,27 @@ class GoogleAuthController extends Controller
     public function googleLoginUser(Request $request) {
         // Decode JWT token from google 
         $userInfo = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $request->credential)[1]))));
-
-        // dd($userInfo);
-
+        
         $user = User::where('email', '=', $userInfo->email)->first();
 
         if ($user) {
-            $request->session()->put('loginId', $user->id);
-
-            return (redirect('/'));
+            return $this->_loginUser($request, $user);
         }
+        else {
+            // Register when the user is not yet registered when they try to sign in with google
+            return $this->googleCallback($request);
+        }
+
+    }
+
+
+    /**
+     * Second parameter only accepts variable type of Object
+     * Explicitly set to prevent errors
+     */
+    private function _loginUser(Request $request, Object $user) {
+        $request->session()->put('loginId', $user->id);
+
+        return (redirect('/'));
     }
 }

@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 // Import controller
-use App\Http\Controllers\RegistrationController; 
-use App\Http\Controllers\GoogleAuthController; 
+use App\Http\Controllers\Auth\RegistrationController; 
+use App\Http\Controllers\Auth\GoogleAuthController; 
 use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,10 @@ Route::post('/register-user', [RegistrationController::class, 'registerUser'])->
 // Google Routes
 Route::prefix('google')->name('google.')->group(function(){
     Route::post('callback', [GoogleAuthController::class, 'googleCallback'])->name('callback');
+});
+
+Route::prefix('google')->name('google.')->group(function(){
+    Route::post('google-login-user', [GoogleAuthController::class, 'googleLoginUser'])->name('google-login-user');
 });
 
 Auth::routes();

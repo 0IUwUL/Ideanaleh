@@ -72,12 +72,29 @@
               <label class="form-check-label" for="exampleCheck1">Remember me</label>
           </div> -->
           <div class="d-grid">
-              <button class="btn btn-primary" type="button">Login in with Google</button>
+              <!-- <button class="btn btn-primary" type="button">Login in with Google</button> -->
           </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       <button type="submit" class="btn btn-primary">Login</button>
+
+      <!-- Google button-->
+      <div id="g_id_onload"
+        data-client_id="858839383289-5m5kp74ondfn61no39porlmjfqdbg0lf.apps.googleusercontent.com"
+        data-login_uri="{{route('google.google-login-user')}}"
+        data-_token="{{csrf_token()}}" 
+        data-method="post" 
+        data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="rectangular"
+        data-logo_alignment="left">
+      </div>
     </div>
     </form>
   </div>

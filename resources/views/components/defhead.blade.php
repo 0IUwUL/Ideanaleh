@@ -1,5 +1,5 @@
-<div>
-  <nav class="navbar navbar-expand-lg bg-light">
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container-fluid d-flex justify-content-evenly">
           <div class = "d-flex align-items-center">
               <a class="navbar-brand" href="#">
@@ -46,7 +46,7 @@
 
       </div>
   </nav>
-</div>
+</header>
 
 <!-- Login -->
 <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">

@@ -37,5 +37,6 @@ function validate(){
     }
 
 };
+
 $('.next').click(validate);
 $("#submit").on("click",validate);

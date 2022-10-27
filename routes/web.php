@@ -18,7 +18,7 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/', function () {
-    return view('settings');
+    return view('welcome');
 });
 
 // User registration routes

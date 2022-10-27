@@ -165,3 +165,38 @@ h1, h2, h3, h4, h5, h6, .btn {
   width:5%;
 }
 
+.settings{
+  background-color: #1f4260;
+  min-height: 100vh;
+  color: white
+}
+
+.set-header{
+  padding: 7rem 7rem 0 5rem
+}
+
+.col_set{
+  min-height: 80vh;
+}
+
+.set_content{
+  margin-left: 5rem;
+}
+
+.set_tabs .nav-link{
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: start;
+    font-size: 1em;
+    padding: 0.5rem;
+    color: black;
+    margin: 1rem 0;
+}
+
+.set_tabs .nav-link:hover{
+  color: #009a9c;
+}
+
+.icon_settings{
+  font-size: 2rem;
+}

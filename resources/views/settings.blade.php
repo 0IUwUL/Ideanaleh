@@ -31,11 +31,11 @@
                 <div class="col-7 bg-light rounded set_content shadow tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
                         <div class="p-5">
-                            wow
+                            
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab" tabindex="0">
-                        rawr
+                        
                     </div>
                     <!-- <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab" tabindex="0">yie</div> -->
                 </div>

@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Ideanaleh</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
 </head>
 <body>
-    <x-settings/>
+    <x-defhead/>
     <div class="settings">
         <div class="set-header">
             <div class="row text-dark d-flex justify-content-center">
@@ -100,17 +102,17 @@
                     <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab" tabindex="0">
                         <div class="p-4">
                             <div class="h1">Manage your account</div>
-                            <form class = "mt-5">
+                            
                                 <div class="row mb-3">
-                                    <span class = "text-danger mb-3">*Please verify your account</span>
+                                    <span id="error" class = "text-danger mb-3">*Please verify your account</span>
                                     <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label id="inputEmail">sample@example.com</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <button class = "btn btn-primary">Send code <i class="fa-solid fa-paper-plane"></i></i></button>
-                                        </div>
+                                            <button id="generateCode" class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
+                                        </div> 
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -120,10 +122,10 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary" disabled>Verify</button>
+                                    <button id="verifyCode" type="submit" class="btn btn-primary" disabled>Verify</button>
                                 </div>
                                 
-                            </form>
+                           
                         </div>
                     </div>
                     <!-- <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab" tabindex="0">yie</div> -->
@@ -133,4 +135,78 @@
         </div>
     </div>
 </body>
+<script>
+    // Send code in email
+    $('#generateCode').on('click', function () {
+        document.getElementById("verifyCode").disabled = false;
+        disableResend();
+        timer(60);
+            $.ajax({
+                url: "{{route('send-email')}}",
+                type:'get',
+            });
+
+        });
+
+    function disableResend()
+    {
+            $("#regenerateOTP").attr("disabled", true);
+            timer(60);
+            setTimeout(function() {
+            // enable click after 1 second
+            $('#regenerateOTP').removeAttr("disabled");
+            }, 60000); // 1 second delay
+    }
+
+    let timerOn = true;
+
+    function timer(remaining) {
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+        
+        m = m < 10 ? '0' + m : m;
+        s = s < 10 ? '0' + s : s;
+        resend = "Resend";
+        document.getElementById('timer').textContent = m + ':' + s;
+        remaining -= 1;
+        
+        if(remaining >= 0 && timerOn) {
+        setTimeout(function() {
+            timer(remaining);
+        }, 1000);
+        return;
+        }
+
+        if(!timerOn) {
+        return;
+        }
+        document.getElementById('timer').textContent = resend;
+        return;
+    }
+
+    // Verify the input code
+    $('#verifyCode').on('click', function () {
+        var code = document.getElementById("inputCode").value;
+        console.log(code);
+        $.ajax({
+            url: "{{route('verify')}}",
+            type:'get',
+            data: {
+              code : code,
+            },
+            success: function(result){
+                data = JSON.parse(result);
+                console.log(data);
+                if(data.response == "success") {
+                    document.getElementById('error').innerHTML='Verified Account';
+                    // Can also refresh the page and load the change pass view
+                } 
+                else {
+                    document.getElementById('error').innerHTML='Incorrect verification code';
+                }
+            }
+        });
+
+        });
+</script>
 </html>

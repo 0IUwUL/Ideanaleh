@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('icon')->nullable();
             $table->string('pref_categs')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }

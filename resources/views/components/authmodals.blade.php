@@ -75,20 +75,23 @@
             <div class="mt-3">
             
                     <div class="mb-3">
-                        <label for="InputLName" class="form-label">Last Name</label>
-                        <input type="text" name = "Lname" class="form-control border-info" id="Lname" required/>
+                      <label for="InputLName" class="form-label">Last Name</label>
+                      <label class="text-danger ms-1">*</label>
+                      <input type="text" name = "Lname" class="form-control border-info" id="Lname" required/>
                     </div>
                     <div class="mb-3">
-                        <label for="InputFName" class="form-label">First Name</label>
-                        <input type="text" name = "Fname" class="form-control border-info" id="FName" required/>
+                      <label for="InputFName" class="form-label">First Name</label>
+                      <label class="text-danger ms-1">*</label>
+                      <input type="text" name = "Fname" class="form-control border-info" id="FName" required/>
                     </div>
                     <div class="mb-3">
                         <label for="InputMName" class="form-label">Middle Name</label>
-                        <input type="text" name = "Mname" class="form-control border-info" id="MName" required/>
+                        <input type="text" name = "Mname" class="form-control border-info" id="MName"/>
                     </div>
                     <div class="mb-3">
-                        <label for="InputAddress" class="form-label">Complete Address</label>
-                        <textarea name = "address" class="form-control border-info" id="Address" required></textarea>
+                      <label for="InputAddress" class="form-label">Complete Address</label>
+                      <label class="text-danger ms-1">*</label>
+                      <textarea name = "address" class="form-control border-info" id="Address" required></textarea>
                     </div>
             </div>
         </div>
@@ -133,18 +136,21 @@
             <div class="mt-3">
                 <div class="mb-3">
                     <label for="InputEmail" class="form-label">Email</label>
+                    <label class="text-danger me-1">*</label>
                     <input type="email" name = "email" class="form-control border-info" id="email" required/>
                 </div>
                 <div class="mb-3">
                     <label for="InputPassword" class="form-label">Input Password</label>
+                    <label class="text-danger me-1">*</label>
                     <input type="password" name = "password" class="form-control border-info" id="password" minlength="8" required/>
                 </div>
                 <div class="mb-3">
                     <label for="InputRePassword" class="form-label">Re-Enter Password</label>
+                    <label class="text-danger me-1">*</label>
                     <input type="password" name = "rePassword" class="form-control border-info" id="rePassword" required data-rule-equalTo = '#password'/>
                 </div>
                 <div class="mb-3">
-                    <label for="InputIMG" class="form-label">Upload image as an icon (optional):</label>
+                    <label for="InputIMG" class="form-label">Upload image as an icon:</label>
                     <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
                 </div>
             </div>
@@ -173,6 +179,7 @@
           </div>  
             <div class="mt-3">
                 <label class="form-label">Choose preffered categories (3 at least): </label>
+                <label class="text-danger me-1">*</label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games

@@ -95,6 +95,8 @@
                             
                                 <div class="row mb-3">
                                     <span id="error" class = "text-danger mb-3">*Please verify your account</span>
+
+                                    <!-- Unverified email -->
                                     <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -114,14 +116,45 @@
                                 <div class="d-flex justify-content-end">
                                     <button id="verifyCode" type="submit" class="btn btn-primary" disabled>Verify</button>
                                 </div>
-                                
-                           
+
+                                <!-- Verified Email -->
+                                <!-- <label for="inputChangePass" class="col-sm-2 col-form-label" id = "title"><h3>Email</h3></label>
+                                    <div class="row mt-3">
+                                        <div class="mb-3 row">
+                                            <div class="col-sm-4">
+                                                <label id="inputOldPass">Input Old Password</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="password" class="form-control" id="inputOldPass">
+                                            </div> 
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="col-sm-4">
+                                                <label id="inputChangePass">Input New Password</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="password" class="form-control" id="inputChangePass">
+                                            </div> 
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="col-sm-4">
+                                                <label id="inputReChangePass">Re-enter New Password</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="password" class="form-control" id="inputReChangePass">
+                                            </div> 
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary" disabled>Submit Changes</button>
+                                </div> -->
                         </div>
                     </div>
                     <!-- <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab" tabindex="0">yie</div> -->
                 </div>
             </div>
-            
         </div>
     </div>
     @vite(['resources/js/settings.js'])

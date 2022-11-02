@@ -1,36 +1,26 @@
 <!DOCTYPE>
 <html lang="en" xml:lang="en">
-    <head>
-        <style type= "text/css">
-            body{background-color:"#CCD9f9";
-                font-family: Verdana, Geneva, sans-serif
-            }
-            h3{color:#4C628D}
-            p{font-weight:bold}
-        </style>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">
-    </head>
-    <title>Thinklik</title>
-    <body>
-        <div class = "container">
-            <div class ="row">
-                <div class = "col-md-4">
-                    <div class = "card" style = "margin-top: 5rem">
-                    <h1>
-                        {{$details['header']}}
+    <title>Ideanaleh</title>
+    <body style = "width: 50rem; margin: auto">
+        <div style = "color: white; margin-top: 10px">
+            <div style = "background-color: #1f4260; border-radius: 10px;">
+                <div style = "padding: 1rem; display: flex; justify-content: center;">
+                    <h1 style = "font-family: 'Brush Script MT'; font-size:3rem">
+                        Ideanaleh 
                     </h1>
-                    
-                    <br>
-                    <p>
-                        {{$details['body']}}
-                    </p>
-
-                    <br>
-                    <p>
-                        {{$details['code']}}
-                    </p>
-                    
+                </div>
+            </div>
+            <hr>
+            <div style = "display: flex; justify-content: center; margin-top: 2rem;">
+                <div>
+                    <div style = "color: black">
+                        <p style = "font-size: 2rem"> Hello , {{$details['header']}}</p> 
+                    </div>
+                    <div style = "color: black">
+                        <p>Here is your verification code: </p>
+                    </div>
+                    <div style = "letter-spacing: 3em; text-align: center; text-indent: 3em; color: black">
+                            <p style= "font-size: 50px">{{$details['code']}}</p>
                     </div>
                 </div>
             </div>

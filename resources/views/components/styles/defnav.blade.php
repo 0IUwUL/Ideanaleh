@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid d-flex justify-content-evenly">
             <div class = "d-flex align-items-center">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <div class = "display-6">
                         Ideanaleh
                     </div>
@@ -36,11 +36,17 @@
             </div>
             @else
             <div class="col-2 d-flex justify-content-end">
-                <form method="get" action="{{ route('logout') }}">
-                <button type="submit" class="btn btn-primary btn-outline-light text- white mx-3">
-                    Logout
-                </button>
-                </form>
+                <div class="dropdown">
+                    <a class="btn btn-dark btn-outline-light p-3 h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-gears"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ route('settings') }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Log out</a></li>
+                    </ul>
+                </div>
+                    
             </div>
             @endif
 

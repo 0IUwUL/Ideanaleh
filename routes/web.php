@@ -19,8 +19,12 @@ use App\Http\Controllers\Auth\EmailController;
 */
 
 Route::get('/', function () {
-    return view('pages.settings');
+    return view('pages.welcome');
 });
+
+Route::get('/settings', function () {
+    return view('pages.settings');
+})->name('settings');
 
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');

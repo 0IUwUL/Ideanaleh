@@ -25,7 +25,7 @@ class EmailController extends Controller
     $code = random_int(0,999999);  
     $code = str_pad($code, 6, 0, STR_PAD_LEFT);
     $emailDetails = [
-        'header' => 'Hello '.$user->Fname,
+        'header' => $user->Fname,
         'body' => 'To verify your email, please enter the code below',
         'code' => $code,
     ];

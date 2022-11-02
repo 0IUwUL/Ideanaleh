@@ -61,6 +61,7 @@ $('#verifyCode').on('click', function () {
             console.log(data);
             if(data.response == "success") {
                 document.getElementById('error').innerHTML='Verified Account';
+                document.getElementById('title').innerHTML='Change Password';
                 // Can also refresh the page and load the change pass view
             } 
             else {

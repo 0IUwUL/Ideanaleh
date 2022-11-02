@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController; 
 use App\Http\Controllers\Auth\GoogleAuthController; 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\EmailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +19,12 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
+
+Route::get('/settings', function () {
+    return view('pages.settings');
+})->name('settings');
 
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
@@ -48,3 +53,9 @@ Route::get('/login', function() {
 Route::post('/login-user', [LoginController::class, 'loginUser'])->name('login-user');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Send Email Routes
+Route::get('/send-email', [EmailController::class, 'sendCode'])->name('send-email');
+
+// Verify Code Routes
+Route::get('/verify', [EmailController::class, 'verify'])->name('verify');

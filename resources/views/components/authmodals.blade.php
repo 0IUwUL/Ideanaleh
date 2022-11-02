@@ -1,52 +1,4 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container-fluid d-flex justify-content-evenly">
-          <div class = "d-flex align-items-center">
-              <a class="navbar-brand" href="#">
-                  <div class = "display-6">
-                      Ideanaleh
-                  </div>
-              </a>
-          </div>
 
-          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button> -->
-          
-          <div class="col-7">
-              <form class="container-fluid">
-                  <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
-                      <span class="input-group-text" id="basic-addon1">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                          </svg>
-                      </span>
-                  </div>
-              </form>
-          </div>
-          @if(!session()->has('loginId'))
-          <div class="col-2 d-flex justify-content-end">
-                  <button type="button" class="btn btn-light btn-outline-dark mx-3" data-bs-toggle="modal" data-bs-target="#SignUpModal">
-                      Sign Up
-                  </button>
-                  <button type="button" class="btn btn-primary btn-outline-light text- white mx-3" data-bs-toggle="modal" data-bs-target="#LoginModal">
-                      Login
-                  </button>
-          </div>
-          @else
-          <div class="col-2 d-flex justify-content-end">
-              <form method="get" action="{{ route('logout') }}">
-                <button type="submit" class="btn btn-primary btn-outline-light text- white mx-3">
-                    Logout
-                </button>
-              </form>
-          </div>
-          @endif
-
-      </div>
-  </nav>
-</header>
 
 <!-- Login -->
 <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
@@ -123,20 +75,23 @@
             <div class="mt-3">
             
                     <div class="mb-3">
-                        <label for="InputLName" class="form-label">Last Name</label>
-                        <input type="text" name = "Lname" class="form-control border-info" id="Lname" required/>
+                      <label for="InputLName" class="form-label">Last Name</label>
+                      <label class="text-danger ms-1">*</label>
+                      <input type="text" name = "Lname" class="form-control border-info" id="Lname" required/>
                     </div>
                     <div class="mb-3">
-                        <label for="InputFName" class="form-label">First Name</label>
-                        <input type="text" name = "Fname" class="form-control border-info" id="FName" required/>
+                      <label for="InputFName" class="form-label">First Name</label>
+                      <label class="text-danger ms-1">*</label>
+                      <input type="text" name = "Fname" class="form-control border-info" id="FName" required/>
                     </div>
                     <div class="mb-3">
                         <label for="InputMName" class="form-label">Middle Name</label>
-                        <input type="text" name = "Mname" class="form-control border-info" id="MName" required/>
+                        <input type="text" name = "Mname" class="form-control border-info" id="MName"/>
                     </div>
                     <div class="mb-3">
-                        <label for="InputAddress" class="form-label">Complete Address</label>
-                        <textarea name = "address" class="form-control border-info" id="Address" required></textarea>
+                      <label for="InputAddress" class="form-label">Complete Address</label>
+                      <label class="text-danger ms-1">*</label>
+                      <textarea name = "address" class="form-control border-info" id="Address" required></textarea>
                     </div>
             </div>
         </div>
@@ -181,18 +136,21 @@
             <div class="mt-3">
                 <div class="mb-3">
                     <label for="InputEmail" class="form-label">Email</label>
+                    <label class="text-danger me-1">*</label>
                     <input type="email" name = "email" class="form-control border-info" id="email" required/>
                 </div>
                 <div class="mb-3">
                     <label for="InputPassword" class="form-label">Input Password</label>
+                    <label class="text-danger me-1">*</label>
                     <input type="password" name = "password" class="form-control border-info" id="password" minlength="8" required/>
                 </div>
                 <div class="mb-3">
                     <label for="InputRePassword" class="form-label">Re-Enter Password</label>
+                    <label class="text-danger me-1">*</label>
                     <input type="password" name = "rePassword" class="form-control border-info" id="rePassword" required data-rule-equalTo = '#password'/>
                 </div>
                 <div class="mb-3">
-                    <label for="InputIMG" class="form-label">Upload image as an icon (optional):</label>
+                    <label for="InputIMG" class="form-label">Upload image as an icon:</label>
                     <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
                 </div>
             </div>
@@ -221,6 +179,7 @@
           </div>  
             <div class="mt-3">
                 <label class="form-label">Choose preffered categories (3 at least): </label>
+                <label class="text-danger me-1">*</label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games

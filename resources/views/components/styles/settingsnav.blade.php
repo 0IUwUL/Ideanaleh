@@ -45,7 +45,7 @@
             @endif
 
         </div>
-        <x-defhead/>
+        <x-authmodals/>
     </nav>
 </header>
 

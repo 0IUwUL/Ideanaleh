@@ -4,7 +4,7 @@ $('#generateCode').on('click', function () {
     disableResend();
     timer(60);
         $.ajax({
-            url: "{{route('send-email')}}",
+            url: "send-email",
             type:'get',
         });
 
@@ -28,7 +28,7 @@ function timer(remaining) {
     
     m = m < 10 ? '0' + m : m;
     s = s < 10 ? '0' + s : s;
-    resend = "Resend";
+    let resend = "Resend";
     document.getElementById('timer').textContent = m + ':' + s;
     remaining -= 1;
     
@@ -51,13 +51,13 @@ $('#verifyCode').on('click', function () {
     var code = document.getElementById("inputCode").value;
     console.log(code);
     $.ajax({
-        url: "{{route('verify')}}",
+        url: "verify",
         type:'get',
         data: {
           code : code,
         },
         success: function(result){
-            data = JSON.parse(result);
+            let data = JSON.parse(result);
             console.log(data);
             if(data.response == "success") {
                 document.getElementById('error').innerHTML='Verified Account';

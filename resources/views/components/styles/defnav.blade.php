@@ -48,4 +48,4 @@
        
     </nav>
 </header>
-<x-defhead/>
+<x-authmodals/>

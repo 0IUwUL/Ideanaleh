@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController; 
 use App\Http\Controllers\Auth\GoogleAuthController; 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\EmailController;
+use App\Http\Controllers\Auth\EmailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +19,7 @@ use App\Http\Controllers\EmailController;
 */
 
 Route::get('/', function () {
-    return view('pages.welcome');
+    return view('pages.settings');
 });
 
 // User registration routes

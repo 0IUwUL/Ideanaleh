@@ -2,9 +2,8 @@
 
 <x-styles.settingsnav/>
 
-
 @section('content')
-@vite(['resources/js/app.js'])
+
     <div class="settings">
         <div class="set-header">
             <div class="row text-dark d-flex justify-content-center">
@@ -125,8 +124,8 @@
             
         </div>
     </div>
-</body>
+    @vite(['resources/js/settings.js'])
 <script>
-    
+  
 </script>
 @endsection

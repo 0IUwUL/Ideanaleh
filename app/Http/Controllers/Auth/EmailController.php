@@ -11,7 +11,9 @@ use App\Models\User;
 
 class EmailController extends Controller
 {
-    //
+    // Temporary alternative before utilizing
+    // the default VerificationController
+
     public function sendCode(Request $request)
     {
     $userId = $request->session()->get('loginId');
@@ -27,7 +29,9 @@ class EmailController extends Controller
         'code' => $code,
     ];
 
+    // Send the code to the database
     User::where('id', $userId)->update(['code' => $code]);
+    
     // Send email
     Mail::to($user->email)->send(new EmailVerification($emailDetails));
     

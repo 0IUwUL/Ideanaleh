@@ -19,7 +19,7 @@ use App\Http\Controllers\EmailController;
 */
 
 Route::get('/', function () {
-    return view('settings');
+    return view('pages.welcome');
 });
 
 // User registration routes

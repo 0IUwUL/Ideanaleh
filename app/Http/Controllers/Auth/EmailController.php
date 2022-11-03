@@ -44,6 +44,7 @@ class EmailController extends Controller
         $user = User::where('id', $userId)->first();
 
         if($request->code == $user->code) {
+            User::where('id', $userId)->update(['dev_mode' => '1']);
             $json_data = array("response" => "success");
         }
         else {

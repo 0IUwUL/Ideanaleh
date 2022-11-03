@@ -12,15 +12,14 @@ $('#generateCode').on('click', function () {
 
 function disableResend()
 {
-        $("#regenerateOTP").attr("disabled", true);
-        timer(60);
-        setTimeout(function() {
-        // enable click after 1 second
-        $('#regenerateOTP').removeAttr("disabled");
-        }, 60000); // 1 second delay
+    $("#regenerateOTP").attr("disabled", true);
+    timer(60);
+    setTimeout(function() {
+    // enable click after 1 second
+    $('#regenerateOTP').removeAttr("disabled");
+    }, 60000); // 1 second delay
 }
 
-let timerOn = true;
 
 function timer(remaining) {
     var m = Math.floor(remaining / 60);
@@ -32,18 +31,15 @@ function timer(remaining) {
     document.getElementById('timer').textContent = m + ':' + s;
     remaining -= 1;
     
-    if(remaining >= 0 && timerOn) {
-    setTimeout(function() {
-        timer(remaining);
-    }, 1000);
-    return;
+    if(remaining >= 0) {
+        setTimeout(function() {
+            timer(remaining);
+        }, 1000);
+        return;
     }
-
-    if(!timerOn) {
-    return;
-    }
+    
     document.getElementById('timer').textContent = resend;
-    return;
+    
 }
 
 // Verify the input code
@@ -58,16 +54,43 @@ $('#verifyCode').on('click', function () {
         },
         success: function(result){
             let data = JSON.parse(result);
-            console.log(data);
+            
             if(data.response == "success") {
-                document.getElementById('error').innerHTML='Verified Account';
-                document.getElementById('title').innerHTML='Change Password';
-                // Can also refresh the page and load the change pass view
-            } 
+                // Store the id of account tab
+                localStorage.setItem('activeTab', 'v-pills-account-tab');
+                
+                // Reload to change the content to change pass
+                location.reload();
+                } 
             else {
                 document.getElementById('error').innerHTML='Incorrect verification code';
             }
         }
     });
 
+});
+
+// Show the same tab after verifying
+$(document).ready(function(){
+    var activeTab = localStorage.getItem('activeTab');
+    
+    if(activeTab){
+        $('#'+ activeTab).tab('show');
+        // Remove so it only happen once
+        localStorage.removeItem("activeTab");
+    }
+});
+
+function validate(){
+    var form = $("#changePass");
+
+    form.validate({
+        messages: {
+            confirmPass: {
+                equalTo: "Doesn't match with new password",
+            },
+        }
     });
+}
+
+$("#submitChanges").on("keyup", validate);

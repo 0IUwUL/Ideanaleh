@@ -46,11 +46,11 @@
                                     @csrf
                                     <div class="col-md-6">
                                         <label for="inputLname" class="form-label">Last Name</label>
-                                        <input type="text" name="Lname" class="form-control" id="inputLname" value='{{$user->Lname}}''>
+                                        <input type="text" name="Lname" class="form-control" id="inputLname" value='{{$user->Lname}}' required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputFname" class="form-label">First Name</label>
-                                        <input type="text" name = "Fname" class="form-control" id="inputFname" value='{{$user->Fname}}'>
+                                        <input type="text" name = "Fname" class="form-control" id="inputFname" value='{{$user->Fname}}' required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputMname" class="form-label">Middle Name</label>
@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label">Address</label>
-                                        <textarea name = "address" class="form-control border-info" id="inputAddress"> {{$user->address}}</textarea>
+                                        <textarea name = "address" class="form-control border-info" id="inputAddress" required> {{$user->address}}</textarea>
                                     </div>
                                     
                                     <div class="col-12 d-flex justify-content-end">
@@ -91,7 +91,7 @@
                                 <div class="row mb-3">
                                     <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
                                     <div class="col-sm-4">
-                                    <input type="text" name = "code" class="form-control" id="inputCode">
+                                    <input type="text" name = "code" class="form-control" id="inputCode" required>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -122,9 +122,15 @@
                                                 <input type="password" name="confirmPass" class="form-control" id="confirmPass" required data-rule-equalTo = '#newPass'>
                                             </div> 
                                         </div>
-                                        
+                                        <div class="row mb-3">
+                                            <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
+                                            <div class="col input-group">
+                                                <input type="text" class="form-control" required>
+                                                <button class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex justify-content-end">
+                                    <div class="d-flex justify-content-end mt-3">
                                         <button id="submitChanges" type="submit" class="btn btn-primary" >Submit Changes</button>
                                     </div>
                                 </form>

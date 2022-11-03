@@ -25,10 +25,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <button class = "btn nav-link" type = "submit">
+                        <button class = "btn nav-link" type = "submit" href="{{ route('logout') }}">
                             <i class="fa-regular fa-share-from-square me-3"></i>Logout
                         </button>
-                        
                     </li>
                 </ul>
             </div>
@@ -177,6 +176,7 @@
                                         <th>Last Name</th>
                                         <th>Issue/Report</th>
                                         <th>Action</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -184,7 +184,50 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -192,8 +235,230 @@
                     </div>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
-                    <div class="container-fluid mt-5">
-                        rawr
+                <div class="container-fluid mt-5">
+                        <div class="row table-responsive" style = "max-height: 40vh; overflow-y: scroll">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Project Number</th>
+                                        <th>Project Name</th>
+                                        <th>Issue/Report</th>
+                                        <th>Action</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
+                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">
+                                            Top Supported Projects
+                                            <div class="card-text table=responsive" style = "max-height: 30vh; overflow-y: scroll">
+                                                <table class="table">
+                                                    <thead class = "table-dark sticky-top">
+                                                        <tr>
+                                                            <th scope = "col">#</th>
+                                                            <th scope = "col">/{{Title}/}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope = "col">1</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">2</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">3</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">4</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">5</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">
+                                            Top Genre Supported
+                                            <div class="card-text table=responsive" style = "max-height: 30vh; overflow-y: scroll">
+                                                <table class="table">
+                                                    <thead class = "table-dark sticky-top">
+                                                        <tr>
+                                                            <th scope = "col">#</th>
+                                                            <th scope = "col">/{{Genre}/}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope = "col">1</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">2</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">3</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">4</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope = "col">5</th>
+                                                            <th scope = "col">Mark</th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="row table-responsive" style = "max-height: 40vh; overflow-y: scroll">
+                                <table class="table align-middle">
+                                    <thead class = "table-dark sticky-top">
+                                        <tr>
+                                            <th>Project Name</th>
+                                            <th>Developer</th>
+                                            <th>
+                                                <button class = "btn btn-dark dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Genre
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Ascending</a></li>
+                                                    <li><a class="dropdown-item" href="#">Descending</a></li>
+                                                </ul>
+                                            </th>
+                                            <th>
+                                                <button class = "btn btn-dark dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Date
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Ascending</a></li>
+                                                    <li><a class="dropdown-item" href="#">Descending</a></li>
+                                                </ul>
+                                            </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                            <td>12-06-2000</td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                            <td>12-06-2000</td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                            <td>12-06-2000</td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                            <td>12-06-2000</td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
+                                            <td>12-06-2000</td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
+                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -201,4 +466,5 @@
     </div>
     
 </div>
+
 @endsection

@@ -26,6 +26,10 @@ Route::get('/settings', function () {
     return view('pages.settings');
 })->name('settings');
 
+Route::get('/admin', function () {
+    return view('pages.adminPage');
+});
+
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 

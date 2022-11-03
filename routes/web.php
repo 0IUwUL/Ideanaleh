@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\GoogleAuthController; 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EmailController;
+use App\Http\Controllers\SettingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +23,12 @@ Route::get('/', function () {
     return view('pages.welcome');
 });
 
-Route::get('/settings', function () {
-    return view('pages.settings');
-})->name('settings');
+// Settings routes
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+
+Route::post('/change-profile', [SettingsController::class, 'changeProfile'])->name('change-profile');
+
+Route::post('/change-pass', [SettingsController::class, 'changePass'])->name('change-pass');
 
 Route::get('/admin', function () {
     return view('pages.adminPage');

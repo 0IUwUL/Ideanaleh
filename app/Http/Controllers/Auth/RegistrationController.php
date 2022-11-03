@@ -26,7 +26,7 @@ class RegistrationController extends Controller
         $user->Lname = $request->Lname;
         $user->Fname = $request->Fname;
         $user->Mname = $request->Mname;
-        $user->address = $request->Lname;
+        $user->address = $request->address;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->icon = $request->icon;

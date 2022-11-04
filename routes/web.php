@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // Import controller
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegistrationController; 
 use App\Http\Controllers\Auth\GoogleAuthController; 
 use App\Http\Controllers\Auth\LoginController;
@@ -19,9 +20,8 @@ use App\Http\Controllers\SettingsController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.welcome');
-});
+// Home routes
+Route::get('/', [HomeController::class, 'index']);
 
 // Settings routes
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');

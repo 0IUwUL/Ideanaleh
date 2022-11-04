@@ -44,4 +44,23 @@ class SettingsController extends Controller
       
         return redirect('settings');
     }
+
+    public function uploadImage(Request $request){
+        // Get user id
+        $userId = $request->session()->get('loginId');
+        
+        if($request->hasFile('avatar')){
+            // Store the icon to avatars folder under public folder
+            $iconPath = $request->file('avatar')->storeAs(
+                'avatars',
+                // Set the name to id.imgExtension (e.g 1.jpg)
+                $userId.'.'.$request->file('avatar')->getClientOriginalExtension(),
+                'public',
+            );
+
+            User::where('id', $userId)->update(['icon' => $iconPath]);
+        }
+       
+        return redirect('settings');
+    }
 }

@@ -30,6 +30,8 @@ Route::post('/change-profile', [SettingsController::class, 'changeProfile'])->na
 
 Route::post('/change-pass', [SettingsController::class, 'changePass'])->name('change-pass');
 
+Route::post('/upload-img', [SettingsController::class, 'uploadImage'])->name('upload-img');
+
 Route::get('/admin', function () {
     return view('pages.adminPage');
 });

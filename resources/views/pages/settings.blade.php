@@ -154,13 +154,15 @@
                                         <div class="row mb-3">
                                             <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
                                             <div class="col input-group">
-                                                <input type="text" class="form-control" required>
-                                                <button class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
+                                                <input name="code" id="code" type="text" class="form-control">
+                                                <button type="button" id="generateCode" class = "btn btn-primary"><span id="timer">Send code</span></button>
                                             </div>
+                                            <div id="errorMsg" class="error"></div>
                                         </div>
                                     </div>
+                                    
                                     <div class="d-flex justify-content-end mt-3">
-                                        <button id="submitChanges" type="submit" class="btn btn-primary" >Submit Changes</button>
+                                        <button id="submitChanges" type="button" class="btn btn-primary" disabled>Submit Changes</button>
                                     </div>
                                 </form>
                                 @endif

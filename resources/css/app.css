@@ -208,3 +208,36 @@ h1, h2, h3, h4, h5, h6, .btn {
 .settings_edit_icon{
   font-size: 2rem;
 }
+
+/* admin style */
+.admin_brand{
+  font-size: 2rem;
+}
+
+.admin_nav{
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(31,66,96));
+}
+
+.admin_side{
+  max-width: 23rem;
+  right: .8rem;
+  height: 87.9vh;
+}
+
+.admin_side ul li{
+  margin-top: 1em;
+}
+
+.admin_display{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.admin_content{
+  text-align: center;
+}
+
+.admin_chart{
+  width: 50%;
+  height: 65%; 
+}

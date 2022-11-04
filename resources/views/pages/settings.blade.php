@@ -42,46 +42,27 @@
                             
                             <hr>
                             <div class="col">
-                                <form class="row g-3">
+                                <form method="post" class="row g-3"  action="{{ route('change-profile') }}" accept-charset="UTF-8">
+                                    @csrf
                                     <div class="col-md-6">
                                         <label for="inputLname" class="form-label">Last Name</label>
-                                        <input type="text" name="Lname" class="form-control" id="inputLname">
+                                        <input type="text" name="Lname" class="form-control" id="inputLname" value='{{$user->Lname}}' required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputFname" class="form-label">First Name</label>
-                                        <input type="text" name = "Fname" class="form-control" id="inputFname">
+                                        <input type="text" name = "Fname" class="form-control" id="inputFname" value='{{$user->Fname}}' required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputMname" class="form-label">Middle Name</label>
-                                        <input type="text" name="Mname" class="form-control" id="inputMname">
+                                        <input type="text" name="Mname" class="form-control" id="inputMname" value='{{$user->Mname}}'>
                                     </div>
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label">Address</label>
-                                        <textarea name = "address" class="form-control border-info" id="inputAddress"></textarea>
+                                        <textarea name = "address" class="form-control border-info" id="inputAddress" required> {{$user->address}}</textarea>
                                     </div>
                                     
-                                    <div class="mt-3">
-                                        <label class="form-label">Choose preffered categories (3 at least): </label>
-                                        <div class="input-group mb-3 d-flex justify-content-evenly">
-                                            <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
-                                            </div>
-                                            <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
-                                            </div>
-                                            <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
-                                            </div>
-                                            <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
-                                            </div>
-                                            <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary" disabled>Save</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -94,13 +75,13 @@
                             <div class="h1">Manage your account</div>
                             
                                 <div class="row mb-3">
-                                    <span id="error" class = "text-danger mb-3">*Please verify your account</span>
-
+                                    @if ($user->dev_mode == '0')
                                     <!-- Unverified email -->
+                                    <span id="error" class = "text-danger mb-3">*Please verify your account</span>
                                     <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label id="inputEmail">sample@example.com</label>
+                                            <label id="inputEmail">{{$user->email}}</label>
                                         </div>
                                         <div class="col-sm-6">
                                             <button id="generateCode" class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
@@ -110,30 +91,27 @@
                                 <div class="row mb-3">
                                     <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
                                     <div class="col-sm-4">
-                                    <input type="text" name = "code" class="form-control" id="inputCode">
+                                    <input type="text" name = "code" class="form-control" id="inputCode" required>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button id="verifyCode" type="submit" class="btn btn-primary" disabled>Verify</button>
                                 </div>
-
+                                
+                                @else
                                 <!-- Verified Email -->
-                                <!-- <label for="inputChangePass" class="col-sm-2 col-form-label" id = "title"><h3>Email</h3></label>
+                                <span id="error" class = "text-success mb-3">Verified Account</span>
+                                <label for="inputChangePass" class="col-sm-4 col-form-label" id = "title"><h3>Change Password</h3></label>
+                                <form method="post"  action="{{ route('change-pass') }}" accept-charset="UTF-8" id="changePass">
+                                    @csrf
                                     <div class="row mt-3">
-                                        <div class="mb-3 row">
-                                            <div class="col-sm-4">
-                                                <label id="inputOldPass">Input Old Password</label>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="password" class="form-control" id="inputOldPass">
-                                            </div> 
-                                        </div>
+                                       
                                         <div class="mb-3 row">
                                             <div class="col-sm-4">
                                                 <label id="inputChangePass">Input New Password</label>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="password" class="form-control" id="inputChangePass">
+                                                <input type="password" name="newPass" class="form-control" id="newPass" minlength="8" required>
                                             </div> 
                                         </div>
                                         <div class="mb-3 row">
@@ -141,15 +119,22 @@
                                                 <label id="inputReChangePass">Re-enter New Password</label>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="password" class="form-control" id="inputReChangePass">
+                                                <input type="password" name="confirmPass" class="form-control" id="confirmPass" required data-rule-equalTo = '#newPass'>
                                             </div> 
                                         </div>
-                                        
+                                        <div class="row mb-3">
+                                            <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
+                                            <div class="col input-group">
+                                                <input type="text" class="form-control" required>
+                                                <button class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary" disabled>Submit Changes</button>
-                                </div> -->
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button id="submitChanges" type="submit" class="btn btn-primary" >Submit Changes</button>
+                                    </div>
+                                </form>
+                                @endif
                         </div>
                     </div>
                     <!-- <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab" tabindex="0">yie</div> -->
@@ -158,7 +143,5 @@
         </div>
     </div>
     @vite(['resources/js/settings.js'])
-<script>
   
-</script>
 @endsection

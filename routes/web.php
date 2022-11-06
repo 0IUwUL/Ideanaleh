@@ -27,12 +27,18 @@ Route::get('/', [HomeController::class, 'index']);
 // Settings routes
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
+// Create Project
+Route::get('/project', function () {
+    return view('pages.create');
+})->name('project');
+
 Route::post('/change-profile', [SettingsController::class, 'changeProfile'])->name('change-profile');
 
 Route::post('/change-pass', [SettingsController::class, 'changePass'])->name('change-pass');
 
 Route::post('/upload-img', [SettingsController::class, 'uploadImage'])->name('upload-img');
 
+// Admin routes
 Route::get('/admin', function () {
     return view('pages.adminPage');
 });

@@ -292,7 +292,28 @@
         <p class="hero__text">
           A Platform that serves to help Creators, Inventors, Innovators to Kickstart their Dream Projects.
         </p>
-        <a href="#" class="hero__btn hero__btn--light btn">Get Started!</a>
+        @if ($mode)
+        <a href="{{ route('project') }}" class="hero__btn hero__btn--light btn">Get Started!</a>
+        @else
+        <button class="hero__btn hero__btn--light btn" id = "modeToast">Get Started!</a>
+        @endif
+        
+      </div>
+      
+      <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100 mt-5">
+        <div class="DevToast toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">System</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body bg-dark">
+            @if (session('loginId'))
+            Verify your email in your profile settings.
+            @else
+            Register or Login first
+            @endif
+          </div>
+        </div>
       </div>
   </section>
 
@@ -337,4 +358,5 @@
       </div>
     </div>
   </section>
+
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\projectViewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,9 @@ Route::get('/admin', function () {
 
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
+
+//Project View routes
+Route::get('/Project-View', [projectViewController::class, 'index'])->name('Project-View');
 
 // Google Routes
 Route::prefix('google')->name('google.')->group(function(){

@@ -30,13 +30,42 @@
                                         Avatar in use:
                                     </div>
                                     <div class="col">
-                                        <i class="fa-solid fa-images display-2"></i>
+                                        @if ($user->icon)
+                                            <img src="{{asset('storage/'.$user->icon);}} " width="100" height="100" >
+                                        @else
+                                            <i class="fa-solid fa-images display-2"></i>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <button class="btn">
+                                    <button class="btn" type="button"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#uploadModal" >
                                         <i class="fa-solid fa-user-pen settings_edit_icon"></i>
                                     </button>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="uploadModal"  tabindex="-1" aria-labelledby="uploadModal" >
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <form action ="{{route('upload-img')}}" method="post" enctype='multipart/form-data' >
+                                        @csrf
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-center">
+                                                <h4 class="modal-title" id="InputModalTitleLabel">Upload Photo</h4>
+                                            </div> 
+
+                                            <div class="modal-body text-color">
+                                                <input name="avatar" id = 'avatar' type="file" accept="image/*" required/>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-custom cancel" data-bs-dismiss="modal" >Close</button>
+                                                <button type="submit" class="btn btn-custom" >Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             
@@ -125,13 +154,15 @@
                                         <div class="row mb-3">
                                             <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
                                             <div class="col input-group">
-                                                <input type="text" class="form-control" required>
-                                                <button class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
+                                                <input name="code" id="code" type="text" class="form-control">
+                                                <button type="button" id="generateCode" class = "btn btn-primary"><span id="timer">Send code</span></button>
                                             </div>
+                                            <div id="errorMsg" class="error"></div>
                                         </div>
                                     </div>
+                                    
                                     <div class="d-flex justify-content-end mt-3">
-                                        <button id="submitChanges" type="submit" class="btn btn-primary" >Submit Changes</button>
+                                        <button id="submitChanges" type="button" class="btn btn-primary" disabled>Submit Changes</button>
                                     </div>
                                 </form>
                                 @endif

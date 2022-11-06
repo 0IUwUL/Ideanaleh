@@ -1,6 +1,8 @@
 // Send code in email
 $('#generateCode').on('click', function () {
-    document.getElementById("verifyCode").disabled = false;
+    if(document.getElementById("verifyCode"))
+        document.getElementById("verifyCode").disabled = false;
+
     disableResend();
     timer(60);
         $.ajax({
@@ -81,16 +83,53 @@ $(document).ready(function(){
     }
 });
 
-function validate(){
+
+$("#confirmPass").on("keyup", function(){
     var form = $("#changePass");
 
     form.validate({
+        rules:{
+            newPass: {
+                required:true,
+            },
+            confirmPass: {
+                required:true,
+            },    
+        },
         messages: {
             confirmPass: {
                 equalTo: "Doesn't match with new password",
             },
         }
     });
-}
 
-$("#submitChanges").on("keyup", validate);
+    if (form.valid() === true){
+        document.getElementById("submitChanges").disabled = false;
+    }
+
+}); 
+
+$("#submitChanges").on("click", function(){
+    
+    var code = document.getElementById("code").value;
+    $.ajax({
+        url: "verify",
+        type:'get',
+        data: {
+            code : code,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+
+            if(data.response == "success") {
+                document.getElementById("changePass").submit();
+            } 
+            else {
+                document.getElementById('errorMsg').innerHTML = 'Incorrect verification code'; 
+            }
+        }
+ 
+    });
+
+
+});

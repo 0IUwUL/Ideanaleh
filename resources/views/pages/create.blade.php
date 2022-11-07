@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.CreateProj')
 
 <x-styles.defnav/>
 
@@ -8,7 +8,7 @@
     <div class="col-10 rounded shadow border p-5 bg-light">
         <h2 class = "d-flex justify-content-center">Development Form</h2>
         <div class="col-8 mx-auto mt-5">
-            <>
+            <form>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingTitle" name = "ProjTitle" placeholder="Title Here..." required>
                     <label for="floatingTitle">Project Title</label>
@@ -69,26 +69,29 @@
                         <input type="text" class="form-control" aria-label="Text input with checkbox">
                     </div>
                 </div>
-                {{-- <div class="form-floating mb-3 col-8">
-                    <div class="wrapper">
-                        <div class="content">
-                            <label class = "title">Enter Desired Tags</label>
-                            <div class="tag-box">
-                                <ul id = "listTags">
-                                    <input type = "text" class = "col-2" name = "ProjTags" id = "tags">
-                                </ul>
-                            </div>
-                            <small class = "text-danger mt-5">Press enter or comma after each tag</small>
-                            <button class = "btn btn-warning ms-5 mt-2">Remove all</button>
+                <div class="form-floating my-5 col-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <h3>Enter desired tags:</h3>
+                            <button type="button" class="btn-close Tool" id = "clear_tags" title="Clear tags" aria-label="Close"></button>
                         </div>
-                    </div> --}}
+                        <div class="card-body">
+                            <div class="card-title">Use <strong>comma (,)</strong> to seperate each tag</div>
+                            <div class="tags">
+                                   <input type="text" placeholder="Add tags...">
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                          <span class="current-tag"> </span>/ <span class="max-tags"></span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="col d-flex justify-content-end">
                     <button class = "btn btn-primary btn-lg" type = "submit">Submit</button>
                 </div>
                 
-            </>
+            </form>
         </div>
     </div>
 </div>

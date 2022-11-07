@@ -41,7 +41,7 @@ function activateToast(){
     $('.DevToast').toast('show');
 }
 
+
 $('.next').click(validate);
 $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);
-$("#tags").on("keyup", addTag);

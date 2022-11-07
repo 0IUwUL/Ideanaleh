@@ -2,7 +2,6 @@ import './bootstrap';
 
 import '../sass/app.scss';
 
-
 function validate(){
     var form = $("#myForm");
     form.validate({
@@ -45,3 +44,4 @@ function activateToast(){
 $('.next').click(validate);
 $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);
+$("#tags").on("keyup", addTag);

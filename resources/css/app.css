@@ -242,8 +242,52 @@ h1, h2, h3, h4, h5, h6, .btn {
   height: 65%; 
 }
 
-/* Project page */
+/* Contect Project page */
 .project_body{
   padding: 6rem 0;
   background-image: linear-gradient(to right, rgba(243, 255, 130, 1), white, rgba(171, 235, 136, 1));
 }
+/* 
+.content ul{
+  display: flex;
+  border: 1px solid #a6a6a6;
+  padding: .5rem;
+  border-radius: 5px;
+  flex-wrap: wrap;
+}
+
+.content li{
+  list-style: none;
+  background: #f2f2f2;
+  padding: .2rem .5rem .2em .8rem; 
+  margin: .2rem .1rem;
+  border-radius: 5px;
+  border: 1px solid #e3d1e1;
+}
+
+.content li i{
+  height: 20px;
+  width: 20px;
+  background: #dfdfdf;
+  font-size: .8rem;
+  margin-left: 1rem;
+  margin-right: .5rem;
+  color: #808080;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.wrapper :where(.title, li, li i){
+  display: flex;
+  align-items: center;
+}
+
+.content ul input{
+  flex: 1;
+  outline: none;
+  padding: .7rem;
+  font-size: 15px;
+  border: none;
+} */

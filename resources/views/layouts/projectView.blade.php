@@ -21,12 +21,14 @@
         <!-- owl carousel js file -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
         @vite(['resources/css/project.css'])
-        @vite(['resources/js/app.js'])
-        @vite(['resources/js/project.js'])
+        
     </head>
     <body class="antialiased">
 
         @yield('content')
         
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        @vite(['resources/js/app.js'])
+        @vite(['resources/js/project.js'])
     </body>
 </html>

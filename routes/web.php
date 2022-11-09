@@ -28,28 +28,36 @@ Route::get('/', [HomeController::class, 'index']);
 // Settings routes
 Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
-// Create Project
-Route::get('/project', function () {
-    return view('pages.create');
-})->name('project');
-
-Route::post('/change-profile', [SettingsController::class, 'changeProfile'])->name('change-profile');
+Route::post('/change-name', [SettingsController::class, 'changeName'])->name('change-name');
 
 Route::post('/change-pass', [SettingsController::class, 'changePass'])->name('change-pass');
 
 Route::post('/upload-img', [SettingsController::class, 'uploadImage'])->name('upload-img');
+
+Route::post('/check-pass', [SettingsController::class, 'checkPassword'])->name('check-pass');
+
+Route::post('/change-email', [SettingsController::class, 'changeEmail'])->name('check-email');
+
+Route::post('/change-address', [SettingsController::class, 'changeAddress'])->name('check-address');
+
 
 // Admin routes
 Route::get('/admin', function () {
     return view('pages.adminPage');
 });
 
+
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 
-//Project View routes
+//Project routes
 Route::get('/Project-View', [ProjectController::class, 'index'])->name('Project-View');
+
 Route::post('/save-created-project', [ProjectController::class, 'saveCreatedProject'])->name('save-created-project');
+
+Route::get('/project', function () {
+    return view('pages.create');
+})->name('project');
 
 // Google Routes
 Route::prefix('google')->name('google.')->group(function(){
@@ -80,4 +88,4 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/send-email', [EmailController::class, 'sendCode'])->name('send-email');
 
 // Verify Code Routes
-Route::get('/verify', [EmailController::class, 'verify'])->name('verify');
+Route::post('/verify', [EmailController::class, 'verify'])->name('verify');

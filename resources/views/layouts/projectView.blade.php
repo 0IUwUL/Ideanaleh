@@ -21,6 +21,9 @@
         <!-- owl carousel js file -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
         @vite(['resources/css/project.css'])
+
+        {{-- bootstrap 5 icon --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         
     </head>
     <body class="antialiased">
@@ -28,6 +31,9 @@
         @yield('content')
         
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <!-- Change background dynamically -->
+        <script>var bg = document.getElementById('product');
+            bg.setAttribute('style', 'background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 154, 156,0.9)), url("https://picsum.photos/1000/1260")');</script>
         @vite(['resources/js/app.js'])
         @vite(['resources/js/project.js'])
     </body>

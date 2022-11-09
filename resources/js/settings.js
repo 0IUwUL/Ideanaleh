@@ -5,12 +5,17 @@ $('#generateCode').on('click', function () {
 
     disableResend();
     timer(60);
-        $.ajax({
-            url: "send-email",
-            type:'get',
-        });
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
     });
+    $.ajax({
+        url: "send-email",
+        type:'post',
+    });
+
+});
 
 function disableResend()
 {
@@ -50,7 +55,7 @@ $('#verifyCode').on('click', function () {
     console.log(code);
     $.ajax({
         url: "verify",
-        type:'get',
+        type:'post',
         data: {
           code : code,
         },
@@ -165,17 +170,21 @@ $(".editInfo").click(function(e){
 });
 
 // Send code to user's email
-
-
 $("#sendCode").click(function (e){
     document.getElementById('verify').disabled = false;
  
     console.log('1');
     e.target.innerHTML = 'Sent';
     e.target.disabled = true
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
         url: "send-email",
-        type:'get',
+        type:'post',
     });
 });
 

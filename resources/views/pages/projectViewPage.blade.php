@@ -6,15 +6,14 @@
 
 <!-- Product Section -->
 
-<section class="container-fluid products py-5">
+<section class="container-fluid products py-5" id=product>
     <div class="container">
-
         <!-- mobile -->
       <h1 class="product-name product-mobile-name my-5 d-block d-lg-none text-center">Title Mobile View</h1>
       <div class="tags product-mobile-name d-lg-none my-3 d-block text-center">
-        <h6>tags: RPG, Action, Hack n Slash</h6>
+        <i style="color:yellow" class="bi bi-tags"></i><h6>tags: RPG, Action, Hack n Slash</h6>
       </div>
-
+      
       <div class="row">
         <div class="col-md-6 gx-5">
           <div class="product-media">
@@ -37,7 +36,7 @@
                     <!-- if button centered add </div> here, else put div before section closing-->
                     <h1 class="product-name my-4 d-lg-block d-none">Title Desktop View</h1>
                     <div class="tags my-4 d-lg-block d-none">
-                        <h6>tags: RPG, Action, Hack n Slash</h6>
+                        <h6><i style="color:yellow" class="bi bi-tags"></i>&nbsp tags: RPG, Action, Hack n Slash</h6>
                     </div>
                     <!-- Progress Bars -->
                     <div class="progress-bars row g-0 mt-3">
@@ -60,7 +59,7 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button>
+                  <a href="http://localhost:8000/Project-View#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -70,12 +69,80 @@
       <div class="product-description d-block d-lg-none text-center my-5">
         <p>Lorem ipsum Mobile dolor sit amet consectetur, adipisicing elit. Quis ullam reprehenderit nulla iure modi assumenda necessitatibus rerum temporibus! Velit sed totam dolor in corrupti, quibusdam eos non accusantium aspernatur consectetur.
         </p>
-        <a>Read More</a>
+        <a class="text-decoration-none text-light">Read More</a>
       </div>
     </div>
   </section>
 <!-- Product Section end -->
 
+<!-- notice -->
+<div class="container-fluid notifs mt-1">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-4">
+        <span class="d-inline-block float-right position-absolute">
+          <i style="font-size:18px" class="fa-sharp fa-solid fa-wand-magic-sparkles"></i>
+        </span>
+        <span class="d-inline-block mx-4"><h6>Idiyanale is a platform made to connect creators to backers to fund their projects</h6></span>
+      </div>
+
+      <div class="col-4">
+        <span class="d-inline-block float-right position-absolute">
+          <i style="font-size:18px" class="fa-sharp fa-solid fa-file-invoice-dollar"></i>
+        </span>
+        <span class="d-inline-block mx-4"><h6>Creators should keep backers updated on a regular basis, but backers' rewards are not guaranteed.</h6></span>
+      </div>
+
+      <div class="col-4">
+        <span class="d-inline-block float-right position-absolute">
+          <i style="font-size:18px" class="fa-sharp fa-solid fa-mug-hot"></i>
+        </span>
+        <span class="d-inline-block mx-4"><h6>Come along on the voyage into the innovative future</h6></span>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- notice end -->
+
+<!-- tiers -->
+<div  id="tiers-section" class="tiers-section"></div>
+<div class="container-fluid tiers">
+  <h1 class="tiers-title text-center text-light">Tiers</h1>
+  <div class="row justify-content-center center-block">
+    <div class="card a mx-4 mt-4" style="width: 18rem;">
+      <div class="card-icon"><i class="bi bi-circle"></i></div>
+        <div class="card-body">
+        
+          <h5 class="card-title">Tier title</h5>
+          <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Porro, consectetur adipisci! Itaque dolor libero ipsam temporibus animi assumenda labore. Fugiat?</p>
+          <a href="#" class="btn btn-outline-light">Go somewhere</a>
+      </div>
+    </div>
+
+    <div class="card b mx-4 mt-4" style="width: 18rem;">
+      <div class="card-icon "><i class="bi bi-square"></i></div>
+      <div class="card-body">
+          <h5 class="card-title">Tier title</h5>
+          <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Porro, consectetur adipisci! Itaque dolor libero ipsam temporibus animi assumenda labore. Fugiat?</p>
+          <a href="#" class="btn btn-outline-light">Go somewhere</a>
+      </div>
+    </div>
+
+    <div class="card c mx-4 mt-4" style="width: 18rem;">
+      <div class="card-icon"><i class="bi bi-triangle"></i></div>
+      <div class="card-body">
+          <h5 class="card-title">Tier title</h5>
+          <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+            Porro, consectetur adipisci! Itaque dolor libero ipsam temporibus animi assumenda labore. Fugiat?</p>
+          <a href="#" class="btn btn-outline-light">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Tiers end -->
 
   <section class="container-fluid info bg-brown-medium px-0">
     <div class="container-lg py-5 px-0">

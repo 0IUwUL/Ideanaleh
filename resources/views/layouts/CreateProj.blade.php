@@ -15,7 +15,6 @@
         @yield('content')
 
         <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         @vite(['resources/js/app.js'])
 
@@ -40,6 +39,17 @@
                 document.querySelector(".current-tag").innerText = tags.length;
             }
 
+            /**
+             * The problem here is that when you remove a tag the 'name' of the 'input' infield is not updated
+             * 
+             * Say i have 3 tags namely Nice, One, Mark,... therefore the are also 3 hidden input fields with the names
+             * TagName1, TagName2, TagName3, ... However, if I decided to delete the tag named 'One'...
+             * 
+             * Expected: TagName1, TagName2
+             * Output: TagName1, TagName3
+             * 
+             * For now I will leave it as is -RamonDev
+             */
             function removeTag(el, target){
                 el.parentElement.remove();
                 tags = tags.filter(tag => tag != target);
@@ -72,7 +82,7 @@
             function createTag(){
                 document.querySelectorAll('.tag').forEach(tag => tag.remove());
                 for (tag of tags){
-                    let span_tag = `<span class = "tag">${tag} <span class="remove-tag" onclick = "removeTag(this, '${tag}')">&times;</span></span> `;
+                    let span_tag = `<span class = "tag">${tag} <input type="hidden" name="Tags[]" value="${tag}"> <span class="remove-tag" onclick = "removeTag(this, '${tag}')">&times;</span></span> `;
                     input_tags.insertAdjacentHTML('beforebegin', span_tag);
                 }
             }

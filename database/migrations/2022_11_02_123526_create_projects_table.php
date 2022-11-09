@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('tags');
             $table->integer('target_amt');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->string('yt_link');
-            $table->datetime('target_date');
+            $table->datetime('target_date')->nullable();
             $table->timestamps();
         });
     }

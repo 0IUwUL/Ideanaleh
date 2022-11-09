@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\projectViewController;
+use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,7 @@ use App\Http\Controllers\projectViewController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 // Home routes
 Route::get('/', [HomeController::class, 'index']);
@@ -47,7 +48,8 @@ Route::get('/admin', function () {
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 
 //Project View routes
-Route::get('/Project-View', [projectViewController::class, 'index'])->name('Project-View');
+Route::get('/Project-View', [ProjectController::class, 'index'])->name('Project-View');
+Route::post('/save-created-project', [ProjectController::class, 'saveCreatedProject'])->name('save-created-project');
 
 // Google Routes
 Route::prefix('google')->name('google.')->group(function(){

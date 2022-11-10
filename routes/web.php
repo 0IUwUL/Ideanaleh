@@ -48,7 +48,7 @@ Route::get('/admin', function () {
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 
 //Project View routes
-Route::get('/Project-View', [ProjectController::class, 'index'])->name('Project-View');
+Route::get('/project-view/{id}', [ProjectController::class, 'index'])->name('project-view');
 Route::post('/save-created-project', [ProjectController::class, 'saveCreatedProject'])->name('save-created-project');
 
 // Google Routes

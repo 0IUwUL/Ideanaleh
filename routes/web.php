@@ -50,9 +50,8 @@ Route::get('/admin', function () {
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 
-//Project routes
-Route::get('/Project-View', [ProjectController::class, 'index'])->name('Project-View');
-
+// Project View routes
+Route::get('/project-view/{id}', [ProjectController::class, 'index'])->name('project-view');
 Route::post('/save-created-project', [ProjectController::class, 'saveCreatedProject'])->name('save-created-project');
 
 Route::get('/project', function () {

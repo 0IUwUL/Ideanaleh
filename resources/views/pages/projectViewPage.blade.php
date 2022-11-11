@@ -6,15 +6,14 @@
 
 <!-- Product Section -->
 
-<section class="container-fluid products py-5">
+<section class="container-fluid products py-5" id=product>
     <div class="container">
-
         <!-- mobile -->
-      <h1 class="product-name product-mobile-name my-5 d-block d-lg-none text-center">Title Mobile View</h1>
+      <h1 class="product-name product-mobile-name my-5 d-block d-lg-none text-center">{{$project['title']}}</h1>
       <div class="tags product-mobile-name d-lg-none my-3 d-block text-center">
-        <h6>tags: RPG, Action, Hack n Slash</h6>
+        <i style="color:yellow" class="bi bi-tags"></i><h6>tags: {{$project['tags']}}</h6>
       </div>
-
+      
       <div class="row">
         <div class="col-md-6 gx-5">
           <div class="product-media">
@@ -35,11 +34,12 @@
 
                     <!-- desktop -->
                     <!-- if button centered add </div> here, else put div before section closing-->
-                    <h1 class="product-name my-4 d-lg-block d-none">Title Desktop View</h1>
+                    <h1 class="product-name my-4 d-lg-block d-none">{{$project['title']}}</h1>
                     <div class="tags my-4 d-lg-block d-none">
-                        <h6>tags: RPG, Action, Hack n Slash</h6>
+                        <h6><i style="color:yellow" class="bi bi-tags"></i>&nbsp tags: {{$project['tags']}}</h6>
                     </div>
                     <!-- Progress Bars -->
+                    {{-- Note to future RamonDev: Get the code for the bars in the SE2 project -RamonDev --}}
                     <div class="progress-bars row g-0 mt-3">
                         <div class="progress mx-4 mt-5" style="width: 90%;">
                             <div class="progress-bar" role="progressbar" style="width: 25%; height:20px; font-weight:bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
@@ -52,30 +52,85 @@
                     </div>
 
 
-                    <!-- Project Summary Description-->
+                    <!-- Project Summary Description Desktop-->
                 <div class="product-description d-lg-block d-none mt-3 mb-4">
-                    <p>Lorem Desktop, ipsum dolor sit amet consectetur adipisicing elit. Officia quos nulla ea voluptates quasi quam dolore optio ad omnis dolorum doloremque mollitia earum ab aut quod, quaerat qui, maiores esse laboriosam, minus a illum laborum dignissimos? Eaque, a suscipit vitae velit aspernatur, sed hic voluptatem vero temporibus ullam expedita eos, maxime numquam voluptates delectus itaque! Eius omnis neque dolorem doloremque laboriosam ratione dignissimos amet totam aperiam autem nostrum animi fugiat recusandae eos quasi rerum, temporibus eligendi molestiae, voluptate perferendis! Suscipit voluptas unde corporis maxime, libero sunt quas blanditiis omnis quos tempore autem velit molestiae distinctio, necessitatibus consectetur praesentium placeat? Doloribus.</p>
+                    <p>{{$project['description']}}</p>
                 </div>
             </div>
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button>
+                  <a href="http://localhost:8000/Project-View#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
             </div>
         </div>
       </div>
+      <!-- Project Description for Mobile -->
       <div class="product-description d-block d-lg-none text-center my-5">
-        <p>Lorem ipsum Mobile dolor sit amet consectetur, adipisicing elit. Quis ullam reprehenderit nulla iure modi assumenda necessitatibus rerum temporibus! Velit sed totam dolor in corrupti, quibusdam eos non accusantium aspernatur consectetur.
+        <p>{{$project['description']}}
         </p>
-        <a>Read More</a>
+        <a class="text-decoration-none text-light">Read More</a>
       </div>
     </div>
   </section>
 <!-- Product Section end -->
 
+<!-- notice -->
+<div class="container-fluid notifs mt-1">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-4">
+        <span class="d-inline-block float-right position-absolute">
+          <i style="font-size:18px" class="fa-sharp fa-solid fa-wand-magic-sparkles"></i>
+        </span>
+        <span class="d-inline-block mx-4"><h6>Idiyanale is a platform made to connect creators to backers to fund their projects</h6></span>
+      </div>
+
+      <div class="col-4">
+        <span class="d-inline-block float-right position-absolute">
+          <i style="font-size:18px" class="fa-sharp fa-solid fa-file-invoice-dollar"></i>
+        </span>
+        <span class="d-inline-block mx-4"><h6>Creators should keep backers updated on a regular basis, but backers' rewards are not guaranteed.</h6></span>
+      </div>
+
+      <div class="col-4">
+        <span class="d-inline-block float-right position-absolute">
+          <i style="font-size:18px" class="fa-sharp fa-solid fa-mug-hot"></i>
+        </span>
+        <span class="d-inline-block mx-4"><h6>Come along on the voyage into the innovative future</h6></span>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- notice end -->
+
+<!-- tiers -->
+<div  id="tiers-section" class="tiers-section"></div>
+<div class="container-fluid tiers">
+  <h1 class="tiers-title text-center text-light">Tiers</h1>
+  <div class="row justify-content-center center-block">
+    
+    <!-- Tiers START -->
+    @foreach($project['tiers'] as $tier)
+    <div class="card a mx-4 mt-4" style="width: 18rem;">
+      <div class="card-icon"><i class="bi bi-circle"></i></div>
+        <div class="card-body">
+          {{-- Tier Name --}}
+          <h5 class="card-title">{{$tier['name']}}</h5>
+          {{-- Tier Ammount --}}
+          <p class="card-text">{{$tier['amount']}}</p>
+          {{-- Tier Benefit --}}
+          <p class="card-text">{{$tier['benefit']}}</p>
+          <a href="#" class="btn btn-outline-light">Donate</a>
+      </div>
+    </div>
+    @endforeach
+    <!-- Tiers END -->
+  </div>
+</div>
 
   <section class="container-fluid info bg-brown-medium px-0">
     <div class="container-lg py-5 px-0">
@@ -110,7 +165,10 @@
           <!-- tab item -->
           <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
             <div class="py-5 px-lg-5" id="info-campaign-accordion">
-              <p class="text-center"> description of project (background of proj, img, etc)</p>
+              {{-- Note to fronend devs, pls fix/format ty. -RamonDev --}}
+              <p class="text-center">{{$project['description']}}</p>
+              <p class="text-center">{{$project['yt_link']}}</p>
+              <p class="text-center">{{$project['target_date']}}</p>
             </div>
           </div>
           <!-- tab item -->

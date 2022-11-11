@@ -83,7 +83,6 @@
   
   /* Product section */
   .products {
-    background: #009a9c;
     background-repeat: repeat;
     background-size: cover;
     color:whitesmoke;
@@ -254,4 +253,38 @@
   
   .reference-section .accordion-button:not(.collapsed)::after {
     background-image: var(--bs-accordion-btn-icon);
+  }
+
+  .container-fluid.notifs {
+    padding-top:2rem;
+    padding-bottom: 2rem;
+    background-color:rgb(237, 230, 230);
+    
+  }
+
+  .container-fluid.tiers {
+    padding-top:5rem;
+    padding-bottom: 5rem;
+    background-color:#292b2e;
+  }
+  .card.a, .card.b, .card.c {
+    border: 0;
+    border-radius: 0;
+    padding: 3em 0;
+    background-color: teal;
+    border-radius: 4em 0;
+    color: #fff;
+    background: linear-gradient(to left, teal 50%, #3e296a 50%);
+    background-size: 200%;
+    background-position: right;
+    transition: background-position 0.5s ease-out;
+  }
+  .card:hover {
+    background-position: left;
+  }
+  .card-icon {
+    margin: 0 1em;
+  }
+  .card-icon i {
+    font-size: 3em;
   }

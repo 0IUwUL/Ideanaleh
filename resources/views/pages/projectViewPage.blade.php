@@ -1,11 +1,15 @@
 @extends('layouts.projectView')
 
-<x-styles.defnav/>
+
 
 @section('content')
-
+<x-styles.defnav/> 
 <!-- Product Section -->
-
+<div class="progress-container">
+  <div class="progress-bar" id="progress-bar">
+      <div></div>
+  </div>
+</div>
 <section class="container-fluid products py-5" id=product>
     <div class="container">
         <!-- mobile -->
@@ -76,7 +80,7 @@
 <!-- Product Section end -->
 
 <!-- notice -->
-<div class="container-fluid notifs mt-1">
+<div class="container-fluid notifs mt-1" id="notice">
   <div class="container">
     <div class="row mt-3">
       <div class="col-4">
@@ -144,7 +148,7 @@
 </div>
 <!-- Tiers end -->
 
-  <section class="container-fluid info bg-brown-medium px-0">
+  <section class="container-fluid info bg-brown-medium px-0" id="adt-info">
     <div class="container-lg py-5 px-0">
       <h2 class="text-center title my-3 my-md-4 my-lg-5 px-2 px-sm-0">Additional Product Information</h2>
 
@@ -235,8 +239,8 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
 
+    <div class="container-fluid" id="rcmd-tabs">
         <div class="col-12">
             <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">

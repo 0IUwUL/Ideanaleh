@@ -29,15 +29,14 @@ class SettingsController extends Controller
         return redirect('settings');
     }
 
-    public function changeProfile(Request $request){
+    public function changeName(Request $request){
         // Get user id
         $userId = $request->session()->get('loginId');
 
         $user = array(
-            'Lname' => $request->Lname,
-            'Fname' => $request->Fname,
-            'Mname' => $request->Mname,
-            'address' => $request->address,
+            'Lname' => $request->inputLname,
+            'Fname' => $request->inputFname,
+            'Mname' => $request->inputMname,
         );
         
         User::where('id', $userId)->update($user);
@@ -63,4 +62,49 @@ class SettingsController extends Controller
        
         return redirect('settings');
     }
+    
+    public function checkPassword(Request $request){
+        // Get user id and search to db
+        $userId = $request->session()->get('loginId');
+        $user = User::find($userId);
+
+        if (Hash::check($request->pass, $user->password)) {
+            $json_data = array("response" => "success");
+        }
+        else {
+            $json_data = array("response" => "fail");
+        }
+        
+        echo json_encode($json_data);
+   
+    }
+
+    public function changeAddress(Request $request){
+        // Get user id
+        $userId = $request->session()->get('loginId');
+
+        $user = array(
+            'address' => $request->inputAddress,
+        );
+        
+        User::where('id', $userId)->update($user);
+      
+        return redirect('settings');
+    }
+
+    public function changeEmail(Request $request){
+        // Get user id
+        $userId = $request->session()->get('loginId');
+
+        $user = array(
+            'email' => $request->inputEmail,
+            'dev_mode' => 0
+        );
+        
+        User::where('id', $userId)->update($user);
+      
+        return redirect('settings');
+    }
+
+
 }

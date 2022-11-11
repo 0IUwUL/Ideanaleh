@@ -39,17 +39,7 @@
                 document.querySelector(".current-tag").innerText = tags.length;
             }
 
-            /**
-             * The problem here is that when you remove a tag the 'name' of the 'input' infield is not updated
-             * 
-             * Say i have 3 tags namely Nice, One, Mark,... therefore the are also 3 hidden input fields with the names
-             * TagName1, TagName2, TagName3, ... However, if I decided to delete the tag named 'One'...
-             * 
-             * Expected: TagName1, TagName2
-             * Output: TagName1, TagName3
-             * 
-             * For now I will leave it as is -RamonDev
-             */
+
             function removeTag(el, target){
                 el.parentElement.remove();
                 tags = tags.filter(tag => tag != target);
@@ -79,11 +69,50 @@
                 countTags();
             });
 
+
             function createTag(){
                 document.querySelectorAll('.tag').forEach(tag => tag.remove());
                 for (tag of tags){
                     let span_tag = `<span class = "tag">${tag} <input type="hidden" name="Tags[]" value="${tag}"> <span class="remove-tag" onclick = "removeTag(this, '${tag}')">&times;</span></span> `;
                     input_tags.insertAdjacentHTML('beforebegin', span_tag);
+                }
+            }
+        </script>
+
+        <!-- Javascript for Tiers -->
+        <script>
+            document.getElementById('Tier2_toggle').onchange = function() {
+                reset_tier('Tier_2', this);
+            };
+
+            document.getElementById('Tier3_toggle').onchange = function() {
+                reset_tier('Tier_3', this);
+            };
+
+            function reset_tier(tier_arg, toggle_arg){
+                // Disable Tier 3 when Tier 2 is disabled
+                if(tier_arg === 'Tier_2'){
+                    document.getElementById('Tier3_toggle').disabled = !toggle_arg.checked;
+                    if(!toggle_arg.checked){
+                        if(document.getElementById('Tier3_toggle').checked){
+                            document.getElementById('Tier3_toggle').checked = toggle_arg.checked;
+                            reset_tier('Tier_3', this);
+                        }
+                    }
+                }
+
+                document.getElementById(tier_arg.concat('_title')).disabled = !toggle_arg.checked;
+                document.getElementById(tier_arg.concat('_amount')).disabled = !toggle_arg.checked;
+                document.getElementById(tier_arg.concat('_benefits')).disabled = !toggle_arg.checked;
+
+                document.getElementById(tier_arg.concat('_title')).required = toggle_arg.checked;
+                document.getElementById(tier_arg.concat('_amount')).required = toggle_arg.checked;
+                document.getElementById(tier_arg.concat('_benefits')).required = toggle_arg.checked;
+
+                if(!toggle_arg.checked){
+                    document.getElementById(tier_arg.concat('_title')).value = '';
+                    document.getElementById(tier_arg.concat('_target')).value = '';
+                    document.getElementById(tier_arg.concat('_benefits')).value = '';
                 }
             }
         </script>

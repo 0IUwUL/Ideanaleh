@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <!-- Modal -->
+                            <!-- Image Upload Modal -->
                             <div class="modal fade" id="uploadModal"  tabindex="-1" aria-labelledby="uploadModal" >
                                 <div class="modal-dialog modal-dialog-centered">
                                     <form action ="{{route('upload-img')}}" method="post" enctype='multipart/form-data' >
@@ -70,30 +70,121 @@
                             </div>
                             
                             <hr>
+
                             <div class="col">
-                                <form method="post" class="row g-3"  action="{{ route('change-profile') }}" accept-charset="UTF-8">
-                                    @csrf
-                                    <div class="col-md-6">
-                                        <label for="inputLname" class="form-label">Last Name</label>
-                                        <input type="text" name="Lname" class="form-control" id="inputLname" value='{{$user->Lname}}' required>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column">
+                                        <div>Name :</div>
+                                        <div id="inputName"> {{$user->Lname}}, {{$user->Fname}} {{$user->Mname}} </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="inputFname" class="form-label">First Name</label>
-                                        <input type="text" name = "Fname" class="form-control" id="inputFname" value='{{$user->Fname}}' required>
+                                    <a type="button" class="text-primary editInfo"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editModal" 
+                                        data-params="name"
+                                        data-lname={{$user->Lname}}
+                                        data-fname={{$user->Fname}}
+                                        data-mname={{$user->Mname}}>
+                                        Edit</a>
+                                </div>
+                                <hr class="solid">
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column">
+                                        <div>Email :</div>
+                                        <div id="inputame"> {{$user->email}} </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="inputMname" class="form-label">Middle Name</label>
-                                        <input type="text" name="Mname" class="form-control" id="inputMname" value='{{$user->Mname}}'>
+                                    <a type="button" class="text-primary"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#verifyModal" 
+                                        data-params="email"
+                                        name="editInfo">
+                                        Edit</a>
+                                </div>
+
+                                <hr class="solid">
+
+                               <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column">
+                                        <div>Address :</div>
+                                        <div id="inputLname"> {{$user->address}} </div>
                                     </div>
-                                    <div class="col-12">
-                                        <label for="inputAddress" class="form-label">Address</label>
-                                        <textarea name = "address" class="form-control border-info" id="inputAddress" required> {{$user->address}}</textarea>
-                                    </div>
+                                    <a type="button" class="text-primary editInfo"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editModal" 
+                                        data-params="address"
+                                        data-address={{$user->address}}>
+                                        Edit</a>
+                                </div>
                                     
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    
+                            </div>
+
+                            <!-- Edit Info Modal -->
+                            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-info">
+                                        <form method="post" action="" accept-charset="UTF-8"id="editForm">
+                                            @csrf
+                                            <div class="modal-header bg-info text-white">
+                                                <h1 class="modal-title fs-3" id="LoginModalLabel">Edit</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                       
+                                            <div class="modal-body p-4">
+                                                <div class="mb-3" id="editInfo">
+                                                   {{-- Adjust modal info --}}
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="InputPassword" class="form-label">Current Password</label>
+                                                    <input type="password" name = "password" class="form-control border-info" id="checkPassword" required/>
+                                                    <div id="errorPassword" class="error"></div>
+                                                </div> 
+                                            </div>
+                                        
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" id="saveChanges" class="btn btn-primary " >Save Changes</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+
+                            <!-- Verify Email Modal -->
+                            <div class="modal fade" id="verifyModal" tabindex="-1" aria-labelledby="verifyModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form>
+                                            @csrf
+                                            <div class="modal-header bg-danger text-white ">
+                                                <h1 class="modal-title fs-3" id="LoginModalLabel">Verify Your Email</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                       
+                                            <div class="modal-body p-4">
+                                                <div class="mb-3">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <label id="oldtEmail">Email</label>
+                                                            <div> {{$user->email}}</div>
+                                                        </div>
+                                                        <button type="button" id="sendCode" class = "btn btn-primary">Send code <i class="fa-solid fa-paper-plane"></i></button>
+                                                    </div> 
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="VerifyCode" class="form-label">Verification Code</label>
+                                                    <input name = "inputCode" class="form-control border-info" id="inputCode" required/>
+                                                    <div id="showError" class="error"></div>
+                                                </div> 
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" id="verify" class="btn btn-primary ">Verify</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

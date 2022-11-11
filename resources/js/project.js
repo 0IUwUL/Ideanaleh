@@ -1,3 +1,19 @@
+// progress bar
+window.onload = function() {progressBar()};
+window.onscroll = function() {progressBar()};
+  function progressBar() {
+      var docuScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (docuScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+  }
+
+  var widths = $(window).outerWidth();
+
+  $('.progress-bar div').css({
+      width: widths,
+  });
+
 $(document).ready(function () {
     $(".images-carousel").owlCarousel({
       loop: true,

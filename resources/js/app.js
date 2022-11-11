@@ -45,3 +45,4 @@ function activateToast(){
 $('.next').click(validate);
 $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);
+

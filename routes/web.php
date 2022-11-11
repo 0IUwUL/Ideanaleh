@@ -23,53 +23,48 @@ use App\Http\Controllers\ProjectController;
 
 
 // Home routes
-Route::get('/', [HomeController::class, 'index']);
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/home', 'index')->name('home');
+});
 
 // Settings routes
-Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
-
-Route::post('/change-name', [SettingsController::class, 'changeName'])->name('change-name');
-
-Route::post('/change-pass', [SettingsController::class, 'changePass'])->name('change-pass');
-
-Route::post('/upload-img', [SettingsController::class, 'uploadImage'])->name('upload-img');
-
-Route::post('/check-pass', [SettingsController::class, 'checkPassword'])->name('check-pass');
-
-Route::post('/change-email', [SettingsController::class, 'changeEmail'])->name('check-email');
-
-Route::post('/change-address', [SettingsController::class, 'changeAddress'])->name('check-address');
-
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('/settings', 'index')->name('settings');
+    Route::post('/change-name', 'changeName')->name('change-name');
+    Route::post('/change-pass', 'changePass')->name('change-pass');
+    Route::post('/upload-img', 'uploadImage')->name('upload-img');
+    Route::post('/check-pass', 'checkPassword')->name('check-pass');
+    Route::post('/change-email', 'changeEmail')->name('check-email');
+    Route::post('/change-address', 'changeAddress')->name('check-address');
+});
 
 // Admin routes
 Route::get('/admin', function () {
     return view('pages.adminPage');
 });
 
-
 // User registration routes
 Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
 
-// Project View routes
-Route::get('/project-view/{id}', [ProjectController::class, 'index'])->name('project-view');
-Route::post('/save-created-project', [ProjectController::class, 'saveCreatedProject'])->name('save-created-project');
+// Project routes
+Route::controller(ProjectController::class)->group(function () {
+    Route::get('/project-view/{id}', 'index')->name('project-view');
+    Route::post('/save-created-project', 'saveCreatedProject')->name('save-created-project');
+});
 
 Route::get('/project', function () {
     return view('pages.create');
 })->name('project');
 
 // Google Routes
-Route::prefix('google')->name('google.')->group(function(){
-    Route::post('callback', [GoogleAuthController::class, 'googleCallback'])->name('callback');
+Route::controller(GoogleAuthController::class)->prefix('google')->name('google.')->group(function(){
+    Route::post('callback', 'googleCallback')->name('callback');
+    Route::post('google-login-user', 'googleLoginUser')->name('google-login-user');
 });
 
-Route::prefix('google')->name('google.')->group(function(){
-    Route::post('google-login-user', [GoogleAuthController::class, 'googleLoginUser'])->name('google-login-user');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Not utilized
+// Auth::routes();
 
 /**
  * pag tinype ni user ang base_url/login ireredirect lang rin sa homepage
@@ -79,12 +74,14 @@ Route::get('/login', function() {
     return redirect('/');
 })->name('login');
 
-Route::post('/login-user', [LoginController::class, 'loginUser'])->name('login-user');
+// Login Routes
+Route::controller(LoginController::class)->group(function () {
+    Route::post('/login-user', 'loginUser')->name('login-user');
+    Route::get('/logout', 'logout')->name('logout');
+});
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// Send Email Routes
-Route::get('/send-email', [EmailController::class, 'sendCode'])->name('send-email');
-
-// Verify Code Routes
-Route::post('/verify', [EmailController::class, 'verify'])->name('verify');
+// Email routes
+Route::controller(EmailController::class)->group(function () {
+    Route::get('/send-email', 'sendCode')->name('send-email');
+    Route::post('/verify', 'verify')->name('verify');
+});

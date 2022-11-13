@@ -42,8 +42,12 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('settings') }}">Profile</a></li>
-                        <li><a class="dropdown-item" href="{{ route('logout') }}">Log out</a></li>
+                        @if (Request::segment(1) == 'settings')
+                            <li><a class="dropdown-item" href="/">Home</a></li>
+                        @else
+                            <li><a class="dropdown-item" href="{{ route('settings') }}">Profile</a></li>
+                        @endif
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Log out</a></li>
                     </ul>
                 </div>
                     

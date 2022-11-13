@@ -1,8 +1,7 @@
 @extends('layouts.default')
 
-<x-styles.defnav/>
-
 @section('content')
+<x-styles.defnav/>
 
 <div class="settings">
     <div class="set-header">
@@ -265,6 +264,5 @@
     </div>
 </div>
 @vite(['resources/js/settings.js'])
-
 
 @endsection

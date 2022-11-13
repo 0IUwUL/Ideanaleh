@@ -1,9 +1,7 @@
 @extends('layouts.default')
 
-<x-styles.defnav/>
-
-
 @section('content')
+<x-styles.defnav/>
 
   @if(session()->has('message'))
       <div class="d-flex justify-content-center">

@@ -1,9 +1,8 @@
 @extends('layouts.CreateProj')
 
+@section('content')
 <x-styles.defnav/>
 
-
-@section('content')
 <div class="project_body d-flex justify-content-center">
     <div class="col-10 rounded shadow border p-5 bg-light">
         <h2 class = "d-flex justify-content-center">Development Form</h2>

@@ -24,10 +24,10 @@
             <div class="product-media-container">
               <div class="images-carousel owl-carousel owl-theme">
                 <div class="item">
-                  <img src="https://picsum.photos/1000/1260" alt="">
+                  <img img-zoom src="https://picsum.photos/1000/1260" alt="">
                 </div>
                 <div class="item">
-                  <img src="https://picsum.photos/1000/1280" alt="">
+                  <img img-zoom src="https://picsum.photos/1000/1280" alt="">
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                  <a href="http://localhost:8000/Project-View#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  <a href="http://localhost:8000/project-view/{{$project['id']}}#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -112,7 +112,7 @@
 <!-- notice end -->
 
 <!-- tiers -->
-<div  id="tiers-section" class="tiers-section"></div>
+<div id="tiers-section" class="tiers-section"></div>
 <div class="container-fluid tiers">
   <h1 class="tiers-title text-center text-light">Tiers</h1>
   <div class="row justify-content-center center-block">

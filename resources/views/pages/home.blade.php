@@ -300,13 +300,13 @@
         
       </div>
       
-      <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100 mt-5">
+      <div aria-live="polite" aria-atomic="true" class="toast-container position-fixed bottom-0 end-0 p-3 align-items-center mt-5">
         <div class="DevToast toast" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
             <strong class="me-auto">System</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div class="toast-body bg-dark">
+          <div class="toast-body bg-dark d-flex justify-content-start">
             @if (session('loginId'))
             Verify your email in your profile settings.
             @else

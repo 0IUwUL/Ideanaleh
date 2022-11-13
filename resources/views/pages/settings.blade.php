@@ -173,7 +173,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="VerifyCode" class="form-label">Verification Code</label>
-                                                    <input name = "inputCode" class="form-control border-info" id="inputCode" required/>
+                                                    <input name = "inputCode" class="form-control border-info" id="inputCode2" required/>
                                                     <div id="showError" class="error"></div>
                                                 </div> 
                                             </div>

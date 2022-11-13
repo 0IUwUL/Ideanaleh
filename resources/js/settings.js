@@ -52,7 +52,6 @@ function timer(remaining) {
 // Verify the input code for email verification
 $('#verifyCode').on('click', function () {
     var code = document.getElementById("inputCode").value;
-    console.log(code);
     $.ajax({
         url: "verify",
         type:'post',
@@ -173,7 +172,6 @@ $(".editInfo").click(function(e){
 $("#sendCode").click(function (e){
     document.getElementById('verify').disabled = false;
  
-    console.log('1');
     e.target.innerHTML = 'Sent';
     e.target.disabled = true
 
@@ -197,7 +195,7 @@ $("#verifyModal").on("show.bs.modal", function(){
 
 // Verify code for change email
 $("#verify").click(function(e){
-    var code = document.getElementById("inputCode").value
+    var code = document.getElementById("inputCode2").value
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')

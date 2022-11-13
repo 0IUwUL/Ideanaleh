@@ -82,6 +82,6 @@ Route::controller(LoginController::class)->group(function () {
 
 // Email routes
 Route::controller(EmailController::class)->group(function () {
-    Route::get('/send-email', 'sendCode')->name('send-email');
+    Route::post('/send-email', 'sendCode')->name('send-email');
     Route::post('/verify', 'verify')->name('verify');
 });

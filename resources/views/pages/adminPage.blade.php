@@ -1,9 +1,8 @@
 @extends('layouts.admin')
 
+@section('content')
 <x-styles.adminnav/>
 
-
-@section('content')
 <div class="container-fluid">
     <div class="row">
         <div class = "col-3">

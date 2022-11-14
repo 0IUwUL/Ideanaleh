@@ -141,7 +141,7 @@ $("#submitChanges").on("click", function(){
 // Edit modal body 
 $(".editInfo").click(function(e){
     var info = $(e.target).attr('data-params');
-    
+    console.log(e)
     if (info == 'name'){
         document.getElementById('editInfo').innerHTML = `
             <div class="mb-3">

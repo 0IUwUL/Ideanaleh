@@ -29,14 +29,16 @@
         <div class="col-6">
           <h3 class="mb-3">Popular Projects </h3>
         </div>
-        <!-- <div class="col-6 text-right">
-          <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-            <i class="fa fa-arrow-left"></i>
-          </a>
-          <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-            <i class="fa fa-arrow-right"></i>
-          </a>
-        </div>  -->
+        <div class="container align-items-center justify-content-center text-center">
+          <div class="col-12 text-right">
+             <a class="btn btn-primary mb-3 mr-1" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+               <i class="fa fa-arrow-left"></i>
+             </a>
+             <a class="btn btn-primary mb-3 " type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+               <i class="fa fa-arrow-right"></i>
+             </a>
+           </div> 
+         </div>
 
 
         
@@ -268,17 +270,6 @@
               </div>
             </div>
           </div>
-          <div class="carousel-btn">
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          
-          </button>
-        </div>
       </div>
     </div>
   </section>
@@ -308,7 +299,7 @@
             @if (session('loginId'))
             Verify your email in your profile settings.
             @else
-            Register or Login first
+            Register or Log In first
             @endif
           </div>
         </div>

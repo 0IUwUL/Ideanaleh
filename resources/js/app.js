@@ -41,8 +41,22 @@ function activateToast(){
     $('.DevToast').toast('show');
 }
 
+function showRegister(){
+    $('#LoginModal').modal('hide');
+    $('#SignUpModal').modal('show');
+}
+
+
+function showLogin(){
+    $('#LoginModal').modal('show');
+    $('#SignUpModal').modal('hide');
+}
+
+
 
 $('.next').click(validate);
 $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);
+$("#register").on("click", showRegister);
+$("#login").on("click", showLogin);
 

@@ -28,7 +28,7 @@
                 </div>
                 <div class="item">
                   {{-- NOTE TO FRONTEND DEVS PLS STYLE THE BANNER -RamonDev --}}
-                  <img src="{{asset('storage/'.$project['banner']);}} ">
+                  <img img-zoom src="{{asset('storage/'.$project['banner']);}} ">
                 </div>
               </div>
             </div>

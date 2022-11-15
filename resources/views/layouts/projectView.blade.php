@@ -32,8 +32,8 @@
         
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <!-- Change background dynamically -->
-        <script>var bg = document.getElementById('product');
-            bg.setAttribute('style', 'background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 154, 156,0.9)), url("https://picsum.photos/1000/1260")');</script>
+        <script>let bg = document.getElementById('product');
+            bg.setAttribute('style', 'background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 154, 156,0.9)), url("{{asset('storage/'.$project['banner']);}}")');</script>
         @vite(['resources/js/app.js'])
         @vite(['resources/js/project.js'])
     </body>

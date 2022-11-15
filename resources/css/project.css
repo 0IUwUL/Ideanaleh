@@ -330,3 +330,12 @@
     position: fixed;
     transition: all .3s;
   }
+  @media(max-width: 320px){
+    :root{
+      zoom:60%;
+    }
+    .images-carousel,.owl-theme{
+      zoom:100%;
+    } 
+    
+  }

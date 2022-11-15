@@ -64,9 +64,14 @@ class ProjectController extends Controller
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->yt_link= $requestArg->ProjVideo;
-        // $dataVar->img = 
-        // $dataVar->target_date = 
+        $dataVar->logo = null;
+        $dataVar->banner = null;
+        $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
+
+        // The Images are later uploaded because we need the project ID to be generated first
+        $this->_saveImage($requestArg, $dataVar->id, 'logo', 'ProjLogo');
+        $this->_saveImage($requestArg, $dataVar->id, 'banner', 'ProjBanner');
 
         // Saving Tiers
         $this->_saveTiers($dataVar->id, $requestArg);
@@ -74,6 +79,19 @@ class ProjectController extends Controller
         // Note to future RamonDev Redirect to Project view page.
         return redirect('project-view/'.$dataVar->id);
 
+    }
+
+
+    private function _saveImage(Request $requestArg, string $projectIdArg, string $typeArg, string $formNameArg)
+    {
+        $pathVar = $requestArg->file($formNameArg)->storeAs(
+            'project_'.$typeArg.'s', //Folder name
+            //Naming Scheme: {{projectID}}._project_{{$typeArg}}_.{{originalFilename}}
+            'project_'.$projectIdArg.'_'.$typeArg.'.'.$requestArg->file($formNameArg)->getClientOriginalExtension(),
+            'public', //Disc (optional. It is like the root folder)
+        );
+        
+        Projects::where('id', $projectIdArg)->update([$typeArg => $pathVar]);
     }
 
 

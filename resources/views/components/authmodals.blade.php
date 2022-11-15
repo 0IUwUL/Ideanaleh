@@ -1,7 +1,7 @@
 
 
 <!-- Login -->
-<div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
+<div class="modal p-0" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content border-info">
     <div class="modal-header bg-info text-white">
@@ -23,8 +23,8 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Remember me</label>
           </div> -->
-          <div class="d-grid">
-              <!-- <button class="btn btn-primary" type="button">Login in with Google</button> -->
+          <div class="mb-3">
+              <a role = "button" class ="link-primary" id = "register"> Not registered yet? Signup</a>
           </div>
     </div>
     <div class="modal-footer">
@@ -57,7 +57,7 @@
 <form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm">
 @csrf           
               
-<div class="modal" id="SignUpModal" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
+<div class="modal p-0" id="SignUpModal" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
@@ -94,6 +94,9 @@
                       <textarea name = "address" class="form-control border-info" id="Address" required></textarea>
                     </div>
             </div>
+            <div class="mb-3">
+              <a role = "button" class ="link-primary" id = "login"> Already a user? Login</a>
+          </div>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success next" >Next</button>

@@ -16,7 +16,7 @@ window.onscroll = function() {progressBar()};
 
 $(document).ready(function () {
     $(".images-carousel").owlCarousel({
-      loop: true,
+      loop: false,
       margin:10,
       nav: true,
       navText: ["<div class='nav-button owl-prev'><i class='fa-solid fa-arrow-left'></i></div>", "<div class='nav-button owl-next'><i class='fa-solid fa-arrow-right'></i></div>"],

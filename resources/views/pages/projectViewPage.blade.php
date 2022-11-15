@@ -24,10 +24,11 @@
             <div class="product-media-container">
               <div class="images-carousel owl-carousel owl-theme">
                 <div class="item">
-                  <img img-zoom src="https://picsum.photos/1000/1260" alt="">
+                  <img img-zoom src="{{asset('storage/'.$project['logo']);}} ">
                 </div>
                 <div class="item">
-                  <img img-zoom src="https://picsum.photos/1000/1280" alt="">
+                  {{-- NOTE TO FRONTEND DEVS PLS STYLE THE BANNER -RamonDev --}}
+                  <img img-zoom src="{{asset('storage/'.$project['banner']);}} ">
                 </div>
               </div>
             </div>
@@ -265,6 +266,7 @@
   
                     <div class="col-md-4 mb-3">
                       <div class="card shadow-sm bg-body rounded">
+                        {{-- <img src="{{asset('storage/'.$project['logo']);}} "> --}}
                           <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
                           <div class="card-body text-dark">
                              <h4 class="card-title">Title</h4>

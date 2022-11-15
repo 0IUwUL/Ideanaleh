@@ -7,7 +7,7 @@
     <div class="col-10 rounded shadow border p-5 bg-light">
         <h2 class = "d-flex justify-content-center">Development Form</h2>
         <div class="col-8 mx-auto mt-5">
-            <form method="post" action="{{ route('save-created-project') }}" accept-charset="UTF-8")>
+            <form method="post" action="{{ route('save-created-project') }}" accept-charset="UTF-8" enctype='multipart/form-data'>
             @csrf
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingTitle" name = "ProjTitle" placeholder="Title Here..." required>

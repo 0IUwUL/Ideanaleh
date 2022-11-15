@@ -11,7 +11,7 @@
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'>
         @vite(['resources/css/app.css'])
     </head>
-    <body class="antialiased">
+    <body class="antialiased p-0">
 
         @yield('content')
 

@@ -284,25 +284,9 @@
         @if ($mode)
         <a href="{{ route('project') }}" class="hero__btn hero__btn--light btn">Get Started!</a>
         @else
-        <button class="hero__btn hero__btn--light btn" id = "modeToast">Get Started!</a>
+        <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{session('loginId') ? 'logI' : 'logO'}} data-mode = {{$mode}}>Get Started!</a>
         @endif
         
-      </div>
-      
-      <div aria-live="polite" aria-atomic="true" class="toast-container position-fixed bottom-0 end-0 p-3 align-items-center mt-5">
-        <div class="DevToast toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <strong class="me-auto">System</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body bg-dark d-flex justify-content-start">
-            @if (session('loginId'))
-            Verify your email in your profile settings.
-            @else
-            Register or Log In first
-            @endif
-          </div>
-        </div>
       </div>
   </section>
 
@@ -348,4 +332,14 @@
     </div>
   </section>
 
+  <div aria-live="polite" aria-atomic="true" class="toast-container p-3 align-items-center mt-5">
+    <div class="DevToast toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">System</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body bg-dark text-white d-flex justify-content-start">
+      </div>
+    </div>
+  </div>  
 @endsection

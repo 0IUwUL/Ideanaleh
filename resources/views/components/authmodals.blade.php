@@ -29,7 +29,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary">Log In</button>
 
       <!-- Google button-->
       <div id="g_id_onload"

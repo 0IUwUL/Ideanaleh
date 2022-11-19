@@ -151,7 +151,8 @@ $("#submitChanges").on("click", function(){
 // Edit modal body 
 $(".editInfo").click(function(e){
     var info = $(e.target).attr('data-params');
-    console.log(e)
+    $('#checkPassword-error').css('display', 'none');
+    $('#editModal').find('form').trigger('reset');
     if (info == 'name'){
         document.getElementById('editInfo').innerHTML = `
             <div class="mb-3">
@@ -264,7 +265,9 @@ $("#saveChanges").click(function(){
                     document.getElementById("editForm").submit();   
                 } 
                 else {
-                    document.getElementById('errorPassword').innerHTML='Incorrect password';
+                    var label = $('#checkPassword-error');
+                    label.text('Incorrect password')
+                    label.removeAttr("style");
                 }
             }
         });

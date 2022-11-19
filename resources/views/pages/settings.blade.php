@@ -143,7 +143,7 @@
                                             <div class="mb-3">
                                                 <label for="InputPassword" class="form-label">Current Password</label>
                                                 <input type="password" name = "password" class="form-control border-info" id="checkPassword" required/>
-                                                <div id="errorPassword" class="error"></div>
+                                                <label for="checkPassword" id="checkPassword-error" class="error"></label>
                                             </div> 
                                         </div>
                                     

@@ -30,7 +30,7 @@
                         Log In
                     </button>
                     <div class="dropdown d-none d-sm-block d-xxl-none">
-                        <a class="btn btn-dark btn-outline-light gear_icon m-0 h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn btn-dark btn-outline-light gear_icon h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-gears"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -52,11 +52,11 @@
 
                     <ul class="dropdown-menu dropdown-menu-end">
                         @if (Request::segment(1) == 'settings')
-                            <li class="dropdown-item"><a class = "text-decoration-none" href="/">Home</a></li>
+                            <li><a role = "button" class = "dropdown-item" href="/">Home</a></li>
                         @else
-                            <li class="dropdown-item"><a class = "text-decoration-none" href="{{ route('settings') }}">Profile</a></li>
+                            <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Profile</a></li>
                         @endif
-                            <li class="dropdown-item"><a class = "text-decoration-none" href="{{ route('logout') }}">Log out</a></li>
+                            <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Log out</a></li>
                     </ul>
                 </div>
                 <button class="navbar-toggler d-block d-sm-none bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerLogged" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,10 +68,10 @@
 
         </div>
         <div class="collapse navbar-collapse pb-2" id="navbarToggler">
-            <div class="d-block d-sm-none nav_home col mx-3">
-                <ul class = "dropdown p-0">
-                    <li class="dropdown-item"><a role = "button" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a></li>
-                    <li class="dropdown-item"><a role = "button" data-bs-toggle="modal" data-bs-target="#LoginModal">Log In</a></li>
+            <div class="d-block d-sm-none nav_home col">
+                <ul class = "dropdown">
+                    <li class="dropdown-item text-white"><a role = "button" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a></li>
+                    <li class="dropdown-item text-white"><a role = "button" data-bs-toggle="modal" data-bs-target="#LoginModal">Log In</a></li>
                 </ul>
                 <form class="d-flex" role="search">
                     <div class="input-group">
@@ -86,14 +86,14 @@
             </div>
         </div>
         <div class="collapse navbar-collapse pb-2" id="navbarTogglerLogged">
-            <div class="d-block d-sm-none nav_home col mx-3">
-                <ul class="dropdown p-0">
+            <div class="d-block d-sm-none nav_home col">
+                <ul class="dropdown">
                     @if (Request::segment(1) == 'settings')
-                        <li class="dropdown-item"><a class = "text-decoration-none" href="/">Home</a></li>
+                        <li><a role = "button" class = "dropdown-item" href="/">Home</a></li>
                     @else
-                        <li class="dropdown-item"><a class = "text-decoration-none" href="{{ route('settings') }}">Profile</a></li>
+                        <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Profile</a></li>
                     @endif
-                        <li class="dropdown-item"><a class = "text-decoration-none" href="{{ route('logout') }}">Log out</a></li>
+                        <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Log out</a></li>
                 </ul>
                 <form class="d-flex" role="search">
                     <div class="input-group">

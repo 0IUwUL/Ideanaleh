@@ -45,17 +45,20 @@ Route::get('/admin', function () {
 });
 
 // User registration routes
-Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
+Route::controller(RegistrationController::class)->group(function () {
+    Route::post('/register-user', 'registerUser')->name('register-user');
+    Route::post('/verify-email', 'dupliEmail')->name('login-user');
+});
 
 // Project routes
 Route::controller(ProjectController::class)->group(function () {
-    Route::get('/project-view/{id}', 'index')->name('project-view');
+    Route::get('/project/{id}', 'index')->name('project-view');
     Route::post('/save-created-project', 'saveCreatedProject')->name('save-created-project');
 });
 
-Route::get('/project', function () {
+Route::get('/project-create', function () {
     return view('pages.create');
-})->name('project');
+})->name('project-create');
 
 // Google Routes
 Route::controller(GoogleAuthController::class)->prefix('google')->name('google.')->group(function(){
@@ -76,6 +79,7 @@ Route::get('/login', function() {
 
 // Login Routes
 Route::controller(LoginController::class)->group(function () {
+    Route::post('/verify-log', 'verifyInput')->name('verify-log');
     Route::post('/login-user', 'loginUser')->name('login-user');
     Route::get('/logout', 'logout')->name('logout');
 });

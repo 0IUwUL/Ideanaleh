@@ -37,4 +37,14 @@ class RegistrationController extends Controller
         return redirect('/');
         }
     }
+
+    public function dupliEmail(Request $request){
+        $user = User::where('email', '=', $request->email)->first();
+        if ($user){
+            $json_data = array("response" => "duplicate");
+        } else {
+            $json_data = array("response" => "success");
+        }
+        echo json_encode($json_data);
+    }
 }

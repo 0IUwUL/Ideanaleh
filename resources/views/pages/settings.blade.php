@@ -143,7 +143,7 @@
                                             <div class="mb-3">
                                                 <label for="InputPassword" class="form-label">Current Password</label>
                                                 <input type="password" name = "password" class="form-control border-info" id="checkPassword" required/>
-                                                <div id="errorPassword" class="error"></div>
+                                                <label for="checkPassword" id="checkPassword-error" class="error"></label>
                                             </div> 
                                         </div>
                                     
@@ -209,17 +209,17 @@
                                 <span id="error" class = "text-danger mb-3">*Please verify your account</span>
                                 <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-8 col-md-8 col-lg-6 col-form-label">
                                         <label id="inputEmail">{{$user->email}}</label>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 col-md-6 col-lg-4">
                                         <button id="generateCode" class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
                                     </div> 
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
-                                <div class="col-sm-4">
+                                <label for="inputCode" class="col-sm-6 col-form-label">Input verification code</label>
+                                <div class="col-sm-4 p-0">
                                 <input type="text" name = "code" class="form-control" id="inputCode" required>
                                 </div>
                             </div>
@@ -272,6 +272,16 @@
             </div>
         </div>
     </div>
+    <div aria-live="polite" aria-atomic="true" class="toast-container p-3 align-items-center mt-5">
+        <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">System</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body bg-dark text-white d-flex justify-content-start">
+            </div>
+        </div>
+    </div>  
 </div>
 @vite(['resources/js/settings.js'])
 

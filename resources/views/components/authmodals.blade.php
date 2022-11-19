@@ -9,27 +9,25 @@
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body p-4">
-    <form method="post" action="{{ route('login-user') }}" accept-charset="UTF-8")>
+    <form method="post" action="{{ route('login-user') }}" accept-charset="UTF-8" id = "LogInForm">
       @csrf
           <div class="mb-3">
               <label for="InputEmail" class="form-label">Email address</label>
               <input type="email" name = "LoginEmail" class="form-control border-info" id="InputEmail" aria-describedby="emailHelp" required/>
+              <span class = "error" id = "err_mail"></span>
           </div>
           <div class="mb-3">
               <label for="InputPassword" class="form-label">Password</label>
               <input type="password" name = "LoginPassword" class="form-control border-info" id="InputPassword" required/>
-          </div>
-          <!-- <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Remember me</label>
-          </div> -->
+              <span class = "error" id = "err_pass"></span>
+            </div>
           <div class="mb-3">
               <a role = "button" class ="link-primary" id = "register"> Not registered yet? Signup</a>
           </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="button" id="LoginSubmit" class="btn btn-primary">Login</button>
 
       <!-- Google button-->
       <div id="g_id_onload"
@@ -141,6 +139,7 @@
                     <label for="InputEmail" class="form-label">Email</label>
                     <label class="text-danger me-1">*</label>
                     <input type="email" name = "email" class="form-control border-info" id="email" required/>
+                    <span class = "error" id = "dupli"></span>
                 </div>
                 <div class="mb-3">
                     <label for="InputPassword" class="form-label">Input Password</label>

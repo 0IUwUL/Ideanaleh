@@ -45,7 +45,10 @@ Route::get('/admin', function () {
 });
 
 // User registration routes
-Route::post('/register-user', [RegistrationController::class, 'registerUser'])->name('register-user');
+Route::controller(RegistrationController::class)->group(function () {
+    Route::post('/register-user', 'registerUser')->name('register-user');
+    Route::post('/verify-email', 'dupliEmail')->name('login-user');
+});
 
 // Project routes
 Route::controller(ProjectController::class)->group(function () {
@@ -76,6 +79,7 @@ Route::get('/login', function() {
 
 // Login Routes
 Route::controller(LoginController::class)->group(function () {
+    Route::post('/verify-log', 'verifyInput')->name('verify-log');
     Route::post('/login-user', 'loginUser')->name('login-user');
     Route::get('/logout', 'logout')->name('logout');
 });

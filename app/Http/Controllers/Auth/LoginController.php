@@ -13,26 +13,24 @@ use Session;
 class LoginController extends Controller
 {
     public function loginUser(Request $request){
-        $request->validate([
-            'LoginEmail' => 'required|email',
-            'LoginPassword' => 'required',
-        ]);
-
         $user = User::where('email', '=', $request->LoginEmail)->first();
+        // Saving user id to a session variable called "loginId"
+        $request->session()->put('loginId', $user->id);
+        return (redirect('/'));
+    }
 
+    public function verifyInput (Request $request){
+        $user = User::where('email', '=', $request->email)->first();
         if ($user){
-            if (Hash::check($request->LoginPassword, $user->password)) {
-                // Saving user id to a session variable called "loginId"
-                $request->session()->put('loginId', $user->id);
-                
-                return (redirect('/'));
+            if (Hash::check($request->pass, $user->password)) {
+                $json_data = array("response" => "success");
             } else {
-                return redirect()->back()->with('message', 'Incorrect Password');
+                $json_data = array("response" => "err_pass");
             }
         } else {
-            return redirect()->back()->with('message', 'Email not found');
+            $json_data = array("response" => "err_mail");
         }
-
+        echo json_encode($json_data);
     }
 
 

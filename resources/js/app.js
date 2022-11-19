@@ -2,6 +2,8 @@ import './bootstrap';
 
 import '../sass/app.scss';
 
+const into = document.querySelector('.toast-body')
+
 function validate(){
     var form = $("#myForm");
     form.validate({
@@ -59,6 +61,21 @@ function validate(){
 };
 
 function activateToast(){
+    var c = $(this).data('id');
+    var insert
+    if (c == 'logO' || c == 'logI'){
+        var mode = $(this).data('mode');
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-danger text-white')
+        if (!mode && c == 'logI'){
+            insert = `Verify your email in your profile settings.`
+        }else{
+            insert = `Register or Log In first`
+        }
+    }
+    into.innerHTML = insert
+    
+
     $('.DevToast').toast('show');
 }
 

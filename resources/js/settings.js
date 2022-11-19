@@ -1,3 +1,4 @@
+const into = document.querySelector('.toast-body')
 // Send code in email
 $('#generateCode').on('click', function () {
     if(document.getElementById("verifyCode"))
@@ -79,11 +80,20 @@ $('#verifyCode').on('click', function () {
 // Show the same tab after verifying
 $(document).ready(function(){
     var activeTab = localStorage.getItem('activeTab');
-    
+    var activeToast = localStorage.getItem('activeToast');
     if(activeTab){
         $('#'+ activeTab).tab('show');
         // Remove so it only happen once
         localStorage.removeItem("activeTab");
+    }
+    if(activeToast){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-success text-white')
+        var insert = `Changes saved`
+        into.innerHTML = insert      
+        $('#'+ activeToast).toast('show');
+        // Remove so it only happen once
+        localStorage.removeItem("activeToast");
     }
 });
 
@@ -249,7 +259,8 @@ $("#saveChanges").click(function(){
             success: function(result){
                 let data = JSON.parse(result);
                 
-                if(data.response == "success") {             
+                if(data.response == "success") {
+                    localStorage.setItem('activeToast', 'DevToast');    
                     document.getElementById("editForm").submit();   
                 } 
                 else {

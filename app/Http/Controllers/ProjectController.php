@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $dataVar->description = $requestArg->ProjDesc;
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;
-        $dataVar->yt_link= $requestArg->ProjVideo;
+        $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
         $dataVar->logo = null;
         $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
@@ -77,7 +77,7 @@ class ProjectController extends Controller
         $this->_saveTiers($dataVar->id, $requestArg);
         
         // Note to future RamonDev Redirect to Project view page.
-        return redirect('project-view/'.$dataVar->id);
+        return redirect('project/'.$dataVar->id);
 
     }
 
@@ -114,4 +114,24 @@ class ProjectController extends Controller
         }
     }
 
+    private function _getYoutubeId($urlParams)
+    {
+        // from https://stackoverflow.com/questions/3392993/php-regex-to-get-youtube-video-id
+        // Supported YT Links
+        // http://youtu.be/dQw4w9WgXcQ
+        // http://www.youtube.com/embed/dQw4w9WgXcQ
+        // http://www.youtube.com/watch?v=dQw4w9WgXcQ
+        // http://www.youtube.com/?v=dQw4w9WgXcQ
+        // http://www.youtube.com/v/dQw4w9WgXcQ
+        // http://www.youtube.com/e/dQw4w9WgXcQ
+        // http://www.youtube.com/user/username#p/u/11/dQw4w9WgXcQ
+        // http://www.youtube.com/sandalsResorts#p/c/54B8C800269D7C1B/0/dQw4w9WgXcQ
+        // http://www.youtube.com/watch?feature=player_embedded&v=dQw4w9WgXcQ
+        // http://www.youtube.com/?feature=player_embedded&v=dQw4w9WgXcQ
+        // It also works on the youtube-nocookie.com URL with the same above options.
+        // It will also pull the ID from the URL in an embed code (both iframe and object tags)
+        preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $urlParams, $match);
+        
+        return $match[1];
+    }
 }

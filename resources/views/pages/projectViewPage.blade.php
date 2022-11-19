@@ -65,7 +65,7 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                  <a href="http://localhost:8000/project-view/{{$project['id']}}#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  <a href="http://localhost:8000/project/{{$project['id']}}#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -172,6 +172,11 @@
             <div class="py-5 px-lg-5" id="info-campaign-accordion">
               {{-- Note to fronend devs, pls fix/format ty. -RamonDev --}}
               <p class="text-center">{{$project['description']}}</p>
+              <div class="d-flex justify-content-center">
+                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{$project['yt_link']}}" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+              </div>
               <p class="text-center">{{$project['yt_link']}}</p>
               <p class="text-center">{{$project['target_date']}}</p>
             </div>

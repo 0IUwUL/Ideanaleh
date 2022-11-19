@@ -52,13 +52,13 @@ Route::controller(RegistrationController::class)->group(function () {
 
 // Project routes
 Route::controller(ProjectController::class)->group(function () {
-    Route::get('/project-view/{id}', 'index')->name('project-view');
+    Route::get('/project/{id}', 'index')->name('project-view');
     Route::post('/save-created-project', 'saveCreatedProject')->name('save-created-project');
 });
 
-Route::get('/project', function () {
+Route::get('/project-create', function () {
     return view('pages.create');
-})->name('project');
+})->name('project-create');
 
 // Google Routes
 Route::controller(GoogleAuthController::class)->prefix('google')->name('google.')->group(function(){

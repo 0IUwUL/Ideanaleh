@@ -77,7 +77,7 @@ class ProjectController extends Controller
         $this->_saveTiers($dataVar->id, $requestArg);
         
         // Note to future RamonDev Redirect to Project view page.
-        return redirect('project/'.$dataVar->id);
+        return redirect('project/view/'.$dataVar->id);
 
     }
 

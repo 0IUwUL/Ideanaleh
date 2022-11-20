@@ -121,6 +121,17 @@ $('#LoginSubmit').on("click", function(){
 });
 
 
+function loadBtn (e) {
+    var btn = $(e.target).attr('data-btn');
+    
+    google.accounts.id.renderButton(
+        document.getElementById(btn),
+        { theme: "outline", size: "large", text: "continue_with"}  // customization attributes
+    );
+}
+
+$('#LoginModal').on('show.bs.modal',  loadBtn);
+$('#SignUpModal').on('show.bs.modal',  loadBtn);
 $('.next').click(validate);
 $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);

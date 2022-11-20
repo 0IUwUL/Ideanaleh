@@ -1,7 +1,14 @@
-
+<!-- Initialize google button -->
+<div id="g_id_onload"
+  data-client_id="858839383289-5m5kp74ondfn61no39porlmjfqdbg0lf.apps.googleusercontent.com"
+  data-login_uri="{{route('google.login-user')}}"
+  data-_token="{{csrf_token()}}" 
+  data-method="post" 
+  data-auto_prompt="false">
+</div>
 
 <!-- Login -->
-<div class="modal p-0" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
+<div class="modal p-0" id="LoginModal" data-btn="loginModalGSI"tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content border-info">
     <div class="modal-header bg-info text-white">
@@ -30,21 +37,7 @@
       <button type="button" id="LoginSubmit" class="btn btn-primary">Login</button>
 
       <!-- Google button-->
-      <div id="g_id_onload"
-        data-client_id="858839383289-5m5kp74ondfn61no39porlmjfqdbg0lf.apps.googleusercontent.com"
-        data-login_uri="{{route('google.google-login-user')}}"
-        data-_token="{{csrf_token()}}" 
-        data-method="post" 
-        data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-        data-type="standard"
-        data-size="large"
-        data-theme="outline"
-        data-text="sign_in_with"
-        data-shape="rectangular"
-        data-logo_alignment="left">
-      </div>
+      <div id="loginModalGSI"></div> 
     </div>
     </form>
   </div>
@@ -55,7 +48,7 @@
 <form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm">
 @csrf           
               
-<div class="modal p-0" id="SignUpModal" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
+<div class="modal p-0" id="SignUpModal" data-btn="signupModalGSI" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
@@ -98,24 +91,10 @@
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success next" >Next</button>
-        <div id="g_id_onload"
-          data-client_id="858839383289-5m5kp74ondfn61no39porlmjfqdbg0lf.apps.googleusercontent.com"
-          data-login_uri="{{route('google.callback')}}"
-          data-_token="{{csrf_token()}}" 
-          data-method="post" 
-          data-auto_prompt="false">
-        </div>
-        <div class="g_id_signin"
-          data-type="standard"
-          data-size="large"
-          data-theme="outline"
-          data-text="sign_in_with"
-          data-shape="rectangular"
-          data-logo_alignment="left">
-        </div>
+        
+        <!-- Google button-->
+        <div id="signupModalGSI"></div> 
       </div>
-      <!-- Google button-->
-      
     </div>
   </div>
 </div>

@@ -273,7 +273,7 @@
           A Platform that serves to help Creators, Inventors, Innovators to Kickstart their Dream Projects.
         </p>
         @if ($mode)
-        <a href="{{ route('project-create') }}" class="hero__btn hero__btn--light btn">Get Started!</a>
+        <a href="{{ route('project.create') }}" class="hero__btn hero__btn--light btn">Get Started!</a>
         @else
         <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{session('loginId') ? 'logI' : 'logO'}} data-mode = {{$mode}}>Get Started!</a>
         @endif

@@ -10,12 +10,24 @@ use App\Models\User;
 
 class GoogleAuthController extends Controller
 {
-
-    public function googleCallback(Request $request) {
-        
+    public function googleLoginUser(Request $request) {
         // Decode JWT token from google 
         $userInfo = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $request->credential)[1]))));
+        
+        $user = User::where('email', '=', $userInfo->email)->first();
 
+        if ($user) {
+            return $this->_loginUser($request, $user);
+        }
+        else {
+            // Register when the user is not yet registered when they try to sign in with google
+            return $this->registerUser($request, $userInfo);
+        }
+
+    }
+
+    private function registerUser($request, $userInfo) {
+        
         $user = new User;
         $user->Lname = $userInfo->family_name;
         $user->Fname = $userInfo->given_name;
@@ -29,24 +41,6 @@ class GoogleAuthController extends Controller
         return $this->_loginUser($request, $currentUser);
         
     }
-
-
-    public function googleLoginUser(Request $request) {
-        // Decode JWT token from google 
-        $userInfo = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $request->credential)[1]))));
-        
-        $user = User::where('email', '=', $userInfo->email)->first();
-
-        if ($user) {
-            return $this->_loginUser($request, $user);
-        }
-        else {
-            // Register when the user is not yet registered when they try to sign in with google
-            return $this->googleCallback($request);
-        }
-
-    }
-
 
     /**
      * Second parameter only accepts variable type of Object

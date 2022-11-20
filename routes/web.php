@@ -51,19 +51,22 @@ Route::controller(RegistrationController::class)->group(function () {
 });
 
 // Project routes
-Route::controller(ProjectController::class)->group(function () {
-    Route::get('/project/{id}', 'index')->name('project-view');
-    Route::post('/save-created-project', 'saveCreatedProject')->name('save-created-project');
-});
+Route::prefix('project')->name('project.')->group(function () {
+    Route::get('/create', function () {
+        return view('pages.create');
+    })->name('create');
 
-Route::get('/project-create', function () {
-    return view('pages.create');
-})->name('project-create');
+    // Project controller routes
+    Route::controller(ProjectController::class)->group(function () {
+        Route::get('/view/{id}', 'index')->name('view');
+        Route::post('/save', 'saveCreatedProject')->name('save');
+    });
+    
+});
 
 // Google Routes
 Route::controller(GoogleAuthController::class)->prefix('google')->name('google.')->group(function(){
-    Route::post('callback', 'googleCallback')->name('callback');
-    Route::post('google-login-user', 'googleLoginUser')->name('google-login-user');
+    Route::post('login-user', 'googleLoginUser')->name('login-user');
 });
 
 // Not utilized

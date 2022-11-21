@@ -130,6 +130,23 @@ function loadBtn (e) {
     );
 }
 
+$('.create a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+    var target = $(e.target).attr('data-bs-target');
+    var $curr = $(".prog_tabs a[data-bs-target='" + target + "']").parent();
+    $('.prog_tabs li a').removeClass('done');
+    $curr.prevAll().children().addClass("done");
+    
+    if(target == '#Basic-tab-pane')
+        $('.progress-bar').css('width', '25%')
+    if(target == '#Reward-tab-pane')
+        $('.progress-bar').css('width', '50%')
+    if(target == '#Story-tab-pane')
+        $('.progress-bar').css('width', '75%')
+    if(target == '#Payment-tab-pane')
+        $('.progress-bar').css('width', '100%')
+});
+
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);
 $('.next').click(validate);

@@ -8,10 +8,10 @@
         <div class="row text-dark d-flex justify-content-center">
             <div class="col-2 shadow list">
                 <div class="nav flex-column set_tabs mt-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" role = "button" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
+                    <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
                         <i class="fa-solid fa-user icon_settings me-2"></i> <p class = "d-none d-sm-none d-md-none d-lg-block">Profile</p> 
                     </a>
-                    <a class="nav-link" role = "button" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">
+                    <a class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">
                         <i class="fa-solid fa-lock icon_settings me-2"></i> <p class = "d-none d-sm-none d-md-none d-lg-block">Account</p> 
                     </a>
                     <!-- <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill" data-bs-target="#v-pills-payment" type="button" role="tab" aria-controls="v-pills-payment" aria-selected="false">

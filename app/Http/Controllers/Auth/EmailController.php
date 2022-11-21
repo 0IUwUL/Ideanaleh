@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerification;
+use Auth;
 
 //Import model
 use App\Models\User; 
@@ -16,10 +17,8 @@ class EmailController extends Controller
     // the default VerificationController
 
     public function sendCode(Request $request)
-    {
-    $userId = $request->session()->get('loginId');
-    
-    $user = User::where('id', $userId)->first();
+    { 
+    $user = Auth::user();
     
     // Generate six digit code
     $code = random_int(0,999999);  
@@ -31,7 +30,7 @@ class EmailController extends Controller
     ];
 
     // Send the code to the database
-    User::where('id', $userId)->update(['code' => $code]);
+    User::where('id', $user->id)->update(['code' => $code]);
     
     // Send email
     Mail::to($user->email)->send(new EmailVerification($emailDetails));
@@ -40,11 +39,10 @@ class EmailController extends Controller
 
     public function verify(Request $request)
     {
-        $userId = $request->session()->get('loginId');
-        $user = User::where('id', $userId)->first();
+        $user = Auth::user();
 
         if($request->code == $user->code) {
-            User::where('id', $userId)->update(['dev_mode' => '1']);
+            User::where('id', $user->id)->update(['dev_mode' => '1']);
             $json_data = array("response" => "success");
         }
         else {

@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 //Import model
 use App\Models\User; 
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Auth;
 
 class RegistrationController extends Controller
 {
@@ -33,7 +35,7 @@ class RegistrationController extends Controller
         $user->pref_categs = implode(',', $request->Categs);
         
         $user->save();
-        
+        Auth::loginUsingId($user->id);
         return redirect('/');
         }
     }

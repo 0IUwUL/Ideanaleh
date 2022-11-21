@@ -29,7 +29,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 // Settings routes
-Route::controller(SettingsController::class)->group(function () {
+Route::middleware('auth')->controller(SettingsController::class)->group(function () {
     Route::get('/settings', 'index')->name('settings');
     Route::post('/change-name', 'changeName')->name('change-name');
     Route::post('/change-pass', 'changePass')->name('change-pass');
@@ -51,7 +51,7 @@ Route::controller(RegistrationController::class)->group(function () {
 });
 
 // Project routes
-Route::prefix('project')->name('project.')->group(function () {
+Route::middleware('auth')->prefix('project')->name('project.')->group(function () {
     Route::get('/create', function () {
         return view('pages.create');
     })->name('create');

@@ -5,32 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Projects; 
 use App\Models\ProjectTiers;
+use Auth;
 
 class ProjectController extends Controller
 {
     public function index(int $idArg)
     {
-        // $projectDataVar = Projects::where('id', '=', $idArg)->first();
-
-        // $dataVar = [
-        //     'projectId' => $projectDataVar->id,
-        //     'projectUserId' => $projectDataVar->user_id,
-        //     'projectTitle' => $projectDataVar->title,
-        //     'projectDescription' => $projectDataVar->description,
-        //     'projectTags' => $projectDataVar->tags,
-        //     'projectTargetAmount' => $projectDataVar->target_amt,
-        //     'projectImg' => $projectDataVar->img,
-        //     'projectYtLing' => $projectDataVar->yt_link,
-        //     'projectTargetDate' => $projectDataVar->target_date,
-        //     'projectTiers' => $this->_getProjectTiers($idArg),
-        //     'projectCreatedAt' => $projectDataVar->created_at->format('M d Y'),
-        //     'projectUpdatedAt' => $projectDataVar->updated_at->format('M d Y'),
-        // ];
-
         $projectDataVar = Projects::find($idArg)->toArray();
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
 
-        // return view('pages.projectViewPage', $dataVar);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
 
     }
@@ -58,7 +41,7 @@ class ProjectController extends Controller
     public function saveCreatedProject(Request $requestArg)
     {
         $dataVar = new Projects;
-        $dataVar->user_id = $requestArg->session()->get('loginId');
+        $dataVar->user_id = Auth::id();
         $dataVar->title = $requestArg->ProjTitle;
         $dataVar->description = $requestArg->ProjDesc;
         $dataVar->tags = implode(',', $requestArg->Tags);

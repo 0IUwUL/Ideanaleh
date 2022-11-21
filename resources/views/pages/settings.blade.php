@@ -32,8 +32,8 @@
                                     <h3>Avatar in use:</h3>
                                 </div>
                                 <div class="col">
-                                    @if ($user->icon)
-                                        <img src="{{asset('storage/'.$user->icon);}} " width="100" height="100" >
+                                    @if ($user['icon'])
+                                        <img src="{{asset('storage/'.$user['icon']);}} " width="100" height="100" >
                                     @else
                                         <i class="fa-solid fa-images display-2"></i>
                                     @endif
@@ -77,16 +77,16 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <h3>Name :</h3>
-                                    <div class = "fs-5" id="inputName"> {{$user->Lname}}, {{$user->Fname}} {{$user->Mname}} </div>
+                                    <div class = "fs-5" id="inputName"> {{$user['Lname']}}, {{$user['Fname']}} {{$user['Mname']}} </div>
                                 </div>
                                 <a class="h5 editInfo"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="name"
-                                    data-lname={{$user->Lname}}
-                                    data-fname={{$user->Fname}}
-                                    data-mname={{$user->Mname}}>
+                                    data-lname={{$user['Lname']}}
+                                    data-fname={{$user['Fname']}}
+                                    data-mname={{$user['Mname']}}>
                                     </i>
                                 </a>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <h3>Email :</h3>
-                                    <div class = "fs-5" id="inputame"> {{$user->email}} </div>
+                                    <div class = "fs-5" id="inputame"> {{$user['email']}} </div>
                                 </div>
                                 <a type="button" class="h5"
                                     data-bs-toggle="modal" 
@@ -110,14 +110,14 @@
                            <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <h3>Address :</h3>
-                                    <div class="fs-5" id="inputLname"> {{$user->address}} </div>
+                                    <div class="fs-5" id="inputLname"> {{$user['address']}} </div>
                                 </div>
                                 <a type="button" class="editInfo h5"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="address"
-                                    data-address={{$user->address}}>
+                                    data-address={{$user['address']}}>
                                     </i>
                                 </a>
                             </div>
@@ -172,7 +172,7 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div>
                                                         <label id="oldtEmail">Email</label>
-                                                        <div> {{$user->email}}</div>
+                                                        <div> {{$user['email']}}</div>
                                                     </div>
                                                     <button type="button" id="sendCode" class = "btn btn-primary">Send code <i class="fa-solid fa-paper-plane"></i></button>
                                                 </div> 
@@ -204,13 +204,13 @@
                         <div class="h1 d-sm-none d-md-none d-lg-block hid_set_text">Manage your account</div>
                         
                             <div class="row mb-3">
-                                @if ($user->dev_mode == '0')
+                                @if ($user== '0')
                                 <!-- Unverified email -->
                                 <span id="error" class = "text-danger mb-3">*Please verify your account</span>
                                 <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>
                                 <div class="row">
                                     <div class="col-sm-8 col-md-8 col-lg-6 col-form-label">
-                                        <label id="inputEmail">{{$user->email}}</label>
+                                        <label id="inputEmail">{{$user['email']}}</label>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-4">
                                         <button id="generateCode" class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>

@@ -21,7 +21,8 @@
                     </div>
                 </form>
             </div>
-            @if(!session()->has('loginId'))
+            
+            @if(!Auth::check())
             <div class="col-2 d-flex justify-content-end">
                     <button type="button" class="btn btn-light btn-outline-dark mx-3 d-none d-xxl-block" data-bs-toggle="modal" data-bs-target="#SignUpModal">
                         Sign Up

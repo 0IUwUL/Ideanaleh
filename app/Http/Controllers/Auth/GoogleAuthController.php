@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -47,8 +47,8 @@ class GoogleAuthController extends Controller
      * Explicitly set to prevent errors
      */
     private function _loginUser(Request $request, Object $user) {
-        $request->session()->put('loginId', $user->id);
-
+        //$request->session()->put('loginId', $user->id);
+        Auth::loginUsingId($user->id);
         return (redirect('/'));
     }
 }

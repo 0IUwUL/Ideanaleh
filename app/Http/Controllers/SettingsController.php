@@ -4,25 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Hash;
-
+use Auth;
 //Import model
 use App\Models\User; 
 
 class SettingsController extends Controller
 {
     public function index(Request $request){
-        // Get user id and then query to db
-        $userId = $request->session()->get('loginId');
-        $query = User::find($userId);
-
-        //dd($user->Fname);
-  
-        return view('pages.settings')->with('user', $query);
+        // Get user info from session
+        $user = Auth::user()->toArray();
+        
+        return view('pages.settings')->with('user', $user);
     }
     
     public function changePass(Request $request){
         // Get user id
-        $userId = $request->session()->get('loginId');
+        $userId = Auth::id();
        
         User::where('id', $userId)->update(['password' => bcrypt($request->newPass)]);
 
@@ -31,7 +28,7 @@ class SettingsController extends Controller
 
     public function changeName(Request $request){
         // Get user id
-        $userId = $request->session()->get('loginId');
+        $userId = Auth::id();
 
         $user = array(
             'Lname' => $request->inputLname,
@@ -46,7 +43,7 @@ class SettingsController extends Controller
 
     public function uploadImage(Request $request){
         // Get user id
-        $userId = $request->session()->get('loginId');
+        $userId = Auth::id();
         
         if($request->hasFile('avatar')){
             // Store the icon to avatars folder under public folder
@@ -65,7 +62,7 @@ class SettingsController extends Controller
     
     public function checkPassword(Request $request){
         // Get user id and search to db
-        $userId = $request->session()->get('loginId');
+        $userId = Auth::id();
         $user = User::find($userId);
 
         if (Hash::check($request->pass, $user->password)) {
@@ -81,7 +78,7 @@ class SettingsController extends Controller
 
     public function changeAddress(Request $request){
         // Get user id
-        $userId = $request->session()->get('loginId');
+        $userId = Auth::id();
 
         $user = array(
             'address' => $request->inputAddress,
@@ -94,7 +91,7 @@ class SettingsController extends Controller
 
     public function changeEmail(Request $request){
         // Get user id
-        $userId = $request->session()->get('loginId');
+        $userId = Auth::id();
 
         $user = array(
             'email' => $request->inputEmail,

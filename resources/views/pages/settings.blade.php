@@ -272,7 +272,7 @@
             </div>
         </div>
     </div>
-    <div aria-live="polite" aria-atomic="true" class="toast-container p-3 align-items-center mt-5">
+    <div class="toast-container align-items-center mt-5">
         <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <strong class="me-auto">System</strong>

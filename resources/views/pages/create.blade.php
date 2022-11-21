@@ -4,7 +4,7 @@
 <x-styles.defnav/>
 
 <div class="project_body d-flex justify-content-center">
-    <div class="col-10 rounded shadow border p-5 bg-light">
+    <div class="col-9 rounded shadow border p-4 bg-light">
         <h2 class = "d-flex justify-content-center">Development Form</h2>
         <div class="col-8 mx-auto mt-5">
             <form method="post" action="{{ route('project.save') }}" accept-charset="UTF-8" enctype='multipart/form-data'>
@@ -18,25 +18,28 @@
                     <label for="floatingDesc">Project Description</label>
                 </div>
                 <div class="row my-5 d-flex justify-content-start">
-                    <div class="col-5">
+                    <div class="col">
                         <label for="floatingProj">Target Project Amount</label>
                         <input type="number" class = "form-control form-control-lg" id="floatingProj" min="100" name = "ProjTarget" required>
                     </div>
-                    <div class="col-5">
+                    <div class="w-100 d-block d-md-block d-lg-none mb-3"></div>
+                    <div class="col">
                         <label for="floatingMileStone">Target Milestone Amount</label>
                         <input type="number" class = "form-control form-control-lg" id="floatingMileStone" min="100" name = "ProjMilestone" required>
                     </div>
                 </div>
                 <div class="row my-5 d-flex justify-content-start">
-                    <div class="col-5 mb-3">
+                    <div class="col col-xl-4 mb-4">
                         <label for="formBanner" class="form-label">Upload Project banner</label>
                         <input accept="image/*" class="form-control" name = "ProjBanner" type="file" id="formBanner" required>
                     </div>
-                    <div class="col-4">
+                    <div class="w-100 d-block d-md-none"></div>
+                    <div class="col col-xl-4 mb-4">
                         <label for="formLogo" class="form-label">Upload Image Logo</label>
                         <input accept="image/*" class="form-control" name = "ProjLogo"  type="file" id="formLogo">
                     </div>
-                    <div class="col-5 mt-3">
+                    <div class="w-100 d-block d-xl-none"></div>
+                    <div class="col col-xl-4">
                         <label for="formVideo" class="form-label">Link Project Video Promo</label>
                         <input class="form-control" name = "ProjVideo"  type="text" id="formVideo">
                     </div>

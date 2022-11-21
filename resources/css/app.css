@@ -177,7 +177,6 @@ h1, h2, h3, h4, h5, h6, .btn {
   background-size: cover;
   min-height: 100vh;
   color: white;
-  overflow: hidden;
 }
 
 .set-header{
@@ -292,7 +291,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 /* Contect Project page */
 .project_body{
   padding: 6rem 0;
-  background-image: linear-gradient(to right, rgba(243, 255, 130, 1), white, rgba(171, 235, 136, 1));
+  background-image: linear-gradient(#1f4260,white);
 }
 
 .card-body{

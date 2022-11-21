@@ -44,10 +44,25 @@
                         <input class="form-control" name = "ProjVideo"  type="text" id="formVideo">
                     </div>
                 </div>
-                <div class="col-4 mb-5">
-                    <label for="floatingDate">Project Target Date</label>
-                    <input type="date" class = "form-control form-control-lg" id="floatingDate" name = "ProjDate" required>
+                <div class="row mb-5">
+                    <div class="col mb-4">
+                        <label for="floatingDate">Project Target Date</label>
+                        <input type="date" class = "form-control form-control-lg" id="floatingDate" name = "ProjDate" required>
+                    </div>
+                    <div class="w-100 d-block d-xl-none"></div>
+                    <div class="col">
+                        <label for="CatgeoryForm" class="form-label">Datalist example</label>
+                        <input class="form-control" list="CatOption" id="CatgeoryForm" placeholder="Add/Choose category">
+                        <datalist id="CatOption">
+                            <option value="San Francisco">
+                            <option value="New York">
+                            <option value="Seattle">
+                            <option value="Los Angeles">
+                            <option value="Chicago">
+                        </datalist>
+                    </div>
                 </div>
+                
                 {{-- Note to future RamonDev: Add project milestone target -RamonDev --}}
                 <div class="col-12 my-4">
                     <label>Tier List Titles</label>

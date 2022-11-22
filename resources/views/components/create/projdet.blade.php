@@ -39,20 +39,10 @@
     </div>
     <div class="col-7">
         <label for="CatgeoryForm" class="form-label">Project Category</label>
-        <select class="form-select" id="CatgeoryForm" aria-label="Default select example" placeholder="Add/Choose category">
-            <option value="AI">Artificial Intelligence</option>
-            <option value="Agri">Agriculture</option>
-            <option value="Business">Business</option>
-            <option value="Games">Games</option>
-            <option value="IOT">Internet of Things</option>
-            <option value="Comm">Communication</option>
-            <option value="Medical">Medical</option>
-            <option value="Transpo">Transportation</option>
-            <option value="Edu">Education</option>
-            <option value="Sec">Security</option>
-            <option value="VR/AR">Virtual/Augmented Reality</option>
-            <option value="Music">Music</option>
-            <option value="Others">Others</option>
+        <select class="form-select" id="CatgeoryForm" name="ProjCategory" aria-label="Default select example" placeholder="Add/Choose category">
+            @foreach($data['categories'] as $category)
+                <option value="{{$category}}">{{$category}}</option>
+            @endforeach
         </select>
     </div>
 </div>

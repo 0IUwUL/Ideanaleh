@@ -350,6 +350,10 @@ h1, h2, h3, h4, h5, h6, .btn {
   }
 }
 
+.Edisplay:hover{
+  cursor: not-allowed;
+}
+
 .create_prog{
   margin-top: 4rem!important;
 }

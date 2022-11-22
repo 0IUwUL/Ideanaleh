@@ -21,6 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title');
             $table->string('description');
+            $table->enum('category', [config('category')]);
             $table->string('tags');
             $table->integer('target_amt');
             $table->string('logo')->nullable();

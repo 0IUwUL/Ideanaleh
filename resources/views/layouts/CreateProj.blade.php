@@ -43,7 +43,6 @@
             function removeTag(el, target){
                 el.parentElement.remove();
                 tags = tags.filter(tag => tag != target);
-                console.log(tags);
                 countTags();
             }
 

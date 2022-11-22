@@ -80,3 +80,7 @@
         </div>
     </div>
 </div>
+<div class="col d-flex justify-content-between">
+    <button type ="button" data-next = "basic" class="tab_next btn btn-danger">Previous</button>
+    <button type ="button" data-next = "story" class="tab_next btn btn-primary">Next</button>
+</div>

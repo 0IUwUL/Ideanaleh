@@ -32,10 +32,9 @@
             Project Category
         </h3>
         <section class="mt-4 fs-6">
-            To help people quickly understand your project, write a concise, clear title and subtitle. Project Title and Project
-            Description will be visible on your project.
+            This will help potential backers to easily locate your project.
             <br>
-            Potential backers will be able to see this whenever they would search, results in categories, etc.
+            Please choose an appopriate category for your project.
         </section>
     </div>
     <div class="col-7">
@@ -64,10 +63,7 @@
             Project Goals
         </h3>
         <section class="mt-4 fs-6">
-            To help people quickly understand your project, write a concise, clear title and subtitle. Project Title and Project
-            Description will be visible on your project.
-            <br>
-            Potential backers will be able to see this whenever they would search, results in categories, etc.
+            This will help backers see the target amount of your project.
         </section>
     </div>
     <div class="col-7 px-3 my-auto">
@@ -89,10 +85,8 @@
             Project Image
         </h3>
         <section class="mt-4 fs-5">
-            To help people quickly understand your project, write a concise, clear title and subtitle. Project Title and Project
-            Description will be visible on your project.
-            <br>
-            Potential backers will be able to see this whenever they would search, results in categories, etc.
+            Include a picture that effectively conveys your project. Choose a design that works well in a variety of sizes because it will be used on your project's page, 
+            the Kickstarter website, mobile apps, and (when shared) social media platforms.
         </section>
     </div>
     <div class="col-7 px-3 my-auto">
@@ -117,13 +111,10 @@
 <div class="row my-4">
     <div class="col-5">
         <h3>
-            Project Image
+            Target Date
         </h3>
         <section class="mt-4 fs-5">
-            To help people quickly understand your project, write a concise, clear title and subtitle. Project Title and Project
-            Description will be visible on your project.
-            <br>
-            Potential backers will be able to see this whenever they would search, results in categories, etc.
+            This date can be changed up until the point at which you manually launch your project.
         </section>
     </div>
     <div class="col-7 mb-4">
@@ -138,13 +129,10 @@
             Project Tag
         </h3>
         <section class="mt-4 fs-5">
-            To help people quickly understand your project, write a concise, clear title and subtitle. Project Title and Project
-            Description will be visible on your project.
-            <br>
-            Potential backers will be able to see this whenever they would search, results in categories, etc.
+            Input tags which makes your project unique from other projects under the same category.
         </section>
     </div>
-    <div class="col col-sm-7 d-flex justify-content-center">
+    <div class="col-7 d-flex justify-content-center">
         <div class="form-floating my-5 col-8">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
@@ -164,3 +152,6 @@
         </div>
     </div>
 </div> 
+<div class="col d-flex justify-content-end">
+    <button type ="button" data-next = "reward" class="tab_next btn btn-primary">Next</button>
+</div>

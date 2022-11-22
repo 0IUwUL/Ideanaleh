@@ -5,34 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Projects; 
 use App\Models\ProjectTiers;
+use Auth;
 
 class ProjectController extends Controller
 {
-    public function index(int $idArg)
+    public function index()
     {
-        // $projectDataVar = Projects::where('id', '=', $idArg)->first();
+        // $categoryVar = $this->_getEnumValues('category');
+        $categoryVar = [
+            //Added '[0]' after the config() because it returns an array named '0'
+            'categories' => config('category')[0],
+        ];
 
-        // $dataVar = [
-        //     'projectId' => $projectDataVar->id,
-        //     'projectUserId' => $projectDataVar->user_id,
-        //     'projectTitle' => $projectDataVar->title,
-        //     'projectDescription' => $projectDataVar->description,
-        //     'projectTags' => $projectDataVar->tags,
-        //     'projectTargetAmount' => $projectDataVar->target_amt,
-        //     'projectImg' => $projectDataVar->img,
-        //     'projectYtLing' => $projectDataVar->yt_link,
-        //     'projectTargetDate' => $projectDataVar->target_date,
-        //     'projectTiers' => $this->_getProjectTiers($idArg),
-        //     'projectCreatedAt' => $projectDataVar->created_at->format('M d Y'),
-        //     'projectUpdatedAt' => $projectDataVar->updated_at->format('M d Y'),
-        // ];
+        return view('pages.create')->with('data', $categoryVar);
+    }
 
+
+    public function view(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
 
-        // return view('pages.projectViewPage', $dataVar);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
-
     }
 
 
@@ -58,9 +51,10 @@ class ProjectController extends Controller
     public function saveCreatedProject(Request $requestArg)
     {
         $dataVar = new Projects;
-        $dataVar->user_id = $requestArg->session()->get('loginId');
+        $dataVar->user_id = Auth::id();
         $dataVar->title = $requestArg->ProjTitle;
         $dataVar->description = $requestArg->ProjDesc;
+        $dataVar->category = $requestArg->ProjCategory;
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
@@ -134,4 +128,19 @@ class ProjectController extends Controller
         
         return $match[1];
     }
+
+
+    private static function _getEnumValues($column){
+        $type= Projects::select(Projects::raw("SHOW COLUMNS FROM projects WHERE Field = '{$column}'"))[0]->Type ;
+        preg_match('/^enum((.*))$/',$type,$matches)->get();
+        $enum=array();
+
+        foreach(explode(',',$matches[1])as$value){
+            $v=trim($value,"'");
+            $enum=array_add($enum,$v,$v);
+        }
+
+        return $enum;
+    }
+
 }

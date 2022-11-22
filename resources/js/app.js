@@ -130,6 +130,28 @@ function loadBtn (e) {
     );
 }
 
+$('.prog_tabs a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+    var target = $(e.target).attr('data-bs-target');
+    var $curr = $(".prog_tabs a[data-bs-target='" + target + "']");
+    $('.prog_tabs a').removeClass('done');
+    $('.prog_tabs .arrow').removeClass('done');
+    $curr.prevAll().addClass("done");
+    if(target == '#nav-basic')
+        $('.progress-bar').css('width', '25%')
+    if(target == '#nav-reward')
+        $('.progress-bar').css('width', '50%')
+    if(target == '#nav-story')
+        $('.progress-bar').css('width', '75%')
+    if(target == '#nav-payment')
+        $('.progress-bar').css('width', '100%')
+});
+
+function Next(e){
+    var btn = $(e.target).attr('data-next');
+    $('#nav-'+btn+'-tab').tab('show');
+}
+
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);
 $('.next').click(validate);
@@ -137,4 +159,6 @@ $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
+$('.tab_next').on('click', Next);
+
 

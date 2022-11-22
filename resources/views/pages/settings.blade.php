@@ -8,10 +8,10 @@
         <div class="row text-dark d-flex justify-content-center">
             <div class="col-2 shadow list">
                 <div class="nav flex-column set_tabs mt-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" role = "button" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
+                    <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">
                         <i class="fa-solid fa-user icon_settings me-2"></i> <p class = "d-none d-sm-none d-md-none d-lg-block">Profile</p> 
                     </a>
-                    <a class="nav-link" role = "button" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">
+                    <a class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">
                         <i class="fa-solid fa-lock icon_settings me-2"></i> <p class = "d-none d-sm-none d-md-none d-lg-block">Account</p> 
                     </a>
                     <!-- <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill" data-bs-target="#v-pills-payment" type="button" role="tab" aria-controls="v-pills-payment" aria-selected="false">
@@ -32,8 +32,8 @@
                                     <h3>Avatar in use:</h3>
                                 </div>
                                 <div class="col">
-                                    @if ($user->icon)
-                                        <img src="{{asset('storage/'.$user->icon);}} " width="100" height="100" >
+                                    @if ($user['icon'])
+                                        <img src="{{asset('storage/'.$user['icon']);}} " width="100" height="100" >
                                     @else
                                         <i class="fa-solid fa-images display-2"></i>
                                     @endif
@@ -77,16 +77,16 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <h3>Name :</h3>
-                                    <div class = "fs-5" id="inputName"> {{$user->Lname}}, {{$user->Fname}} {{$user->Mname}} </div>
+                                    <div class = "fs-5" id="inputName"> {{$user['Lname']}}, {{$user['Fname']}} {{$user['Mname']}} </div>
                                 </div>
                                 <a class="h5 editInfo"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="name"
-                                    data-lname={{$user->Lname}}
-                                    data-fname={{$user->Fname}}
-                                    data-mname={{$user->Mname}}>
+                                    data-lname={{$user['Lname']}}
+                                    data-fname={{$user['Fname']}}
+                                    data-mname={{$user['Mname']}}>
                                     </i>
                                 </a>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <h3>Email :</h3>
-                                    <div class = "fs-5" id="inputame"> {{$user->email}} </div>
+                                    <div class = "fs-5" id="inputame"> {{$user['email']}} </div>
                                 </div>
                                 <a type="button" class="h5"
                                     data-bs-toggle="modal" 
@@ -110,14 +110,14 @@
                            <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-column">
                                     <h3>Address :</h3>
-                                    <div class="fs-5" id="inputLname"> {{$user->address}} </div>
+                                    <div class="fs-5" id="inputLname"> {{$user['address']}} </div>
                                 </div>
                                 <a type="button" class="editInfo h5"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="address"
-                                    data-address={{$user->address}}>
+                                    data-address={{$user['address']}}>
                                     </i>
                                 </a>
                             </div>
@@ -172,7 +172,7 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div>
                                                         <label id="oldtEmail">Email</label>
-                                                        <div> {{$user->email}}</div>
+                                                        <div> {{$user['email']}}</div>
                                                     </div>
                                                     <button type="button" id="sendCode" class = "btn btn-primary">Send code <i class="fa-solid fa-paper-plane"></i></button>
                                                 </div> 
@@ -204,13 +204,13 @@
                         <div class="h1 d-sm-none d-md-none d-lg-block hid_set_text">Manage your account</div>
                         
                             <div class="row mb-3">
-                                @if ($user->dev_mode == '0')
+                                @if ($user== '0')
                                 <!-- Unverified email -->
                                 <span id="error" class = "text-danger mb-3">*Please verify your account</span>
                                 <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>
                                 <div class="row">
                                     <div class="col-sm-8 col-md-8 col-lg-6 col-form-label">
-                                        <label id="inputEmail">{{$user->email}}</label>
+                                        <label id="inputEmail">{{$user['email']}}</label>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-4">
                                         <button id="generateCode" class = "btn btn-primary"><span id="timer">Send code <i class="fa-solid fa-paper-plane"></i></span></button>
@@ -272,7 +272,7 @@
             </div>
         </div>
     </div>
-    <div aria-live="polite" aria-atomic="true" class="toast-container p-3 align-items-center mt-5">
+    <div class="toast-container align-items-center mt-5">
         <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <strong class="me-auto">System</strong>

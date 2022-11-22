@@ -135,6 +135,7 @@ $('.prog_tabs a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr('data-bs-target');
     var $curr = $(".prog_tabs a[data-bs-target='" + target + "']");
     $('.prog_tabs a').removeClass('done');
+    $('.prog_tabs .arrow').removeClass('done');
     $curr.prevAll().addClass("done");
     console.log($curr)
     if(target == '#nav-basic')

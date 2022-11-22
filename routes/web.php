@@ -55,7 +55,6 @@ Route::middleware('auth')->prefix('project')->name('project.')->group(function (
     Route::get('/create', function () {
         return view('pages.create');
     })->name('create');
-
     // Project controller routes
     Route::controller(ProjectController::class)->group(function () {
         Route::get('/view/{id}', 'index')->name('view');

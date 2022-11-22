@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   width:  100px;
   text-align: center!important;
   background-color: white !important;
-
+  padding: 0;
 }
 
 .prog_tabs a.active,
@@ -313,7 +313,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 .prog_tabs .nav-link i{
   font-size: 3rem;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .prog_tabs .nav-link h5{
@@ -324,6 +324,30 @@ h1, h2, h3, h4, h5, h6, .btn {
 .prog_tabs .nav-link:hover{
   color: whitesmoke !important;
   background-color: #009a9c!important;
+}
+
+.prog_tabs div{
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.arrow{
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+}
+
+@media(max-width: 850px){
+  .prog_tabs .nav-link{
+    height: 75px;
+    width:  75px;
+    margin: .5rem;
+  }
+  .prog_tabs .nav-link i{
+    font-size: 2rem;
+    margin-top: 18px;
+  }
 }
 
 .create_prog{
@@ -377,6 +401,13 @@ hr.create{
   font: 250 1rem sans-serif;
   border: none;
   background-color: transparent;
+}
+
+@media(max-width: 440px){
+  .tags input{
+    padding: 0;
+    font-size: .7rem;
+  }
 }
 
 .Tool{

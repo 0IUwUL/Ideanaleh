@@ -305,8 +305,8 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 }
 
-.prog_tabs li a.active,
-.prog_tabs li .done{
+.prog_tabs a.active,
+.prog_tabs .done{
   color: whitesmoke !important;
   background-color: #009a9c!important;
 }

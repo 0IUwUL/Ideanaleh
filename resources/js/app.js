@@ -130,20 +130,20 @@ function loadBtn (e) {
     );
 }
 
-$('.create a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+$('.prog_tabs a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
     var target = $(e.target).attr('data-bs-target');
-    var $curr = $(".prog_tabs a[data-bs-target='" + target + "']").parent();
-    $('.prog_tabs li a').removeClass('done');
-    $curr.prevAll().children().addClass("done");
-    
-    if(target == '#Basic-tab-pane')
+    var $curr = $(".prog_tabs a[data-bs-target='" + target + "']");
+    $('.prog_tabs a').removeClass('done');
+    $curr.prevAll().addClass("done");
+    console.log($curr)
+    if(target == '#nav-basic')
         $('.progress-bar').css('width', '25%')
-    if(target == '#Reward-tab-pane')
+    if(target == '#nav-reward')
         $('.progress-bar').css('width', '50%')
-    if(target == '#Story-tab-pane')
+    if(target == '#nav-story')
         $('.progress-bar').css('width', '75%')
-    if(target == '#Payment-tab-pane')
+    if(target == '#nav-payment')
         $('.progress-bar').css('width', '100%')
 });
 

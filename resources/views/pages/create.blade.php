@@ -76,14 +76,11 @@
                         </div>
                         <div class="col-7">
                             <label for="CatgeoryForm" class="form-label">Project Category</label>
-                            <input class="form-control" list="CatOption" id="CatgeoryForm" placeholder="Add/Choose category">
-                            <datalist id="CatOption">
-                                <option value="San Francisco">
-                                <option value="New York">
-                                <option value="Seattle">
-                                <option value="Los Angeles">
-                                <option value="Chicago">
-                            </datalist>
+                            <select class="form-control" name="ProjCategory" id="ProjCategory">
+                            @foreach($data['categories'] as $category)
+                                <option value="{{$category}}">{{$category}}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
                     <hr class= "create">

@@ -52,13 +52,10 @@ Route::controller(RegistrationController::class)->group(function () {
 
 // Project routes
 Route::middleware('auth')->prefix('project')->name('project.')->group(function () {
-    Route::get('/create', function () {
-        return view('pages.create');
-    })->name('create');
-
     // Project controller routes
     Route::controller(ProjectController::class)->group(function () {
-        Route::get('/view/{id}', 'index')->name('view');
+        Route::get('/create', 'index')->name('create');
+        Route::get('/view/{id}', 'view')->name('view');
         Route::post('/save', 'saveCreatedProject')->name('save');
     });
     

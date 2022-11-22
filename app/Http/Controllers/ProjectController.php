@@ -9,13 +9,23 @@ use Auth;
 
 class ProjectController extends Controller
 {
-    public function index(int $idArg)
+    public function index()
     {
+        // $categoryVar = $this->_getEnumValues('category');
+        $categoryVar = [
+            //Added '[0]' after the config() because it returns an array named '0'
+            'categories' => config('category')[0],
+        ];
+
+        return view('pages.create')->with('data', $categoryVar);
+    }
+
+
+    public function view(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
 
         return view('pages.projectViewPage')->with('project', $projectDataVar);
-
     }
 
 
@@ -44,6 +54,7 @@ class ProjectController extends Controller
         $dataVar->user_id = Auth::id();
         $dataVar->title = $requestArg->ProjTitle;
         $dataVar->description = $requestArg->ProjDesc;
+        $dataVar->category = $requestArg->ProjCategory;
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
@@ -117,4 +128,19 @@ class ProjectController extends Controller
         
         return $match[1];
     }
+
+
+    private static function _getEnumValues($column){
+        $type= Projects::select(Projects::raw("SHOW COLUMNS FROM projects WHERE Field = '{$column}'"))[0]->Type ;
+        preg_match('/^enum((.*))$/',$type,$matches)->get();
+        $enum=array();
+
+        foreach(explode(',',$matches[1])as$value){
+            $v=trim($value,"'");
+            $enum=array_add($enum,$v,$v);
+        }
+
+        return $enum;
+    }
+
 }

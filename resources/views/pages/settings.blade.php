@@ -204,7 +204,7 @@
                         <div class="h1 d-sm-none d-md-none d-lg-block hid_set_text">Manage your account</div>
                         
                             <div class="row mb-3">
-                                @if ($user== '0')
+                                @if ($user['dev_mode']== '0')
                                 <!-- Unverified email -->
                                 <span id="error" class = "text-danger mb-3">*Please verify your account</span>
                                 <label for="inputEmail" class="col-sm-2 col-form-label"><h3>Email</h3></label>

@@ -33,7 +33,7 @@ class GoogleAuthController extends Controller
         $user->Lname = $userInfo->family_name;
         $user->Fname = $userInfo->given_name;
         $user->email = $userInfo->email;
-        
+        $user->dev_mode = 1;
         // Save in database
         $user->save();
 

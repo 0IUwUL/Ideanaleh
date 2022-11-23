@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserPreferenceController;
 use Illuminate\Http\Request;
 
 //Import model
@@ -35,6 +36,10 @@ class RegistrationController extends Controller
         $user->pref_categs = implode(',', $request->Categs);
         
         $user->save();
+        
+        //Calling a function of a controller from a controller
+        (new UserPreferenceController)->createInitialUserPreference($user->id);
+
         Auth::loginUsingId($user->id);
         return redirect('/');
         }

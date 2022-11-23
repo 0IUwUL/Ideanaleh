@@ -65,7 +65,24 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                  <a href="http://localhost:8000/project/{{$project['id']}}#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  {{-- UNFOLLOW BUTTON --}}
+                  @if($project['isFollowed'])
+                  <form method="post" action="{{ route('user-preference.update/delete') }}">
+                  @csrf
+                    <input type="hidden" name="ProjectId" value='{{$project['id']}}'>
+                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-heart"></span>&nbsp Unfollow the Project</button>
+                  </form>
+                  @else
+                  {{-- FOLLOW BUTTON --}}
+                  <form method="post" action="{{ route('user-preference.update/add') }}">
+                  @csrf
+                    <input type="hidden" name="ProjectId" value='{{$project['id']}}'>
+                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-heart"></span>&nbsp Follow the Project</button>
+                  </form>
+                  @endif
+
+                  {{-- DONATE BUTTON --}}
+                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             

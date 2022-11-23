@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\UserPreferenceController;
 
 //Import model
 use App\Models\User; 
@@ -35,6 +36,9 @@ class GoogleAuthController extends Controller
         
         // Save in database
         $user->save();
+
+        //Calling a function of a controller from a controller
+        (new UserPreferenceController)->createInitialUserPreference($user->id);
 
         // Auto Login the user when they sign up with google?
         $currentUser = User::where('email', '=', $userInfo->email)->first();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\UserPreferenceController;
+
 use Illuminate\Http\Request;
 use App\Models\Projects; 
 use App\Models\ProjectTiers;
@@ -24,6 +26,7 @@ class ProjectController extends Controller
     public function view(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
 
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }

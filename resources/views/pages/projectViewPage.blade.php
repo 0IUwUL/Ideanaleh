@@ -65,7 +65,24 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                  <a href="http://localhost:8000/project/{{$project['id']}}#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  {{-- UNFOLLOW BUTTON --}}
+                  @if($project['isFollowed'])
+                  <form method="post" action="{{ route('user-preference.update/delete') }}">
+                  @csrf
+                    <input type="hidden" name="ProjectId" value='{{$project['id']}}'>
+                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-heart"></span>&nbsp Unfollow the Project</button>
+                  </form>
+                  @else
+                  {{-- FOLLOW BUTTON --}}
+                  <form method="post" action="{{ route('user-preference.update/add') }}">
+                  @csrf
+                    <input type="hidden" name="ProjectId" value='{{$project['id']}}'>
+                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-heart"></span>&nbsp Follow the Project</button>
+                  </form>
+                  @endif
+
+                  {{-- DONATE BUTTON --}}
+                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -152,7 +169,7 @@
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-update-tab" data-bs-toggle="pill"
               data-bs-target="#pills-update" type="button" role="tab" aria-controls="pills-update"
-              aria-selected="false">Update</button>
+              aria-selected="false">Progress</button>
           </li>
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-comments-tab" data-bs-toggle="pill"
@@ -167,74 +184,15 @@
         </ul>
 
         <div class="tab-content px-3" id="pills-tabContent">
-          <!-- tab item -->
-          <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
-            <div class="py-5 px-lg-5" id="info-campaign-accordion">
-              {{-- Note to fronend devs, pls fix/format ty. -RamonDev --}}
-              <p class="text-center">{{$project['description']}}</p>
-              <div class="d-flex justify-content-center">
-                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{$project['yt_link']}}" 
-                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>
-              </div>
-              <p class="text-center">{{$project['yt_link']}}</p>
-              <p class="text-center">{{$project['target_date']}}</p>
-            </div>
-          </div>
-          <!-- tab item -->
-          <div class="tab-pane fade" id="pills-update" role="tabpanel" aria-labelledby="pills-update-tab">
-            <div class="accordion accordion-flush py-5 px-lg-5" id="info-update-accordion">
-              <!-- accordion -->
-              <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
-                <div class="accordion-item">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#info-update-acord-1" aria-expanded="true" aria-controls="info-update-acord-1">
-                    <h3 class="accordion-header" id="update-acord-heading1">
-                      Update 2.0
-                    </h3>
-                  </button>
-                  <div id="info-update-acord-1" class="accordion-collapse collapse show"
-                    aria-labelledby="update-acord-heading1" data-bs-parent="#info-update-accordion">
-                    <div class="accordion-body py-2">
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem eius dolore veritatis cupiditate itaque natus velit dignissimos exercitationem. Atque pariatur voluptates ut repudiandae sapiente minima! Officiis libero modi corrupti neque.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- accordion -->
-              <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
-                <div class="accordion-item">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#info-update-acord-2" aria-expanded="false" aria-controls="info-update-acord-2">
-                    <h3 class="accordion-header" id="update-acord-heading2">
-                      Update 1.0
-                    </h3>
-                  </button>
-                  <div id="info-update-acord-2" class="accordion-collapse collapse"
-                    aria-labelledby="update-acord-heading2" data-bs-parent="#info-update-accordion">
-                    <div class="accordion-body py-2">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur hic omnis optio distinctio, a nobis, quam aliquam explicabo animi, eum sit! Recusandae maiores, eos adipisci vitae inventore ipsa neque incidunt.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Campaign tab -->
+          <x-project.view.campaign :project="$project"/>
+          <!-- Update tab -->
+          <x-project.view.progress :id="$project['id']" :progress="$project['progress']"/>
           <!-- comments item tab -->
-          <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
-            <div class="py-5 px-lg-5" id="info-comments-accordion">
-                <!-- Information -->
-                <p class="text-center "> comments </p>
-          </div>
-          </div>
+          <x-project.view.comments/>
           <!-- Backers item tab -->
-          <div class="tab-pane fade" id="pills-backers" role="tabpanel" aria-labelledby="pills-backers-tab">
-            <div class="accordion accordion-flush py-5 px-lg-5" id="info-backers-accordion">
-              <!-- Information -->
-              <p class="text-center "> There are currently 10000 backers at this project</p>
-          </div>
+          <x-project.view.backers/>
         </div>
-      </div>
     </div>
 
     <div class="container-fluid" id="rcmd-tabs">

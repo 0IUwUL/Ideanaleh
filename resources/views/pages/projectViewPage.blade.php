@@ -169,7 +169,7 @@
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-update-tab" data-bs-toggle="pill"
               data-bs-target="#pills-update" type="button" role="tab" aria-controls="pills-update"
-              aria-selected="false">Update</button>
+              aria-selected="false">Progress</button>
           </li>
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-comments-tab" data-bs-toggle="pill"

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+// Import Controllers
 use App\Http\Controllers\UserPreferenceController;
+use App\Http\Controllers\ProgressController;
 
-use Illuminate\Http\Request;
+// Import models
 use App\Models\Projects; 
 use App\Models\ProjectTiers;
+
+use Illuminate\Http\Request;
 use Auth;
 
 class ProjectController extends Controller
@@ -27,7 +31,7 @@ class ProjectController extends Controller
         $projectDataVar = Projects::find($idArg)->toArray();
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
-
+        $projectDataVar = array_merge($projectDataVar, ['progress' => (new ProgressController)->getProjectProgress($idArg)]);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }
 

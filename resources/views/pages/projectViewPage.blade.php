@@ -187,7 +187,7 @@
           <!-- Campaign tab -->
           <x-project.view.campaign :project="$project"/>
           <!-- Update tab -->
-          <x-project.view.update/>
+          <x-project.view.progress :id="$project['id']" :progress="$project['progress']"/>
           <!-- comments item tab -->
           <x-project.view.comments/>
           <!-- Backers item tab -->

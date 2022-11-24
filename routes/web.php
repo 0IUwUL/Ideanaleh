@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
+use App\Http\Controllers\ProgressController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,7 +53,7 @@ Route::controller(RegistrationController::class)->group(function () {
 });
 
 // Project routes
-Route::prefix('project')->name('project.')->group(function () {
+Route::controller(ProjectController::class)->prefix('project')->name('project.')->group(function () {
     // Project controller routes
     Route::controller(ProjectController::class)->group(function () {
         Route::middleware('auth')->get('/create', 'index')->name('create');
@@ -68,6 +69,11 @@ Route::prefix('user-preference')->name('user-preference.')->group(function(){
         Route::post('/update/add', 'addFollowed')->name('update/add');
         Route::post('/update/delete', 'deleteFollowed')->name('update/delete');
     });
+});
+
+// Project progress routes
+Route::controller(ProgressController::class)->prefix('progress')->name('progress.')->group(function () {
+    Route::middleware('auth')->post('/create', 'create')->name('create');
 });
 
 // Google Routes

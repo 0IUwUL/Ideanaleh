@@ -43,16 +43,16 @@
         @csrf
             <div class="tab-content container" id="nav-createContent">
                 <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab" tabindex="0">
-                    <x-create.projdet :data="$data"/>       
+                    <x-project.create.details :data="$data"/>       
                 </div>
                 <div class="tab-pane fade" id="nav-reward" role="tabpanel" aria-labelledby="nav-reward-tab" tabindex="0">
-                    <x-create.projreward/>
+                    <x-project.create.reward/>
                 </div>
                 <div class="tab-pane fade" id="nav-story" role="tabpanel" aria-labelledby="nav-story-tab" tabindex="0">
-                    <x-create.projstory/>
+                    <x-project.create.story/>
                 </div>
                 <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab" tabindex="0">
-                    <x-create.projpaytab/> 
+                    <x-project.create.paytab/> 
                 </div>
             </div>
         </form>

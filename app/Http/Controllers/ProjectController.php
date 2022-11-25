@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+// Import Controllers
 use App\Http\Controllers\UserPreferenceController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ProgressController;
+
+// Import models
 use App\Models\Projects; 
 use App\Models\ProjectTiers;
-use Illuminate\Support\Facades\DB;
 use App\Models\UserPreference; 
+
+use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Phpml\Association\Apriori;
+
 class ProjectController extends Controller
 {
     public function index()
@@ -31,6 +37,7 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar)]);
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['progress' => (new ProgressController)->getProjectProgress($idArg)]);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }
 

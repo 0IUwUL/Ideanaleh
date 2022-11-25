@@ -18,40 +18,44 @@ class UserPreferenceController extends Controller
     }
 
 
-    public function addFollowed(Request $requestArg)
+    public function updateFollowed(Request $requestArg)
     {
         if(Auth::check()){
             $currentUserVar = $this->_getCurrentUser();
             if($currentUserVar->followed != null){
-                $initialFollowedVar = $currentUserVar->followed;
-                $currentUserVar->followed = $initialFollowedVar.strval($requestArg->ProjectId).',';
+
+                $initialFollowedVar = explode(',', $currentUserVar->followed);
+
+                if(in_array($requestArg->ProjectId, $initialFollowedVar)){
+                    // Deleting
+                    $trimmedVar = array_diff($initialFollowedVar, array($requestArg->ProjectId));
+                    $currentUserVar->followed = implode(',', $trimmedVar);
+
+                    $json_data = array("response" => "unfollowed", "trrimed" => $trimmedVar);
+                }
+                else{
+                    // Adding
+                    $mergedArrayVar = array_merge($initialFollowedVar, array($requestArg->ProjectId));     
+                    sort($mergedArrayVar);
+
+                    $currentUserVar->followed = implode(',', $mergedArrayVar);
+                    $json_data = array("response" => "followed");
+                }
             }
             else{
-                $currentUserVar->followed = strval($requestArg->ProjectId).',';
+                // Initial
+                $currentUserVar->followed = strval($requestArg->ProjectId);
+                $json_data = array("response" => "followed");
             }
             $currentUserVar->save();
         }
-
-        //Note to future Ramon convert to an Ajax call -RamonDev
-        return(redirect("project/view/".$requestArg->ProjectId));
-    }
-
-
-    public function deleteFollowed(Request $requestArg)
-    {
-        if(Auth::check()){
-            $currentUserVar = $this->_getCurrentUser();
-            if($currentUserVar->followed != null){
-                $trimmedVar = str_replace($requestArg->ProjectId.',', '', $currentUserVar->followed);
-                $currentUserVar->followed = $trimmedVar;
-                $currentUserVar->save();
-            }
+        else{
+            $json_data = array("response" => "fail");
         }
-        
-        //Note to future Ramon convert to an Ajax call -RamonDev
-        return(redirect("project/view/".$requestArg->ProjectId));
+
+        echo json_encode($json_data);
     }
-    
+
 
     private function _getCurrentUser()
     {

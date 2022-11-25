@@ -54,3 +54,34 @@ $(document).ready(function () {
         $(this).remove();
     }).appendTo('body');
 });
+
+// Ajax for Follow and Unfollow functionality
+$("#FollowUnfollowButton").click(function(e){
+  // var form = $("#FollowUnfollowForm");
+  // var id = document.getElementById("ProjectId").value
+  var id = $(e.target).attr('data-projectId');
+
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+      url: "/user-preference/follow/",
+      type:'post',
+      data: {
+        ProjectId : id,
+
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+          console.log(data);
+          if(data.response == "followed") {
+            // console.log(data);
+            document.getElementById('FollowUnfollowButton').innerHTML = '<span class="fa-regular fa-heart"></span>&nbsp Unfollow';
+          }else {
+            document.getElementById('FollowUnfollowButton').innerHTML = '<span class="fa fa-heart"></span>&nbsp Follow';
+          }
+      }
+  });
+});

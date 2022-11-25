@@ -34,7 +34,7 @@ class ProjectController extends Controller
     public function view(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
-        $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar)]);
+        $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar, $idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['progress' => (new ProgressController)->getProjectProgress($idArg)]);
@@ -45,13 +45,14 @@ class ProjectController extends Controller
     /***
      * Private function to generate recommendations
      */
-    private function recommendation($projectDataArg){
+    private function recommendation($projectDataArg, int $idArg){
 
         //get all project under the visited page category
+        //id,!=,Auth::id();
         $project = json_decode(
             json_encode(
                 DB::table('projects')
-                    ->where('user_id','!=',Auth::id())
+                    ->where('id','!=',$idArg)
                     ->where('category', $projectDataArg["category"])
                     ->where('created_at','>', Carbon::parse(Carbon::now())->setTimezone('Asia/Manila')->subDays(7))
                     ->select('id','title')
@@ -145,6 +146,7 @@ class ProjectController extends Controller
             $tmp = json_decode(
                 json_encode(
                     DB::table('projects')
+                        
                         ->where('id',$list)
                         ->select('title')
                         ->get()

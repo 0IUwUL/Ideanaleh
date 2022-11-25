@@ -65,21 +65,14 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                  {{-- UNFOLLOW BUTTON --}}
-                  @if($project['isFollowed'])
-                  <form method="post" action="{{ route('user-preference.update/delete') }}">
-                  @csrf
-                    <input type="hidden" name="ProjectId" value='{{$project['id']}}'>
-                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-heart"></span>&nbsp Unfollow the Project</button>
-                  </form>
-                  @else
-                  {{-- FOLLOW BUTTON --}}
-                  <form method="post" action="{{ route('user-preference.update/add') }}">
-                  @csrf
-                    <input type="hidden" name="ProjectId" value='{{$project['id']}}'>
-                    <button type="submit" class="btn add-to-cart w-50"><span class="fa fa-heart"></span>&nbsp Follow the Project</button>
-                  </form>
-                  @endif
+                  {{-- FOLLOW UNFOLLOW BUTTON --}}
+                  <div name="ProjectFollowButton" id="ProjectFollowButton">
+                      <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
+                        <span class="fa{{$project['isFollowed'] ? "-regular" : ""}} fa-heart"></span>
+                        &nbsp 
+                        {{$project['isFollowed'] ? "UNFOLLOW" : "FOLLOW"}}
+                      </button>
+                  </div>
 
                   {{-- DONATE BUTTON --}}
                   <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>

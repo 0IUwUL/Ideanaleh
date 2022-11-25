@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
+        "php-ai/php-ml": "^0.10.0",
         "twbs/bootstrap-icons": "^1.9"
     },
     "require-dev": {

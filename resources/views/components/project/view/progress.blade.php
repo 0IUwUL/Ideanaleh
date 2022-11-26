@@ -70,15 +70,15 @@
                 <input type="hidden" name = "ProjectId" value = "{{$id}}"/>
                 <div class="mb-3">
                     <label for="ProgressTitle" class="form-label">Title</label>
-                    <input type="text" name = "ProgressTitle" class="form-control " id="progressTitle" required/>
+                    <input type="text" name = "ProgressTitle" class="form-control " maxlength="50" id="progressTitle" required/>
                 </div>
                 <div class="mb-3">
                     <label for="ProgressDesc" class="form-label">Description</label>
-                    <textarea name = "ProgressDesc" class="form-control h-75" id="progressDesc" required></textarea>
+                    <textarea name = "ProgressDesc" class="form-control h-75" rows="4" cols="50" maxlength="200" id="progressDesc" required></textarea>
                 </div>
             </div>
             <button type="button" id="progressSubmit" class="btn btn-primary mx-4 mb-4">Post</button>
         </form>
       </div>
     </div>
-    </div>
+</div>

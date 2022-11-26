@@ -1,6 +1,7 @@
 import './bootstrap';
 
 import '../sass/app.scss';
+import { templateSettings } from 'lodash';
 
 const into = document.querySelector('.toast-body')
 
@@ -120,7 +121,6 @@ $('#LoginSubmit').on("click", function(){
     });
 });
 
-
 function loadBtn (e) {
     var btn = $(e.target).attr('data-btn');
     
@@ -152,6 +152,114 @@ function Next(e){
     $('#nav-'+btn+'-tab').tab('show');
 }
 
+$('textarea').keyup(function () {
+    var max = 200
+    var tlength = $(this).val().length;
+    $(this).val($(this).val().substring(0, max));
+    var tlength = $(this).val().length;
+    $('#limit').text(tlength);
+});
+
+
+$.validator.addMethod('yey', function (value, element, param) {
+    console.log(element)
+    console.log(param)
+    var given
+    if (parseFloat($(param).val()) == NaN)
+        given = 0
+    else
+        given = parseFloat($(param).val())
+
+    if (this.optional(element) || parseFloat(value) >  given)
+        return true;
+}, 'Invalid value');    
+
+function DetValid(e){
+    var form = $("#ProjForm");
+    var logo = $(e.target).attr('id');
+    var btn = $(e.target).attr('data-next')
+
+    form.validate({
+        
+        focusCleanup: true,
+        rules:{
+            "Tier[1][amount]": {
+                yey: '#Tier_1_amount',
+            },
+            "Tier[2][amount]": {
+                yey: '#Tier_2_amount',
+            },
+            ProjTarget :{
+                yey: '#floatingMileStone',
+            }
+        },
+        messages: {
+            ProjTarget: {
+                range: "Target must me greater than 100!",
+                yey: '*Input must be greater than the Project milestone',
+            },
+            ProjMilestone: {
+                range: "Target must me greater than 100!",
+            },
+            "Tier[0][name]": {
+                required: "Tier title input is required",
+            },
+            "Tier[1][name]": {
+                required: "Tier title input is required",
+            },
+            "Tier[0][amount]": {
+                required: "Tier amount input is required",
+                range : "Amount must be greater than 100."
+            },
+            "Tier[1][amount]": {
+                required: "Tier amount input is required",
+                range : "Amount must be greater than 100.",
+                yey : 'Input must be greater than the previous tier/s.',
+            },
+            "Tier[2][amount]": {
+                required: "Tier amount input is required",
+                range : "Amount must be greater than 100.",
+                yey : 'Input must be greater than the previous tier/s.',
+            },
+        },
+        
+    });
+
+    if (form.valid() === true){
+        if(tags.length >= 3){
+            if (logo == 'nav-basic-tab' || btn == 'reward'){
+                $('#nav-reward-tab').removeClass('disabled');
+                $('#nav-reward-tab').attr("data-bs-target", '#nav-reward')
+            }
+            if (logo == 'nav-reward-tab' || btn == 'story'){
+                $('#nav-story-tab').removeClass('disabled');
+                $('#nav-story-tab').attr("data-bs-target", '#nav-story')
+            }
+            if (logo == 'nav-story-tab' || btn == 'payment'){
+                $('#nav-payment-tab').removeClass('disabled');
+                $('#nav-payment-tab').attr("data-bs-target", '#nav-payment')
+            }
+            Next(e);
+        }else{
+            input_tags.focus();
+        }
+    }else{
+        if (logo == 'nav-basic-tab' || btn == 'reward'){
+            $('#nav-reward-tab').addClass('disabled');
+            $('#nav-reward-tab').attr("data-bs-target", '')
+        }
+        if (logo == 'nav-reward-tab' || btn == 'story'){
+            $('#nav-story-tab').addClass('disabled');
+            $('#nav-story-tab').attr("data-bs-target", '')
+        }
+        if (logo == 'nav-story-tab' || btn == 'payment'){
+            $('#nav-payment-tab').addClass('disabled');
+            $('#nav-payment-tab').attr("data-bs-target", '')
+        }
+    }
+}
+
+
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);
 $('.next').click(validate);
@@ -159,6 +267,6 @@ $("#submit").on("click",validate);
 $("#modeToast").on("click", activateToast);
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
-$('.tab_next').on('click', Next);
+$('.tab_next').on('click', DetValid);
 
 

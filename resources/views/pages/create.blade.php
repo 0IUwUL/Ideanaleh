@@ -10,23 +10,23 @@
             <nav>
                 <div class="nav nav-tabs prog_tabs justify-content-center" id="nav-create" role="tablist">
                     <div class="arrow d-flex align-items-center d-block d-sm-none fs-2"><i class="fa-solid fa-arrow-right"></i></div>
-                    <a class="nav-link active" id="nav-basic-tab" data-bs-toggle="tab" data-bs-target="#nav-basic" type="button" role="tab" aria-controls="nav-basic" aria-selected="true">
+                    <a class="tab_next nav-link active" id="nav-basic-tab" data-bs-toggle="tab" data-bs-target = "#nav-basic" type="button" role="tab" aria-controls="nav-basic" aria-selected="true">
                         <i class="fa-solid fa-file-lines"></i>
                         <h5 class="d-none d-sm-block">Basic</h5>
                     </a>
                     <div class="arrow d-flex align-items-center fs-2"><i class="fa-solid fa-arrow-right"></i></div>
-                    <a class="nav-link" id="nav-reward-tab" data-bs-toggle="tab" data-bs-target="#nav-reward" type="button" role="tab" aria-controls="nav-reward" aria-selected="false">
+                    <a class="tab_next nav-link disabled" id="nav-reward-tab" data-bs-toggle="tab" data-bs-target = "" type="button" role="tab" aria-controls="nav-reward" aria-selected="false">
                         <i class="fa-solid fa-gift"></i>
                         <h5 class="d-none d-sm-block">Reward</h5> 
                     </a>
                     <div class="w-100 d-block d-sm-none"></div>
                     <div class="arrow d-flex align-items-center fs-2"><i class="fa-solid fa-arrow-right"></i></div>
-                    <a class="nav-link" id="nav-story-tab" data-bs-toggle="tab" data-bs-target="#nav-story" type="button" role="tab" aria-controls="nav-story" aria-selected="false">
+                    <a class="tab_next nav-link disabled" id="nav-story-tab" data-bs-toggle="tab" data-bs-target = "" type="button" role="tab" aria-controls="nav-story" aria-selected="false">
                         <i class="fa-solid fa-swatchbook"></i>
                         <h5 class="d-none d-sm-block">Story</h5>
                     </a>
                     <div class="arrow d-flex align-items-center fs-2"><i class="fa-solid fa-arrow-right"></i></div>
-                    <a class="nav-link" id="nav-payment-tab" data-bs-toggle="tab" data-bs-target="#nav-payment" type="button" role="tab" aria-controls="nav-payment" aria-selected="false">
+                    <a class="tab_next nav-link disabled" id="nav-payment-tab" data-bs-toggle="tab" data-bs-target = "" type="button" role="tab" aria-controls="nav-payment" aria-selected="false">
                         <i class="fa-solid fa-money-bill-1-wave"></i>
                         <h5 class="d-none d-sm-block">Payment</h5>
                     </a>
@@ -39,7 +39,7 @@
         </div>
         <hr class="create">
 
-        <form method="post" action="{{ route('project.save') }}" accept-charset="UTF-8" enctype='multipart/form-data'>
+        <form method="post" action="{{ route('project.save') }}" id ="ProjForm" accept-charset="UTF-8" enctype='multipart/form-data'>
         @csrf
             <div class="tab-content container" id="nav-createContent">
                 <div class="tab-pane fade show active" id="nav-basic" role="tabpanel" aria-labelledby="nav-basic-tab" tabindex="0">

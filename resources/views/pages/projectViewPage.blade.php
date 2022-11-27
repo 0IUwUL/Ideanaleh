@@ -202,23 +202,48 @@
                 <div class="carousel-item active">
                   <div class="row">
                     <h2>Recommended Projects under this Category</h1>
-                      @foreach($project['recommend'] as $category)
-                      <div class="col-md-4 mb-3">
-                          <div class="card shadow-sm bg-body rounded">
-                            <img src="{{asset('storage/'.$category['banner']);}} ">
-                            <div class="card-body text-dark">
-                              <h4 class="card-title">{{$category['title']}}</h4>
-                                <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
-                            </div>
-                            <div class="d-flex justify-content-between p-3">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    
-                                </div>
-                                <div class="text-muted">9 mins</div>
-                            </div>
+                      @foreach($project['recommend'][0] as $index => $category)
+                      @if($index!=3) 
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm bg-body rounded">
+                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <div class="card-body text-dark">
+                                <h4 class="card-title">{{$category['title']}}</h4>
+                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                              </div>
+                              <div class="d-flex justify-content-between p-3">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                      
+                                  </div>
+                                  <div class="text-muted">9 mins</div>
+                              </div>
+                          </div>
                         </div>
-                      </div>
+                      @endif
+                      @endforeach
+                  </div><br>
+                  <div class="row">
+                    <h2>Other Projects That You May Like</h1>
+                      @foreach($project['recommend'][1] as $index => $category)
+                      @if($index != 3)
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm bg-body rounded">
+                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <div class="card-body text-dark">
+                                <h4 class="card-title">{{$category['title']}}</h4>
+                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                              </div>
+                              <div class="d-flex justify-content-between p-3">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                      
+                                  </div>
+                                  <div class="text-muted">9 mins</div>
+                              </div>
+                          </div>
+                        </div>
+                      @endif
                       @endforeach
                   </div>
                 </div>

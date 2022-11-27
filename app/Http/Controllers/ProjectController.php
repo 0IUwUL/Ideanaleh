@@ -34,6 +34,7 @@ class ProjectController extends Controller
     public function view(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
+        
         $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar, $idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
@@ -53,7 +54,7 @@ class ProjectController extends Controller
             json_encode(
                 DB::table('projects')
                     ->where('id','!=',$idArg)
-                    ->where('category', $projectDataArg["category"])
+                    // ->where('category', $projectDataArg["category"])
                     ->where('created_at','>', Carbon::parse(Carbon::now())->setTimezone('Asia/Manila')->subDays(7))
                     ->select('id','title')
                     ->get()
@@ -79,7 +80,7 @@ class ProjectController extends Controller
             ));
         }
 
-        //get all projects that are purchased atleast once by the customers
+        //get all projects that are supported by the customers
         $projects = array();
         $allProjects = $project;
         foreach($allProjects as $key){
@@ -111,66 +112,92 @@ class ProjectController extends Controller
         $frequent = $associator->apriori();
         
         //store frequent itemsets for recommendation
+        $predict = $associator->predict(reset($frequent[count($frequent[count($frequent)])])); 
+
+        // $reverse = $associator->predict($associator->predict(reset($frequent[count($frequent[count($frequent)])]))); 
+        // $rev = [];
+        
+        // for($x = 0; $x < count($reverse); $x++){
+        //     $rev = array_merge($rev, array_merge(array_values($reverse[$i])));
+        // }
+        
         $recommendation = [];
 
-        //get preferences with atleast length of 2
+        //get preferences with atleast length of 2 based on frequent itemset
         for ($i = 2; $i <= count($frequent); $i++) {
             $temp = $frequent[$i];
             foreach ($temp as $item) {
                 array_push($recommendation, $item);
             }
         }
-        //Authenticated user's preferences
-        $personalPreferences = json_decode(
-            json_encode(
-                DB::table('user_preferences')
-                    ->where('user_id',Auth::id())
-                    ->select('followed')
-                    ->get()
-                    ->toArray()
-            ),
-            true);
-
-        //convert string to array
-        $personalPreferences[0]['followed'] = array_filter(explode(',',$personalPreferences[0]['followed']));
-        
-        //get values of preferences Ids
-        $hold = array_merge(...array_values($personalPreferences[0])); 
-        $holdkey = array_flip($hold);
-        foreach($hold as $rep){
-            $holdkey[$rep] = $rep;
+       
+        $supported_projects = [];
+        if(!(Auth::Check())){
+            $supported_projects = $predict[count($predict)-1];
         }
-            
-        //get projects based on user's preferences
-        foreach($hold as $list){
-            $tmp = json_decode(
+        if(Auth::check()){
+            // print_r(end($frequent[count($frequent)]));
+            //Authenticated user's preferences
+            $personalPreferences = json_decode(
                 json_encode(
-                    DB::table('projects')
-                        
-                        ->where('id',$list)
-                        ->select('title')
+                    DB::table('user_preferences')
+                        ->where('user_id',Auth::id())
+                        ->select('followed')
                         ->get()
+                        ->toArray()
                 ),
                 true);
-            $holdkey[$list] = $tmp[0];
+
+                //convert string to array
+
+                $personalPreferences[0]['followed'] = array_filter(explode(',',$personalPreferences[0]['followed']));
+
+                // merge followed and support and remove duplicates -- note
+                if(!empty($personalPreferences[0]['followed']) && count($personalPreferences[0]['followed']) > 1){
+                    
+                    //get values of preferences Ids
+                    $hold = array_merge(...array_values($personalPreferences[0])); 
+                    $holdkey = array_flip($hold);
+                    foreach($hold as $rep){
+                        $holdkey[$rep] = $rep;
+                    }
+                        
+                    //get projects based on user's preferences
+                    foreach($hold as $list){
+                        $tmp = json_decode(
+                            json_encode(
+                                DB::table('projects')
+                                    
+                                    ->where('id',$list)
+                                    ->select('title')
+                                    ->get()
+                            ),
+                            true);
+                        $holdkey[$list] = $tmp[0];
+                    }
+                    
+                    $preferences = $personalPreferences;
+                    $preferences = $preferences[0]["followed"];
+
+
+                    //get titles of project
+                    foreach ($preferences as $x) {
+                        $project_name = $holdkey[$x]['title'];
+                        array_push($supported_projects, $project_name);
+                    }
+                }
+                else {
+                    $supported_projects = $predict[count($predict)-1];
+                }
         }
 
-        // echo"<pre>"; print_r($holdkey);
-
         //Collaborative filtering (User-User)
-        $supported_projects=[];
+        
         $recommendation_for_you=[];
         $final_rec = [];
         $final_recomendation_list=[];
-        $preferences = $personalPreferences;
-        $preferences = $preferences[0]["followed"];
-
-        //get titles of project
-        foreach ($preferences as $x) {
-            $project_name = $holdkey[$x]['title'];
-            array_push($supported_projects, $project_name);
-        }
-       
+        $other_recomendation_list=[];
+        
 
         //projects based on user preferences on visited project (category)
         //check users project on the frequent itemset based on apriori
@@ -182,12 +209,11 @@ class ProjectController extends Controller
                 }
             }
         }
-
         // clean list of container for project titles
         foreach ($recommendation_for_you as $rec) {
             $final_rec = array_merge($final_rec, $rec);
         }
-
+        
         // remove duplicates
         $final_rec = array_unique($final_rec);
         
@@ -204,13 +230,24 @@ class ProjectController extends Controller
                 json_encode(
                     DB::table('projects')
                         ->where('title',$rec)
+                        ->where('category', $projectDataArg["category"])
                         ->get()
                 ),
                 true);
             $final_recomendation_list = array_merge($final_recomendation_list,$products[$rec]);
         }
-        return($final_recomendation_list);
-
+        foreach ($final_rec as $rec) {
+            $products[$rec] = json_decode(
+                json_encode(
+                    DB::table('projects')
+                        ->where('title',$rec)
+                        ->where('category', '!=', $projectDataArg["category"])
+                        ->get()
+                ),
+                true);
+            $other_recomendation_list = array_merge($other_recomendation_list,$products[$rec]);
+        }
+        return array($final_recomendation_list, $other_recomendation_list);
     }
 
 

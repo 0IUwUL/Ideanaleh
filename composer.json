@@ -6,11 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
+        "luigel/laravel-paymongo": "^2.2",
         "php-ai/php-ml": "^0.10.0",
         "twbs/bootstrap-icons": "^1.9"
     },

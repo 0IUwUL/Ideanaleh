@@ -129,7 +129,7 @@
   <div class="row justify-content-center center-block">
     
     <!-- Tiers START -->
-    @foreach($project['tiers'] as $tier)
+    @foreach($project['tiers'] as $t=>$tier)
     <div class="card a mx-4 mt-4" style="width: 18rem;">
       <div class="card-icon"><i class="bi bi-circle"></i></div>
         <div class="card-body">
@@ -139,7 +139,7 @@
           <p class="card-text">{{$tier['amount']}}</p>
           {{-- Tier Benefit --}}
           <p class="card-text">{{$tier['benefit']}}</p>
-          <a href="#" class="btn btn-outline-light">Donate</a>
+          <button type="button" id="Tier{{(int)$t+1}}DonateButton" class="tier-button btn btn-outline-light" data-projectId={{$project['id']}} data-tierAmount={{$tier['amount']}}>Donate</button>
       </div>
     </div>
     @endforeach
@@ -196,7 +196,7 @@
                   <div class="row">
                     <h2>Recommended Projects under this Category</h1>
                       @foreach($project['recommend'][0] as $index => $category)
-                      @if($index!=3) 
+                      @if($index<3) 
                         <div class="col-md-4 mb-3">
                             <div class="card shadow-sm bg-body rounded">
                               <img src="{{asset('storage/'.$category['banner']);}} ">
@@ -219,7 +219,7 @@
                   <div class="row">
                     <h2>Other Projects That You May Like</h1>
                       @foreach($project['recommend'][1] as $index => $category)
-                      @if($index != 3)
+                      @if($index < 3)
                         <div class="col-md-4 mb-3">
                             <div class="card shadow-sm bg-body rounded">
                               <img src="{{asset('storage/'.$category['banner']);}} ">

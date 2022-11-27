@@ -24,10 +24,10 @@ return new class extends Migration
             $table->enum('category', [config('category')]);
             $table->string('tags');
             $table->integer('target_amt');
-            $table->string('logo')->nullable();
-            $table->string('banner')->nullable();
-            $table->string('yt_link');
-            $table->datetime('target_date')->nullable();
+            $table->string('logo');
+            $table->string('banner');
+            $table->string('yt_link')->nullable();
+            $table->datetime('target_date');
             $table->timestamps();
         });
     }

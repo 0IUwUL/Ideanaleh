@@ -52,17 +52,17 @@ Route::controller(RegistrationController::class)->group(function () {
     Route::post('/verify-email', 'dupliEmail')->name('login-user');
 });
 
+
+// User Preferences routes
+Route::controller(UserPreferenceController::class)->prefix('user-preference')->name('user-preference.')->group(function(){
+    Route::middleware('auth')->post('follow/', 'updateFollowed')->name('follow/');
+});
+
 // Project routes
 Route::controller(ProjectController::class)->prefix('project')->name('project.')->group(function () {
     Route::middleware('auth')->get('/create', 'index')->name('create');
     Route::get('/view/{id}', 'view')->name('view');
     Route::middleware('auth')->post('/save', 'saveCreatedProject')->name('save');
-});
-
-// User Preferences routes
-Route::controller(UserPreferenceController::class)->prefix('user-preference')->name('user-preference.')->group(function(){
-    Route::post('/update/add', 'addFollowed')->name('update/add');
-    Route::post('/update/delete', 'deleteFollowed')->name('update/delete');
 });
 
 // Project progress routes

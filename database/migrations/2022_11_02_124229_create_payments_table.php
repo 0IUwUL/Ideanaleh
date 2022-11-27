@@ -23,8 +23,8 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->integer('payment_id');
-            $table->string('signature');
+            $table->string('payment_id');
+            $table->string('amount');
             $table->timestamps();
         });
     }

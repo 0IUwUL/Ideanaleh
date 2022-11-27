@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\PaymentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,4 +98,10 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(EmailController::class)->group(function () {
     Route::post('/send-email', 'sendCode')->name('send-email');
     Route::post('/verify', 'verify')->name('verify');
+});
+
+//WEbhook
+Route::controller(PaymentsController::class)->group(function(){
+    Route::post('/webhook/paymongo', 'webhookPaymongo')->name('webhook/paymongo');
+    Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
 });

@@ -86,6 +86,41 @@ $("#FollowUnfollowButton").click(function(e){
   });
 });
 
+
+// Ajax for Follow and Unfollow functionality
+$(".tier-button").click(function(e){
+  // var form = $("#FollowUnfollowForm");
+  // var id = document.getElementById("ProjectId").value
+  var id = $(e.target).attr('data-projectId');
+  var amount_var = $(e.target).attr('data-tierAmount');
+
+  alert("Please Wait...");
+
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+      url: "/payment/create/source/",
+      type:'post',
+      data: {
+        ProjectId : id,
+        TierAmount : amount_var,
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+          console.log(data);
+          if(data.response == "success") {
+            window.open(data.checkout_url);
+          }else {
+            console.log("Error")
+          }
+      }
+  });
+});
+
+
 // Ajax for posting project progress
 $("#progressSubmit").click(function(){
   var form = $("#progressForm");

@@ -65,6 +65,15 @@ h1, h2, h3, h4, h5, h6, .btn {
     margin: .4rem;
 }
 
+.list_category:hover{
+  color: yellow;
+  cursor:none;
+}
+
+.followed{
+  color: yellow;
+}
+
 .btn_follow{
   display: inline-block;
   width: 1.4rem;
@@ -76,6 +85,12 @@ h1, h2, h3, h4, h5, h6, .btn {
   text-align: center;
   line-height: 1.4rem;
   cursor: pointer;
+}
+
+.btn_follow:hover{
+  color: #002d50;
+  background-color: yellow;
+  transform: scale(1.5);
 }
 
 .hero {

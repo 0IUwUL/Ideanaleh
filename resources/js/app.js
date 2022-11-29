@@ -56,6 +56,7 @@ function validate(){
          
             });
         }else if ($('#SignUpModal3').is(":visible")){
+            // getting categories checked
             let cate = [];
             var max = form.find('input[name="Categs[]"]:checked')
             Object.values(max).forEach(categs => {
@@ -75,74 +76,44 @@ function validate(){
                 },
                 success: function(result){
                     let data = JSON.parse(result);
-                    // console.log(typeof(data.response));
-                    // console.log(data.response);
-                    // console.log(Object.keys(data.response)[0]);
                     const categories = data.response;
+                    // formatting projects from categories picked
                     let header =
-                    //     jQuery.map(categories, (element, key) => {
-                    //         // console.log(element)
-                    //         // console.log(typeof(element))
-                    //         // console.log(key)
-                    //         // console.log(typeof(key))
-                    //         let hold = `
-                    //         <div class = "Category_header">
-                    //            <h3>${key}</h3>
-                    //            <hr class = "create">
-                    //                 <div class = "content">
-                    //         ` +
-                    //             jQuery.map(element, (display, index) => {   // <-- map instead of forEach
-                    //             return `
-                    //                 <span class = "list_category">${display['title']}<span class="btn_follow"><i class="fa-solid fa-flag"></i></span></span>
-                    //             `
-                    //         // console.log(display)
-                    //         // console.log(typeof(display))
-                    //         // console.log(element)
-                    //         // console.log(typeof(element))
-                    //         // console.log(hold)
-                    //         // console.log(typeof(hold))
-                    //             });
-                    //         hold + `</div>
-                    //         </div>`
-                    //         return hold
-                    // });
                     jQuery.map(categories, (element, keys) => {
-                        console.log(keys)
-                        console.log(element)
-                        // console.log(typeof(element))
-                        // var dayState = eval('global.that.state.' + days);
                         var elementArray = Object.values(element);
-                        // console.log("dayState")
-                        // console.log(dayStateArray)
-                        // console.log(typeof(dayStateArray))
                         return `<div class = "Category_header">
                                     <h3>${keys}</h3>
                                         <hr class = "create">
                                             <div class = "content">` + 
                                         elementArray.map(i => {
-                                            // console.log("Within map")
-                                            // console.log(i)
-                                            // console.log(typeof(i))
                                             return `
-                                                <span class = "list_category">${i['title']}<span class="btn_follow"><i class="fa-solid fa-flag"></i></span></span>
-                                                        
+                                                <span class = "list_category"><input type="hidden" name="Followed[]" value = ${i['id']}>${i['title']}<a class="btn_follow" role = "button" data-param = ${i['id']}><i class="fa-solid fa-flag"></i></a></span>
                                             `
                                             })
                                         + `
                                             </div>
                                 </div>`
                       })
-                    // console.log(contents)
-                    document.querySelector('#Category_content').innerHTML = header.join("\n");
+                    // inserting to html
+                    document.querySelector('#Category_content').innerHTML = header;
                     $('#SignUpModal3').modal('hide');
                     $('#SignUpModal4').modal('show');
                 }
-            //     
             });
         }
     }
 
 };
+
+$(".btn_follow").click(function(e){
+    var form = $("#myForm");
+    var id = $(e.target).attr('data-param');
+    let cate = [];
+    var clicked = form.find('input[name="Followed[]"]')
+    console.log(id)
+    console.log(clicked)
+    
+  });
 
 function activateToast(){
     var c = $(this).data('id');

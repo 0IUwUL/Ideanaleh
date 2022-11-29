@@ -89,13 +89,9 @@ $("#FollowUnfollowButton").click(function(e){
 
 // Ajax for Follow and Unfollow functionality
 $(".tier-button").click(function(e){
-  // var form = $("#FollowUnfollowForm");
-  // var id = document.getElementById("ProjectId").value
   var id = $(e.target).attr('data-projectId');
-  var amount_var = $(e.target).attr('data-tierAmount');
-
-  alert("Please Wait...");
-
+  var amount_var = $('#FormControlAmt').val();
+  
   $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -110,11 +106,10 @@ $(".tier-button").click(function(e){
       },
       success: function(result){
           let data = JSON.parse(result);
-          console.log(data);
           if(data.response == "success") {
             window.open(data.checkout_url);
           }else {
-            console.log("Error")
+            document.getElementById('err_donation').innerHTML = "* Donation must be greater than 0."
           }
       }
   });

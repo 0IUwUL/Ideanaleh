@@ -139,7 +139,12 @@
           <p class="card-text">{{$tier['amount']}}</p>
           {{-- Tier Benefit --}}
           <p class="card-text">{{$tier['benefit']}}</p>
-          <button type="button" id="Tier{{(int)$t+1}}DonateButton" class="tier-button btn btn-outline-light" data-projectId={{$project['id']}} data-tierAmount={{$tier['amount']}}>Donate</button>
+          <button type="button" 
+              class="btn btn-outline-light" 
+              data-bs-toggle="modal" 
+              data-bs-target="#amtModal">
+            Donate
+          </button>
       </div>
     </div>
     @endforeach
@@ -250,7 +255,31 @@
     
     </div>
   </section>
-  
+
+  <!-- Vertically centered modal -->
+<div class="modal fade" id="amtModal" tabindex="-1" aria-labelledby="amtModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h1 class="modal-title fs-3" id="amtModalLabel">Donation Modal</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5">
+        <form id = "DonateForm">
+        <div class="mb-3">
+          <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount: </label>
+          <input type="number" class="form-control" id="FormControlAmt">
+          <label for="FormControlAmt" id = "err_donation" class = "error"></label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="tier-button btn btn-primary" data-projectId={{$project['id']}}>Confirm</button>
+        <form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 @endsection

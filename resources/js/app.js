@@ -162,8 +162,6 @@ $('textarea').keyup(function () {
 
 
 $.validator.addMethod('yey', function (value, element, param) {
-    console.log(element)
-    console.log(param)
     var given
     if (parseFloat($(param).val()) == NaN)
         given = 0

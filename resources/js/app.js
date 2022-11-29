@@ -1,7 +1,7 @@
 import './bootstrap';
 
 import '../sass/app.scss';
-import { templateSettings } from 'lodash';
+import { conformsTo, templateSettings } from 'lodash';
 
 const into = document.querySelector('.toast-body')
 
@@ -55,7 +55,90 @@ function validate(){
                 }
          
             });
-            
+        }else if ($('#SignUpModal3').is(":visible")){
+            let cate = [];
+            var max = form.find('input[name="Categs[]"]:checked')
+            Object.values(max).forEach(categs => {
+                if(categs.value)
+                    cate.push(categs.value)
+            })
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "project/categs",
+                type:'post',
+                data: {
+                    categs : cate,
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    // console.log(typeof(data.response));
+                    // console.log(data.response);
+                    // console.log(Object.keys(data.response)[0]);
+                    const categories = data.response;
+                    let header =
+                    //     jQuery.map(categories, (element, key) => {
+                    //         // console.log(element)
+                    //         // console.log(typeof(element))
+                    //         // console.log(key)
+                    //         // console.log(typeof(key))
+                    //         let hold = `
+                    //         <div class = "Category_header">
+                    //            <h3>${key}</h3>
+                    //            <hr class = "create">
+                    //                 <div class = "content">
+                    //         ` +
+                    //             jQuery.map(element, (display, index) => {   // <-- map instead of forEach
+                    //             return `
+                    //                 <span class = "list_category">${display['title']}<span class="btn_follow"><i class="fa-solid fa-flag"></i></span></span>
+                    //             `
+                    //         // console.log(display)
+                    //         // console.log(typeof(display))
+                    //         // console.log(element)
+                    //         // console.log(typeof(element))
+                    //         // console.log(hold)
+                    //         // console.log(typeof(hold))
+                    //             });
+                    //         hold + `</div>
+                    //         </div>`
+                    //         return hold
+                    // });
+                    jQuery.map(categories, (element, keys) => {
+                        console.log(keys)
+                        console.log(element)
+                        // console.log(typeof(element))
+                        // var dayState = eval('global.that.state.' + days);
+                        var elementArray = Object.values(element);
+                        // console.log("dayState")
+                        // console.log(dayStateArray)
+                        // console.log(typeof(dayStateArray))
+                        return `<div class = "Category_header">
+                                    <h3>${keys}</h3>
+                                        <hr class = "create">
+                                            <div class = "content">` + 
+                                        elementArray.map(i => {
+                                            // console.log("Within map")
+                                            // console.log(i)
+                                            // console.log(typeof(i))
+                                            return `
+                                                <span class = "list_category">${i['title']}<span class="btn_follow"><i class="fa-solid fa-flag"></i></span></span>
+                                                        
+                                            `
+                                            })
+                                        + `
+                                            </div>
+                                </div>`
+                      })
+                    // console.log(contents)
+                    document.querySelector('#Category_content').innerHTML = header.join("\n");
+                    $('#SignUpModal3').modal('hide');
+                    $('#SignUpModal4').modal('show');
+                }
+            //     
+            });
         }
     }
 

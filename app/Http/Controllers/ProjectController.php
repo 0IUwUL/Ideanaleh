@@ -365,4 +365,18 @@ class ProjectController extends Controller
         return $enum;
     }
 
+    public function _getProjects(Request $requestArg){
+        $pref_categs = $requestArg->categs;
+        foreach ($pref_categs as $key => $categories){
+            $sample = Projects::where('category', '=', $categories)
+                                ->select(array('id', 'title', 'description'))
+                                ->get()
+                                ->toArray();
+            $project[$categories] = $sample;
+        }
+        
+        $json_data = array("response" => $project);
+        echo json_encode($json_data);
+    }
+
 }

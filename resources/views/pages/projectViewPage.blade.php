@@ -75,7 +75,7 @@
                   </div>
 
                   {{-- DONATE BUTTON --}}
-                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             

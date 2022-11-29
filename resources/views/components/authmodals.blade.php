@@ -48,8 +48,8 @@
 <form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm">
 @csrf           
               
-<div class="modal p-0" id="SignUpModal" data-btn="signupModalGSI" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade p-0" id="SignUpModal" data-btn="signupModalGSI" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
         <h1 class="modal-title fs-5" id="SignUpModalToggleLabel">Sign Up</h1>
@@ -57,7 +57,7 @@
       </div>
         <div class="modal-body p-4">
           <div class="d-flex justify-content-center fw-semibold text-danger">
-                Step 1 of 3
+                Step 1 of 4
           </div>
           <div class="d-flex justify-content-center display-6 text-dark">
                     Profile Information
@@ -99,8 +99,8 @@
   </div>
 </div>
 
-<div class="modal" id="SignUpModal2" aria-hidden="true" aria-labelledby="SignUpModalToggle2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="SignUpModal2" aria-hidden="true" aria-labelledby="SignUpModalToggle2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
         <h1 class="modal-title fs-5" id="SignUpModalToggle2">Sign Up</h1>
@@ -108,7 +108,7 @@
       </div>
       <div class="modal-body p-4">
         <div class="d-flex justify-content-center fw-semibold text-danger">
-          Step 2 of 3
+          Step 2 of 4
         </div>  
         <div class="d-flex justify-content-center display-6 text-dark">
               Email Authentication
@@ -144,8 +144,8 @@
   </div>
 </div>
 
-<div class="modal" id="SignUpModal3" aria-hidden="true" aria-labelledby="SignUpModalToggle3" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="SignUpModal3" aria-hidden="true" aria-labelledby="SignUpModalToggle3" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
         <h1 class="modal-title fs-5" id="SignUpModalToggle3">Sign Up</h1>
@@ -153,7 +153,7 @@
       </div>
       <div class="modal-body p-4">
           <div class="d-flex justify-content-center fw-semibold text-danger">
-            Step 3 of 3
+            Step 3 of 4
           </div>  
           <div class="d-flex justify-content-center display-6 text-dark">
                 Category Selection
@@ -163,43 +163,43 @@
                 <label class="text-danger me-1">*</label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
+                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
+                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
+                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
+                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
                     </div>
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
+                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for IOT"> IOT
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="IOT" aria-label="Checkbox for IOT"> IOT
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Communication"> Communication
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Communication" aria-label="Checkbox for Communication"> Communication
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Medical"> Medical
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Medical" aria-label="Checkbox for Medical"> Medical
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Transportation"> Transportation
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Transportation" aria-label="Checkbox for Transportation"> Transportation
                     </div> 
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Education"> Education
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Education" aria-label="Checkbox for Education"> Education
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Security"> Security
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Security" aria-label="Checkbox for Security"> Security
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for VR/AR"> VR/AR
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="VR/AR" aria-label="Checkbox for VR/AR"> VR/AR
                     </div>
                     <div class="input-group-text">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Others"> Others
+                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Others" aria-label="Checkbox for Others"> Others
                     </div>
                 </div>
                 <label for="Categs[]" class="error">Your error message will be display here.</label>
@@ -207,6 +207,32 @@
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-target="#SignUpModal2" data-bs-toggle="modal">Back</button>
+        <button type="button" class="btn btn-success next" id="button">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="SignUpModal4" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="SignUpModalToggle4" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h1 class="modal-title fs-5" id="SignUpModalToggle4">Sign Up</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+          <div class="d-flex justify-content-center fw-semibold text-danger">
+            <h3>Step 4 of 4</h3>
+          </div>  
+          <div class="d-flex text-center display-6 text-dark">
+                Follow Projects under your preferences
+          </div>  
+          <div class="mt-5" id = "Category_content">
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-target="#SignUpModal3" data-bs-toggle="modal">Back</button>
         <button type="submit" class="btn btn-success" id="submit">Submit</button>
       </div>
       </form>

@@ -64,6 +64,7 @@ Route::controller(ProjectController::class)->prefix('project')->name('project.')
     Route::middleware('auth')->get('/create', 'index')->name('create');
     Route::get('/view/{id}', 'view')->name('view');
     Route::middleware('auth')->post('/save', 'saveCreatedProject')->name('save');
+    Route::post('/categs', '_getProjects')->name('categs');
 });
 
 // Project progress routes

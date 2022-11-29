@@ -13,6 +13,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\CommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,6 +70,11 @@ Route::controller(ProjectController::class)->prefix('project')->name('project.')
 // Project progress routes
 Route::controller(ProgressController::class)->prefix('progress')->name('progress.')->group(function () {
     Route::middleware('auth')->post('/create', 'create')->name('create');
+});
+
+// Project progress routes
+Route::controller(CommentsController::class)->prefix('comments')->name('comments.')->group(function () {
+    Route::middleware('auth')->post('project/create', 'createProjectComment')->name('project/create');
 });
 
 // Google Routes

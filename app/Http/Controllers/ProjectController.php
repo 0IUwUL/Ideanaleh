@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // Import Controllers
 use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\CommentsController;
 
 // Import models
 use App\Models\Projects; 
@@ -39,6 +40,8 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['progress' => (new ProgressController)->getAllProgress($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['comments' => (new CommentsController)->getAllProjectComments($idArg)]);
+        //dd($projectDataVar);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }
 

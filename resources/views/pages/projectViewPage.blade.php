@@ -190,7 +190,7 @@
           <!-- Update tab -->
           <x-project.view.progress :id="$project['id']" :progress="$project['progress']"/>
           <!-- comments item tab -->
-          <x-project.view.comments/>
+          <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
           <!-- Backers item tab -->
           <x-project.view.backers/>
         </div>

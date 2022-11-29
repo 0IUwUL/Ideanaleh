@@ -13,21 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('project_comments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->string('title');
-            $table->string('description');
-            $table->enum('category', [config('category')]);
-            $table->string('tags');
-            $table->integer('target_amt');
-            $table->string('logo')->nullable();;
-            $table->string('banner')->nullable();;
-            $table->string('yt_link')->nullable();
-            $table->datetime('target_date');
+            $table->bigInteger('proj_id')->unsigned();
+            $table->foreign('proj_id')
+                ->references('id')->on('projects')
+                ->onDelete('cascade');
+            $table->string('content');
             $table->timestamps();
         });
     }
@@ -39,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('project_comments');
     }
 };

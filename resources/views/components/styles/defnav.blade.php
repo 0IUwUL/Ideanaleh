@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-2">
         <div class="container-fluid d-flex justify-content-between">
             <div class = "d-flex align-items-center">
                 <a class="navbar-brand" href="/">
@@ -24,7 +24,7 @@
             
             @if(!Auth::check())
             <div class="col-2 d-flex justify-content-end">
-                    <button type="button" class="btn btn-light btn-outline-dark mx-3 d-none d-xxl-block" data-bs-toggle="modal" data-bs-target="#SignUpModal">
+                    <button type="button" class="btn btn-light btn-outline-dark mx-3 d-none d-xxl-block" data-bs-toggle="modal" data-bs-target="#SignUpModal4">
                         Sign Up
                     </button>
                     <button type="button" class="btn btn-primary btn-outline-light text- white mx-3 d-none d-xxl-block" data-bs-toggle="modal" data-bs-target="#LoginModal">
@@ -34,15 +34,14 @@
                         <a class="btn btn-dark btn-outline-light gear_icon h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-gears"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a role = "button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end m-0">
+                            <li><a role = "button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal4">Sign Up</a></li>
                             <li><a role = "button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#LoginModal">Log In</a></li>
                         </ul>
                     </div>
                     <button class="navbar-toggler d-block d-sm-none bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
             </div>
             @else
             <div class="col-2 d-flex justify-content-end">
@@ -51,7 +50,7 @@
                         <i class="fa-solid fa-gears"></i>
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <ul class="dropdown-menu dropdown-menu-end m-0">
                         @if (Request::segment(1) == 'settings')
                             <li><a role = "button" class = "dropdown-item" href="/">Home</a></li>
                         @else

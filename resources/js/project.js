@@ -86,15 +86,36 @@ $("#FollowUnfollowButton").click(function(e){
   });
 });
 
+$("#AmtDonate").click(function(){
+  var amount = $('#FormControlAmt').val()  
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+      url: "/payment/valid/",
+      type:'post',
+      data: {
+        TierAmount : amount,
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+          if(data.response == "success") {
+            $('#FormControldisplayAmt').val(amount - (parseFloat(amount)*0.025))
+            $('#displayAmt').modal('show');
+            $('#amtModal').modal('hide');
+          }else {
+            document.getElementById('err_donation').innerHTML = "* Donation must be greater than 100."
+          }
+      }
+  });
+});
 
 // Ajax for Follow and Unfollow functionality
 $(".tier-button").click(function(e){
-  // var form = $("#FollowUnfollowForm");
-  // var id = document.getElementById("ProjectId").value
   var id = $(e.target).attr('data-projectId');
-  var amount_var = $(e.target).attr('data-tierAmount');
-
-  alert("Please Wait...");
+  var amount_var = $('#FormControlAmt').val();
 
   $.ajaxSetup({
     headers: {
@@ -110,11 +131,8 @@ $(".tier-button").click(function(e){
       },
       success: function(result){
           let data = JSON.parse(result);
-          console.log(data);
           if(data.response == "success") {
             window.open(data.checkout_url);
-          }else {
-            console.log("Error")
           }
       }
   });
@@ -146,7 +164,7 @@ $("#progressSubmit").click(function(){
           let data = JSON.parse(result);
           var progress = data.progress
           var options = {year: 'numeric', month: 'long', day: 'numeric' };
-          var date  = new Date();
+          let date  = new Date(progress[0]['created_at']);
 
           // Change the current progress text
           document.getElementById("progress-current-title").textContent = `${progress[0]['title']} (${date.toLocaleDateString("en-US", options)})`
@@ -180,8 +198,9 @@ $("#progressSubmit").click(function(){
               </div>`
             // Insert the format for previous item at the top of the list
             $("#previous-progress-accordion").prepend(accordionItem)
-           
+            
             // Then insert the string via text content to prevent XSS
+            let date  = new Date(progress[1]['created_at']);
             document.getElementById("progress-acord-heading" + proj_id).textContent =  `${progress[1]['title']} (${date.toLocaleDateString("en-US", options)})`
             document.getElementById("progress-acord-desc" + proj_id).textContent = progress[1]['description']
 
@@ -191,3 +210,72 @@ $("#progressSubmit").click(function(){
     });
   }
 });
+
+// Adjust textarea size
+$("#comment-box").on('keydown', function(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'padding:0';
+    // for box-sizing other than "content-box" use:
+    el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+});
+
+// Submit comment on pressing enter
+$('#comment-box').keypress(function(e) {
+  var key =  e.which || e.keyCode;
+  if(key == 13  && !e.shiftKey){
+    e.preventDefault() // Prevent new line with just enter key
+
+    var id = $('#ProjectId').val();
+    var comment = e.target.value;
+    
+    $(e.target).val(''); // Clear the text field
+
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      url: "/comments/project/create",
+      type:'post',
+      data: {
+        ProjectId : id,
+        ProjectComment : comment,
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+          var comment = data.comment
+          var id = comment['id']
+          let newComment =  
+          `<div class="col-6 mx-auto my-2 comment"> 
+              <div class="row flex-column">
+                <div class="px-4 py-2 col d-flex">
+                  <img class="avatar mr-2" src="/storage/${comment['icon'] ? comment['icon'] : 'avatars/default.png'}">
+                  <div class="d-flex flex-column">
+                    <div class="fw-bold" id="comment-user${id}"></div>
+                    <div id="comment-date${id}"></div>
+                  </div>
+                </div>
+
+                <div class="col px-4 mx-2 py-2" id="comment-body${id}"></div>
+              </div>
+            </div>`
+          
+          // Render comment layout
+          $("#commentsList").prepend(newComment)
+          
+          // Set as text content
+          var options = {year: 'numeric', month: 'long', day: 'numeric' };
+          var date  = new Date(comment['created_at']);
+          let Mname = comment['Mname'] ? comment['Mname'] : '' // Check for no middle names
+          document.getElementById("comment-user" + id).textContent = `${comment['Fname']} ${Mname} ${comment['Lname']}`
+          document.getElementById("comment-date" + id).textContent = `(${date.toLocaleDateString("en-US", options)})`
+          document.getElementById("comment-body" + id).textContent = comment['content']
+      }
+    });
+  }
+   
+}); 

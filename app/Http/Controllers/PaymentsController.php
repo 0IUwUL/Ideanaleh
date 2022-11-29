@@ -27,9 +27,11 @@ class PaymentsController extends Controller
     }
 
     public function createSource(Request $requestArg){
+        $input = (float)$requestArg->TierAmount;
+        
         $sourceVar = Paymongo::source()->create([
             'type' => 'gcash',
-            'amount' => (float)$requestArg->TierAmount,
+            'amount' => $input,
             'currency' => 'PHP',
             'redirect' => [
                 'success' => (string)url('project/view/2'),
@@ -54,8 +56,18 @@ class PaymentsController extends Controller
             'user_id' => $responseVar->attributes->metadata->user_id,
             'data' => $responseVar,
         );
-        // $json_data = array("response" => "fail");
 
+
+        echo json_encode($json_data);
+    }
+
+    public function ValidInput(Request $requestArg){
+        $input = (float)$requestArg->TierAmount;
+        
+        if ($input >= 100)
+            $json_data = array("response" => "success");
+        else
+            $json_data = array("response" => "fail");
         echo json_encode($json_data);
     }
 

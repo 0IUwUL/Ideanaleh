@@ -1,6 +1,6 @@
 <div class="row mt-3 mb-5 text-center">
     <h1>Reward Feature</h1>
-    <p class = "fs-5">Add reward description for potential backers</p>
+    <p class = "fs-5">Add reward description for potential backers. <br> Minimum Tier value is 100.</p>
 </div>
 <div class="row text-dark">
     <div class="col-12 my-4">

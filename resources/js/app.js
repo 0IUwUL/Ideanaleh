@@ -1,7 +1,7 @@
 import './bootstrap';
 
 import '../sass/app.scss';
-import { templateSettings } from 'lodash';
+import { conformsTo, templateSettings } from 'lodash';
 
 const into = document.querySelector('.toast-body')
 
@@ -55,11 +55,65 @@ function validate(){
                 }
          
             });
-            
+        }else if ($('#SignUpModal3').is(":visible")){
+            // getting categories checked
+            let cate = [];
+            var max = form.find('input[name="Categs[]"]:checked')
+            Object.values(max).forEach(categs => {
+                if(categs.value)
+                    cate.push(categs.value)
+            })
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "project/categs",
+                type:'post',
+                data: {
+                    categs : cate,
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    const categories = data.response;
+                    // formatting projects from categories picked
+                    let header =
+                    jQuery.map(categories, (element, keys) => {
+                        var elementArray = Object.values(element);
+                        return `<div class = "Category_header">
+                                    <h3>${keys}</h3>
+                                        <hr class = "create">
+                                            <div class = "content">` + 
+                                        elementArray.map(i => {
+                                            return `
+                                                <span class = "list_category"><input type="hidden" name="Followed[]" value = ${i['id']}>${i['title']}<a class="btn_follow" role = "button" data-param = ${i['id']}><i class="fa-solid fa-flag"></i></a></span>
+                                            `
+                                            })
+                                        + `
+                                            </div>
+                                </div>`
+                      })
+                    // inserting to html
+                    document.querySelector('#Category_content').innerHTML = header;
+                    $('#SignUpModal3').modal('hide');
+                    $('#SignUpModal4').modal('show');
+                }
+            });
         }
     }
 
 };
+
+$(".btn_follow").click(function(e){
+    var form = $("#myForm");
+    var id = $(e.target).attr('data-param');
+    let cate = [];
+    var clicked = form.find('input[name="Followed[]"]')
+    console.log(id)
+    console.log(clicked)
+    
+  });
 
 function activateToast(){
     var c = $(this).data('id');
@@ -162,8 +216,6 @@ $('textarea').keyup(function () {
 
 
 $.validator.addMethod('yey', function (value, element, param) {
-    console.log(element)
-    console.log(param)
     var given
     if (parseFloat($(param).val()) == NaN)
         given = 0

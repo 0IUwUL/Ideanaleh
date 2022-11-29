@@ -103,5 +103,6 @@ Route::controller(EmailController::class)->group(function () {
 //WEbhook
 Route::controller(PaymentsController::class)->group(function(){
     Route::post('/webhook/paymongo', 'webhookPaymongo')->name('webhook/paymongo');
+    Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
     Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
 });

@@ -86,12 +86,37 @@ $("#FollowUnfollowButton").click(function(e){
   });
 });
 
+$("#AmtDonate").click(function(){
+  var amount = $('#FormControlAmt').val()  
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+      url: "/payment/valid/",
+      type:'post',
+      data: {
+        TierAmount : amount,
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+          if(data.response == "success") {
+            $('#FormControldisplayAmt').val(amount - (parseFloat(amount)*0.025))
+            $('#displayAmt').modal('show');
+            $('#amtModal').modal('hide');
+          }else {
+            document.getElementById('err_donation').innerHTML = "* Donation must be greater than 100."
+          }
+      }
+  });
+});
 
 // Ajax for Follow and Unfollow functionality
 $(".tier-button").click(function(e){
   var id = $(e.target).attr('data-projectId');
   var amount_var = $('#FormControlAmt').val();
-  
+
   $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -108,8 +133,6 @@ $(".tier-button").click(function(e){
           let data = JSON.parse(result);
           if(data.response == "success") {
             window.open(data.checkout_url);
-          }else {
-            document.getElementById('err_donation').innerHTML = "* Donation must be greater than 0."
           }
       }
   });

@@ -142,7 +142,10 @@
           <button type="button" 
               class="btn btn-outline-light" 
               data-bs-toggle="modal" 
-              data-bs-target="#amtModal">
+              data-bs-target="#amtModal"
+              {{-- data-projectId={{$project['id']}} 
+              data-tierAmount={{$tier['amount']}} --}}
+          >
             Donate
           </button>
       </div>
@@ -265,8 +268,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-5">
-        <form id = "DonateForm">
-        <div class="mb-3">
+        <div>
           <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount: </label>
           <input type="number" class="form-control" id="FormControlAmt">
           <label for="FormControlAmt" id = "err_donation" class = "error"></label>
@@ -274,12 +276,38 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="tier-button btn btn-primary" data-projectId={{$project['id']}}>Confirm</button>
-        <form>
+        <button type="button" class="btn btn-success" id = "AmtDonate">Confirm</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Vertically centered modal -->
+<div class="modal fade" id="displayAmt" tabindex="-1" aria-labelledby="displayAmt" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h1 class="modal-title fs-3" id="displayAmt">Donation Modal</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5">
+        <div class="mb-3">
+          <h4 class="text-warning h2"><i class="fa-solid fa-triangle-exclamation"></i> </h4>
+          <h5>There will be a tax of 2.5% for PayMongo services</h5>
+        </div>
+        <div class="mb-3">
+          <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
+          <input type="number" class="form-control" id="FormControldisplayAmt" readonly>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-target="#amtModal" data-bs-toggle="modal">Return</button>
+        <button type="button" class="tier-button btn btn-success" data-projectId={{$project['id']}}>Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
 
 
 @endsection

@@ -344,3 +344,7 @@
     color: red;
     font-style: italic;
   }
+  
+#FormControldisplayAmt:hover{
+  cursor: not-allowed;
+}

@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-2">
         <div class="container-fluid d-flex justify-content-between">
             <div class = "d-flex align-items-center">
                 <a class="navbar-brand" href="/">
@@ -42,7 +42,6 @@
                     <button class="navbar-toggler d-block d-sm-none bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
             </div>
             @else
             <div class="col-2 d-flex justify-content-end">

@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
 use Session;
+use Auth;
 
 class LoginController extends Controller
 {
     public function loginUser(Request $request){
         $user = User::where('email', '=', $request->LoginEmail)->first();
-        // Saving user id to a session variable called "loginId"
-        $request->session()->put('loginId', $user->id);
+        // Saving user to a session
+        Auth::loginUsingId($user->id);
         return (redirect('/'));
     }
 
@@ -35,8 +36,8 @@ class LoginController extends Controller
 
 
     public function logout(){
-        if (Session::has('loginId')) {
-            Session::pull('loginId');
+        if (Auth::check()) {
+            Auth::logout();
 
             return (redirect('/'));
         }

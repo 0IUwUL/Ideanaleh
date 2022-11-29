@@ -177,7 +177,6 @@ h1, h2, h3, h4, h5, h6, .btn {
   background-size: cover;
   min-height: 100vh;
   color: white;
-  overflow: hidden;
 }
 
 .set-header{
@@ -214,18 +213,9 @@ h1, h2, h3, h4, h5, h6, .btn {
   background-color: white;
 }
 
-.hid_set_text{
-  color: #009a9c
-}
-
-.set_tabs .nav-link:hover{
-  color: #018285;
-}
-
-.settings_editinfo h3{
-  color:#005e7d ;
-}
-
+.hid_set_text,
+.set_tabs .nav-link:hover,
+.settings_editinfo h3,
 .settings_editinfo a {
   color:#005e7d ;
 }
@@ -291,8 +281,91 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 /* Contect Project page */
 .project_body{
-  padding: 6rem 0;
-  background-image: linear-gradient(to right, rgba(243, 255, 130, 1), white, rgba(171, 235, 136, 1));
+  padding: 6rem 0 0 0;
+}
+
+.project_body h1{
+  font-family: 'Nunito', sans-serif;
+}
+
+.prog_tabs{
+  margin-top: 2rem!important;
+  border: none !important;
+}
+
+.prog_tabs .nav-link{
+  color: #009a9c;
+  border-radius: 50% !important;
+  border-style: none!important;
+  margin: 0 2rem;
+  height: 100px;
+  width:  100px;
+  text-align: center!important;
+  background-color: white !important;
+  padding: 0;
+}
+
+.prog_tabs a.active,
+.prog_tabs .done{
+  color: whitesmoke !important;
+  background-color: #009a9c!important;
+}
+
+.prog_tabs .nav-link i{
+  font-size: 3rem;
+  margin-top: 25px;
+}
+
+.prog_tabs .nav-link h5{
+  margin-top: 50px;
+  color: #67d294;
+}
+
+.prog_tabs .nav-link:hover{
+  color: whitesmoke !important;
+  background-color: #009a9c!important;
+}
+
+.prog_tabs div{
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.arrow{
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+}
+
+@media(max-width: 850px){
+  .prog_tabs .nav-link{
+    height: 75px;
+    width:  75px;
+    margin: .5rem;
+  }
+  .prog_tabs .nav-link i{
+    font-size: 2rem;
+    margin-top: 18px;
+  }
+}
+
+.Edisplay:hover{
+  cursor: not-allowed;
+}
+
+.create_prog{
+  margin-top: 4rem!important;
+}
+
+.tab-pane{
+  margin-right: 0!important;
+}
+
+hr.create{
+  border: none;
+  border-top: 10px solid;
+  color: #1f4260;
 }
 
 .card-body{
@@ -332,6 +405,13 @@ h1, h2, h3, h4, h5, h6, .btn {
   font: 250 1rem sans-serif;
   border: none;
   background-color: transparent;
+}
+
+@media(max-width: 440px){
+  .tags input{
+    padding: 0;
+    font-size: .7rem;
+  }
 }
 
 .Tool{

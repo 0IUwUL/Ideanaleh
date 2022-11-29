@@ -177,6 +177,30 @@
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
                     </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for IOT"> IOT
+                    </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Communication"> Communication
+                    </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Medical"> Medical
+                    </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Transportation"> Transportation
+                    </div> 
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Education"> Education
+                    </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Security"> Security
+                    </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for VR/AR"> VR/AR
+                    </div>
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Others"> Others
+                    </div>
                 </div>
                 <label for="Categs[]" class="error">Your error message will be display here.</label>
             </div>

@@ -65,7 +65,17 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
-                  <a href="http://localhost:8000/project/{{$project['id']}}#tiers-section"><button type="submit" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  {{-- FOLLOW UNFOLLOW BUTTON --}}
+                  <div name="ProjectFollowButton" id="ProjectFollowButton">
+                      <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
+                        <span class="fa{{$project['isFollowed'] ? "-regular" : ""}} fa-heart"></span>
+                        &nbsp 
+                        {{$project['isFollowed'] ? "UNFOLLOW" : "FOLLOW"}}
+                      </button>
+                  </div>
+
+                  {{-- DONATE BUTTON --}}
+                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -119,7 +129,7 @@
   <div class="row justify-content-center center-block">
     
     <!-- Tiers START -->
-    @foreach($project['tiers'] as $tier)
+    @foreach($project['tiers'] as $t=>$tier)
     <div class="card a mx-4 mt-4" style="width: 18rem;">
       <div class="card-icon"><i class="bi bi-circle"></i></div>
         <div class="card-body">
@@ -129,7 +139,7 @@
           <p class="card-text">{{$tier['amount']}}</p>
           {{-- Tier Benefit --}}
           <p class="card-text">{{$tier['benefit']}}</p>
-          <a href="#" class="btn btn-outline-light">Donate</a>
+          <button type="button" id="Tier{{(int)$t+1}}DonateButton" class="tier-button btn btn-outline-light" data-projectId={{$project['id']}} data-tierAmount={{$tier['amount']}}>Donate</button>
       </div>
     </div>
     @endforeach
@@ -152,7 +162,7 @@
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-update-tab" data-bs-toggle="pill"
               data-bs-target="#pills-update" type="button" role="tab" aria-controls="pills-update"
-              aria-selected="false">Update</button>
+              aria-selected="false">Progress</button>
           </li>
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-comments-tab" data-bs-toggle="pill"
@@ -167,74 +177,15 @@
         </ul>
 
         <div class="tab-content px-3" id="pills-tabContent">
-          <!-- tab item -->
-          <div class="tab-pane fade show active" id="pills-campaign" role="tabpanel" aria-labelledby="pills-campaign-tab">
-            <div class="py-5 px-lg-5" id="info-campaign-accordion">
-              {{-- Note to fronend devs, pls fix/format ty. -RamonDev --}}
-              <p class="text-center">{{$project['description']}}</p>
-              <div class="d-flex justify-content-center">
-                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{$project['yt_link']}}" 
-                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>
-              </div>
-              <p class="text-center">{{$project['yt_link']}}</p>
-              <p class="text-center">{{$project['target_date']}}</p>
-            </div>
-          </div>
-          <!-- tab item -->
-          <div class="tab-pane fade" id="pills-update" role="tabpanel" aria-labelledby="pills-update-tab">
-            <div class="accordion accordion-flush py-5 px-lg-5" id="info-update-accordion">
-              <!-- accordion -->
-              <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
-                <div class="accordion-item">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#info-update-acord-1" aria-expanded="true" aria-controls="info-update-acord-1">
-                    <h3 class="accordion-header" id="update-acord-heading1">
-                      Update 2.0
-                    </h3>
-                  </button>
-                  <div id="info-update-acord-1" class="accordion-collapse collapse show"
-                    aria-labelledby="update-acord-heading1" data-bs-parent="#info-update-accordion">
-                    <div class="accordion-body py-2">
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem eius dolore veritatis cupiditate itaque natus velit dignissimos exercitationem. Atque pariatur voluptates ut repudiandae sapiente minima! Officiis libero modi corrupti neque.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- accordion -->
-              <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
-                <div class="accordion-item">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#info-update-acord-2" aria-expanded="false" aria-controls="info-update-acord-2">
-                    <h3 class="accordion-header" id="update-acord-heading2">
-                      Update 1.0
-                    </h3>
-                  </button>
-                  <div id="info-update-acord-2" class="accordion-collapse collapse"
-                    aria-labelledby="update-acord-heading2" data-bs-parent="#info-update-accordion">
-                    <div class="accordion-body py-2">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur hic omnis optio distinctio, a nobis, quam aliquam explicabo animi, eum sit! Recusandae maiores, eos adipisci vitae inventore ipsa neque incidunt.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Campaign tab -->
+          <x-project.view.campaign :project="$project"/>
+          <!-- Update tab -->
+          <x-project.view.progress :id="$project['id']" :progress="$project['progress']"/>
           <!-- comments item tab -->
-          <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
-            <div class="py-5 px-lg-5" id="info-comments-accordion">
-                <!-- Information -->
-                <p class="text-center "> comments </p>
-          </div>
-          </div>
+          <x-project.view.comments/>
           <!-- Backers item tab -->
-          <div class="tab-pane fade" id="pills-backers" role="tabpanel" aria-labelledby="pills-backers-tab">
-            <div class="accordion accordion-flush py-5 px-lg-5" id="info-backers-accordion">
-              <!-- Information -->
-              <p class="text-center "> There are currently 10000 backers at this project</p>
-          </div>
+          <x-project.view.backers/>
         </div>
-      </div>
     </div>
 
     <div class="container-fluid" id="rcmd-tabs">
@@ -244,79 +195,49 @@
                 <div class="carousel-item active">
                   <div class="row">
                     <h2>Recommended Projects under this Category</h1>
-                    <div class="col-md-4 mb-3">
-                      
-                      <div class="card shadow-sm bg-body rounded">
-                          <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
-                          <div class="card-body text-dark">
-                             <h4 class="card-title">Title</h4>
-                              <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                                  lead-in to additional content. This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.</p>
-                          </div>
-                          <div class="d-flex justify-content-between p-3">
-                              <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                  
+                      @foreach($project['recommend'][0] as $index => $category)
+                      @if($index<3) 
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm bg-body rounded">
+                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <div class="card-body text-dark">
+                                <h4 class="card-title">{{$category['title']}}</h4>
+                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
                               </div>
-                              <div class="text-muted">9 mins</div>
-                          </div>
-                      </div>
-                    </div>
-  
-                    <div class="col-md-4 mb-3">
-                      <div class="card shadow-sm bg-body rounded">
-                        {{-- <img src="{{asset('storage/'.$project['logo']);}} "> --}}
-                          <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
-                          <div class="card-body text-dark">
-                             <h4 class="card-title">Title</h4>
-                              <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                                  lead-in to additional content. This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.</p>
-                          </div>
-                          <div class="d-flex justify-content-between p-3">
-                              <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                  
+                              <div class="d-flex justify-content-between p-3">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                      
+                                  </div>
+                                  <div class="text-muted">9 mins</div>
                               </div>
-                              <div class="text-muted">9 mins</div>
                           </div>
-                      </div>
-                    </div>
-  
-                    <div class="col-md-4 mb-3">
-                      <div class="card shadow-sm bg-body rounded">
-                          <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
-                          <div class="card-body text-dark">
-                             <h4 class="card-title">Title</h4>
-                              <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                                  lead-in to additional content. This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.This is a wider card with supporting text below as a natural
-                                  lead-in to additional content.</p>
-                          </div>
-                          <div class="d-flex justify-content-between p-3">
-                              <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                  
+                        </div>
+                      @endif
+                      @endforeach
+                  </div><br>
+                  <div class="row">
+                    <h2>Other Projects That You May Like</h1>
+                      @foreach($project['recommend'][1] as $index => $category)
+                      @if($index < 3)
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm bg-body rounded">
+                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <div class="card-body text-dark">
+                                <h4 class="card-title">{{$category['title']}}</h4>
+                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="d-flex justify-content-between p-3">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                      
+                                  </div>
+                                  <div class="text-muted">9 mins</div>
+                              </div>
                           </div>
-                      </div>
-                    </div>
+                        </div>
+                      @endif
+                      @endforeach
                   </div>
                 </div>
             </div>

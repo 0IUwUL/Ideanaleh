@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserPreferenceController;
 use Illuminate\Http\Request;
 
 //Import model
 use App\Models\User; 
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Auth;
 
 class RegistrationController extends Controller
 {
@@ -34,6 +37,10 @@ class RegistrationController extends Controller
         
         $user->save();
         
+        //Calling a function of a controller from a controller
+        (new UserPreferenceController)->createInitialUserPreference($user->id);
+
+        Auth::loginUsingId($user->id);
         return redirect('/');
         }
     }

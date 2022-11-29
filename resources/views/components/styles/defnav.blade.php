@@ -34,7 +34,7 @@
                         <a class="btn btn-dark btn-outline-light gear_icon h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-gears"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
+                        <ul class="dropdown-menu dropdown-menu-end m-0">
                             <li><a role = "button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a></li>
                             <li><a role = "button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#LoginModal">Log In</a></li>
                         </ul>
@@ -51,7 +51,7 @@
                         <i class="fa-solid fa-gears"></i>
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <ul class="dropdown-menu dropdown-menu-end m-0">
                         @if (Request::segment(1) == 'settings')
                             <li><a role = "button" class = "dropdown-item" href="/">Home</a></li>
                         @else

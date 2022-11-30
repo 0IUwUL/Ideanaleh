@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
-use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\CommentsController;
 /*
@@ -69,12 +69,12 @@ Route::controller(ProjectController::class)->prefix('project')->name('project.')
     Route::post('/categs', '_getProjects')->name('categs');
 });
 
-// Project progress routes
-Route::controller(ProgressController::class)->prefix('progress')->name('progress.')->group(function () {
+// Project updates routes
+Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')->group(function () {
     Route::middleware('auth')->post('/create', 'create')->name('create');
 });
 
-// Project progress routes
+// Project comments routes
 Route::controller(CommentsController::class)->prefix('comments')->name('comments.')->group(function () {
     Route::middleware('auth')->post('project/create', 'createProjectComment')->name('project/create');
 });

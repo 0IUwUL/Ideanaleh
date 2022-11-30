@@ -9,7 +9,11 @@ function validate(){
     var form = $("#myForm");
     form.validate({
         rules: {
-            'Categs[]': { 
+            'Categs[]': {
+                required: true,
+                minlength: 3,
+            },
+            'Followed[]': {
                 required: true,
                 minlength: 3,
             },
@@ -22,6 +26,10 @@ function validate(){
                 required: "You must check at least 3 categories",
                 minlength: "Check at least {0} categories"
             },
+            'Categs[]': {
+                required: "You must follow at least 3 projects",
+                minlength: "Check at least {0} categories"
+            },
         }
     });
 
@@ -29,7 +37,7 @@ function validate(){
         if ($('#SignUpModal').is(":visible")){
             $('#SignUpModal').modal('hide');
             $('#SignUpModal2').modal('show');
-            
+
         }else if ($('#SignUpModal2').is(":visible")){
             var email = document.getElementById("email").value;
             $.ajaxSetup({
@@ -45,7 +53,7 @@ function validate(){
                 },
                 success: function(result){
                     let data = JSON.parse(result);
-                    
+
                     if (data.response == 'duplicate')
                         document.getElementById('dupli').innerHTML = "* Email is already registered"
                     else{
@@ -53,7 +61,7 @@ function validate(){
                         $('#SignUpModal3').modal('show');
                     }
                 }
-         
+
             });
         }else if ($('#SignUpModal3').is(":visible")){
             // getting categories checked
@@ -84,10 +92,10 @@ function validate(){
                         return `<div class = "Category_header">
                                     <h3>${keys}</h3>
                                         <hr class = "create">
-                                            <div class = "content">` + 
+                                            <div class = "content">` +
                                         elementArray.map(i => {
                                             return `
-                                                <span class = "list_category"><input type="hidden" name="Followed[]" value = ${i['id']}>${i['title']}<a class="btn_follow" role = "button" data-param = ${i['id']}><i class="fa-solid fa-flag"></i></a></span>
+                                                <span class = "list_category">${i['title']}<input type="checkbox" name="Followed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
                                             `
                                             })
                                         + `
@@ -105,14 +113,13 @@ function validate(){
 
 };
 
-$(".btn_follow").click(function(e){
-    var form = $("#myForm");
-    var id = $(e.target).attr('data-param');
-    let cate = [];
-    var clicked = form.find('input[name="Followed[]"]')
-    console.log(id)
-    console.log(clicked)
-    
+jQuery(document.body).on('click', '.btn_follow', function(e){
+    var btnClass = $(e.target).parent();
+    if (btnClass.hasClass('followed')){
+        btnClass.removeClass('followed')
+    }else{
+        btnClass.addClass('followed')
+    }
   });
 
 function activateToast(){
@@ -129,7 +136,7 @@ function activateToast(){
         }
     }
     into.innerHTML = insert
-    
+
 
     $('.DevToast').toast('show');
 }
@@ -163,7 +170,7 @@ $('#LoginSubmit').on("click", function(){
         },
         success: function(result){
             let data = JSON.parse(result);
-            
+
             if (data.response == 'err_pass'){
                 document.getElementById('err_pass').innerHTML = "* Incorrect password"
             } else if (data.response == 'err_mail')
@@ -171,13 +178,13 @@ $('#LoginSubmit').on("click", function(){
             else
                 document.getElementById("LogInForm").submit();
         }
- 
+
     });
 });
 
 function loadBtn (e) {
     var btn = $(e.target).attr('data-btn');
-    
+
     google.accounts.id.renderButton(
         document.getElementById(btn),
         { theme: "outline", size: "large", text: "continue_with"}  // customization attributes
@@ -224,7 +231,7 @@ $.validator.addMethod('yey', function (value, element, param) {
 
     if (this.optional(element) || parseFloat(value) >  given)
         return true;
-}, 'Invalid value');    
+}, 'Invalid value');
 
 function DetValid(e){
     var form = $("#ProjForm");
@@ -232,7 +239,7 @@ function DetValid(e){
     var btn = $(e.target).attr('data-next')
 
     form.validate({
-        
+
         focusCleanup: true,
         rules:{
             "Tier[1][amount]": {
@@ -274,7 +281,7 @@ function DetValid(e){
                 yey : 'Input must be greater than the previous tier/s.',
             },
         },
-        
+
     });
 
     if (form.valid() === true){

@@ -34,11 +34,16 @@ class RegistrationController extends Controller
         $user->password = bcrypt($request->password);
         $user->icon = $request->icon;
         $user->pref_categs = implode(',', $request->Categs);
+
+        $followed = implode(',', $request->Followed);
         
         $user->save();
-        
+        $data = array(
+            'id' => $user->id,
+            'pref_projs' => $followed,
+        );
         //Calling a function of a controller from a controller
-        (new UserPreferenceController)->createInitialUserPreference($user->id);
+        (new UserPreferenceController)->createInitialUserPreference($data);
 
         Auth::loginUsingId($user->id);
         return redirect('/');

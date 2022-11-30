@@ -162,44 +162,44 @@
                 <label class="form-label">Choose preffered categories (3 at least): </label>
                 <label class="text-danger me-1">*</label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
+                    <div class="input-group-text categs">
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
                     </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
+                    <div class="input-group-text categs">
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
                     </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
+                    <div class="input-group-text categs">
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
                     </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
+                    <div class="input-group-text categs">
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
                     </div>
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
+                    <div class="input-group-text categs">
+                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="IOT" aria-label="Checkbox for IOT"> IOT
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="IOT" aria-label="Checkbox for IOT"> IOT
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Communication" aria-label="Checkbox for Communication"> Communication
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Communication" aria-label="Checkbox for Communication"> Communication
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Medical" aria-label="Checkbox for Medical"> Medical
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Medical" aria-label="Checkbox for Medical"> Medical
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Transportation" aria-label="Checkbox for Transportation"> Transportation
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Transportation" aria-label="Checkbox for Transportation"> Transportation
                     </div> 
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Education" aria-label="Checkbox for Education"> Education
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Education" aria-label="Checkbox for Education"> Education
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Security" aria-label="Checkbox for Security"> Security
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Security" aria-label="Checkbox for Security"> Security
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="VR/AR" aria-label="Checkbox for VR/AR"> VR/AR
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="VR/AR" aria-label="Checkbox for VR/AR"> VR/AR
                     </div>
-                    <div class="input-group-text">
-                      <input class="form-check-input mt-0 categs" type="checkbox" name="Categs[]" value="Others" aria-label="Checkbox for Others"> Others
+                    <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Others" aria-label="Checkbox for Others"> Others
                     </div>
                 </div>
                 <label for="Categs[]" class="error">Your error message will be display here.</label>
@@ -224,12 +224,15 @@
           <div class="d-flex justify-content-center fw-semibold text-danger">
             <h3>Step 4 of 4</h3>
           </div>  
-          <div class="d-flex text-center display-6 text-dark">
-                Follow Projects under your preferences
+          <div class="d-flex justify-content-center display-5 text-dark">
+            Follow Projects under your preferences
           </div>  
+          <div class="warn d-flex justify-content-center display-6 text-info">
+            Please select at least 3 projects to follow
+          </div>
           <div class="mt-5" id = "Category_content">
-          
-        </div>
+          </div>
+          <label for="Followed[]" class="error">Your error message will be display here.</label>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-target="#SignUpModal3" data-bs-toggle="modal">Back</button>

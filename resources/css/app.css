@@ -63,34 +63,38 @@ h1, h2, h3, h4, h5, h6, .btn {
     padding: .6rem 1rem .6rem .6rem;
     border-radius: 2rem;
     margin: .4rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .list_category:hover{
   color: yellow;
-  cursor:none;
 }
 
 .followed{
-  color: yellow;
+  color: #002d50!important;
+  background-color: #abeb88;
+  transform: scale(1.1);
 }
 
-.btn_follow{
-  display: inline-block;
-  width: 1.4rem;
-  height: 1.4rem;
-  color: black;
-  background-color: white; 
-  border-radius: 50%;
-  margin-left: 2rem;
-  text-align: center;
-  line-height: 1.4rem;
+input[name="Followed[]"]{
+  accent-color: limegreen;
+  margin-left: 1rem;
   cursor: pointer;
 }
 
-.btn_follow:hover{
-  color: #002d50;
-  background-color: yellow;
-  transform: scale(1.5);
+input[name="Categs[]"]{
+  accent-color: limegreen;
+  margin-right  : 1rem;
+  cursor: pointer;
+}
+
+.categs{
+  background-color: #1f4260!important;
+  color: whitesmoke!important;
+  border-radius: 20px!important;
 }
 
 .hero {

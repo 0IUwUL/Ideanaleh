@@ -48,7 +48,10 @@ class CommentsController extends Controller
             'icon' => Auth::user()->icon);
         $result = array_merge($newComment->toArray(), $user);
 
-        $json_data = array("comment" => $result);
+        // Store html blade for ajax response with render()
+        $viewRender = view('formats.comment')->with('comment', $result)->render();
+
+        $json_data = array("commentHTML" => $viewRender);
 
         echo json_encode($json_data);
     }

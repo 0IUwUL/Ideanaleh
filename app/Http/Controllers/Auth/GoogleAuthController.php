@@ -53,6 +53,7 @@ class GoogleAuthController extends Controller
     private function _loginUser(Request $request, Object $user) {
         //$request->session()->put('loginId', $user->id);
         Auth::loginUsingId($user->id);
+        // return view('pages.home')->with('active', 1);
         return (redirect('/'));
     }
 }

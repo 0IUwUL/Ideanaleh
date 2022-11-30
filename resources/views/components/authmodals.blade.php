@@ -144,7 +144,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="SignUpModal3" aria-hidden="true" aria-labelledby="SignUpModalToggle3" tabindex="-1">
+<div class="modal fade" id="SignUpModal3" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="SignUpModalToggle3" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">

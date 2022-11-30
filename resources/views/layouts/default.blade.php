@@ -13,7 +13,14 @@
     </head>
     <body class="antialiased p-0">
 
-        @yield('content')
+        <div class="load">
+            <div class="ring"></div>
+            <span>Loading...</span>
+        </div>
+        <div class="content">
+            @yield('content')
+        </div>
+        
 
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

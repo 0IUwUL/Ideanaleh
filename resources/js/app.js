@@ -5,6 +5,10 @@ import { conformsTo, templateSettings } from 'lodash';
 
 const into = document.querySelector('.toast-body')
 
+$( window ).on( "load", function() {
+    $('.load').fadeOut("slow");
+    $('.content').fadeIn("slow");
+});
 function validate(){
     var form = $("#myForm");
     form.validate({

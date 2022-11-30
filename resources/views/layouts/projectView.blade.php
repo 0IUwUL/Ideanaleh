@@ -27,7 +27,13 @@
     </head>
     <body class="antialiased">
         
-        @yield('content')
+        <div class="load">
+            <div class="ring"></div>
+            <span>Loading...</span>
+        </div>
+        <div class="content">
+            @yield('content')
+        </div>
         
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <!-- Change background dynamically -->

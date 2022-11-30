@@ -5,7 +5,7 @@
    
   <section id="header-hero" class="hero hero-dark p1">
       <div class="hero__container">
-        <h1 class="hero__title">A Philippine-Based Crowdfunding Platform{{$mode}}</h1>
+        <h1 class="hero__title">A Philippine-Based Crowdfunding Platform</h1>
         <hr class="hero__divider">
         <p class="hero__text">
           Start your Clever Innovative Projects with hopes of Bringing Joy and Excitement for Everyone

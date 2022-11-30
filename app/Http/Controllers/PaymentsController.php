@@ -26,6 +26,10 @@ class PaymentsController extends Controller
         $dataVar->save();
     }
 
+    public static function PaymentSuccess(int $ProjId){
+        return view('pages.payment_success')->with('idArg', $ProjId);
+    }
+
     public function createSource(Request $requestArg){
         $input = (float)$requestArg->TierAmount;
         
@@ -34,7 +38,7 @@ class PaymentsController extends Controller
             'amount' => $input,
             'currency' => 'PHP',
             'redirect' => [
-                'success' => (string)url('project/view/2'),
+                'success' => (string)url('/payment/success/'.$requestArg->ProjectId),
                 'failed' => (string)url('project/view/'.$requestArg->ProjectId)
             ],
             'metadata' => [

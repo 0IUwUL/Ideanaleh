@@ -557,3 +557,14 @@ hr.create{
   transform: translate(-50%, 0px);
 }
 
+.payment_header{
+  margin-top: 10rem;
+}
+
+.card-header i{
+  font-size: 10rem;
+}
+
+.bg_card{
+  background-color: #beed53!important;
+}

@@ -132,7 +132,7 @@ $(".tier-button").click(function(e){
       success: function(result){
           let data = JSON.parse(result);
           if(data.response == "success") {
-            window.open(data.checkout_url);
+            window.location.href = data.checkout_url;
           }
       }
   });

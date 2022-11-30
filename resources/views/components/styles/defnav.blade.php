@@ -110,3 +110,4 @@
     </nav>
 </header>
 <x-authmodals/>
+<x-googleauthmodals/>

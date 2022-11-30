@@ -5,10 +5,20 @@ import { conformsTo, templateSettings } from 'lodash';
 
 const into = document.querySelector('.toast-body')
 
+$(document).ready(function(){
+    var data = $('#modeToast').attr('data-mode')
+    if(data == 3){
+        $('#SignUpModal5').modal('show');
+    }
+        
+});
+
+// function for loading
 $( window ).on( "load", function() {
     $('.load').fadeOut("slow");
-    $('.content').fadeIn("slow");
+    $('.page_content').fadeIn("slow");
 });
+
 function validate(){
     var form = $("#myForm");
     form.validate({
@@ -30,9 +40,9 @@ function validate(){
                 required: "You must check at least 3 categories",
                 minlength: "Check at least {0} categories"
             },
-            'Categs[]': {
+            'Followed[]': {
                 required: "You must follow at least 3 projects",
-                minlength: "Check at least {0} categories"
+                minlength: "Check at least {0} projects"
             },
         }
     });
@@ -115,6 +125,83 @@ function validate(){
         }
     }
 
+};
+
+function GoogleForm(){
+    var form = $("#GoogleForm");
+    form.validate({
+        rules: {
+            'GCategs[]': {
+                required: true,
+                minlength: 3,
+            },
+            'GFollowed[]': {
+                required: true,
+                minlength: 3,
+            },
+        },
+        messages: {
+            'GCategs[]': {
+                required: "You must check at least 3 categories",
+                minlength: "Check at least {0} categories"
+            },
+            'GFollowed[]': {
+                required: "You must follow at least 3 projects",
+                minlength: "Check at least {0} projects"
+            },
+        }
+    });
+
+    if (form.valid() === true){
+        if ($('#SignUpModal5').is(":visible")){
+            // getting categories checked
+            let cate = [];
+            var max = form.find('input[name="GCategs[]"]:checked')
+            Object.values(max).forEach(categs => {
+                if(categs.value)
+                    cate.push(categs.value)
+            })
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "/project/categs",
+                type:'post',
+                data: {
+                    categs : cate,
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    const categories = data.response;
+                    // formatting projects from categories picked
+                    console.log('categories :', categories)
+                    let Gheader =
+                    jQuery.map(categories, (element, keys) => {
+                        var elementArray = Object.values(element);
+                        return `<div class = "Category_header">
+                                    <h3>${keys}</h3>
+                                        <hr class = "create">
+                                            <div class = "content">` +
+                                        elementArray.map(i => {
+                                            return `
+                                                <span class = "list_category">${i['title']}<input type="checkbox" name="GFollowed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
+                                            `
+                                            })
+                                        + `
+                                            </div>
+                                </div>`
+                      })
+                      console.log('Gheader :', Gheader)
+                    // inserting to html
+                    document.querySelector('#GCategory_content').innerHTML = Gheader;
+                    $('#SignUpModal5').modal('hide');
+                    $('#SignUpModal6').modal('show');
+                }
+            });
+        }
+    }
 };
 
 jQuery(document.body).on('click', '.btn_follow', function(e){
@@ -325,8 +412,12 @@ function DetValid(e){
 
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);
+// Normal Auth
 $('.next').click(validate);
 $("#submit").on("click",validate);
+// Google Auth
+$('.Gnext').click(GoogleForm);
+$("#Gsubmit").on("click",GoogleForm);
 $("#modeToast").on("click", activateToast);
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);

@@ -18,6 +18,16 @@ class UserPreferenceController extends Controller
         $userPreferenceVar->save();
     }
 
+    public function googleUpdatepreferences(array $dataArg)
+    {
+        $user_id = $dataArg['id'];
+        $followed = array(
+            'followed' => $dataArg['pref_projs'],
+        );
+        UserPreference::where('user_id', $user_id)->update($followed);
+    }
+
+
 
     public function updateFollowed(Request $requestArg)
     {

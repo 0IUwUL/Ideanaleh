@@ -16,7 +16,7 @@
             <div class="ring"></div>
             <span>Loading...</span>
         </div>
-        <div class="content">
+        <div class="page_content">
             @yield('content')
         </div>
 

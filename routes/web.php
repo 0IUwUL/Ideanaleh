@@ -51,6 +51,7 @@ Route::get('/admin', function () {
 // User registration routes
 Route::controller(RegistrationController::class)->group(function () {
     Route::post('/register-user', 'registerUser')->name('register-user');
+    Route::post('google/register-user', 'GoogleRegisterUser')->name('google-register-user');
     Route::post('/verify-email', 'dupliEmail')->name('login-user');
 });
 

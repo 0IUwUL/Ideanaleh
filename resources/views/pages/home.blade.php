@@ -5,7 +5,7 @@
    
   <section id="header-hero" class="hero hero-dark p1">
       <div class="hero__container">
-        <h1 class="hero__title">A Philippine-Based Crowdfunding Platform</h1>
+        <h1 class="hero__title">A Philippine-Based Crowdfunding Platform{{$mode}}</h1>
         <hr class="hero__divider">
         <p class="hero__text">
           Start your Clever Innovative Projects with hopes of Bringing Joy and Excitement for Everyone
@@ -273,9 +273,9 @@
           A Platform that serves to help Creators, Inventors, Innovators to Kickstart their Dream Projects.
         </p>
         @if ($mode)
-        <a href="{{ route('project.create') }}" class="hero__btn hero__btn--light btn">Get Started!</a>
+        <a href="{{ route('project.create') }}" id = "modeToast" class="hero__btn hero__btn--light btn" data-mode = {{$mode}}>Get Started!</a>
         @else
-        <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{session('loginId') ? 'logI' : 'logO'}} data-mode = {{$mode}}>Get Started!</a>
+        <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{Auth::check() ? 'logI' : 'logO'}}>Get Started!</a>
         @endif
         
       </div>

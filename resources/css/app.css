@@ -12,7 +12,7 @@ html{
 }
 
 /* for loading screen */
-.content{
+.page_content{
   display: none;
 }
 
@@ -133,19 +133,20 @@ html{
   transform: scale(1.1);
 }
 
-input[name="Followed[]"]{
+input[name="Followed[]"], input[name="GFollowed[]"]{
   accent-color: limegreen;
   margin-left: 1rem;
   cursor: pointer;
 }
 
-input[name="Categs[]"]{
+input[name="Categs[]"], 
+input[name="GCategs[]"]{
   accent-color: limegreen;
-  margin-right  : 1rem;
+  margin-right  : 1rem!important;
   cursor: pointer;
 }
 
-.categs{
+.categs, .Gcategs{
   background-color: #1f4260!important;
   color: whitesmoke!important;
   border-radius: 20px!important;

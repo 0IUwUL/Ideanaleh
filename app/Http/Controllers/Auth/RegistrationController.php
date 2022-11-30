@@ -16,15 +16,6 @@ use Auth;
 class RegistrationController extends Controller
 {
     public function registerUser(Request $request){
-
-
-        $validator = Validator::make($request->all(), [
-            'email' => 'unique:users',
-        ]);
- 
-        if ($validator->fails()) {
-            return redirect()->back()->with('message', 'Email is already registered');
-        }else{
         $user = new User;
         $user->Lname = $request->Lname;
         $user->Fname = $request->Fname;
@@ -47,7 +38,24 @@ class RegistrationController extends Controller
 
         Auth::loginUsingId($user->id);
         return redirect('/');
-        }
+    }
+
+    public function GoogleRegisterUser(Request $request){
+        $userId = Auth::id();
+        $categs = implode(',', $request->GCategs);
+        $user = array(
+            'pref_categs' => $categs
+        );
+        $followed = implode(',', $request->GFollowed);
+        User::where('id', $userId)->update($user);
+        $data = array(
+            'id' => $userId,
+            'pref_projs' => $followed,
+        );
+        //Calling a function of a controller from a controller
+        (new UserPreferenceController)->googleUpdatepreferences($data);
+
+        return redirect('/');
     }
 
     public function dupliEmail(Request $request){

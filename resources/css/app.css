@@ -603,5 +603,5 @@ hr.create{
 }
 
 .bg_card{
-  background-color: #beed53!important;
+  background: radial-gradient(#ffe995, #fa742b)!important;
 }

@@ -66,6 +66,7 @@ Route::controller(UserPreferenceController::class)->prefix('user-preference')->n
 Route::controller(ProjectController::class)->prefix('project')->name('project.')->group(function () {
     Route::middleware('auth')->get('/create', 'index')->name('create');
     Route::get('/view/{id}', 'view')->name('view');
+    Route::middleware('auth')->get('edit/{id}', 'edit')->name('edit');
     Route::middleware('auth')->post('/save', 'saveCreatedProject')->name('save');
     Route::post('/categs', '_getProjects')->name('categs');
 });

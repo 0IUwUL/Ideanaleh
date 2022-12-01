@@ -10,7 +10,15 @@ $(document).ready(function(){
     if(data == 3){
         $('#SignUpModal5').modal('show');
     }
-        
+    
+    var form = $("#ProjForm");
+    var tagValues = form.find('input[name="Tags[]"]');
+    Object.values(tagValues).forEach(input => {
+        if(input.value != null)
+            tags.push(input.value);
+    })
+    console.log("tags ito");
+    console.log(tags);
 });
 
 // function for loading
@@ -379,7 +387,8 @@ function DetValid(e){
     });
 
     if (form.valid() === true){
-        if(tags.length >= 3){
+        var max = form.find('input[name="Tags[]"]')
+        if(max.length >= 3){
             if (logo == 'nav-basic-tab' || btn == 'reward'){
                 $('#nav-reward-tab').removeClass('disabled');
                 $('#nav-reward-tab').attr("data-bs-target", '#nav-reward')

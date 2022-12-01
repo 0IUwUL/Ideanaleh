@@ -26,8 +26,25 @@ class PaymentsController extends Controller
         $dataVar->save();
     }
 
-    public static function PaymentSuccess(int $ProjId){
-        return view('pages.payment_success')->with('idArg', $ProjId);
+    public static function PaymentStatus(int $ProjId, string $status){
+        if($status == 'success'){
+            $data = array(
+                'idArg' => $ProjId,
+                'title' => 'Success',
+                'text' => 'successful',
+                'icon' => 'fa-regular fa-circle-check',
+                'color' => 'success'
+            );
+        }else{
+            $data = array(
+                'idArg' => $ProjId,
+                'title' => 'Failed',
+                'text' => 'unsuccessful',
+                'icon' => 'fa-solid fa-triangle-exclamation',
+                'color' => 'danger'
+            );
+        }
+        return view('pages.payment_success')->with('dataArg', $data);
     }
 
     public function createSource(Request $requestArg){
@@ -38,8 +55,8 @@ class PaymentsController extends Controller
             'amount' => $input,
             'currency' => 'PHP',
             'redirect' => [
-                'success' => (string)url('/payment/success/'.$requestArg->ProjectId),
-                'failed' => (string)url('project/view/'.$requestArg->ProjectId)
+                'success' => (string)url('/payment/status/'.$requestArg->ProjectId.'/success'),
+                'failed' => (string)url('payment/status/'.$requestArg->ProjectId.'/failed')
             ],
             'metadata' => [
                 'project_id' => (string)$requestArg->ProjectId,

@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-2">
         <div class="container-fluid d-flex justify-content-between">
-            <div class = "d-flex align-items-center">
+            <div class = "col d-flex align-items-center">
                 <a class="navbar-brand" href="/">
                     <div class = "display-6">
                         Ideanaleh
@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <div class="col-7 d-none d-sm-block">
+            <div class="col-6 d-none d-sm-block">
                 <form class="container-fluid" role="search">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
@@ -21,16 +21,18 @@
                     </div>
                 </form>
             </div>
-            
             @if(!Auth::check())
-            <div class="col-2 d-flex justify-content-end">
-                    <button type="button" class="btn btn-light btn-outline-dark mx-3 d-none d-xxl-block" data-bs-toggle="modal" data-bs-target="#SignUpModal">
-                        Sign Up
-                    </button>
-                    <button type="button" class="btn btn-primary btn-outline-light text- white mx-3 d-none d-xxl-block" data-bs-toggle="modal" data-bs-target="#LoginModal">
-                        Log In
-                    </button>
-                    <div class="dropdown d-none d-sm-block d-xxl-none">
+            <div class="col-2 col-lg-3 d-flex justify-content-end">
+                <div class="navbread col p-0 d-none d-lg-block">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb d-flex justify-content-end align-self-center m-0">
+                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign Up</a></li>
+                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" data-bs-toggle="modal" data-bs-target="#LoginModal">Log In</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                
+                    <div class="dropdown d-none d-sm-block d-lg-none">
                         <a class="btn btn-dark btn-outline-light gear_icon h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-gears"></i>
                         </a>
@@ -44,8 +46,21 @@
                     </button>
             </div>
             @else
-            <div class="col-2 d-flex justify-content-end">
-                <div class="logged dropdown d-none d-sm-block">
+            <div class="col col-lg-4 d-flex justify-content-end">
+                <div class="navbread col p-0 d-none d-lg-block">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb d-flex justify-content-end align-self-center m-0">
+                        @if (Request::segment(1) == 'settings')
+                            <li class="breadcrumb-item"><a role = "fw-bolder" href="/">Home</a></li>
+                        @else
+                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('settings') }}">Profile</a></li>
+                        @endif
+                            <li class="breadcrumb-item"><a class = "fw-bolder" id = "modeToast2" data-id = {{Auth::check() ? 'logI' : 'logO'}} role = "button" href="{{ route('project.create') }}">My Project</a></li>
+                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('logout') }}">Log out</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="logged dropdown d-none d-sm-block d-lg-none">
                     <a class="btn btn-dark btn-outline-light gear_icon h4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-gears"></i>
                     </a>
@@ -56,6 +71,7 @@
                         @else
                             <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Profile</a></li>
                         @endif
+                            <li><a role = "button" class = "dropdown-item" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} href="{{ route('project.create') }}">My Project</a></li>
                             <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Log out</a></li>
                     </ul>
                 </div>
@@ -93,6 +109,7 @@
                     @else
                         <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Profile</a></li>
                     @endif
+                        <li><a role = "button" class = "dropdown-item" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} href="{{ route('project.create') }}">My Project</a></li>
                         <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Log out</a></li>
                 </ul>
                 <form class="d-flex" role="search">

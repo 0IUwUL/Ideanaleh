@@ -216,12 +216,15 @@ jQuery(document.body).on('click', '.btn_follow', function(e){
 function activateToast(){
     var c = $(this).data('id');
     var insert
+    console.log(c)
     if (c == 'logO' || c == 'logI'){
         var mode = $(this).data('mode');
+        console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (!mode && c == 'logI'){
             insert = `Verify your email in your profile settings.`
+            $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`
         }
@@ -419,6 +422,9 @@ $("#submit").on("click",validate);
 $('.Gnext').click(GoogleForm);
 $("#Gsubmit").on("click",GoogleForm);
 $("#modeToast").on("click", activateToast);
+$("#modeToast2").on("click", activateToast);
+$("#modeToast3").on("click", activateToast);
+$("#modeToast4").on("click", activateToast);
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
 $('.tab_next').on('click', DetValid);

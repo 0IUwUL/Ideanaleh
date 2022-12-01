@@ -36,14 +36,16 @@ class GoogleAuthController extends Controller
         $user->dev_mode = 1;
         // Save in database
         $user->save();
-
+        $data = array(
+            'id' => $user->id,
+            'pref_projs' => null
+        );
         //Calling a function of a controller from a controller
-        (new UserPreferenceController)->createInitialUserPreference($user->id);
+        (new UserPreferenceController)->createInitialUserPreference($data);
 
         // Auto Login the user when they sign up with google?
         $currentUser = User::where('email', '=', $userInfo->email)->first();
         return $this->_loginUser($request, $currentUser);
-        
     }
 
     /**
@@ -53,6 +55,14 @@ class GoogleAuthController extends Controller
     private function _loginUser(Request $request, Object $user) {
         //$request->session()->put('loginId', $user->id);
         Auth::loginUsingId($user->id);
-        return (redirect('/'));
+        $categories = User::where('id', '=', $user->id)
+                                ->select(array('pref_categs', 'dev_mode'))
+                                ->first()
+                                ->toArray();
+        if($categories['pref_categs'])
+            return view('pages.home')->with('mode', $categories['dev_mode']);
+        else
+            return view('pages.home')->with('mode', 3);
+        // return (redirect('/'));
     }
 }

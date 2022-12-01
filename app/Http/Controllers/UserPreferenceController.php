@@ -10,12 +10,23 @@ use App\Models\UserPreference;
 
 class UserPreferenceController extends Controller
 {
-    public function createInitialUserPreference(int $userIdArg)
+    public function createInitialUserPreference(array $dataArg)
     {
         $userPreferenceVar = new UserPreference;
-        $userPreferenceVar->user_id = $userIdArg;
+        $userPreferenceVar->user_id = $dataArg['id'];
+        $userPreferenceVar->followed = $dataArg['pref_projs'];
         $userPreferenceVar->save();
     }
+
+    public function googleUpdatepreferences(array $dataArg)
+    {
+        $user_id = $dataArg['id'];
+        $followed = array(
+            'followed' => $dataArg['pref_projs'],
+        );
+        UserPreference::where('user_id', $user_id)->update($followed);
+    }
+
 
 
     public function updateFollowed(Request $requestArg)
@@ -83,6 +94,11 @@ class UserPreferenceController extends Controller
         else{
             return(false);
         }
+    }
+
+    public function addFollow(Request $request){
+        $id = $request->ProjectId;
+        
     }
 
 }

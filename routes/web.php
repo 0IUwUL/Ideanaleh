@@ -11,8 +11,9 @@ use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
-use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\CommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +51,7 @@ Route::get('/admin', function () {
 // User registration routes
 Route::controller(RegistrationController::class)->group(function () {
     Route::post('/register-user', 'registerUser')->name('register-user');
+    Route::post('google/register-user', 'GoogleRegisterUser')->name('google-register-user');
     Route::post('/verify-email', 'dupliEmail')->name('login-user');
 });
 
@@ -57,6 +59,7 @@ Route::controller(RegistrationController::class)->group(function () {
 // User Preferences routes
 Route::controller(UserPreferenceController::class)->prefix('user-preference')->name('user-preference.')->group(function(){
     Route::middleware('auth')->post('follow/', 'updateFollowed')->name('follow/');
+    Route::middleware('auth')->post('registration/follow', 'addFollow')->name('registration/follow');
 });
 
 // Project routes
@@ -64,11 +67,17 @@ Route::controller(ProjectController::class)->prefix('project')->name('project.')
     Route::middleware('auth')->get('/create', 'index')->name('create');
     Route::get('/view/{id}', 'view')->name('view');
     Route::middleware('auth')->post('/save', 'saveCreatedProject')->name('save');
+    Route::post('/categs', '_getProjects')->name('categs');
 });
 
-// Project progress routes
-Route::controller(ProgressController::class)->prefix('progress')->name('progress.')->group(function () {
+// Project updates routes
+Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')->group(function () {
     Route::middleware('auth')->post('/create', 'create')->name('create');
+});
+
+// Project comments routes
+Route::controller(CommentsController::class)->prefix('comments')->name('comments.')->group(function () {
+    Route::middleware('auth')->post('project/create', 'createProjectComment')->name('project/create');
 });
 
 // Google Routes
@@ -103,5 +112,7 @@ Route::controller(EmailController::class)->group(function () {
 //WEbhook
 Route::controller(PaymentsController::class)->group(function(){
     Route::post('/webhook/paymongo', 'webhookPaymongo')->name('webhook/paymongo');
+    Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
     Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
+    Route::get('/payment/success/{id}', 'PaymentSuccess')->name('payment/success');
 });

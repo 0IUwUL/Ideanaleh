@@ -75,7 +75,7 @@
                   </div>
 
                   {{-- DONATE BUTTON --}}
-                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -139,7 +139,15 @@
           <p class="card-text">{{$tier['amount']}}</p>
           {{-- Tier Benefit --}}
           <p class="card-text">{{$tier['benefit']}}</p>
-          <button type="button" id="Tier{{(int)$t+1}}DonateButton" class="tier-button btn btn-outline-light" data-projectId={{$project['id']}} data-tierAmount={{$tier['amount']}}>Donate</button>
+          <button type="button" 
+              class="btn btn-outline-light" 
+              data-bs-toggle="modal" 
+              data-bs-target="#amtModal"
+              {{-- data-projectId={{$project['id']}} 
+              data-tierAmount={{$tier['amount']}} --}}
+          >
+            Donate
+          </button>
       </div>
     </div>
     @endforeach
@@ -162,7 +170,7 @@
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-update-tab" data-bs-toggle="pill"
               data-bs-target="#pills-update" type="button" role="tab" aria-controls="pills-update"
-              aria-selected="false">Progress</button>
+              aria-selected="false">Updates</button>
           </li>
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-comments-tab" data-bs-toggle="pill"
@@ -180,9 +188,9 @@
           <!-- Campaign tab -->
           <x-project.view.campaign :project="$project"/>
           <!-- Update tab -->
-          <x-project.view.progress :id="$project['id']" :progress="$project['progress']"/>
+          <x-project.view.updates :id="$project['id']" :updates="$project['updates']"/>
           <!-- comments item tab -->
-          <x-project.view.comments/>
+          <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
           <!-- Backers item tab -->
           <x-project.view.backers/>
         </div>
@@ -250,6 +258,55 @@
     
     </div>
   </section>
+
+  <!-- Vertically centered modal -->
+<div class="modal fade" id="amtModal" tabindex="-1" aria-labelledby="amtModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h1 class="modal-title fs-3" id="amtModalLabel">Donation Modal</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5">
+        <div>
+          <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount: </label>
+          <input type="number" class="form-control" id="FormControlAmt">
+          <label for="FormControlAmt" id = "err_donation" class = "error"></label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id = "AmtDonate">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vertically centered modal -->
+<div class="modal fade" id="displayAmt" tabindex="-1" aria-labelledby="displayAmt" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h1 class="modal-title fs-3" id="displayAmt">Donation Modal</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5">
+        <div class="mb-3">
+          <h4 class="text-warning h2"><i class="fa-solid fa-triangle-exclamation"></i> </h4>
+          <h5>There will be a tax of 2.5% for PayMongo services</h5>
+        </div>
+        <div class="mb-3">
+          <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
+          <input type="number" class="form-control" id="FormControldisplayAmt" readonly>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-target="#amtModal" data-bs-toggle="modal">Return</button>
+        <button type="button" class="tier-button btn btn-success" data-projectId={{$project['id']}}>Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
   
 
 

@@ -6,12 +6,78 @@ html{
   overflow-x: hidden;
 }
 
-.navbar-brand{
-    font-family: 'Brush Script MT';
-}
 .error{
     color: red;
     font-style: italic;
+}
+
+/* for loading screen */
+.page_content{
+  display: none;
+}
+
+.load{
+  display: flex;
+  justify-content: center!important;
+  align-items: center!important;
+  min-height: 100vh!important;
+  background-color: white;
+}
+
+.ring{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%!important;
+  animation: ring 2s linear infinite;
+}
+
+@keyframes ring {
+  0%{
+    transform: rotate(0deg);
+    box-shadow: 1px 5px 2px #f3ff82;
+  }
+  50%{
+    transform: rotate(180deg);
+    box-shadow: 1px 5px 2px #abeb88;
+  }
+  100%{
+    transform: rotate(360deg);
+    box-shadow: 1px 5px 2px #67d294;
+  }
+
+}
+
+.ring:before{
+  position: absolute!important;
+  content: '';
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, .3)!important;
+}
+
+.load span{
+  color: #737373;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 200px;
+  justify-content: center!important;
+  animation: display 2s ease-in-out infinite
+}
+
+@keyframes display {
+  50%{
+    color: white;
+  }
+}
+
+/* for navbar */
+.navbar-brand{
+  font-family: 'Brush Script MT';
 }
 
 .nav_home ul li a{
@@ -26,18 +92,6 @@ html{
   padding: 2rem;
 }
 
-/* Main Page */
-
-body {
-  font-family: "Merriweather", serif;
-  line-height: 1.5;
-  overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6, .btn {
-  font-family: "Merriweather Sans", sans-serif;
-}
-
 .navbar {
   padding: 0.75rem 1.5rem;
   font-family: "Merriweather Sans", sans-serif;
@@ -49,6 +103,65 @@ h1, h2, h3, h4, h5, h6, .btn {
 .navbar-dark {
   background-color: rgba(0, 0, 0, 0.15);
   box-shadow: none;
+}
+
+.Category_header{
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.list_category{
+    display: inline-block;
+    background-color: #002d50;
+    color: whitesmoke;
+    padding: .6rem 1rem .6rem .6rem;
+    border-radius: 2rem;
+    margin: .4rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.list_category:hover{
+  color: yellow;
+}
+
+.followed{
+  color: #002d50!important;
+  background-color: #abeb88;
+  transform: scale(1.1);
+}
+
+input[name="Followed[]"], input[name="GFollowed[]"]{
+  accent-color: limegreen;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+input[name="Categs[]"], 
+input[name="GCategs[]"]{
+  accent-color: limegreen;
+  margin-right  : 1rem!important;
+  cursor: pointer;
+}
+
+.categs, .Gcategs{
+  background-color: #1f4260!important;
+  color: whitesmoke!important;
+  border-radius: 20px!important;
+}
+
+/* Main Page */
+
+body {
+  font-family: "Merriweather", serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .btn {
+  font-family: "Merriweather Sans", sans-serif;
 }
 
 .hero {
@@ -279,7 +392,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   height: 65%; 
 }
 
-/* Contect Project page */
+/* Create Project page */
 .project_body{
   padding: 6rem 0 0 0;
 }
@@ -444,3 +557,14 @@ hr.create{
   transform: translate(-50%, 0px);
 }
 
+.payment_header{
+  margin-top: 10rem;
+}
+
+.card-header i{
+  font-size: 10rem;
+}
+
+.bg_card{
+  background-color: #beed53!important;
+}

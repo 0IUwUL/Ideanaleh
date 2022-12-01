@@ -10,7 +10,15 @@ $(document).ready(function(){
     if(data == 3){
         $('#SignUpModal5').modal('show');
     }
-        
+    
+    var form = $("#ProjForm");
+    var tagValues = form.find('input[name="Tags[]"]');
+    Object.values(tagValues).forEach(input => {
+        if(input.value != null)
+            tags.push(input.value);
+    })
+    console.log("tags ito");
+    console.log(tags);
 });
 
 // function for loading
@@ -216,12 +224,15 @@ jQuery(document.body).on('click', '.btn_follow', function(e){
 function activateToast(){
     var c = $(this).data('id');
     var insert
+    console.log(c)
     if (c == 'logO' || c == 'logI'){
         var mode = $(this).data('mode');
+        console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (!mode && c == 'logI'){
             insert = `Verify your email in your profile settings.`
+            $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`
         }
@@ -376,7 +387,8 @@ function DetValid(e){
     });
 
     if (form.valid() === true){
-        if(tags.length >= 3){
+        var max = form.find('input[name="Tags[]"]')
+        if(max.length >= 3){
             if (logo == 'nav-basic-tab' || btn == 'reward'){
                 $('#nav-reward-tab').removeClass('disabled');
                 $('#nav-reward-tab').attr("data-bs-target", '#nav-reward')
@@ -419,6 +431,9 @@ $("#submit").on("click",validate);
 $('.Gnext').click(GoogleForm);
 $("#Gsubmit").on("click",GoogleForm);
 $("#modeToast").on("click", activateToast);
+$("#modeToast2").on("click", activateToast);
+$("#modeToast3").on("click", activateToast);
+$("#modeToast4").on("click", activateToast);
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
 $('.tab_next').on('click', DetValid);

@@ -33,6 +33,30 @@ class ProjectController extends Controller
 
 
     public function view(int $idArg){
+        $projectDataVar = $this->_getProjectData($idArg);
+        //dd($projectDataVar);
+        return view('pages.projectViewPage')->with('project', $projectDataVar);
+    }
+
+
+    public function edit(int $idArg){
+        $projectDataVar = [
+            'project' => $this->_getProjectData($idArg),
+            'categories' => config('category')[0]
+        ];
+
+        if($projectDataVar['project']['user_id'] == Auth::id()){
+            return view('pages.edit-project')->with('data', $projectDataVar);
+        }
+        else{
+            return redirect('/');
+        }
+
+        
+    }
+
+
+    private function _getProjectData(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
         
@@ -41,8 +65,8 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdatesController)->getAllUpdates($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['comments' => (new CommentsController)->getAllProjectComments($idArg)]);
-        //dd($projectDataVar);
-        return view('pages.projectViewPage')->with('project', $projectDataVar);
+
+        return $projectDataVar;
     }
 
 
@@ -275,22 +299,13 @@ class ProjectController extends Controller
      */
     public function saveCreatedProject(Request $requestArg)
     {
-        $dataVar = new Projects;
-        $dataVar->user_id = Auth::id();
-        $dataVar->title = $requestArg->ProjTitle;
-        $dataVar->description = $requestArg->ProjDesc;
-        $dataVar->category = $requestArg->ProjCategory;
-        $dataVar->tags = implode(',', $requestArg->Tags);
-        $dataVar->target_amt = $requestArg->ProjTarget;
-        $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
-        $dataVar->logo = null;
-        $dataVar->banner = null;
-        $dataVar->target_date = $requestArg->ProjDate;
-        $dataVar->save();
-
+        $dataVar = $this->_saveNewProject($requestArg);
+        
         // The Images are later uploaded because we need the project ID to be generated first
-        $this->_saveImage($requestArg, $dataVar->id, 'logo', 'ProjLogo');
-        $this->_saveImage($requestArg, $dataVar->id, 'banner', 'ProjBanner');
+        if($requestArg->hasFile('ProjLogo'))
+            $this->_saveImage($requestArg, $dataVar->id, 'logo', 'ProjLogo');
+        if($requestArg->hasFile('ProjBanner'))
+            $this->_saveImage($requestArg, $dataVar->id, 'banner', 'ProjBanner');
 
         // Saving Tiers
         $this->_saveTiers($dataVar->id, $requestArg);
@@ -299,6 +314,54 @@ class ProjectController extends Controller
         return redirect('project/view/'.$dataVar->id);
 
     }
+
+    private function _saveNewProject(Request $requestArg){
+        
+        if($requestArg->ProjId != null){
+            $dataVar = Projects::find($requestArg->ProjId);
+        }
+        else{
+            $dataVar = new Projects;
+        }
+        $dataVar->user_id = Auth::id();
+        $dataVar->title = $requestArg->ProjTitle;
+        $dataVar->description = $requestArg->ProjDesc;
+        $dataVar->category = $requestArg->ProjCategory;
+        $dataVar->tags = implode(',', $requestArg->Tags);
+        $dataVar->target_amt = $requestArg->ProjTarget;
+        $dataVar->target_milestone = $requestArg->ProjMilestone;
+        $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
+        $dataVar->logo = null;
+        $dataVar->banner = null;
+        $dataVar->target_date = $requestArg->ProjDate;
+        $dataVar->save();
+
+        return $dataVar;
+    }
+
+
+    // public function updateProject(Request $requestArg){
+    //     $dataVar = new Projects;
+    //     $dataVar->user_id = Auth::id();
+    //     $dataVar->title = $requestArg->ProjTitle;
+    //     $dataVar->description = $requestArg->ProjDesc;
+    //     $dataVar->category = $requestArg->ProjCategory;
+    //     $dataVar->tags = implode(',', $requestArg->Tags);
+    //     $dataVar->target_amt = $requestArg->ProjTarget;
+    //     $dataVar->target_milestone = $requestArg->ProjMilestone;
+    //     $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
+    //     $dataVar->logo = null;
+    //     $dataVar->banner = null;
+    //     $dataVar->target_date = $requestArg->ProjDate;
+    //     $dataVar->save();
+
+    //     // The Images are later uploaded because we need the project ID to be generated first
+    //     $this->_saveImage($requestArg, $dataVar->id, 'logo', 'ProjLogo');
+    //     $this->_saveImage($requestArg, $dataVar->id, 'banner', 'ProjBanner');
+
+    //     // Saving Tiers
+    //     $this->_saveTiers($dataVar->id, $requestArg);
+    // }
 
 
     private function _saveImage(Request $requestArg, string $projectIdArg, string $typeArg, string $formNameArg)
@@ -319,7 +382,12 @@ class ProjectController extends Controller
         $currentTierVar = 1;
         for ($index = 0; $index < count($requestArg->Tier); $index++)
         {
-            $tierVar = new ProjectTiers;
+            if($requestArg->Tier[$index]['id'] != null){
+                $tierVar = ProjectTiers::find($requestArg->Tier[$index]['id']);
+            }
+            else{
+                $tierVar = new ProjectTiers;
+            }
             $tierVar->proj_id = $projectIdVar;
 
             $tierVar->level = $currentTierVar;

@@ -66,6 +66,7 @@ Route::controller(UserPreferenceController::class)->prefix('user-preference')->n
 Route::controller(ProjectController::class)->prefix('project')->name('project.')->group(function () {
     Route::middleware('auth')->get('/create', 'index')->name('create');
     Route::get('/view/{id}', 'view')->name('view');
+    Route::middleware('auth')->get('edit/{id}', 'edit')->name('edit');
     Route::middleware('auth')->post('/save', 'saveCreatedProject')->name('save');
     Route::post('/categs', '_getProjects')->name('categs');
 });
@@ -114,5 +115,5 @@ Route::controller(PaymentsController::class)->group(function(){
     Route::post('/webhook/paymongo', 'webhookPaymongo')->name('webhook/paymongo');
     Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
     Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
-    Route::get('/payment/success/{id}', 'PaymentSuccess')->name('payment/success');
+    Route::get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
 });

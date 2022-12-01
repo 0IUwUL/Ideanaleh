@@ -152,6 +152,43 @@ input[name="GCategs[]"]{
   border-radius: 20px!important;
 }
 
+.navbread{
+  display: flex!important;
+  align-content: center;
+  vertical-align: middle!important;
+}
+
+.breadcrumb li a{
+  text-decoration: none!important;
+  font-size: 1rem;
+  color: whitesmoke!important;
+  vertical-align: middle!important;
+  padding: .2rem 1rem .2rem 1rem;
+}
+
+.breadcrumb li a:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.breadcrumb-item::before{
+  color: whitesmoke!important;
+  vertical-align: middle!important;
+}
+
+@media screen and (max-width: 1099px){
+  .breadcrumb li a{
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  .breadcrumb li a:hover{
+    background-color: transparent;
+    color: #f3ff82;
+  }
+}
+
 /* Main Page */
 
 body {
@@ -566,5 +603,5 @@ hr.create{
 }
 
 .bg_card{
-  background-color: #beed53!important;
+  background: radial-gradient(#ffe995, #fa742b)!important;
 }

@@ -32,7 +32,7 @@
                 <div class="input-group">
                     <!-- Tier Amount -->
                     <span class="input-group-text py-2">Tier Amount: </span>
-                    <input required type="number" class="form-control" id = "Tier_1_amount" name = "Tier[0][amount]" placeholder="0.00" required min="100" max="300000" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" {{isset($data) ? 'value ='.$data[0]['amount'] : 'disabled'}}>
+                    <input required type="number" class="form-control" id = "Tier_1_amount" name = "Tier[0][amount]" placeholder="0.00" required min="100" max="300000" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" {{isset($data) ? 'value ='.$data[0]['amount'] : null}}>
                 </div>
             </div>
             <div class="row">

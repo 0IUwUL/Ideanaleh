@@ -339,31 +339,7 @@ class ProjectController extends Controller
         return $dataVar;
     }
 
-
-    // public function updateProject(Request $requestArg){
-    //     $dataVar = new Projects;
-    //     $dataVar->user_id = Auth::id();
-    //     $dataVar->title = $requestArg->ProjTitle;
-    //     $dataVar->description = $requestArg->ProjDesc;
-    //     $dataVar->category = $requestArg->ProjCategory;
-    //     $dataVar->tags = implode(',', $requestArg->Tags);
-    //     $dataVar->target_amt = $requestArg->ProjTarget;
-    //     $dataVar->target_milestone = $requestArg->ProjMilestone;
-    //     $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
-    //     $dataVar->logo = null;
-    //     $dataVar->banner = null;
-    //     $dataVar->target_date = $requestArg->ProjDate;
-    //     $dataVar->save();
-
-    //     // The Images are later uploaded because we need the project ID to be generated first
-    //     $this->_saveImage($requestArg, $dataVar->id, 'logo', 'ProjLogo');
-    //     $this->_saveImage($requestArg, $dataVar->id, 'banner', 'ProjBanner');
-
-    //     // Saving Tiers
-    //     $this->_saveTiers($dataVar->id, $requestArg);
-    // }
-
-
+    
     private function _saveImage(Request $requestArg, string $projectIdArg, string $typeArg, string $formNameArg)
     {
         $pathVar = $requestArg->file($formNameArg)->storeAs(
@@ -382,7 +358,7 @@ class ProjectController extends Controller
         $currentTierVar = 1;
         for ($index = 0; $index < count($requestArg->Tier); $index++)
         {
-            if($requestArg->Tier[$index]['id'] != null){
+            if(isset($requestArg->Tier[$index]['id']) != null){
                 $tierVar = ProjectTiers::find($requestArg->Tier[$index]['id']);
             }
             else{

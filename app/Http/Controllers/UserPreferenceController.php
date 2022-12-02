@@ -96,9 +96,6 @@ class UserPreferenceController extends Controller
         }
     }
 
-    public function addFollow(Request $request){
-        $id = $request->ProjectId;
-        
-    }
+    
 
 }

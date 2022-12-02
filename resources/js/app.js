@@ -221,7 +221,7 @@ jQuery(document.body).on('click', '.btn_follow', function(e){
   });
 
 function activateToast(){
-    var c = $(this).data('id');
+    var c = $("#modeToast").data('id');
     var insert
     if (c == 'logO' || c == 'logI'){
         var mode = $(this).data('mode');

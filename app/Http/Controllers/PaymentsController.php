@@ -26,6 +26,7 @@ class PaymentsController extends Controller
         $dataVar->save();
     }
 
+
     public static function PaymentStatus(int $ProjId, string $status){
         if($status == 'success'){
             $data = array(
@@ -47,6 +48,7 @@ class PaymentsController extends Controller
         return view('pages.payment_success')->with('dataArg', $data);
     }
 
+
     public function createSource(Request $requestArg){
         $input = (float)$requestArg->TierAmount;
         
@@ -67,7 +69,6 @@ class PaymentsController extends Controller
         $encodeVar = json_encode((array)$sourceVar);
         $responseVar = json_decode(str_replace('\u0000*\u0000','',$encodeVar));
 
-
         $json_data = array(
             "response" => "success",
             'checkout_url' => $responseVar->attributes->redirect->checkout_url,
@@ -81,6 +82,7 @@ class PaymentsController extends Controller
 
         echo json_encode($json_data);
     }
+
 
     public function ValidInput(Request $requestArg){
         $input = (float)$requestArg->TierAmount;

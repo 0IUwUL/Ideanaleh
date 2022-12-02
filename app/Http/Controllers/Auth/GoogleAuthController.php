@@ -60,9 +60,11 @@ class GoogleAuthController extends Controller
                                 ->first()
                                 ->toArray();
         if($categories['pref_categs'])
-            return view('pages.home')->with('mode', $categories['dev_mode']);
+            $request->session()->put('mode', $categories['dev_mode']);
+            // return view('pages.home')->with('mode', $categories['dev_mode']);
         else
-            return view('pages.home')->with('mode', 3);
-        // return (redirect('/'));
+            $request->session()->put('mode', 3);
+            // return view('pages.home')->with('mode', 3);
+        return (redirect('/'));
     }
 }

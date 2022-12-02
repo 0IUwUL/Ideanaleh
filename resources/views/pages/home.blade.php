@@ -273,7 +273,7 @@
           A Platform that serves to help Creators, Inventors, Innovators to Kickstart their Dream Projects.
         </p>
         @if ($mode)
-        <a href="{{ route('project.create') }}" id = "modeToast" class="hero__btn hero__btn--light btn" data-mode = {{$mode}}>Get Started!</a>
+        <a href="{{ route('project.create') }}" id = "modeToast" class="hero__btn hero__btn--light btn" data-mode = {{Session::get('mode')}}>Get Started!</a>
         @else
         <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{Auth::check() ? 'logI' : 'logO'}}>Get Started!</a>
         @endif
@@ -286,7 +286,7 @@
       <h1 class="hero__title">Back Innovative Projects, <br> Join Our Ride </h1>
       <hr class="hero__divider">
       <p class="hero__text">
-        Idiyanaleh is your source for creative breakthroughs in technology, design, and other fields, frequently with special advantages and price for early Donators. Support a campaign, share your ideas and feedback with the project team, and share in the joys and risks of bringing innovative technologies to reality.
+        Ideanaleh is your source for creative breakthroughs in technology, design, and other fields, frequently with special advantages and price for early Donators. Support a campaign, share your ideas and feedback with the project team, and share in the joys and risks of bringing innovative technologies to reality.
       </p>
     </div>
   </section>

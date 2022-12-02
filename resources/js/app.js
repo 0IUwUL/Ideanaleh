@@ -120,13 +120,13 @@ function validate(){
                                             return `
                                                 <span class = "list_category">${i['title']}<input type="checkbox" name="Followed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
                                             `
-                                            })
+                                            }).join("");
                                         + `
                                             </div>
                                 </div>`
                       })
                     // inserting to html
-                    document.querySelector('#Category_content').innerHTML = header;
+                    document.querySelector('#Category_content').innerHTML = header.join("");
                     $('#SignUpModal3').modal('hide');
                     $('#SignUpModal4').modal('show');
                 }
@@ -224,7 +224,8 @@ function activateToast(){
     var c = $("#modeToast").data('id');
     var insert
     if (c == 'logO' || c == 'logI'){
-        var mode = $(this).data('mode');
+        var mode = $(this).attr('data-mode');
+        console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (!mode && c == 'logI'){

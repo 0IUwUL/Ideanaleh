@@ -605,3 +605,75 @@ hr.create{
 .bg_card{
   background: radial-gradient(#ffe995, #fa742b)!important;
 }
+
+/* filter page */
+.nav_filter{
+  margin-top: 7rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navigation ul{
+  display: flex;
+  justify-content: space-evenly;
+  width: 700px;
+  padding: 0;
+}
+
+.navigation ul li{
+  position: relative;
+  list-style: none;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+}
+
+.navigation ul li a{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 600;
+}
+
+.navigation ul li a .icon{
+  position: relative;
+  display: block;
+  line-height: 1.5;
+  font-size: 2.5em;
+  text-align: center;
+  transition: .7s;
+  color: #1f4260
+}
+
+.navigation ul li:hover a .icon{
+  transform: translateY(-35px);
+}
+
+.navigation ul li.active a .text{
+  position: absolute;
+  color: #1f4260;
+  font-weight: 500;
+  font-size: 1em;
+  letter-spacing: .5rem;
+  transition: .5s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.navigation ul li.active a .text{
+  opacity: 1;
+  transform: translateY(10px);
+}
+
+.indicator{
+  position: absolute;
+  top: -50%;
+  width: 70px;
+  height: 70px;
+  background: #002d50;
+  border-radius: 50%;
+  border: 6px solid gray;
+  transition: .5s;
+}

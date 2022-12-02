@@ -222,12 +222,11 @@ jQuery(document.body).on('click', '.btn_follow', function(e){
   });
 
 function activateToast(){
-    var c = $(this).data('id');
+    var c = $("#modeToast").data('id');
     var insert
     console.log(c)
     if (c == 'logO' || c == 'logI'){
         var mode = $(this).data('mode');
-        console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (!mode && c == 'logI'){

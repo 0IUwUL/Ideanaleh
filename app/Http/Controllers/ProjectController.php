@@ -82,7 +82,7 @@ class ProjectController extends Controller
                 DB::table('projects')
                     ->where('id','!=',$idArg)
                     // ->where('category', $projectDataArg["category"])
-                    ->where('created_at','>', Carbon::parse(Carbon::now())->setTimezone('Asia/Manila')->subDays(7))
+                    // ->where('created_at','>', Carbon::parse(Carbon::now())->setTimezone('Asia/Manila')->subDays(7))
                     ->select('id','title')
                     ->get()
                     ->toArray()

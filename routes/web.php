@@ -59,7 +59,6 @@ Route::controller(RegistrationController::class)->group(function () {
 // User Preferences routes
 Route::controller(UserPreferenceController::class)->prefix('user-preference')->name('user-preference.')->group(function(){
     Route::middleware('auth')->post('follow/', 'updateFollowed')->name('follow/');
-    Route::middleware('auth')->post('registration/follow', 'addFollow')->name('registration/follow');
 });
 
 // Project routes

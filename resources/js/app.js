@@ -13,12 +13,13 @@ $(document).ready(function(){
     
     var form = $("#ProjForm");
     var tagValues = form.find('input[name="Tags[]"]');
-    Object.values(tagValues).forEach(input => {
-        if(input.value != null)
-            tags.push(input.value);
-    })
-    console.log("tags ito");
-    console.log(tags);
+    if(tagValues){
+        Object.values(tagValues).forEach(input => {
+            if(input.value != null)
+                tags.push(input.value);
+        })
+    }
+    
 });
 
 // function for loading
@@ -184,7 +185,6 @@ function GoogleForm(){
                     let data = JSON.parse(result);
                     const categories = data.response;
                     // formatting projects from categories picked
-                    console.log('categories :', categories)
                     let Gheader =
                     jQuery.map(categories, (element, keys) => {
                         var elementArray = Object.values(element);
@@ -196,14 +196,13 @@ function GoogleForm(){
                                             return `
                                                 <span class = "list_category">${i['title']}<input type="checkbox" name="GFollowed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
                                             `
-                                            })
+                                            }).join("")
                                         + `
                                             </div>
                                 </div>`
                       })
-                      console.log('Gheader :', Gheader)
                     // inserting to html
-                    document.querySelector('#GCategory_content').innerHTML = Gheader;
+                    document.querySelector('#GCategory_content').innerHTML = Gheader.join("");
                     $('#SignUpModal5').modal('hide');
                     $('#SignUpModal6').modal('show');
                 }
@@ -224,10 +223,8 @@ jQuery(document.body).on('click', '.btn_follow', function(e){
 function activateToast(){
     var c = $(this).data('id');
     var insert
-    console.log(c)
     if (c == 'logO' || c == 'logI'){
         var mode = $(this).data('mode');
-        console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (!mode && c == 'logI'){

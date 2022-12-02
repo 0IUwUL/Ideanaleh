@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Luigel\Paymongo\Facades\Paymongo;
 use App\Models\Payments;
+use App\Http\Controllers\UserPreferenceController;
 
 use Auth;
 
@@ -16,19 +17,22 @@ class PaymentsController extends Controller
 
 
     public static function savePayment(array $requestArg){
-        $dataVar = new Payments;
-        $dataVar->proj_id = $requestArg['data']['attributes']['data']['attributes']['metadata']['project_id'];
-        $dataVar->user_id = $requestArg['data']['attributes']['data']['attributes']['metadata']['user_id'];
-        $dataVar->payment_id = $requestArg['data']['attributes']['data']['id'];
-        // note this value should be devided by 100 when you want to display it on the frontend -RamonDev
-        $dataVar->amount = $requestArg['data']['attributes']['data']['attributes']['net_amount']/100;
-
-        $dataVar->save();
+        if(!(Payments::where('payment_id', $requestArg['data']['attributes']['data']['id'])->first())){
+            $dataVar = new Payments;
+            $dataVar->proj_id = $requestArg['data']['attributes']['data']['attributes']['metadata']['project_id'];
+            $dataVar->user_id = $requestArg['data']['attributes']['data']['attributes']['metadata']['user_id'];
+            $dataVar->payment_id = $requestArg['data']['attributes']['data']['id'];
+            $dataVar->amount = $requestArg['data']['attributes']['data']['attributes']['net_amount']/100;
+    
+            $dataVar->save();
+            
+        }
     }
 
 
     public static function PaymentStatus(int $ProjId, string $status){
         if($status == 'success'){
+            (new UserPreferenceController)->updateSupported($ProjId);
             $data = array(
                 'idArg' => $ProjId,
                 'title' => 'Success',

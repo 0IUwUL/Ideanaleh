@@ -68,6 +68,28 @@ class UserPreferenceController extends Controller
     }
 
 
+    public function updateSupported(int $projectIdArg){
+        // $userIdVar = Auth::id();
+        $currentUserVar = $this->_getCurrentUser();
+        if($currentUserVar->supported != null){
+
+            $initialSupported = explode(',', $currentUserVar->supported);
+
+            if(!(in_array($projectIdArg, $initialSupported))){
+                $mergedArrayVar = array_merge($initialSupported, array($projectIdArg));     
+                sort($mergedArrayVar);
+
+                $currentUserVar->supported = implode(',', $mergedArrayVar);
+            }
+        }
+        else{
+            // Initial
+            $currentUserVar->supported = strval($projectIdArg);
+        }
+        $currentUserVar->save();
+    }
+
+
     private function _getCurrentUser()
     {
         $userIdVar = Auth::id();

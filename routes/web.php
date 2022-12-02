@@ -14,6 +14,7 @@ use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FilterProjects;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -116,4 +117,9 @@ Route::controller(PaymentsController::class)->group(function(){
     Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
     Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
     Route::get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
+});
+
+//Filter Projects
+Route::controller(FilterProjects::class)->group(function(){
+    Route::get('/main', 'index')->name('main');
 });

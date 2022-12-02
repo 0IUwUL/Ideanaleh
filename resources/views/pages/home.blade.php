@@ -10,7 +10,7 @@
         <p class="hero__text">
           Start your Clever Innovative Projects with hopes of Bringing Joy and Excitement for Everyone
         </p>
-        <a href="#" class="hero__btn hero__btn--dark btn">Find Out More</a>
+        <a href="{{route('main')}}" class="hero__btn hero__btn--dark btn">Find Out More</a>
       </div>
   </section>
   
@@ -42,7 +42,7 @@
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <div class="card shadow-sm bg-body rounded">
-                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                         <div class="card-body text-dark">
                            <h4 class="card-title">Title</h4>
                             <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -66,7 +66,7 @@
 
                   <div class="col-md-4 mb-3">
                     <div class="card shadow-sm bg-body rounded">
-                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                         <div class="card-body text-dark">
                            <h4 class="card-title">Title</h4>
                             <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -90,7 +90,7 @@
 
                   <div class="col-md-4 mb-3">
                     <div class="card shadow-sm bg-body rounded">
-                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                         <div class="card-body text-dark">
                            <h4 class="card-title">Title</h4>
                             <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -118,7 +118,7 @@
 
                 <div class="col-md-4 mb-3">
                   <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                       <div class="card-body text-dark">
                          <h4 class="card-title">Title</h4>
                           <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                       <div class="card-body text-dark">
                          <h4 class="card-title">Title</h4>
                           <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -164,7 +164,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                       <div class="card-body text-dark">
                          <h4 class="card-title">Title</h4>
                           <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -192,7 +192,7 @@
 
                 <div class="col-md-4 mb-3">
                   <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                       <div class="card-body text-dark">
                          <h4 class="card-title">Title</h4>
                           <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -215,7 +215,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                       <div class="card-body text-dark">
                          <h4 class="card-title">Title</h4>
                           <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
@@ -238,7 +238,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail">
+                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
                       <div class="card-body text-dark">
                          <h4 class="card-title">Title</h4>
                           <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural

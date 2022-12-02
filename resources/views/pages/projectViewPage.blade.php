@@ -213,7 +213,7 @@
                       @if($index<3) 
                         <div class="col-md-4 mb-3">
                             <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
                                   <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
@@ -236,7 +236,7 @@
                       @if($index < 3)
                         <div class="col-md-4 mb-3">
                             <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
                                   <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>

@@ -330,7 +330,10 @@ class ProjectController extends Controller
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->target_milestone = $requestArg->ProjMilestone;
-        $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
+        if($requestArg->ProjVideo)
+            $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
+        else
+            $dataVar->yt_link= null;
         $dataVar->logo = null;
         $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
@@ -338,7 +341,7 @@ class ProjectController extends Controller
 
         return $dataVar;
     }
-
+    
 
     // public function updateProject(Request $requestArg){
     //     $dataVar = new Projects;

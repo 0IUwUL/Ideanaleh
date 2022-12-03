@@ -232,6 +232,15 @@ $(document).on('click', '.edit', function(e){
   let id = $(e.target).attr('data-id')
   let comment = document.getElementById('comment-'+id).textContent
   
+  // Prevents submiting the same comment
+  $('#edit-comment-box').on('keyup',function(e){
+    if (comment == e.target.value)
+      $('.saveChanges').prop('disabled', true)
+    else
+      $('.saveChanges').prop('disabled', false)
+
+  })
+  
   $('#CommentId').val(id)
   $('#edit-comment-box').val(comment)
 })
@@ -260,7 +269,7 @@ $('.saveChanges').click(function(){
 
           // Insert comment
           document.getElementById('comment-'+id).textContent = comment  
-          document.getElementById('comment-'+id+'-date').textContent = data.commentDate  
+          document.getElementById('comment-'+id+'-date').textContent = data.commentDate + ' (Edited)' 
 
           $("#editModal").modal('hide');
       

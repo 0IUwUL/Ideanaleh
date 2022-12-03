@@ -51,7 +51,12 @@
                                     <img class="avatar mr-2" src="{{asset('storage/'.$icon)}}">
                                     <div class="d-flex flex-column">
                                         <div class="fw-bold">{{$comment['Fname'].' '.$comment['Mname'].' '.$comment['Lname']}} </div>
-                                        <div class="text-secondary" id="comment-{{$comment['id']}}-date">{{date('n/j/Y h:i:s A', strtotime($comment['updated_at'])) }}</div>
+                                        <div class="text-secondary" id="comment-{{$comment['id']}}-date">
+                                            {{date('n/j/Y h:i:s A', strtotime($comment['updated_at']))}}
+                                            @if($comment['updated_at'] > $comment['created_at'])
+                                                (Edited)
+                                            @endif
+                                        </div>
                                     </div>
                                     @if(Auth::check() && (Auth::user()->id == $comment['user_id'] || Auth::user()->id == $comment['dev_id']))
                                         <button type="button" class="btn circle ms-auto align-self-center" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
@@ -97,7 +102,7 @@
             
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary saveChanges" >Save Changes</button>
+                    <button type="button" class="btn btn-primary saveChanges" disabled>Save Changes</button>
                 </div>
             </form>
         </div>

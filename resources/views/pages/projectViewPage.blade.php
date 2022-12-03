@@ -106,7 +106,7 @@
         <span class="d-inline-block float-right position-absolute">
           <i style="font-size:18px" class="fa-sharp fa-solid fa-wand-magic-sparkles"></i>
         </span>
-        <span class="d-inline-block mx-4"><h6>Idiyanale is a platform made to connect creators to backers to fund their projects</h6></span>
+        <span class="d-inline-block mx-4"><h6>Idianaleh is a platform made to connect creators to backers to fund their projects</h6></span>
       </div>
 
       <div class="col-4">
@@ -207,13 +207,60 @@
             <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
+                  @if(Auth::check())
+                    <div class="row">
+                      <h2>Recommended Projects under this Category</h1>
+                        @foreach($project['recommend'][0] as $index => $category)
+                        @if($index<3) 
+                          <div class="col-md-4 mb-3">
+                              <div class="card shadow-sm bg-body rounded">
+                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                <div class="card-body text-dark">
+                                  <h4 class="card-title">{{$category['title']}}</h4>
+                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-3">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        
+                                    </div>
+                                    <div class="text-muted">9 mins</div>
+                                </div>
+                              </div>
+                          </div>
+                        @endif
+                        @endforeach
+                    </div><br>
+                    <div class="row">
+                      <h2>Other Projects That You May Like</h1>
+                        @foreach($project['recommend'][1] as $index => $category)
+                        @if($index < 3)
+                          <div class="col-md-4 mb-3">
+                              <div class="card shadow-sm bg-body rounded">
+                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                <div class="card-body text-dark">
+                                  <h4 class="card-title">{{$category['title']}}</h4>
+                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-3">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        
+                                    </div>
+                                    <div class="text-muted">9 mins</div>
+                                </div>
+                            </div>
+                          </div>
+                        @endif
+                        @endforeach
+                  @else
                   <div class="row">
-                    <h2>Recommended Projects under this Category</h1>
-                      @foreach($project['recommend'][0] as $index => $category)
+                    <h2>Popular Projects</h1>
+                      @foreach($project['popular'][0] as $index => $category)
                       @if($index<3) 
                         <div class="col-md-4 mb-3">
                             <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
                                   <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
@@ -225,33 +272,13 @@
                                   </div>
                                   <div class="text-muted">9 mins</div>
                               </div>
-                          </div>
+                            </div>
                         </div>
                       @endif
                       @endforeach
                   </div><br>
-                  <div class="row">
-                    <h2>Other Projects That You May Like</h1>
-                      @foreach($project['recommend'][1] as $index => $category)
-                      @if($index < 3)
-                        <div class="col-md-4 mb-3">
-                            <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} ">
-                              <div class="card-body text-dark">
-                                <h4 class="card-title">{{$category['title']}}</h4>
-                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
-                              </div>
-                              <div class="d-flex justify-content-between p-3">
-                                  <div class="btn-group">
-                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                      
-                                  </div>
-                                  <div class="text-muted">9 mins</div>
-                              </div>
-                          </div>
-                        </div>
-                      @endif
-                      @endforeach
+                  @endif
+                      
                   </div>
                 </div>
             </div>

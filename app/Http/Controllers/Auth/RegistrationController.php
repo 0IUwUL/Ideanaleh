@@ -41,6 +41,7 @@ class RegistrationController extends Controller
     }
 
     public function GoogleRegisterUser(Request $request){
+        
         $userId = Auth::id();
         $categs = implode(',', $request->GCategs);
         $user = array(
@@ -54,7 +55,11 @@ class RegistrationController extends Controller
         );
         //Calling a function of a controller from a controller
         (new UserPreferenceController)->googleUpdatepreferences($data);
-
+        $userStat = User::where('id', '=', $userId)
+                                ->select(array('dev_mode'))
+                                ->first()
+                                ->toArray();
+        $request->session()->put('mode', $userStat['dev_mode']);
         return redirect('/');
     }
 

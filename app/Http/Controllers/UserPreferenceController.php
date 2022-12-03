@@ -18,6 +18,13 @@ class UserPreferenceController extends Controller
         $userPreferenceVar->save();
     }
 
+    public function _getAllPreferences(string $var){
+        $pref = UserPreference::select($var)
+                                ->get()
+                                ->toArray();
+        return $pref;
+    }
+
     public function googleUpdatepreferences(array $dataArg)
     {
         $user_id = $dataArg['id'];
@@ -68,6 +75,28 @@ class UserPreferenceController extends Controller
     }
 
 
+    public function updateSupported(int $projectIdArg){
+        // $userIdVar = Auth::id();
+        $currentUserVar = $this->_getCurrentUser();
+        if($currentUserVar->supported != null){
+
+            $initialSupported = explode(',', $currentUserVar->supported);
+
+            if(!(in_array($projectIdArg, $initialSupported))){
+                $mergedArrayVar = array_merge($initialSupported, array($projectIdArg));     
+                sort($mergedArrayVar);
+
+                $currentUserVar->supported = implode(',', $mergedArrayVar);
+            }
+        }
+        else{
+            // Initial
+            $currentUserVar->supported = strval($projectIdArg);
+        }
+        $currentUserVar->save();
+    }
+
+
     private function _getCurrentUser()
     {
         $userIdVar = Auth::id();
@@ -96,9 +125,27 @@ class UserPreferenceController extends Controller
         }
     }
 
-    public function addFollow(Request $request){
-        $id = $request->ProjectId;
-        
+    public function checkIfSupported(int $projectIdArg)
+    {
+        if(Auth::check()){
+            $currentUserVar = $this->_getCurrentUser();
+            if($currentUserVar->supported){
+                if(Str::contains($currentUserVar->supported, $projectIdArg)){
+                    return(true);
+                }
+                else{
+                    return(false);
+                }
+            }
+            else{
+                return(false);
+            }
+        }
+        else{
+            return(false);
+        }
     }
+
+    
 
 }

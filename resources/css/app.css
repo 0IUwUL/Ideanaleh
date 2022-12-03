@@ -605,3 +605,51 @@ hr.create{
 .bg_card{
   background: radial-gradient(#ffe995, #fa742b)!important;
 }
+
+/* filter page */
+:root{
+  --txt: #abeb88;
+  --bg: #002d50;
+  --hl: #f3ff82;
+}
+.nav_filter{
+  margin-top: 4.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav_filter nav{
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.F_list{
+  text-align: center;
+  max-width: 90px!important;
+}
+
+.F_display{
+  text-align: center;
+  max-width: 100px!important;
+}
+
+.filter_row{
+  padding: 0 2rem;
+}
+/* 
+@media (width < 471px) {
+  .filter_row{
+    margin-bottom: 4rem!important;
+  }
+  .form-select{
+    width: 100%!important;
+  }
+} */
+
+.form-select{
+  width: 100%!important;
+}
+
+.select{
+  padding: 1rem;
+}

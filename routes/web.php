@@ -14,6 +14,7 @@ use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FilterProjects;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,7 +60,6 @@ Route::controller(RegistrationController::class)->group(function () {
 // User Preferences routes
 Route::controller(UserPreferenceController::class)->prefix('user-preference')->name('user-preference.')->group(function(){
     Route::middleware('auth')->post('follow/', 'updateFollowed')->name('follow/');
-    Route::middleware('auth')->post('registration/follow', 'addFollow')->name('registration/follow');
 });
 
 // Project routes
@@ -79,6 +79,8 @@ Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')
 // Project comments routes
 Route::controller(CommentsController::class)->prefix('comments')->name('comments.')->group(function () {
     Route::middleware('auth')->post('project/create', 'createProjectComment')->name('project/create');
+    Route::middleware('auth')->post('project/edit', 'editProjectComment')->name('project/edit');
+    Route::middleware('auth')->post('project/delete', 'deleteProjectComment')->name('project/delete');
 });
 
 // Google Routes
@@ -116,4 +118,10 @@ Route::controller(PaymentsController::class)->group(function(){
     Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
     Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
     Route::get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
+});
+
+//Filter Projects
+Route::controller(FilterProjects::class)->prefix('main')->group(function(){
+    Route::get('/', 'index')->name('main');
+    Route::get('/filter/{option}', 'Filter')->name('filter');
 });

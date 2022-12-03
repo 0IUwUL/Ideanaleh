@@ -106,7 +106,7 @@
         <span class="d-inline-block float-right position-absolute">
           <i style="font-size:18px" class="fa-sharp fa-solid fa-wand-magic-sparkles"></i>
         </span>
-        <span class="d-inline-block mx-4"><h6>Idiyanale is a platform made to connect creators to backers to fund their projects</h6></span>
+        <span class="d-inline-block mx-4"><h6>Idianaleh is a platform made to connect creators to backers to fund their projects</h6></span>
       </div>
 
       <div class="col-4">

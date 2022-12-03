@@ -56,9 +56,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body p-4">
-          <div class="d-flex justify-content-center fw-semibold text-danger">
-                Step 1 of 4
-          </div>
           <div class="d-flex justify-content-center display-6 text-dark">
                     Profile Information
           </div>
@@ -107,9 +104,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">
-        <div class="d-flex justify-content-center fw-semibold text-danger">
-          Step 2 of 4
-        </div>  
         <div class="d-flex justify-content-center display-6 text-dark">
               Email Authentication
         </div>
@@ -152,9 +146,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">
-          <div class="d-flex justify-content-center fw-semibold text-danger">
-            Step 3 of 4
-          </div>  
           <div class="d-flex justify-content-center display-6 text-dark">
                 Category Selection
           </div>  
@@ -221,9 +212,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4">
-          <div class="d-flex justify-content-center fw-semibold text-danger">
-            <h3>Step 4 of 4</h3>
-          </div>  
           <div class="d-flex justify-content-center display-5 text-dark">
             Follow Projects under your preferences
           </div>  

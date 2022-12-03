@@ -34,7 +34,6 @@ class ProjectController extends Controller
 
     public function view(int $idArg){
         $projectDataVar = $this->_getProjectData($idArg);
-        //dd($projectDataVar);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }
 

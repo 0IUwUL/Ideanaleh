@@ -478,31 +478,21 @@ input[name="GCategs[]"]{
     /* box-sizing: padding-box; */
     overflow:hidden;
     /* demo only: */
-    height: 10px;
+    height: 42px;
     padding:10px;
     font-size:14px;
     display:block;
   }
   
 
-.circle {
-  border-radius: 50px;
-  height: 30px;
-  width: 30px;
-  position: relative;
-  overflow: hidden;
+.circle.show {
+  border-radius: 30px;
+
 }
-.circle:after {
-  width: 0;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  transition: all ease 0.5s;
-  content: "";
-  background-color: blue;
-}
-.circle:hover:after {
-  width: 100%;
+
+.circle:hover{
+  background-color: rgba(122, 121, 121,0.2) !important;
+  border-radius: 30px;
 }
 
 /* for loading screen */
@@ -535,36 +525,7 @@ input[name="GCategs[]"]{
     transform: rotate(180deg);
     box-shadow: 1px 5px 2px #abeb88;
   }
-  100%{
-    transform: rotate(360deg);
-    box-shadow: 1px 5px 2px #67d294;
-  }
+
 
 }
-
-.ring:before{
-  position: absolute!important;
-  content: '';
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(255, 255, 255, .3)!important;
-}
-
-.load span{
-  color: #737373;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 200px;
-  justify-content: center!important;
-  animation: display 2s ease-in-out infinite
-}
-
-@keyframes display {
-  50%{
-    color: white;
-  }
-}
+  

@@ -2,7 +2,7 @@
 
 @section('content')
 <x-styles.defnav/>
-   
+
   <section id="header-hero" class="hero hero-dark p1">
       <div class="hero__container">
         <h1 class="hero__title">A Philippine-Based Crowdfunding Platform</h1>
@@ -18,7 +18,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <h3 class="mb-3">Popular Projects </h3>
+          <h3 class="mb-3">@if(Auth::check()) Projects You May Like @else Popular Projects @endif </h3>
         </div>
         <div class="container align-items-center justify-content-center text-center">
           <div class="col-12 text-right">
@@ -40,224 +40,143 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm bg-body rounded">
-                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                        <div class="card-body text-dark">
-                           <h4 class="card-title">Title</h4>
-                            <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.</p>
-                        </div>
-                        <div class="d-flex justify-content-between p-3">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                
+                  @if(Auth::check())
+                    @foreach($mode['recommend'] as $index => $category)
+                      @if($index<3)
+                      <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm bg-body rounded">
+                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                            <div class="card-body text-dark">
+                              <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
+                                <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['recommend'][$index]['description']}}</p>
                             </div>
-                            <div class="text-muted">9 mins</div>
-                        </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm bg-body rounded">
-                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                        <div class="card-body text-dark">
-                           <h4 class="card-title">Title</h4>
-                            <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.</p>
-                        </div>
-                        <div class="d-flex justify-content-between p-3">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                
+                            <div class="d-flex justify-content-between p-3">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    
+                                </div>
+                                <div class="text-muted">9 mins</div>
                             </div>
-                            <div class="text-muted">9 mins</div>
                         </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm bg-body rounded">
-                        <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                        <div class="card-body text-dark">
-                           <h4 class="card-title">Title</h4>
-                            <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.</p>
-                        </div>
-                        <div class="d-flex justify-content-between p-3">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                
+                      </div>
+                      @endif
+                    @endforeach
+                  @else
+                      @foreach($mode['popular'] as $index => $category)
+                        @if($index<3)
+                          <div class="col-md-4 mb-3">
+                            <div class="card shadow-sm bg-body rounded">
+                                <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                                <div class="card-body text-dark">
+                                  <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
+                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['popular'][$index]['description']}}</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-3">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        
+                                    </div>
+                                    <div class="text-muted">9 mins</div>
+                                </div>
                             </div>
-                            <div class="text-muted">9 mins</div>
-                        </div>
-                    </div>
-                  </div>
+                          </div>
+                        @endif
+                      @endforeach
+                  @endif
                 </div>
               </div>
             <div class="carousel-item">
               <div class="row">
-
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                      <div class="card-body text-dark">
-                         <h4 class="card-title">Title</h4>
-                          <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                              lead-in to additional content. This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.</p>
-                      </div>
-                      <div class="d-flex justify-content-between p-3">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              
+                @if(Auth::check())
+                  @foreach($mode['recommend'] as $index => $category)
+                    @if($index>2 && $index<6)
+                    <div class="col-md-4 mb-3">
+                      <div class="card shadow-sm bg-body rounded">
+                          <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          <div class="card-body text-dark">
+                            <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
+                              <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['recommend'][$index]['description']}}</p>
                           </div>
-                          <div class="text-muted">9 mins</div>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                      <div class="card-body text-dark">
-                         <h4 class="card-title">Title</h4>
-                          <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                              lead-in to additional content. This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.</p>
-                      </div>
-                      <div class="d-flex justify-content-between p-3">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              
+                          <div class="d-flex justify-content-between p-3">
+                              <div class="btn-group">
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                  
+                              </div>
+                              <div class="text-muted">9 mins</div>
                           </div>
-                          <div class="text-muted">9 mins</div>
                       </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                      <div class="card-body text-dark">
-                         <h4 class="card-title">Title</h4>
-                          <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                              lead-in to additional content. This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.</p>
-                      </div>
-                      <div class="d-flex justify-content-between p-3">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              
+                    </div>
+                    @endif
+                  @endforeach
+                @else
+                  @foreach($mode['popular'] as $index => $category)
+                    @if($index>2 && $index<6)
+                    <div class="col-md-4 mb-3">
+                      <div class="card shadow-sm bg-body rounded">
+                          <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                          <div class="card-body text-dark">
+                            <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
+                              <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['popular'][$index]['description']}}</p>
                           </div>
-                          <div class="text-muted">9 mins</div>
+                          <div class="d-flex justify-content-between p-3">
+                              <div class="btn-group">
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                  
+                              </div>
+                              <div class="text-muted">9 mins</div>
+                          </div>
                       </div>
-                  </div>
-                </div>
+                    </div>
+                    @endif
+                  @endforeach
+                @endif
               </div>
             </div>
             <div class="carousel-item">
               <div class="row">
-
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                      <div class="card-body text-dark">
-                         <h4 class="card-title">Title</h4>
-                          <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                              lead-in to additional content. This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.</p>
-                      </div>
-                      <div class="d-flex justify-content-between p-3">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              
+              @if(Auth::check())
+                  @foreach($mode['recommend'] as $index => $category)
+                    @if($index>2 && $index<6)
+                    <div class="col-md-4 mb-3">
+                      <div class="card shadow-sm bg-body rounded">
+                          <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          <div class="card-body text-dark">
+                            <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
+                              <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['recommend'][$index]['description']}}</p>
                           </div>
-                          <div class="text-muted">9 mins</div>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                      <div class="card-body text-dark">
-                         <h4 class="card-title">Title</h4>
-                          <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                              lead-in to additional content. This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.</p>
-                      </div>
-                      <div class="d-flex justify-content-between p-3">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                              
+                          <div class="d-flex justify-content-between p-3">
+                              <div class="btn-group">
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                  
+                              </div>
+                              <div class="text-muted">9 mins</div>
                           </div>
-                          <div class="text-muted">9 mins</div>
                       </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm bg-body rounded">
-                      <img src="https://dummyimage.com/360x225/4f4a4f/dddee6&text=Thumbnail" loading="lazy">
-                      <div class="card-body text-dark">
-                         <h4 class="card-title">Title</h4>
-                          <p class="card-text text-truncate" style="max-height: 10vh">This is a wider card with supporting text below as a natural
-                              lead-in to additional content. This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.This is a wider card with supporting text below as a natural
-                              lead-in to additional content.</p>
+                    </div>
+                    @endif
+                  @endforeach
+                @else
+                  @foreach($mode['popular'] as $index => $category)
+                    @if($index>5 && $index<9)
+                      <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm bg-body rounded">
+                            <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                            <div class="card-body text-dark">
+                              <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
+                                <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['popular'][$index]['description']}}</p>
+                            </div>
+                            <div class="d-flex justify-content-between p-3">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    
+                                </div>
+                                <div class="text-muted">9 mins</div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="d-flex justify-content-between p-3">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>  
-                          </div>
-                          <div class="text-muted">9 mins</div>
-                      </div>
-                  </div>
-                </div>
+                      @endif
+                    @endforeach
+                @endif
               </div>
             </div>
           </div>

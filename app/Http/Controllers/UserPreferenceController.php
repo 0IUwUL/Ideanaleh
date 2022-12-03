@@ -118,6 +118,27 @@ class UserPreferenceController extends Controller
         }
     }
 
+    public function checkIfSupported(int $projectIdArg)
+    {
+        if(Auth::check()){
+            $currentUserVar = $this->_getCurrentUser();
+            if($currentUserVar->supported){
+                if(Str::contains($currentUserVar->supported, $projectIdArg)){
+                    return(true);
+                }
+                else{
+                    return(false);
+                }
+            }
+            else{
+                return(false);
+            }
+        }
+        else{
+            return(false);
+        }
+    }
+
     
 
 }

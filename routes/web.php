@@ -121,6 +121,7 @@ Route::controller(PaymentsController::class)->group(function(){
 });
 
 //Filter Projects
-Route::controller(FilterProjects::class)->group(function(){
-    Route::get('/main', 'index')->name('main');
+Route::controller(FilterProjects::class)->prefix('main')->group(function(){
+    Route::get('/', 'index')->name('main');
+    Route::get('/filter/{option}', 'Filter')->name('filter');
 });

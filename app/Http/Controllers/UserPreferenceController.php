@@ -18,6 +18,13 @@ class UserPreferenceController extends Controller
         $userPreferenceVar->save();
     }
 
+    public function _getAllPreferences(string $var){
+        $pref = UserPreference::select($var)
+                                ->get()
+                                ->toArray();
+        return $pref;
+    }
+
     public function googleUpdatepreferences(array $dataArg)
     {
         $user_id = $dataArg['id'];

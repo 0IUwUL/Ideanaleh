@@ -10,7 +10,6 @@ $(document).ready(function(){
     if(data == 3){
         $('#SignUpModal5').modal('show');
     }
-    
     var form = $("#ProjForm");
     var tagValues = form.find('input[name="Tags[]"]');
     if(tagValues){
@@ -19,7 +18,6 @@ $(document).ready(function(){
                 tags.push(input.value);
         })
     }
-    
 });
 
 // function for loading
@@ -419,6 +417,26 @@ function DetValid(e){
     }
 }
 
+$('#options').on('change', function(){
+    var selected = $('#options option:selected').val()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "main/filter/"+selected,
+        type:'get',
+        data: {
+            selected : selected,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            $('#content_projects').html(data.item)
+        }
+
+    });
+})
 
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);

@@ -268,3 +268,41 @@ $('.saveChanges').click(function(){
     });
   } 
 })
+
+$(document).on('click', '.delete', function(e){
+  let id = $(e.target).attr('data-id')
+  let comment = $("#project-comment-" + id).html()
+
+  $('#deleteCommentId').val(id)
+  $('#commentPreview').html(comment)
+})
+
+
+// Confirm comment delete
+$('.confirmDelete').click(function(){
+  let id = $('#deleteCommentId').val()
+
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $.ajax({
+    url: "/comments/project/delete",
+    type:'post',
+    data: {
+      CommentId : id,
+    },
+    success: function(result){
+      let data = JSON.parse(result);
+      
+      if (data.response == "success"){
+        // Delete comment
+        document.getElementById('project-comment-'+id).remove()
+
+        $("#deleteModal").modal('hide');
+      }
+    }
+  });
+  
+})

@@ -20,7 +20,8 @@ class CommentsController extends Controller
                     ->where('project_comments.proj_id', $id)
                     ->orderBy('created_at', 'desc')
                     ->join('users', 'project_comments.user_id', '=', 'users.id')
-                    ->select('project_comments.*','users.id as user_id', 'users.Lname','users.Fname','users.Mname','users.icon')
+                    ->join('projects', 'project_comments.proj_id', '=', 'projects.id')
+                    ->select('project_comments.*','users.id as user_id', 'users.Lname', 'users.Fname', 'users.Mname', 'users.icon', 'projects.user_id as dev_id')
                     ->get() 
                     ->toArray()
             ),
@@ -63,6 +64,16 @@ class CommentsController extends Controller
         $date = date('n/j/Y h:i:s A', strtotime($comment->updated_at));
 
         $json_data = array("commentDate" => $date);
+
+        echo json_encode($json_data);
+    }
+
+    public function deleteProjectComment(Request $request)
+    {
+        // Delete by ID
+        ProjectComments::destroy($request->CommentId);
+
+        $json_data = array("response" => "success");
 
         echo json_encode($json_data);
     }

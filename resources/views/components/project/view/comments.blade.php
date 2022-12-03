@@ -53,11 +53,17 @@
                                         <div class="fw-bold">{{$comment['Fname'].' '.$comment['Mname'].' '.$comment['Lname']}} </div>
                                         <div class="text-secondary" id="comment-{{$comment['id']}}-date">{{date('n/j/Y h:i:s A', strtotime($comment['updated_at'])) }}</div>
                                     </div>
-                                    <button type="button" class="btn circle ms-auto align-self-center" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
-                                    <ul class="dropdown-menu">
-                                        <li><button class="dropdown-item edit" type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-id = {{$comment['id']}}>Edit</button></li>
-                                        <li><button class="dropdown-item" data-commentId = {{$comment['id']}}>Delete</button></li>
-                                    </ul>
+                                    @if(Auth::check() && (Auth::user()->id == $comment['user_id'] || Auth::user()->id == $comment['dev_id']))
+                                        <button type="button" class="btn circle ms-auto align-self-center" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                        <ul class="dropdown-menu">
+                                            <!-- Show only the edit button to the comment owner -->
+                                            @if(Auth::user()->id == $comment['user_id'])
+                                                <li><button class="dropdown-item edit" type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-id = {{$comment['id']}}>Edit</button></li>
+                                            @endif
+                                            <li><button class="dropdown-item delete" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id  = {{$comment['id']}}>Delete</button></li>
+                                            
+                                        </ul>
+                                    @endif
                                 </div>
                             
                                 <div class="col px-4 mx-2 py-2" id="comment-{{$comment['id']}}">{{$comment['content']}}</div>
@@ -94,6 +100,37 @@
                     <button type="button" class="btn btn-primary saveChanges" >Save Changes</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete Comment Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger text-white">
+                <h1 class="modal-title fs-3" id="LoginModalLabel">Delete Comment</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <input id="deleteCommentId" type="hidden" name="deleteCommentId" value=""/>
+
+            <div class="modal-body">
+                <h5 class="fw-bold">Are you sure you want to delete this comment?</h5>
+                <div class="mb-3" id="deleteBody">
+                    
+                    <div class="col-10 mx-auto my-2 comment" id="commentPreview"> 
+                        
+                    </div>
+                </div>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger confirmDelete" >Delete</button>
+            </div>
+            
         </div>
     </div>
 </div>

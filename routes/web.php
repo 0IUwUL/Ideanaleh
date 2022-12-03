@@ -124,4 +124,5 @@ Route::controller(PaymentsController::class)->group(function(){
 Route::controller(FilterProjects::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::get('/filter/{option}', 'Filter')->name('filter');
+    Route::get('/category/{option}', 'Category')->name('category');
 });

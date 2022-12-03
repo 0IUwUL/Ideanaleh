@@ -438,6 +438,27 @@ $('#options').on('change', function(){
     });
 })
 
+$('#category').on('change', function(){
+    var selected = $('#category option:selected').val()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "main/category/"+selected,
+        type:'get',
+        data: {
+            selected : selected,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            $('#content_projects').html(data.item)
+        }
+
+    });
+})
+
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);
 // Normal Auth

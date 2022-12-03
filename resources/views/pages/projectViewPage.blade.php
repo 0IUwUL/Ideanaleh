@@ -68,7 +68,7 @@
 
                   @if($project['user_id'] == Auth::id())
                   {{-- EDIT BUTTON --}}
-                  <a href="{{url('project/edit/'.$project['id'])}}"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp EDIT</button></a>
+                  <a href="{{url('project/edit/'.$project['id'])}}"><button type="button" class="btn add-to-cart w-50 mb-3"><span class="fa fa-cart-shopping"></span>&nbsp EDIT</button></a>
                   @endif
 
                   {{-- FOLLOW UNFOLLOW BUTTON --}}

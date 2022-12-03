@@ -44,6 +44,17 @@ class FilterProjects extends Controller
         echo json_encode($json_data);
     }
 
+    public function Category(string $selected){
+        $final = null;
+        $projectDataVar = Projects::where('category', '=', $selected)
+                                ->select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+                                ->get()
+                                ->toArray();           
+        $viewRender = view('formats.filter')->with(['items'=> $final, 'ProjArg' => $projectDataVar])->render();
+        $json_data = array('item' => $viewRender);
+        echo json_encode($json_data);
+    }
+
     private function _getPreferences(string $selected){
         $arr = (new UserPreferenceController)->_getAllPreferences($selected);
         $pref = [];
@@ -55,7 +66,6 @@ class FilterProjects extends Controller
         $final = array_count_values($pref);
         arsort($final);
         return $final;
-        
     }
 
 }

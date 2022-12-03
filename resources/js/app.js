@@ -120,7 +120,7 @@ function validate(){
                                             return `
                                                 <span class = "list_category">${i['title']}<input type="checkbox" name="Followed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
                                             `
-                                            }).join("");
+                                            }).join("")
                                         + `
                                             </div>
                                 </div>`

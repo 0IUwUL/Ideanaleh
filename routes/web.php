@@ -79,6 +79,8 @@ Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')
 // Project comments routes
 Route::controller(CommentsController::class)->prefix('comments')->name('comments.')->group(function () {
     Route::middleware('auth')->post('project/create', 'createProjectComment')->name('project/create');
+    Route::middleware('auth')->post('project/edit', 'editProjectComment')->name('project/edit');
+
 });
 
 // Google Routes

@@ -225,3 +225,46 @@ $('#comment-box').keypress(function(e) {
   }
    
 }); 
+
+// https://stackoverflow.com/a/26309195
+// used event delegation for inserted html
+$(document).on('click', '.edit', function(e){
+  let id = $(e.target).attr('data-id')
+  let comment = document.getElementById('comment-'+id).textContent
+  
+  $('#CommentId').val(id)
+  $('#edit-comment-box').val(comment)
+})
+
+// Save comment edit
+$('.saveChanges').click(function(){
+  let form = $('#editForm')
+  let id = $('#CommentId').val()
+  var comment = $('#edit-comment-box').val()
+
+  if(form.valid() === true){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+      url: "/comments/project/edit",
+      type:'post',
+      data: {
+        CommentId : id,
+        ProjectComment : comment,
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+
+          // Insert comment
+          document.getElementById('comment-'+id).textContent = comment  
+          document.getElementById('comment-'+id+'-date').textContent = data.commentDate  
+
+          $("#editModal").modal('hide');
+      
+      }
+    });
+  } 
+})

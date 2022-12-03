@@ -64,7 +64,6 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdatesController)->getAllUpdates($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['comments' => (new CommentsController)->getAllProjectComments($idArg)]);
-
         return $projectDataVar;
     }
 
@@ -329,10 +328,7 @@ class ProjectController extends Controller
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->target_milestone = $requestArg->ProjMilestone;
-        if($requestArg->ProjVideo)
-            $dataVar->yt_link= $this->_getYoutubeId($requestArg->ProjVideo);
-        else
-            $dataVar->yt_link= null;
+        if($requestArg->ProjVideo) $dataVar->yt_link = $this->_getYoutubeId($requestArg->ProjVideo);
         $dataVar->logo = null;
         $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
@@ -359,7 +355,7 @@ class ProjectController extends Controller
         $currentTierVar = 1;
         for ($index = 0; $index < count($requestArg->Tier); $index++)
         {
-            if(isset($requestArg->Tier[$index]['id']) != null){
+            if(isset($requestArg->Tier[$index]['id'])){
                 $tierVar = ProjectTiers::find($requestArg->Tier[$index]['id']);
             }
             else{

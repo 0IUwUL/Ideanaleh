@@ -22,13 +22,19 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        // $categoryVar = $this->_getEnumValues('category');
-        $categoryVar = [
-            //Added '[0]' after the config() because it returns an array named '0'
-            'categories' => config('category')[0],
-        ];
+        $userProjectVar = Projects::where('user_id', Auth::id())->first();
+        if($userProjectVar != null){
+            return redirect('project/view/'.$userProjectVar->id);
+        }
+        else{
+            // $categoryVar = $this->_getEnumValues('category');
+            $categoryVar = [
+                //Added '[0]' after the config() because it returns an array named '0'
+                'categories' => config('category')[0],
+            ];
 
-        return view('pages.create')->with('data', $categoryVar);
+            return view('pages.create')->with('data', $categoryVar);
+        }
     }
 
 
@@ -58,53 +64,116 @@ class ProjectController extends Controller
     private function _getProjectData(int $idArg){
         $projectDataVar = Projects::find($idArg)->toArray();
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
-        
-        $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar, $idArg)]);
+        if(Auth::check()){
+            $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar, $idArg)]);
+        }
+        else{
+            $projectDataVar = array_merge($projectDataVar, ['popular' => $this->popularProjects($projectDataVar, $idArg)]);
+        }
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['isSupported' => (new UserPreferenceController)->checkIfSupported($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdatesController)->getAllUpdates($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['comments' => (new CommentsController)->getAllProjectComments($idArg)]);
         return $projectDataVar;
     }
-
-
-    /***
-     * Private function to generate recommendations
-     */
-    private function recommendation($projectDataArg, int $idArg){
-
-        //get all project under the visited page category
-        //id,!=,Auth::id();
-        $project = json_decode(
+    // public function popularProjects($projectDataArg, int $idArg)
+    public function popularProjects(){
+        
+        //get all preferences of users
+        $user_preferences = json_decode(
             json_encode(
-                DB::table('projects')
-                    ->where('id','!=',$idArg)
-                    // ->where('category', $projectDataArg["category"])
-                    // ->where('created_at','>', Carbon::parse(Carbon::now())->setTimezone('Asia/Manila')->subDays(7))
-                    ->select('id','title')
+                DB::table('user_preferences')
+                    ->select('followed','supported')
                     ->get()
                     ->toArray()
             ),
             true);
+            $merge = "";
+            //convert string of preferences to array
+        for($i=0;$i<count($user_preferences);$i++) {
+            //combine followed and supported projects
+            $user_preferences[$i]['followed'] = $user_preferences[$i]['followed'].','.$user_preferences[$i]['supported'];
+            //filter to get unique values from the string
+            $user_preferences[$i]['followed'] = implode(',', array_unique(explode(',', $user_preferences[$i]['followed'])));
+            $merge = $merge.','.$user_preferences[$i]['followed'];
+            $projectsCount = array_map(fn($value) => (int) $value,
+            array_filter(explode(',', $merge)
+            ));
+        }
+        // count all frequency of unique values (number of popularity for projects)
+        $merge = array_count_values($projectsCount);
+        arsort($merge);
+        $merge = array_keys($merge);
+        $popular = [];
+        foreach ($merge as $list) {
+            $products[$list] = json_decode(
+                json_encode(
+                    DB::table('projects')
+                        ->where('id',$list)
+                        ->get()
+                ),
+                true);
+            $popular = array_merge($popular,$products[$list]);
+            
+        }
+        // echo"<pre>"; print_r($popular); die();
+        return array($popular);
+       
+        
+    }
+    /***
+     * Private function to generate recommendations
+     */
+    public function recommendation($projectDataArg, int $idArg){
+
+        //get all project under the visited page category
+        //id,!=,Auth::id();
+        if($projectDataArg==null){
+            $project = json_decode(
+                json_encode(
+                    DB::table('projects')
+                        ->select('id','title')
+                        ->get()
+                        ->toArray()
+                ),
+                true);
+        }
+        else{
+            $project = json_decode(
+                json_encode(
+                    DB::table('projects')
+                        ->where('id','!=',$idArg)
+                        // ->where('category', $projectDataArg["category"])
+                        // ->where('created_at','>', Carbon::parse(Carbon::now())->setTimezone('Asia/Manila')->subDays(7))
+                        ->select('id','title')
+                        ->get()
+                        ->toArray()
+                ),
+                true);
+        }
+        
 
             //get all preferences of users
         $user_preferences = json_decode(
             json_encode(
                 DB::table('user_preferences')
                     ->where('user_id','!=',Auth::id())
-                    ->select('followed')
+                    ->select('followed','supported')
                     ->get()
                     ->toArray()
             ),
             true);
-
+            
         //convert string of preferences to array
         for($i=0;$i<count($user_preferences);$i++) {
+            $user_preferences[$i]['followed'] = $user_preferences[$i]['followed'].','.$user_preferences[$i]['supported'];
             $user_preferences[$i]['followed'] = array_map(fn($value) => (int) $value,
                 array_filter(explode(',', $user_preferences[$i]['followed'])
             ));
+            $user_preferences[$i]['followed'] = array_unique($user_preferences[$i]['followed']);
         }
-
+        
         //get all projects that are supported by the customers
         $projects = array();
         $allProjects = $project;
@@ -167,16 +236,17 @@ class ProjectController extends Controller
                 json_encode(
                     DB::table('user_preferences')
                         ->where('user_id',Auth::id())
-                        ->select('followed')
+                        ->select('followed','supported')
                         ->get()
                         ->toArray()
                 ),
                 true);
 
-                //convert string to array
-
+                //merge follow and support and convert string to array
+                $personalPreferences[0]['followed'] = $personalPreferences[0]['followed'].','.$personalPreferences[0]['supported'];
                 $personalPreferences[0]['followed'] = array_filter(explode(',',$personalPreferences[0]['followed']));
-
+                unset($personalPreferences[0]['supported']);
+                
                 // merge followed and support and remove duplicates -- note
                 if(!empty($personalPreferences[0]['followed']) && count($personalPreferences[0]['followed']) > 1){
                     
@@ -201,9 +271,7 @@ class ProjectController extends Controller
                         $holdkey[$list] = $tmp[0];
                     }
                     
-                    $preferences = $personalPreferences;
-                    $preferences = $preferences[0]["followed"];
-
+                    $preferences = $personalPreferences[0]["followed"];
 
                     //get titles of project
                     foreach ($preferences as $x) {
@@ -250,6 +318,21 @@ class ProjectController extends Controller
         }
         
         //get all info of the recommended project
+
+        if($projectDataArg==null){
+            foreach ($final_rec as $rec) {
+                $others[$rec] = json_decode(
+                        json_encode(
+                            DB::table('projects')
+                                ->where('title',$rec)
+                                
+                                ->get()
+                        ),
+                        true);
+                $other_recomendation_list = array_merge($other_recomendation_list,$others[$rec]);
+            }
+            return $other_recomendation_list;
+        }
         foreach ($final_rec as $rec) {
             $products[$rec] = json_decode(
                 json_encode(
@@ -259,18 +342,16 @@ class ProjectController extends Controller
                         ->get()
                 ),
                 true);
+            $others[$rec] = json_decode(
+                    json_encode(
+                        DB::table('projects')
+                            ->where('title',$rec)
+                            ->where('category', '!=', $projectDataArg["category"])
+                            ->get()
+                    ),
+                    true);
             $final_recomendation_list = array_merge($final_recomendation_list,$products[$rec]);
-        }
-        foreach ($final_rec as $rec) {
-            $products[$rec] = json_decode(
-                json_encode(
-                    DB::table('projects')
-                        ->where('title',$rec)
-                        ->where('category', '!=', $projectDataArg["category"])
-                        ->get()
-                ),
-                true);
-            $other_recomendation_list = array_merge($other_recomendation_list,$products[$rec]);
+            $other_recomendation_list = array_merge($other_recomendation_list,$others[$rec]);
         }
         return array($final_recomendation_list, $other_recomendation_list);
     }

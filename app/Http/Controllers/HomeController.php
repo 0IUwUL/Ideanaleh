@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User; 
 use Auth;
-
+use App\Http\Controllers\ProjectController;
 class HomeController extends Controller
 {
     /**
@@ -25,9 +25,19 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $dev_mode = false;
-        if (Auth::check())
-            $dev_mode = Auth::user()->dev_mode;
+        $dev_mode = array(
+            'dev'=>false);
+        if (Auth::check()){
+            $dev_mode = array('dev' => Auth::user()->dev_mode);
+            $dev_mode = array_merge($dev_mode, ['recommend' => (new ProjectController)->recommendation(null,0)]);
+            
+            // $dev_mode = array_merge($dev_mode, ['popular'=>(new ProjectController)->popularProjects()[0]]);
+        }
+        else{
+            
+            $dev_mode = array_merge($dev_mode, ['popular'=>(new ProjectController)->popularProjects()[0]]);
+        }
+        
         
         return view('pages.home')->with('mode', $dev_mode);
     }

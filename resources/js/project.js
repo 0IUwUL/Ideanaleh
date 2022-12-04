@@ -75,7 +75,7 @@ $("#FollowUnfollowButton").click(function(e){
       },
       success: function(result){
           let data = JSON.parse(result);
-          console.log(data);
+          
           if(data.response == "followed") {
             // console.log(data);
             document.getElementById('FollowUnfollowButton').innerHTML = '<span class="fa-regular fa-heart"></span>&nbsp Unfollow';
@@ -147,6 +147,7 @@ $("#updateSubmit").click(function(){
   var desc = form.find('textarea[name="UpdateDesc"]').val();
   
   if(form.valid() === true){
+    $("#updateModal").modal('hide');  
     $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -165,21 +166,190 @@ $("#updateSubmit").click(function(){
           var update = data.update
           var options = {year: 'numeric', month: 'long', day: 'numeric' };
           let date  = new Date(update['created_at']);
-
+          
           // Change the current update text
-          document.getElementById("update-current-title").textContent = `${update['title']} (${date.toLocaleDateString("en-US", options)})`
+          document.getElementById("update-current-id").value = update['id']
+          document.getElementById("update-current-title").textContent = update['title']
+          document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
           document.getElementById("update-current-description").textContent = update['description']
+          
+          if (data.prevUpdateHTML){
+            // Render progress list accordion for first time
+            if (!document.getElementById("update-list-accordion")){
+              var accordion = `
+              <div class="accordion accordion-flush px-lg-5" id="update-list-accordion">
+                <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
+                    <h2 class="font-weight-bold">Update List</h2>
+                    <div id = "previous-update-accordion" > </div>
+                </div>
+              </div>`;
 
-          // Insert previous update list accordion
-          if (data.prevUpdate){
+              document.getElementById("info-update-accordion").insertAdjacentHTML('afterend', accordion);
+            }
+
+            // Insert previous update list accordion
             $("#previous-update-accordion").prepend(data.prevUpdateHTML)
-          } 
+          }
+          let currentUpdate = $("#update-current-dropdown")
+          currentUpdate.find("button").show()
+
+          var menu = $('#update-current-dropdown')
+          if (menu.find('div').length == 0){
+            menu.html(`
+            <a class="btn circle ms-auto align-self-center " data-bs-toggle="dropdown" aria-expanded="false" disabled><i class="fa-solid fa-ellipsis"></i></a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item editCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateEditModal" data-type="current">Edit</a></li>
+                <li><a class="dropdown-item deleteUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateDeleteModal" data-type="current">Delete</a></li>
+            </ul>`)
+          }
+
           form[0].reset();
-          $("#updateModal").modal('hide');   
+           
       }
     });
   }
 });
+$(document).on('click', '.editUpdate', setEditModal) 
+$(document).on('click', '.editCurrentUpdate', setEditModal)
+
+function setEditModal(e){
+  var updateType = $(e.target).attr('data-type');
+  var id = $(e.target).attr('data-id');
+ 
+  if(updateType == 'current'){
+    var title = document.getElementById('update-current-title').textContent.trim()
+    var desc = document.getElementById('update-current-description').textContent.trim()
+  }
+  else {
+    var title = document.getElementById('update-title-'+id).textContent.trim()
+    var desc = document.getElementById('update-desc-'+id).textContent.trim()
+  }
+
+  $('#updateEditId').val(id);
+  $('#updateEditType').val(updateType);
+  $('#updateEditTitle').val(title);
+  $('#updateEditDesc').val(desc);
+}
+
+// Save comment edit
+$('#updateEditSubmit').click(function(){
+  let form = $('#updateEditForm')
+  let type = $('#updateEditType').val()
+  var id = $('#updateEditId').val()
+  var title = $('#updateEditTitle').val()
+  var desc = $('#updateEditDesc').val()
+
+  if(form.valid() === true){
+    $("#updateEditModal").modal('hide');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+      url: "/updates/edit",
+      type:'post',
+      data: {
+        UpdateId : id,
+        UpdateTitle : title,
+        UpdateDesc : desc,
+      },
+      success: function(){
+        // Change the current update text
+        if (type == 'current'){
+          document.getElementById("update-current-title").textContent = title
+          document.getElementById("update-current-description").textContent = desc
+        }
+        else {
+          document.getElementById("update-title-" + id).textContent = title
+          document.getElementById("update-desc-" + id).textContent = desc
+        }
+         
+        
+      
+      }
+    });
+  } 
+})
+
+$(document).on('click', '.deleteUpdate', function (e){
+  var type = $(e.target).attr('data-type');
+  if (type == 'current'){
+    var id = $('#update-current-id').val();
+  }
+  else {
+    var id = $(e.target).attr('data-id');
+  }
+  $('#updateDeleteId').val(id);
+  $('#updateDeleteType').val(type);
+  
+})
+
+$('#updateDeleteSubmit').click(function(){
+  var type = $('#updateDeleteType').val();
+  if (type == 'current'){
+    var id = $('#update-current-id').val();
+  }
+  else {
+    var id = $('#updateDeleteId').val();
+  }
+
+  $("#updateDeleteModal").modal('hide');
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $.ajax({
+    url: "/updates/delete",
+    type:'post',
+    data: {
+      UpdateId : id,
+    },
+    success: function(result){
+      let data = JSON.parse(result);
+      var latestUpdate = data.latestUpdate
+   
+      if (type == 'current' && document.getElementById('update-list-accordion')){
+        
+        var options = {year: 'numeric', month: 'long', day: 'numeric' };
+        let date  = new Date(latestUpdate['created_at']);
+
+        document.getElementById("update-current-id").value = latestUpdate['id']
+        document.getElementById("update-current-title").textContent = latestUpdate['title']
+        document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
+        document.getElementById("update-current-description").textContent = latestUpdate['description']
+
+        document.getElementById('previous-update-'+ latestUpdate['id']).remove()
+
+        // Check if the list is empty
+        var list = $('#previous-update-accordion')
+        if (list.find('div').length == 0)
+          document.getElementById('update-list-accordion').remove()
+      }
+      else if(type == 'current') {
+        document.getElementById("update-current-title").textContent = "Project Started"
+        document.getElementById("update-current-date").textContent = ''
+        document.getElementById("update-current-description").textContent = 'The developer has just started the project'
+
+        let currentUpdate = $("#update-current-dropdown")
+        currentUpdate.find("a").hide()
+      }
+      else {
+        document.getElementById('previous-update-' + id).remove()
+        
+        // Check if the list is empty
+        var list = $('#previous-update-accordion')
+        if (list.find('div').length == 0)
+          document.getElementById('update-list-accordion').remove()
+      }
+     
+    
+    }
+  });
+  
+})
+
 
 // Adjust textarea size
 $("#comment-box").on('keydown', function(){
@@ -232,6 +402,15 @@ $(document).on('click', '.edit', function(e){
   let id = $(e.target).attr('data-id')
   let comment = document.getElementById('comment-'+id).textContent
   
+  // Prevents submiting the same comment
+  $('#edit-comment-box').on('keyup',function(e){
+    if (comment == e.target.value)
+      $('.saveChanges').prop('disabled', true)
+    else
+      $('.saveChanges').prop('disabled', false)
+
+  })
+  
   $('#CommentId').val(id)
   $('#edit-comment-box').val(comment)
 })
@@ -243,6 +422,7 @@ $('.saveChanges').click(function(){
   var comment = $('#edit-comment-box').val()
 
   if(form.valid() === true){
+    $("#editModal").modal('hide');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -260,10 +440,7 @@ $('.saveChanges').click(function(){
 
           // Insert comment
           document.getElementById('comment-'+id).textContent = comment  
-          document.getElementById('comment-'+id+'-date').textContent = data.commentDate  
-
-          $("#editModal").modal('hide');
-      
+          document.getElementById('comment-'+id+'-date').textContent = data.commentDate + ' (Edited)' 
       }
     });
   } 
@@ -271,10 +448,11 @@ $('.saveChanges').click(function(){
 
 $(document).on('click', '.delete', function(e){
   let id = $(e.target).attr('data-id')
-  let comment = $("#project-comment-" + id).html()
-
+  let comment = $("#project-comment-" + id)
+  comment.find("button").hide()
   $('#deleteCommentId').val(id)
-  $('#commentPreview').html(comment)
+  $('#commentPreview').html(comment.html())
+  comment.find("button").show()
 })
 
 
@@ -282,6 +460,7 @@ $(document).on('click', '.delete', function(e){
 $('.confirmDelete').click(function(){
   let id = $('#deleteCommentId').val()
 
+  $("#deleteModal").modal('hide');
   $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -299,10 +478,13 @@ $('.confirmDelete').click(function(){
       if (data.response == "success"){
         // Delete comment
         document.getElementById('project-comment-'+id).remove()
-
-        $("#deleteModal").modal('hide');
+        
       }
     }
   });
   
 })
+
+$('.dropdown').hover(function(){ 
+  $('.dropdown-toggle', this).trigger('click'); 
+});

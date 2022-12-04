@@ -22,13 +22,19 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        // $categoryVar = $this->_getEnumValues('category');
-        $categoryVar = [
-            //Added '[0]' after the config() because it returns an array named '0'
-            'categories' => config('category')[0],
-        ];
+        $userProjectVar = Projects::where('user_id', Auth::id())->first();
+        if($userProjectVar != null){
+            return redirect('project/view/'.$userProjectVar->id);
+        }
+        else{
+            // $categoryVar = $this->_getEnumValues('category');
+            $categoryVar = [
+                //Added '[0]' after the config() because it returns an array named '0'
+                'categories' => config('category')[0],
+            ];
 
-        return view('pages.create')->with('data', $categoryVar);
+            return view('pages.create')->with('data', $categoryVar);
+        }
     }
 
 

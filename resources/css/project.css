@@ -495,6 +495,11 @@ input[name="GCategs[]"]{
   border-radius: 30px;
 }
 
+.dropdown:hover .dropdown-menu {
+  display: block  !important;
+  margin-top: 0  !important; 
+}
+
 /* for loading screen */
 .page_content{
   display: none;
@@ -529,3 +534,22 @@ input[name="GCategs[]"]{
 
 }
   
+.accordion-button::after {
+  
+  width: 0!important;
+  margin: 0!important;
+}
+
+.accordion-button:not(.collapsed)::after {
+ 
+  width: 0 !important;
+  margin: 0!important;
+}
+ 
+.accordion-button.collapsed:hover {
+  border-color:blue !important;
+}
+.accordion-button:hover {
+  border-color:blue !important;
+}
+

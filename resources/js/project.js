@@ -134,6 +134,10 @@ $(".tier-button").click(function(e){
           if(data.response == "success") {
             window.location.href = data.checkout_url;
           }
+          else{
+            // Note to future tell the user to login first.
+            location.reload();
+          }
       }
   });
 });

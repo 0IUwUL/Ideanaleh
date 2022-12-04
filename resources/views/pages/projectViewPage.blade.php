@@ -47,13 +47,13 @@
                     {{-- Note to future RamonDev: Get the code for the bars in the SE2 project -RamonDev --}}
                     <div class="progress-bars row g-0 mt-3">
                         <div class="progress mx-4 mt-5" style="width: 90%;">
-                            <div class="progress-bar" role="progressbar" style="width: 25%; height:20px; font-weight:bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="progress-bar" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2" style>PHP 0.00 / 60000.00 Target Donations</p>
+                        <p class="product-price mx-4 mt-2" style>PHP 0.00 / {{number_format($project['target_amt'],2)}} Target Donations</p>
                         <div class="progress mx-4" style="width: 90%;">
-                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 25%; height:20px; font-weight:bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2 mb-4" style>PHP 0.00 / 30000.00 Milestone Donations</p>
+                        <p class="product-price mx-4 mt-2 mb-4" style>PHP 0.00 / {{number_format($project['target_milestone'],2)}} Milestone Donations</p>
                     </div>
 
 
@@ -65,6 +65,12 @@
           
             <div class="product-form py-4 justify-content-center">
                 <div class="col-lg-auto text-center" >
+
+                  @if($project['user_id'] == Auth::id())
+                  {{-- EDIT BUTTON --}}
+                  <a href="{{url('project/edit/'.$project['id'])}}"><button type="button" class="btn add-to-cart w-50 mb-3"><span class="fa fa-cart-shopping"></span>&nbsp EDIT</button></a>
+                  @endif
+
                   {{-- FOLLOW UNFOLLOW BUTTON --}}
                   <div name="ProjectFollowButton" id="ProjectFollowButton">
                       <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
@@ -100,7 +106,7 @@
         <span class="d-inline-block float-right position-absolute">
           <i style="font-size:18px" class="fa-sharp fa-solid fa-wand-magic-sparkles"></i>
         </span>
-        <span class="d-inline-block mx-4"><h6>Idiyanale is a platform made to connect creators to backers to fund their projects</h6></span>
+        <span class="d-inline-block mx-4"><h6>Idianaleh is a platform made to connect creators to backers to fund their projects</h6></span>
       </div>
 
       <div class="col-4">
@@ -170,7 +176,7 @@
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-update-tab" data-bs-toggle="pill"
               data-bs-target="#pills-update" type="button" role="tab" aria-controls="pills-update"
-              aria-selected="false">Progress</button>
+              aria-selected="false">Updates</button>
           </li>
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-comments-tab" data-bs-toggle="pill"
@@ -188,7 +194,7 @@
           <!-- Campaign tab -->
           <x-project.view.campaign :project="$project"/>
           <!-- Update tab -->
-          <x-project.view.progress :id="$project['id']" :progress="$project['progress']"/>
+          <x-project.view.updates :id="$project['id']" :dev="$project['user_id']" :updates="$project['updates']"/>
           <!-- comments item tab -->
           <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
           <!-- Backers item tab -->
@@ -201,13 +207,60 @@
             <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
+                  @if(Auth::check())
+                    <div class="row">
+                      <h2>Recommended Projects under this Category</h1>
+                        @foreach($project['recommend'][0] as $index => $category)
+                        @if($index<3) 
+                          <div class="col-md-4 mb-3">
+                              <div class="card shadow-sm bg-body rounded">
+                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                <div class="card-body text-dark">
+                                  <h4 class="card-title">{{$category['title']}}</h4>
+                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-3">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        
+                                    </div>
+                                    <div class="text-muted">9 mins</div>
+                                </div>
+                              </div>
+                          </div>
+                        @endif
+                        @endforeach
+                    </div><br>
+                    <div class="row">
+                      <h2>Other Projects That You May Like</h1>
+                        @foreach($project['recommend'][1] as $index => $category)
+                        @if($index < 3)
+                          <div class="col-md-4 mb-3">
+                              <div class="card shadow-sm bg-body rounded">
+                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                <div class="card-body text-dark">
+                                  <h4 class="card-title">{{$category['title']}}</h4>
+                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                                </div>
+                                <div class="d-flex justify-content-between p-3">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        
+                                    </div>
+                                    <div class="text-muted">9 mins</div>
+                                </div>
+                            </div>
+                          </div>
+                        @endif
+                        @endforeach
+                  @else
                   <div class="row">
-                    <h2>Recommended Projects under this Category</h1>
-                      @foreach($project['recommend'][0] as $index => $category)
+                    <h2>Popular Projects</h1>
+                      @foreach($project['popular'][0] as $index => $category)
                       @if($index<3) 
                         <div class="col-md-4 mb-3">
                             <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} ">
+                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
                                   <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
@@ -219,33 +272,13 @@
                                   </div>
                                   <div class="text-muted">9 mins</div>
                               </div>
-                          </div>
+                            </div>
                         </div>
                       @endif
                       @endforeach
                   </div><br>
-                  <div class="row">
-                    <h2>Other Projects That You May Like</h1>
-                      @foreach($project['recommend'][1] as $index => $category)
-                      @if($index < 3)
-                        <div class="col-md-4 mb-3">
-                            <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} ">
-                              <div class="card-body text-dark">
-                                <h4 class="card-title">{{$category['title']}}</h4>
-                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
-                              </div>
-                              <div class="d-flex justify-content-between p-3">
-                                  <div class="btn-group">
-                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                      
-                                  </div>
-                                  <div class="text-muted">9 mins</div>
-                              </div>
-                          </div>
-                        </div>
-                      @endif
-                      @endforeach
+                  @endif
+                      
                   </div>
                 </div>
             </div>

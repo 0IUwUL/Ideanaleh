@@ -13,7 +13,13 @@
     </head>
     <body style = "overflow-y: hidden">
 
-        @yield('content')
+        <div class="load">
+            <div class="ring"></div>
+            <span>Loading...</span>
+        </div>
+        <div class="page_content">
+            @yield('content')
+        </div>
         
         @vite(['resources/js/app.js'])
         @vite(['resources/js/chart.js'])

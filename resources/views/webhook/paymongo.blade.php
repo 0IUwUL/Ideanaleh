@@ -1,3 +1,6 @@
+@inject('paymentsController', 'App\Http\Controllers\PaymentsController');
+@inject('userPreferenceController', 'App\Http\Controllers\UserPreferenceController');
+
 <?php
 header('Content-Type: application/json');
 $request = file_get_contents('php://input');
@@ -32,23 +35,19 @@ if ($type == 'source.chargeable') {
   ]);
 
   $response = curl_exec($curl);
-  //Log the response
-//   $fp = file_put_contents( 'test.log', $response );
   $err = curl_error($curl);
 
   curl_close($curl);
 
   if ($err) {
     echo "cURL Error #:" . $err;
-    // Log the response
-    $fp = file_put_contents( 'test.log', $err );
   } else {
     echo $response;
   }
+  
 }
 elseif ($type == 'payment.paid') {
   if($payload['data']['attributes']['data']['type'] == 'payment'){
-    App\Http\Controllers\PaymentsController::savePayment($payload);
+    $paymentsController::savePayment($payload);
   }
-  
 }

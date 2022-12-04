@@ -5,11 +5,36 @@ import { conformsTo, templateSettings } from 'lodash';
 
 const into = document.querySelector('.toast-body')
 
+$(document).ready(function(){
+    var data = $('#modeToast').attr('data-mode')
+    if(data == 3){
+        $('#SignUpModal5').modal('show');
+    }
+    var form = $("#ProjForm");
+    var tagValues = form.find('input[name="Tags[]"]');
+    if(tagValues){
+        Object.values(tagValues).forEach(input => {
+            if(input.value != null)
+                tags.push(input.value);
+        })
+    }
+});
+
+// function for loading
+$( window ).on( "load", function() {
+    $('.load').fadeOut("slow");
+    $('.page_content').fadeIn("slow");
+});
+
 function validate(){
     var form = $("#myForm");
     form.validate({
         rules: {
-            'Categs[]': { 
+            'Categs[]': {
+                required: true,
+                minlength: 3,
+            },
+            'Followed[]': {
                 required: true,
                 minlength: 3,
             },
@@ -22,6 +47,10 @@ function validate(){
                 required: "You must check at least 3 categories",
                 minlength: "Check at least {0} categories"
             },
+            'Followed[]': {
+                required: "You must follow at least 3 projects",
+                minlength: "Check at least {0} projects"
+            },
         }
     });
 
@@ -29,7 +58,7 @@ function validate(){
         if ($('#SignUpModal').is(":visible")){
             $('#SignUpModal').modal('hide');
             $('#SignUpModal2').modal('show');
-            
+
         }else if ($('#SignUpModal2').is(":visible")){
             var email = document.getElementById("email").value;
             $.ajaxSetup({
@@ -45,7 +74,7 @@ function validate(){
                 },
                 success: function(result){
                     let data = JSON.parse(result);
-                    
+
                     if (data.response == 'duplicate')
                         document.getElementById('dupli').innerHTML = "* Email is already registered"
                     else{
@@ -53,7 +82,7 @@ function validate(){
                         $('#SignUpModal3').modal('show');
                     }
                 }
-         
+
             });
         }else if ($('#SignUpModal3').is(":visible")){
             // getting categories checked
@@ -84,18 +113,18 @@ function validate(){
                         return `<div class = "Category_header">
                                     <h3>${keys}</h3>
                                         <hr class = "create">
-                                            <div class = "content">` + 
+                                            <div class = "content">` +
                                         elementArray.map(i => {
                                             return `
-                                                <span class = "list_category"><input type="hidden" name="Followed[]" value = ${i['id']}>${i['title']}<a class="btn_follow" role = "button" data-param = ${i['id']}><i class="fa-solid fa-flag"></i></a></span>
+                                                <span class = "list_category">${i['title']}<input type="checkbox" name="Followed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
                                             `
-                                            })
+                                            }).join("")
                                         + `
                                             </div>
                                 </div>`
                       })
                     // inserting to html
-                    document.querySelector('#Category_content').innerHTML = header;
+                    document.querySelector('#Category_content').innerHTML = header.join("");
                     $('#SignUpModal3').modal('hide');
                     $('#SignUpModal4').modal('show');
                 }
@@ -105,31 +134,107 @@ function validate(){
 
 };
 
-$(".btn_follow").click(function(e){
-    var form = $("#myForm");
-    var id = $(e.target).attr('data-param');
-    let cate = [];
-    var clicked = form.find('input[name="Followed[]"]')
-    console.log(id)
-    console.log(clicked)
-    
+function GoogleForm(){
+    var form = $("#GoogleForm");
+    form.validate({
+        rules: {
+            'GCategs[]': {
+                required: true,
+                minlength: 3,
+            },
+            'GFollowed[]': {
+                required: true,
+                minlength: 3,
+            },
+        },
+        messages: {
+            'GCategs[]': {
+                required: "You must check at least 3 categories",
+                minlength: "Check at least {0} categories"
+            },
+            'GFollowed[]': {
+                required: "You must follow at least 3 projects",
+                minlength: "Check at least {0} projects"
+            },
+        }
+    });
+
+    if (form.valid() === true){
+        if ($('#SignUpModal5').is(":visible")){
+            // getting categories checked
+            let cate = [];
+            var max = form.find('input[name="GCategs[]"]:checked')
+            Object.values(max).forEach(categs => {
+                if(categs.value)
+                    cate.push(categs.value)
+            })
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "/project/categs",
+                type:'post',
+                data: {
+                    categs : cate,
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    const categories = data.response;
+                    // formatting projects from categories picked
+                    let Gheader =
+                    jQuery.map(categories, (element, keys) => {
+                        var elementArray = Object.values(element);
+                        return `<div class = "Category_header">
+                                    <h3>${keys}</h3>
+                                        <hr class = "create">
+                                            <div class = "content">` +
+                                        elementArray.map(i => {
+                                            return `
+                                                <span class = "list_category">${i['title']}<input type="checkbox" name="GFollowed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
+                                            `
+                                            }).join("")
+                                        + `
+                                            </div>
+                                </div>`
+                      })
+                    // inserting to html
+                    document.querySelector('#GCategory_content').innerHTML = Gheader.join("");
+                    $('#SignUpModal5').modal('hide');
+                    $('#SignUpModal6').modal('show');
+                }
+            });
+        }
+    }
+};
+
+jQuery(document.body).on('click', '.btn_follow', function(e){
+    var btnClass = $(e.target).parent();
+    if (btnClass.hasClass('followed')){
+        btnClass.removeClass('followed')
+    }else{
+        btnClass.addClass('followed')
+    }
   });
 
 function activateToast(){
-    var c = $(this).data('id');
+    var c = $("#modeToast").data('id');
     var insert
     if (c == 'logO' || c == 'logI'){
-        var mode = $(this).data('mode');
+        var mode = $(this).attr('data-mode');
+        console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (!mode && c == 'logI'){
             insert = `Verify your email in your profile settings.`
+            $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`
         }
     }
     into.innerHTML = insert
-    
+
 
     $('.DevToast').toast('show');
 }
@@ -163,7 +268,7 @@ $('#LoginSubmit').on("click", function(){
         },
         success: function(result){
             let data = JSON.parse(result);
-            
+
             if (data.response == 'err_pass'){
                 document.getElementById('err_pass').innerHTML = "* Incorrect password"
             } else if (data.response == 'err_mail')
@@ -171,13 +276,13 @@ $('#LoginSubmit').on("click", function(){
             else
                 document.getElementById("LogInForm").submit();
         }
- 
+
     });
 });
 
 function loadBtn (e) {
     var btn = $(e.target).attr('data-btn');
-    
+
     google.accounts.id.renderButton(
         document.getElementById(btn),
         { theme: "outline", size: "large", text: "continue_with"}  // customization attributes
@@ -224,7 +329,7 @@ $.validator.addMethod('yey', function (value, element, param) {
 
     if (this.optional(element) || parseFloat(value) >  given)
         return true;
-}, 'Invalid value');    
+}, 'Invalid value');
 
 function DetValid(e){
     var form = $("#ProjForm");
@@ -232,7 +337,7 @@ function DetValid(e){
     var btn = $(e.target).attr('data-next')
 
     form.validate({
-        
+
         focusCleanup: true,
         rules:{
             "Tier[1][amount]": {
@@ -274,11 +379,12 @@ function DetValid(e){
                 yey : 'Input must be greater than the previous tier/s.',
             },
         },
-        
+
     });
 
     if (form.valid() === true){
-        if(tags.length >= 3){
+        var max = form.find('input[name="Tags[]"]')
+        if(max.length >= 3){
             if (logo == 'nav-basic-tab' || btn == 'reward'){
                 $('#nav-reward-tab').removeClass('disabled');
                 $('#nav-reward-tab').attr("data-bs-target", '#nav-reward')
@@ -311,12 +417,60 @@ function DetValid(e){
     }
 }
 
+$('#options').on('change', function(){
+    var selected = $('#options option:selected').val()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "main/filter/"+selected,
+        type:'get',
+        data: {
+            selected : selected,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            $('#content_projects').html(data.item)
+        }
+
+    });
+})
+
+$('#category').on('change', function(){
+    var selected = $('#category option:selected').val()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "main/category/"+selected,
+        type:'get',
+        data: {
+            selected : selected,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            $('#content_projects').html(data.item)
+        }
+
+    });
+})
 
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);
+// Normal Auth
 $('.next').click(validate);
 $("#submit").on("click",validate);
+// Google Auth
+$('.Gnext').click(GoogleForm);
+$("#Gsubmit").on("click",GoogleForm);
 $("#modeToast").on("click", activateToast);
+$("#modeToast2").on("click", activateToast);
+$("#modeToast3").on("click", activateToast);
+$("#modeToast4").on("click", activateToast);
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
 $('.tab_next').on('click', DetValid);

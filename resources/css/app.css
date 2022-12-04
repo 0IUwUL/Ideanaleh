@@ -6,12 +6,78 @@ html{
   overflow-x: hidden;
 }
 
-.navbar-brand{
-    font-family: 'Brush Script MT';
-}
 .error{
     color: red;
     font-style: italic;
+}
+
+/* for loading screen */
+.page_content{
+  display: none;
+}
+
+.load{
+  display: flex;
+  justify-content: center!important;
+  align-items: center!important;
+  min-height: 100vh!important;
+  background-color: white;
+}
+
+.ring{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%!important;
+  animation: ring 2s linear infinite;
+}
+
+@keyframes ring {
+  0%{
+    transform: rotate(0deg);
+    box-shadow: 1px 5px 2px #f3ff82;
+  }
+  50%{
+    transform: rotate(180deg);
+    box-shadow: 1px 5px 2px #abeb88;
+  }
+  100%{
+    transform: rotate(360deg);
+    box-shadow: 1px 5px 2px #67d294;
+  }
+
+}
+
+.ring:before{
+  position: absolute!important;
+  content: '';
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, .3)!important;
+}
+
+.load span{
+  color: #737373;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 200px;
+  justify-content: center!important;
+  animation: display 2s ease-in-out infinite
+}
+
+@keyframes display {
+  50%{
+    color: white;
+  }
+}
+
+/* for navbar */
+.navbar-brand{
+  font-family: 'Brush Script MT';
 }
 
 .nav_home ul li a{
@@ -24,18 +90,6 @@ html{
 
 .gear_icon{
   padding: 2rem;
-}
-
-/* Main Page */
-
-body {
-  font-family: "Merriweather", serif;
-  line-height: 1.5;
-  overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6, .btn {
-  font-family: "Merriweather Sans", sans-serif;
 }
 
 .navbar {
@@ -63,34 +117,88 @@ h1, h2, h3, h4, h5, h6, .btn {
     padding: .6rem 1rem .6rem .6rem;
     border-radius: 2rem;
     margin: .4rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .list_category:hover{
   color: yellow;
-  cursor:none;
 }
 
 .followed{
-  color: yellow;
+  color: #002d50!important;
+  background-color: #abeb88;
+  transform: scale(1.1);
 }
 
-.btn_follow{
-  display: inline-block;
-  width: 1.4rem;
-  height: 1.4rem;
-  color: black;
-  background-color: white; 
-  border-radius: 50%;
-  margin-left: 2rem;
-  text-align: center;
-  line-height: 1.4rem;
+input[name="Followed[]"], input[name="GFollowed[]"]{
+  accent-color: limegreen;
+  margin-left: 1rem;
   cursor: pointer;
 }
 
-.btn_follow:hover{
-  color: #002d50;
-  background-color: yellow;
-  transform: scale(1.5);
+input[name="Categs[]"], 
+input[name="GCategs[]"]{
+  accent-color: limegreen;
+  margin-right  : 1rem!important;
+  cursor: pointer;
+}
+
+.categs, .Gcategs{
+  background-color: #1f4260!important;
+  color: whitesmoke!important;
+  border-radius: 20px!important;
+}
+
+.navbread{
+  display: flex!important;
+  align-content: center;
+  vertical-align: middle!important;
+}
+
+.breadcrumb li a{
+  text-decoration: none!important;
+  font-size: 1rem;
+  color: whitesmoke!important;
+  vertical-align: middle!important;
+  padding: .2rem 1rem .2rem 1rem;
+}
+
+.breadcrumb li a:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.breadcrumb-item::before{
+  color: whitesmoke!important;
+  vertical-align: middle!important;
+}
+
+@media screen and (max-width: 1099px){
+  .breadcrumb li a{
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  .breadcrumb li a:hover{
+    background-color: transparent;
+    color: #f3ff82;
+  }
+}
+
+/* Main Page */
+
+body {
+  font-family: "Merriweather", serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .btn {
+  font-family: "Merriweather Sans", sans-serif;
 }
 
 .hero {
@@ -321,7 +429,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   height: 65%; 
 }
 
-/* Contect Project page */
+/* Create Project page */
 .project_body{
   padding: 6rem 0 0 0;
 }
@@ -486,3 +594,62 @@ hr.create{
   transform: translate(-50%, 0px);
 }
 
+.payment_header{
+  margin-top: 10rem;
+}
+
+.card-header i{
+  font-size: 10rem;
+}
+
+.bg_card{
+  background: radial-gradient(#ffe995, #fa742b)!important;
+}
+
+/* filter page */
+:root{
+  --txt: #abeb88;
+  --bg: #002d50;
+  --hl: #f3ff82;
+}
+.nav_filter{
+  margin-top: 4.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav_filter nav{
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.F_list{
+  text-align: center;
+  max-width: 90px!important;
+}
+
+.F_display{
+  text-align: center;
+  max-width: 100px!important;
+}
+
+.filter_row{
+  padding: 0 2rem;
+}
+/* 
+@media (width < 471px) {
+  .filter_row{
+    margin-bottom: 4rem!important;
+  }
+  .form-select{
+    width: 100%!important;
+  }
+} */
+
+.form-select{
+  width: 100%!important;
+}
+
+.select{
+  padding: 1rem;
+}

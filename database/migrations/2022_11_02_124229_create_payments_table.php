@@ -24,7 +24,7 @@ return new class extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->string('payment_id');
-            $table->string('amount');
+            $table->float('amount');
             $table->timestamps();
         });
     }

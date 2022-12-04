@@ -17,11 +17,18 @@
     <div class="col-7 px-3">
         <div class="mb-3">
             <label for="Title">Project Title</label>
-            <input type="text" class="form-control" id="Title" name = "ProjTitle" placeholder="Title Here..." required>
+            @if(array_key_exists('project', $data))
+            <input type="hidden" id=ProjectId name="ProjId" value='{{$data['project']['id']}}'>
+            @endif
+            <input type="text" class="form-control" id="Title" name = "ProjTitle" 
+                placeholder="Title Here..." 
+                value = "{{array_key_exists('project', $data) ? $data['project']['title'] : ''}}"
+                required
+            >
         </div>
         <div class="mb-3">
             <label for="Desc">Project Description</label>
-            <textarea class="form-control" placeholder="Short project description..." name = "ProjDesc" id="Desc" style="height: 150px" required></textarea>
+            <textarea class="form-control" placeholder="Short project description..." name = "ProjDesc" id="Desc" style="height: 150px"  required>{{array_key_exists('project', $data) ? $data['project']['title'] : ''}}</textarea>
             <section class="d-flex justify-content-end">
                 <span id ="limit">0</span><span>/200</span>
             </section>
@@ -46,7 +53,7 @@
         <select class="form-select" id="CatgeoryForm" name="ProjCategory" aria-label="Default select example" placeholder="Add/Choose category" required>
             <option selected disabled value="">Choose category...</option>
             @foreach($data['categories'] as $category)
-                <option value="{{$category}}">{{$category}}</option>
+                <option value="{{$category}}" {{array_key_exists('project', $data) ? $data['project']['category'] == $category ? 'selected' : '' : ''}}>{{$category}}</option>
             @endforeach
         </select>
     </div>
@@ -65,11 +72,17 @@
         <div class="mb-3">
             {{-- Note to future RamonDev: Add project milestone target -RamonDev --}}
            <label for="floatingMileStone">Target Milestone Amount</label>
-           <input type="number" class = "form-control form-control-lg" id="floatingMileStone" min="100" max = "100000" name = "ProjMilestone" required>
+           <input type="number" class = "form-control form-control-lg" id="floatingMileStone" min="100" max = "100000" name = "ProjMilestone" 
+                value = {{array_key_exists('project', $data) ? $data['project']['target_milestone'] : ''}}
+                required
+           >
        </div>
         <div class="mb-3">
             <label for="floatingProj">Target Project Amount</label>
-            <input type="number" class = "form-control form-control-lg" id="floatingProj" min="100" max = "100000" name = "ProjTarget" required>
+            <input type="number" class = "form-control form-control-lg" id="floatingProj" min="100" max = "100000" name = "ProjTarget" 
+                value = {{array_key_exists('project', $data) ? $data['project']['target_amt'] : ''}}
+                required
+            >
         </div>
     </div>
 </div>
@@ -87,17 +100,17 @@
     <div class="col-7 px-3 my-auto">
         <div class="col mb-4">
             <label for="formBanner" class="form-label">Upload Project banner</label>
-            <input accept="image/*" class="form-control" name = "ProjBanner" type="file" id="formBanner" required>
+            <input accept="image/*" class="form-control" name = "ProjBanner" type="file" id="formBanner" {{array_key_exists('project', $data) ? '' : 'required'}}>
         </div>
         <div class="w-100 d-block d-md-none"></div>
         <div class="col mb-4">
             <label for="formLogo" class="form-label">Upload Image Logo</label>
-            <input accept="image/*" class="form-control" name = "ProjLogo"  type="file" id="formLogo" required>
+            <input accept="image/*" class="form-control" name = "ProjLogo"  type="file" id="formLogo" {{array_key_exists('project', $data) ? '' : 'required'}}>
         </div>
         <div class="w-100 d-block d-xl-none"></div>
         <div class="col">
             <label for="formVideo" class="form-label">Link Project Video Promo (optional)</label>
-            <input class="form-control" name = "ProjVideo"  type="text" id="formVideo">
+            <input class="form-control" name = "ProjVideo"  type="text" id="formVideo" value = {{array_key_exists('project', $data) ? 'https://youtu.be/'.$data['project']['yt_link'] : ''}}>
         </div>
     </div>
     
@@ -114,7 +127,10 @@
     </div>
     <div class="col-7 mb-4">
         <label for="floatingDate">Project Target Date</label>
-        <input type="date" class = "form-control form-control-lg" min="{{now()->format('Y-m-d')}}" id="floatingDate" name = "ProjDate" required>
+        <input type="date" class = "form-control form-control-lg" min="{{now()->format('Y-m-d')}}" id="floatingDate" name = "ProjDate" 
+            value="{{array_key_exists('project', $data) ? date('Y-m-d', strtotime($data['project']['target_date'])) : ''}}"
+            required
+        >
     </div>
 </div>
 <hr class= "create">
@@ -137,6 +153,15 @@
                 <div class="card-body">
                     <div class="card-title">Use <strong>comma (,)</strong> to seperate each tag. <br><br> <span class="text-danger">*Insert at least three tags</span> </div>
                     <div class="tags">
+                        @if(array_key_exists('project', $data))
+                        @foreach(explode(',', $data['project']['tags']) as $tag)
+                            <span class = "tag">
+                                {{$tag}}
+                                <input type="hidden" name="Tags[]" value="{{$tag}}">
+                                <span class="remove-tag" onclick="removeTag(this, '{{$tag}}')">x</span>
+                            </span>
+                        @endforeach
+                        @endif
                            <input type="text" placeholder="Add tags...">
                     </div>
                 </div>

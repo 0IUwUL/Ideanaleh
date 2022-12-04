@@ -75,7 +75,7 @@ $("#FollowUnfollowButton").click(function(e){
       },
       success: function(result){
           let data = JSON.parse(result);
-          console.log(data);
+          
           if(data.response == "followed") {
             // console.log(data);
             document.getElementById('FollowUnfollowButton').innerHTML = '<span class="fa-regular fa-heart"></span>&nbsp Unfollow';
@@ -132,84 +132,224 @@ $(".tier-button").click(function(e){
       success: function(result){
           let data = JSON.parse(result);
           if(data.response == "success") {
-            window.open(data.checkout_url);
+            window.location.href = data.checkout_url;
           }
       }
   });
 });
 
 
-// Ajax for posting project progress
-$("#progressSubmit").click(function(){
-  var form = $("#progressForm");
+// Ajax for posting project updates
+$("#updateSubmit").click(function(){
+  var form = $("#updateForm");
   var id = form.find('input[name="ProjectId"]').val();
-  var title = form.find('input[name="ProgressTitle"]').val();
-  var desc = form.find('textarea[name="ProgressDesc"]').val();
+  var title = form.find('input[name="UpdateTitle"]').val();
+  var desc = form.find('textarea[name="UpdateDesc"]').val();
   
   if(form.valid() === true){
+    $("#updateModal").modal('hide');  
     $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
       }
     });
     $.ajax({
-      url: "/progress/create",
+      url: "/updates/create",
       type:'post',
       data: {
         ProjectId : id,
-        ProgressTitle : title,
-        ProgressDesc : desc,
+        UpdateTitle : title,
+        UpdateDesc : desc,
       },
       success: function(result){
           let data = JSON.parse(result);
-          var progress = data.progress
+          var update = data.update
           var options = {year: 'numeric', month: 'long', day: 'numeric' };
-          let date  = new Date(progress[0]['created_at']);
-
-          // Change the current progress text
-          document.getElementById("progress-current-title").textContent = `${progress[0]['title']} (${date.toLocaleDateString("en-US", options)})`
-          document.getElementById("progress-current-description").textContent = progress[0]['description']
-
-          // Progress will be 2 if its not the first progress posted
-          if (progress.length == 2){
-            // Render progress list accordion
-            if (!document.getElementById("info-progress-accordion")){
+          let date  = new Date(update['created_at']);
+          
+          // Change the current update text
+          document.getElementById("update-current-id").value = update['id']
+          document.getElementById("update-current-title").textContent = update['title']
+          document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
+          document.getElementById("update-current-description").textContent = update['description']
+          
+          if (data.prevUpdateHTML){
+            // Render progress list accordion for first time
+            if (!document.getElementById("update-list-accordion")){
               var accordion = `
-              <div class="accordion accordion-flush px-lg-5" id="info-progress-accordion">
+              <div class="accordion accordion-flush px-lg-5" id="update-list-accordion">
                 <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
-                    <h2 class="font-weight-bold">Progress List</h2>
-                    <div id = "previous-progress-accordion" > </div>
+                    <h2 class="font-weight-bold">Update List</h2>
+                    <div id = "previous-update-accordion" > </div>
                 </div>
               </div>`;
+
               document.getElementById("info-update-accordion").insertAdjacentHTML('afterend', accordion);
             }
-      
-            var proj_id = progress[1]['proj_id']
-            var accordionItem = `
-              <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#info-progress-acord-${proj_id}" aria-expanded="false" aria-controls="info-progress-acord-{{$i}}">
-                  <h4 class="accordion-header" id="progress-acord-heading${proj_id}"></h4>
-                </button>
-                <div id="info-progress-acord-${proj_id}" class="accordion-collapse collapse"
-                aria-labelledby="progress-acord-heading${proj_id}" data-bs-parent="#info-progress-accordion">
-                    <div class="accordion-body py-2" id="progress-acord-desc${proj_id}"></div>
-                </div>
-              </div>`
-            // Insert the format for previous item at the top of the list
-            $("#previous-progress-accordion").prepend(accordionItem)
-            
-            // Then insert the string via text content to prevent XSS
-            let date  = new Date(progress[1]['created_at']);
-            document.getElementById("progress-acord-heading" + proj_id).textContent =  `${progress[1]['title']} (${date.toLocaleDateString("en-US", options)})`
-            document.getElementById("progress-acord-desc" + proj_id).textContent = progress[1]['description']
 
-            $("#updateModal").modal('hide');
-        }    
+            // Insert previous update list accordion
+            $("#previous-update-accordion").prepend(data.prevUpdateHTML)
+          }
+          let currentUpdate = $("#update-current-dropdown")
+          currentUpdate.find("button").show()
+
+          var menu = $('#update-current-dropdown')
+          if (menu.find('div').length == 0){
+            menu.html(`
+            <a class="btn circle ms-auto align-self-center " data-bs-toggle="dropdown" aria-expanded="false" disabled><i class="fa-solid fa-ellipsis"></i></a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item editCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateEditModal" data-type="current">Edit</a></li>
+                <li><a class="dropdown-item deleteUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateDeleteModal" data-type="current">Delete</a></li>
+            </ul>`)
+          }
+
+          form[0].reset();
+           
       }
     });
   }
 });
+$(document).on('click', '.editUpdate', setEditModal) 
+$(document).on('click', '.editCurrentUpdate', setEditModal)
+
+function setEditModal(e){
+  var updateType = $(e.target).attr('data-type');
+  var id = $(e.target).attr('data-id');
+ 
+  if(updateType == 'current'){
+    var title = document.getElementById('update-current-title').textContent.trim()
+    var desc = document.getElementById('update-current-description').textContent.trim()
+  }
+  else {
+    var title = document.getElementById('update-title-'+id).textContent.trim()
+    var desc = document.getElementById('update-desc-'+id).textContent.trim()
+  }
+
+  $('#updateEditId').val(id);
+  $('#updateEditType').val(updateType);
+  $('#updateEditTitle').val(title);
+  $('#updateEditDesc').val(desc);
+}
+
+// Save comment edit
+$('#updateEditSubmit').click(function(){
+  let form = $('#updateEditForm')
+  let type = $('#updateEditType').val()
+  var id = $('#updateEditId').val()
+  var title = $('#updateEditTitle').val()
+  var desc = $('#updateEditDesc').val()
+
+  if(form.valid() === true){
+    $("#updateEditModal").modal('hide');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+      url: "/updates/edit",
+      type:'post',
+      data: {
+        UpdateId : id,
+        UpdateTitle : title,
+        UpdateDesc : desc,
+      },
+      success: function(){
+        // Change the current update text
+        if (type == 'current'){
+          document.getElementById("update-current-title").textContent = title
+          document.getElementById("update-current-description").textContent = desc
+        }
+        else {
+          document.getElementById("update-title-" + id).textContent = title
+          document.getElementById("update-desc-" + id).textContent = desc
+        }
+         
+        
+      
+      }
+    });
+  } 
+})
+
+$(document).on('click', '.deleteUpdate', function (e){
+  var type = $(e.target).attr('data-type');
+  if (type == 'current'){
+    var id = $('#update-current-id').val();
+  }
+  else {
+    var id = $(e.target).attr('data-id');
+  }
+  $('#updateDeleteId').val(id);
+  $('#updateDeleteType').val(type);
+  
+})
+
+$('#updateDeleteSubmit').click(function(){
+  var type = $('#updateDeleteType').val();
+  if (type == 'current'){
+    var id = $('#update-current-id').val();
+  }
+  else {
+    var id = $('#updateDeleteId').val();
+  }
+
+  $("#updateDeleteModal").modal('hide');
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $.ajax({
+    url: "/updates/delete",
+    type:'post',
+    data: {
+      UpdateId : id,
+    },
+    success: function(result){
+      let data = JSON.parse(result);
+      var latestUpdate = data.latestUpdate
+   
+      if (type == 'current' && document.getElementById('update-list-accordion')){
+        
+        var options = {year: 'numeric', month: 'long', day: 'numeric' };
+        let date  = new Date(latestUpdate['created_at']);
+
+        document.getElementById("update-current-id").value = latestUpdate['id']
+        document.getElementById("update-current-title").textContent = latestUpdate['title']
+        document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
+        document.getElementById("update-current-description").textContent = latestUpdate['description']
+
+        document.getElementById('previous-update-'+ latestUpdate['id']).remove()
+
+        // Check if the list is empty
+        var list = $('#previous-update-accordion')
+        if (list.find('div').length == 0)
+          document.getElementById('update-list-accordion').remove()
+      }
+      else if(type == 'current') {
+        document.getElementById("update-current-title").textContent = "Project Started"
+        document.getElementById("update-current-date").textContent = ''
+        document.getElementById("update-current-description").textContent = 'The developer has just started the project'
+
+        let currentUpdate = $("#update-current-dropdown")
+        currentUpdate.find("a").hide()
+      }
+      else {
+        document.getElementById('previous-update-' + id).remove()
+        
+        // Check if the list is empty
+        var list = $('#previous-update-accordion')
+        if (list.find('div').length == 0)
+          document.getElementById('update-list-accordion').remove()
+      }
+     
+    
+    }
+  });
+  
+})
+
 
 // Adjust textarea size
 $("#comment-box").on('keydown', function(){
@@ -247,35 +387,104 @@ $('#comment-box').keypress(function(e) {
       },
       success: function(result){
           let data = JSON.parse(result);
-          var comment = data.comment
-          var id = comment['id']
-          let newComment =  
-          `<div class="col-6 mx-auto my-2 comment"> 
-              <div class="row flex-column">
-                <div class="px-4 py-2 col d-flex">
-                  <img class="avatar mr-2" src="/storage/${comment['icon'] ? comment['icon'] : 'avatars/default.png'}">
-                  <div class="d-flex flex-column">
-                    <div class="fw-bold" id="comment-user${id}"></div>
-                    <div id="comment-date${id}"></div>
-                  </div>
-                </div>
-
-                <div class="col px-4 mx-2 py-2" id="comment-body${id}"></div>
-              </div>
-            </div>`
           
-          // Render comment layout
-          $("#commentsList").prepend(newComment)
-          
-          // Set as text content
-          var options = {year: 'numeric', month: 'long', day: 'numeric' };
-          var date  = new Date(comment['created_at']);
-          let Mname = comment['Mname'] ? comment['Mname'] : '' // Check for no middle names
-          document.getElementById("comment-user" + id).textContent = `${comment['Fname']} ${Mname} ${comment['Lname']}`
-          document.getElementById("comment-date" + id).textContent = `(${date.toLocaleDateString("en-US", options)})`
-          document.getElementById("comment-body" + id).textContent = comment['content']
+          // Insert comment
+          $("#commentsList").prepend(data.commentHTML)  
       }
     });
   }
    
 }); 
+
+// https://stackoverflow.com/a/26309195
+// used event delegation for inserted html
+$(document).on('click', '.edit', function(e){
+  let id = $(e.target).attr('data-id')
+  let comment = document.getElementById('comment-'+id).textContent
+  
+  // Prevents submiting the same comment
+  $('#edit-comment-box').on('keyup',function(e){
+    if (comment == e.target.value)
+      $('.saveChanges').prop('disabled', true)
+    else
+      $('.saveChanges').prop('disabled', false)
+
+  })
+  
+  $('#CommentId').val(id)
+  $('#edit-comment-box').val(comment)
+})
+
+// Save comment edit
+$('.saveChanges').click(function(){
+  let form = $('#editForm')
+  let id = $('#CommentId').val()
+  var comment = $('#edit-comment-box').val()
+
+  if(form.valid() === true){
+    $("#editModal").modal('hide');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+      url: "/comments/project/edit",
+      type:'post',
+      data: {
+        CommentId : id,
+        ProjectComment : comment,
+      },
+      success: function(result){
+          let data = JSON.parse(result);
+
+          // Insert comment
+          document.getElementById('comment-'+id).textContent = comment  
+          document.getElementById('comment-'+id+'-date').textContent = data.commentDate + ' (Edited)' 
+      }
+    });
+  } 
+})
+
+$(document).on('click', '.delete', function(e){
+  let id = $(e.target).attr('data-id')
+  let comment = $("#project-comment-" + id)
+  comment.find("button").hide()
+  $('#deleteCommentId').val(id)
+  $('#commentPreview').html(comment.html())
+  comment.find("button").show()
+})
+
+
+// Confirm comment delete
+$('.confirmDelete').click(function(){
+  let id = $('#deleteCommentId').val()
+
+  $("#deleteModal").modal('hide');
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  $.ajax({
+    url: "/comments/project/delete",
+    type:'post',
+    data: {
+      CommentId : id,
+    },
+    success: function(result){
+      let data = JSON.parse(result);
+      
+      if (data.response == "success"){
+        // Delete comment
+        document.getElementById('project-comment-'+id).remove()
+        
+      }
+    }
+  });
+  
+})
+
+$('.dropdown').hover(function(){ 
+  $('.dropdown-toggle', this).trigger('click'); 
+});

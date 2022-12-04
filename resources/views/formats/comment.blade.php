@@ -16,7 +16,7 @@
             <button type="button" class="btn circle ms-auto align-self-center" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
             <ul class="dropdown-menu">
                 <li><button class="dropdown-item edit" type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-id = {{$comment['id']}}>Edit</button></li>
-                <li><button class="dropdown-item" data-commentId = {{$comment['id']}}>Delete</button></li>
+                <li><button class="dropdown-item delete" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id = {{$comment['id']}}>Delete</button></li>
             </ul>
         </div>
     

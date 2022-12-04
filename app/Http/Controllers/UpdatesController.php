@@ -20,7 +20,11 @@ class UpdatesController extends Controller
 
     private function getLatestUpdates(int $id)
     {
-        $query = ProjectUpdates::where('proj_id', $id)->orderBy('created_at', 'desc')->first();
+        $query = ProjectUpdates::where('proj_id', $id)
+                                ->orderBy('created_at', 'desc')
+                                ->join('projects', 'project_updates.proj_id', '=', 'projects.id')
+                                ->select('project_updates.*', 'projects.user_id as dev_id')
+                                ->first();
 
         if ($query) return $query->toArray();
 
@@ -40,12 +44,20 @@ class UpdatesController extends Controller
         
         // Store the previous update html for ajax response
         if($prevUpdate){
-            $viewRender = view('formats.update')->with('update', $prevUpdate)->render();
+            $viewRender = view('formats.update')->with(['update' => $prevUpdate])->render();
         }else
             $viewRender = null;
 
         $json_data = array("update" => $newUpdate->toArray(), "prevUpdateHTML"=> $viewRender);
 
         echo json_encode($json_data);
+    }
+
+    public function edit(Request $request)
+    {
+        $newUpdate = ProjectUpdates::find($request->UpdateId);
+        $newUpdate->title = $request->UpdateTitle;
+        $newUpdate->description = $request->UpdateDesc;
+        $newUpdate->save();
     }
 }

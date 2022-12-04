@@ -167,11 +167,25 @@ $("#updateSubmit").click(function(){
           let date  = new Date(update['created_at']);
 
           // Change the current update text
-          document.getElementById("update-current-title").textContent = `${update['title']} (${date.toLocaleDateString("en-US", options)})`
+          document.getElementById("update-current-title").textContent = update['title']
+          document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
           document.getElementById("update-current-description").textContent = update['description']
+          
+          if (data.prevUpdateHTML){
+            // Render progress list accordion for first time
+            if (!document.getElementById("info-update-accordion")){
+              var accordion = `
+              <div class="accordion accordion-flush px-lg-5" id="info-update-accordion">
+                <div class="accordion-item-container py-2 px-0 px-sm-2 px-md-3 px-lg-5  mb-4">
+                    <h2 class="font-weight-bold">Update List</h2>
+                    <div id = "previous-update-accordion" > </div>
+                </div>
+              </div>`;
 
-          // Insert previous update list accordion
-          if (data.prevUpdate){
+              document.getElementById("info-update-accordion").insertAdjacentHTML('afterend', accordion);
+            }
+
+            // Insert previous update list accordion
             $("#previous-update-accordion").prepend(data.prevUpdateHTML)
           } 
           form[0].reset();
@@ -180,6 +194,68 @@ $("#updateSubmit").click(function(){
     });
   }
 });
+
+$(".editUpdate").click(setModal)
+$(".editCurrentUpdate").click(setModal)
+
+function setModal(e){
+  var updateType = $(e.target).attr('data-type');
+  var id = $(e.target).attr('data-id');
+ 
+  if(updateType == 'current'){
+    var title = document.getElementById('update-current-title').textContent.trim()
+    var desc = document.getElementById('update-current-description').textContent.trim()
+  }
+  else {
+    var title = document.getElementById('update-title-'+id).textContent.trim()
+    var desc = document.getElementById('update-desc-'+id).textContent.trim()
+  }
+  
+  $('#updateEditId').val(id);
+  $('#updateEditType').val(updateType);
+  $('#updateEditTitle').val(title);
+  $('#updateEditDesc').val(desc);
+}
+
+// Save comment edit
+$('#updateEditSubmit').click(function(){
+  let form = $('#updateEditForm')
+  let type = $('#updateEditType').val()
+  var id = $('#updateEditId').val()
+  var title = $('#updateEditTitle').val()
+  var desc = $('#updateEditDesc').val()
+
+  if(form.valid() === true){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+      url: "/updates/edit",
+      type:'post',
+      data: {
+        UpdateId : id,
+        UpdateTitle : title,
+        UpdateDesc : desc,
+      },
+      success: function(){
+        // Change the current update text
+        if (type == 'current'){
+          document.getElementById("update-current-title").textContent = title
+          document.getElementById("update-current-description").textContent = desc
+        }
+        else {
+          document.getElementById("update-title-" + id).textContent = title
+          document.getElementById("update-desc-" + id).textContent = desc
+        }
+         
+        $("#updateEditModal").modal('hide');
+      
+      }
+    });
+  } 
+})
 
 // Adjust textarea size
 $("#comment-box").on('keydown', function(){
@@ -307,11 +383,16 @@ $('.confirmDelete').click(function(){
       
       if (data.response == "success"){
         // Delete comment
+        console.log(id)
         document.getElementById('project-comment-'+id).remove()
-
+        
         $("#deleteModal").modal('hide');
       }
     }
   });
   
 })
+
+$('.dropdown').hover(function(){ 
+  $('.dropdown-toggle', this).trigger('click'); 
+});

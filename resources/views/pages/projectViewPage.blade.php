@@ -194,7 +194,7 @@
           <!-- Campaign tab -->
           <x-project.view.campaign :project="$project"/>
           <!-- Update tab -->
-          <x-project.view.updates :id="$project['id']" :updates="$project['updates']"/>
+          <x-project.view.updates :id="$project['id']" :dev="$project['user_id']" :updates="$project['updates']"/>
           <!-- comments item tab -->
           <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
           <!-- Backers item tab -->

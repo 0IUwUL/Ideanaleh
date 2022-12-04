@@ -56,8 +56,6 @@ class ProjectController extends Controller
         else{
             return redirect('/');
         }
-
-        
     }
 
 
@@ -401,6 +399,8 @@ class ProjectController extends Controller
         }
         else{
             $dataVar = new Projects;
+            $dataVar->logo = null;
+            $dataVar->banner = null;
         }
         $dataVar->user_id = Auth::id();
         $dataVar->title = $requestArg->ProjTitle;
@@ -410,8 +410,6 @@ class ProjectController extends Controller
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->target_milestone = $requestArg->ProjMilestone;
         if($requestArg->ProjVideo) $dataVar->yt_link = $this->_getYoutubeId($requestArg->ProjVideo);
-        $dataVar->logo = null;
-        $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
 

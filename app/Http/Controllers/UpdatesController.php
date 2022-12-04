@@ -18,14 +18,15 @@ class UpdatesController extends Controller
         return null;
     }
 
-    private function getLatestUpdates(int $id)
+    public function getLatestUpdates(int $id)
     {
         $query = ProjectUpdates::where('proj_id', $id)
-                                ->orderBy('created_at', 'desc')
+                                ->latest()
                                 ->join('projects', 'project_updates.proj_id', '=', 'projects.id')
                                 ->select('project_updates.*', 'projects.user_id as dev_id')
                                 ->first();
-
+                                
+        
         if ($query) return $query->toArray();
 
         return null;
@@ -59,5 +60,19 @@ class UpdatesController extends Controller
         $newUpdate->title = $request->UpdateTitle;
         $newUpdate->description = $request->UpdateDesc;
         $newUpdate->save();
+    }
+
+    public function delete(Request $request)
+    {
+        $update = ProjectUpdates::find($request->UpdateId)->toArray();
+
+        // Delete by ID
+        ProjectUpdates::destroy($request->UpdateId);
+        
+        $latestUpdate = $this->getLatestUpdates($update['proj_id']);
+
+        $json_data = array("latestUpdate" => $latestUpdate);
+ 
+        echo json_encode($json_data);
     }
 }

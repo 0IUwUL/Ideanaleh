@@ -47,13 +47,13 @@
                     {{-- Note to future RamonDev: Get the code for the bars in the SE2 project -RamonDev --}}
                     <div class="progress-bars row g-0 mt-3">
                         <div class="progress mx-4 mt-5" style="width: 90%;">
-                            <div class="progress-bar" role="progressbar" style="width: 25%; height:20px; font-weight:bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="progress-bar" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2" style>PHP 0.00 / 60000.00 Target Donations</p>
+                        <p class="product-price mx-4 mt-2" style>PHP 0.00 / {{number_format($project['target_amt'],2)}} Target Donations</p>
                         <div class="progress mx-4" style="width: 90%;">
-                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 25%; height:20px; font-weight:bold;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2 mb-4" style>PHP 0.00 / 30000.00 Milestone Donations</p>
+                        <p class="product-price mx-4 mt-2 mb-4" style>PHP 0.00 / {{number_format($project['target_milestone'],2)}} Milestone Donations</p>
                     </div>
 
 

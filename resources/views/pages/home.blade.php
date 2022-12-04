@@ -18,7 +18,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <h3 class="mb-3">@if(Auth::check()) Projects You May Like @else Popular Projects @endif </h3>
+          <h3 class="mb-3">@if(Auth::check()) Projects That You May Like @else Popular Projects @endif </h3>
         </div>
         <div class="container align-items-center justify-content-center text-center">
           <div class="col-12 text-right">
@@ -136,7 +136,7 @@
               <div class="row">
               @if(Auth::check())
                   @foreach($mode['recommend'] as $index => $category)
-                    @if($index>2 && $index<6)
+                    @if($index>5 && $index<9)
                     <div class="col-md-4 mb-3">
                       <div class="card shadow-sm bg-body rounded">
                           <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">

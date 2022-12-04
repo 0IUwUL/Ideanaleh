@@ -109,7 +109,8 @@ class UserPreferenceController extends Controller
         if(Auth::check()){
             $currentUserVar = $this->_getCurrentUser();
             if($currentUserVar->followed){
-                if(Str::contains($currentUserVar->followed, $projectIdArg)){
+                $initialFollowedVar = explode(',', $currentUserVar->followed);
+                if(in_array($projectIdArg, $initialFollowedVar)){
                     return(true);
                 }
                 else{
@@ -130,7 +131,8 @@ class UserPreferenceController extends Controller
         if(Auth::check()){
             $currentUserVar = $this->_getCurrentUser();
             if($currentUserVar->supported){
-                if(Str::contains($currentUserVar->supported, $projectIdArg)){
+                $initialSupportedVar = explode(',', $currentUserVar->supported);
+                if(in_array($projectIdArg, $initialSupportedVar)){
                     return(true);
                 }
                 else{

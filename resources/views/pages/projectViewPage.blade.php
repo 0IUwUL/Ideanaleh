@@ -11,7 +11,7 @@
   </div>
 </div>
 <section class="container-fluid products py-5" id=product>
-    <div class="container">
+  <div class="container">
         <!-- mobile -->
       <h1 class="product-name product-mobile-name my-5 d-block d-lg-none text-center">{{$project['title']}}</h1>
       <div class="tags product-mobile-name d-lg-none my-3 d-block text-center">
@@ -81,7 +81,7 @@
                   </div>
 
                   {{-- DONATE BUTTON --}}
-                  <a href="http://localhost:8000/project/view/{{$project['id']}}/#tiers-section"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                  <a href="http://localhost:8000/project/view/{{$project['id']}}#tiers-section"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
                 </div>  
             </div>
             
@@ -94,8 +94,7 @@
         </p>
         <a class="text-decoration-none text-light">Read More</a>
       </div>
-    </div>
-  </section>
+</section>
 <!-- Product Section end -->
 
 <!-- notice -->
@@ -221,7 +220,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between p-3">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                         
                                     </div>
                                     <div class="text-muted">9 mins</div>
@@ -244,7 +243,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between p-3">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                         
                                     </div>
                                     <div class="text-muted">9 mins</div>
@@ -267,7 +266,7 @@
                               </div>
                               <div class="d-flex justify-content-between p-3">
                                   <div class="btn-group">
-                                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                      <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                       
                                   </div>
                                   <div class="text-muted">9 mins</div>
@@ -289,8 +288,6 @@
       </div>
     </section>
     
-    </div>
-  </section>
 
   <!-- Vertically centered modal -->
 <div class="modal fade" id="amtModal" tabindex="-1" aria-labelledby="amtModalLabel" aria-hidden="true">

@@ -110,7 +110,7 @@
         <div class="w-100 d-block d-xl-none"></div>
         <div class="col">
             <label for="formVideo" class="form-label">Link Project Video Promo (optional)</label>
-            <input class="form-control" name = "ProjVideo"  type="text" id="formVideo" value = {{array_key_exists('project', $data) ? 'https://youtu.be/'.$data['project']['yt_link'] : ''}}>
+            <input class="form-control" name = "ProjVideo"  type="text" id="formVideo" value = {{isset($data['project']['yt_link']) ? 'https://youtu.be/'.$data['project']['yt_link'] : ''}}>
         </div>
     </div>
     

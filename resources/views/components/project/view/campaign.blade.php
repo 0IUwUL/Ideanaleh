@@ -9,7 +9,6 @@
         allowfullscreen></iframe>
         @endif
       </div>
-      <p class="text-center">{{$project['yt_link']}}</p>
       <p class="text-center">{{$project['target_date']}}</p>
     </div>
   </div>

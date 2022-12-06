@@ -124,7 +124,7 @@ function GoogleForm(){
                 required: true,
                 minlength: 3,
             },
-            'GFollowed[]': {
+            'Followed[]': {
                 required: true,
                 minlength: 3,
             },
@@ -134,7 +134,7 @@ function GoogleForm(){
                 required: "You must check at least 3 categories",
                 minlength: "Check at least {0} categories"
             },
-            'GFollowed[]': {
+            'Followed[]': {
                 required: "You must follow at least 3 projects",
                 minlength: "Check at least {0} projects"
             },

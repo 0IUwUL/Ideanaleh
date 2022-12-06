@@ -497,8 +497,9 @@ class ProjectController extends Controller
                                 ->toArray();
             $project[$categories] = $sample;
         }
-        
-        $json_data = array("response" => $project);
+        $viewRender = view('formats.projects')->with(['items'=> $project])->render();
+        $json_data = array('item' => $viewRender);
+        // $json_data = array("response" => $project);
         echo json_encode($json_data);
     }
 

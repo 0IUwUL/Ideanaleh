@@ -85,6 +85,7 @@ function validate(){
 
             });
         }else if ($('#SignUpModal3').is(":visible")){
+            $('#SignUpModal3').modal('hide');
             // getting categories checked
             let cate = [];
             var max = form.find('input[name="Categs[]"]:checked')
@@ -105,27 +106,8 @@ function validate(){
                 },
                 success: function(result){
                     let data = JSON.parse(result);
-                    const categories = data.response;
-                    // formatting projects from categories picked
-                    let header =
-                    jQuery.map(categories, (element, keys) => {
-                        var elementArray = Object.values(element);
-                        return `<div class = "Category_header">
-                                    <h3>${keys}</h3>
-                                        <hr class = "create">
-                                            <div class = "content">` +
-                                        elementArray.map(i => {
-                                            return `
-                                                <span class = "list_category">${i['title']}<input type="checkbox" name="Followed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
-                                            `
-                                            }).join("")
-                                        + `
-                                            </div>
-                                </div>`
-                      })
                     // inserting to html
-                    document.querySelector('#Category_content').innerHTML = header.join("");
-                    $('#SignUpModal3').modal('hide');
+                    $('#Category_content').html(data.item)
                     $('#SignUpModal4').modal('show');
                 }
             });
@@ -142,7 +124,7 @@ function GoogleForm(){
                 required: true,
                 minlength: 3,
             },
-            'GFollowed[]': {
+            'Followed[]': {
                 required: true,
                 minlength: 3,
             },
@@ -152,7 +134,7 @@ function GoogleForm(){
                 required: "You must check at least 3 categories",
                 minlength: "Check at least {0} categories"
             },
-            'GFollowed[]': {
+            'Followed[]': {
                 required: "You must follow at least 3 projects",
                 minlength: "Check at least {0} projects"
             },
@@ -160,6 +142,8 @@ function GoogleForm(){
     });
 
     if (form.valid() === true){
+        $('#SignUpModal5').modal('hide');
+        $('#SignUpModal6').modal('show');
         if ($('#SignUpModal5').is(":visible")){
             // getting categories checked
             let cate = [];
@@ -181,28 +165,8 @@ function GoogleForm(){
                 },
                 success: function(result){
                     let data = JSON.parse(result);
-                    const categories = data.response;
-                    // formatting projects from categories picked
-                    let Gheader =
-                    jQuery.map(categories, (element, keys) => {
-                        var elementArray = Object.values(element);
-                        return `<div class = "Category_header">
-                                    <h3>${keys}</h3>
-                                        <hr class = "create">
-                                            <div class = "content">` +
-                                        elementArray.map(i => {
-                                            return `
-                                                <span class = "list_category">${i['title']}<input type="checkbox" name="GFollowed[]" class="form-check-input btn_follow" value = ${i['id']}></span>
-                                            `
-                                            }).join("")
-                                        + `
-                                            </div>
-                                </div>`
-                      })
                     // inserting to html
-                    document.querySelector('#GCategory_content').innerHTML = Gheader.join("");
-                    $('#SignUpModal5').modal('hide');
-                    $('#SignUpModal6').modal('show');
+                    $('#GCategory_content').html(data.item)
                 }
             });
         }

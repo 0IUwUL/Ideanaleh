@@ -410,6 +410,9 @@ class ProjectController extends Controller
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->target_milestone = $requestArg->ProjMilestone;
         if($requestArg->ProjVideo) $dataVar->yt_link = $this->_getYoutubeId($requestArg->ProjVideo);
+        else $dataVar->yt_link = null;
+        $dataVar->logo = null;
+        $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
 

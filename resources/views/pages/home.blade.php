@@ -52,7 +52,7 @@
                             </div>
                             <div class="d-flex justify-content-between p-3">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     
                                 </div>
                                 <div class="text-muted">9 mins</div>
@@ -73,8 +73,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between p-3">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        
+                                        <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     </div>
                                     <div class="text-muted">9 mins</div>
                                 </div>
@@ -99,7 +98,7 @@
                           </div>
                           <div class="d-flex justify-content-between p-3">
                               <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                  <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
                               <div class="text-muted">9 mins</div>
@@ -120,7 +119,7 @@
                           </div>
                           <div class="d-flex justify-content-between p-3">
                               <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                  <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
                               <div class="text-muted">9 mins</div>
@@ -146,7 +145,7 @@
                           </div>
                           <div class="d-flex justify-content-between p-3">
                               <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                  <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
                               <div class="text-muted">9 mins</div>
@@ -167,7 +166,7 @@
                             </div>
                             <div class="d-flex justify-content-between p-3">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     
                                 </div>
                                 <div class="text-muted">9 mins</div>
@@ -191,7 +190,7 @@
         <p class="hero__text">
           A Platform that serves to help Creators, Inventors, Innovators to Kickstart their Dream Projects.
         </p>
-        @if ($mode)
+        @if ($mode['dev'])
         <a href="{{ route('project.create') }}" id = "modeToast" class="hero__btn hero__btn--light btn" data-mode = {{Session::get('mode')}}>Get Started!</a>
         @else
         <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{Auth::check() ? 'logI' : 'logO'}}>Get Started!</a>

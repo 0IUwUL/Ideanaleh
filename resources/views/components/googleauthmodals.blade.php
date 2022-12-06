@@ -79,7 +79,7 @@
             </div>
             <div class="mt-5" id = "GCategory_content">
             </div>
-            <label for="GFollowed[]" class="error"></label>
+            <label for="Followed[]" class="error"></label>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-target="#SignUpModal5" data-bs-toggle="modal">Back</button>

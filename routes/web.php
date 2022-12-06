@@ -75,6 +75,7 @@ Route::controller(ProjectController::class)->prefix('project')->name('project.')
 Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')->group(function () {
     Route::middleware('auth')->post('/create', 'create')->name('create');
     Route::middleware('auth')->post('/edit', 'edit')->name('edit');
+    Route::middleware('auth')->post('/delete', 'delete')->name('delete');
 });
 
 // Project comments routes

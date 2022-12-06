@@ -47,7 +47,7 @@ class RegistrationController extends Controller
         $user = array(
             'pref_categs' => $categs
         );
-        $followed = implode(',', $request->GFollowed);
+        $followed = implode(',', $request->Followed);
         User::where('id', $userId)->update($user);
         $data = array(
             'id' => $userId,

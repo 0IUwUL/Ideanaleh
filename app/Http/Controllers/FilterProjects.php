@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 
 use App\Models\Projects; 
 use App\Http\Controllers\UserPreferenceController;
+use Illuminate\Support\Arr;
 
 class FilterProjects extends Controller
 {
     public function index()
     {
         $projectDataVar = array('projects'=>Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+                                                    ->orderBy('created_at', 'desc')
                                                     ->get()
                                                     ->toArray()
         );
+        $projectDataVar['projects'] = $this->sort('followed', $projectDataVar['projects']);
         $projectDataVar = array_merge($projectDataVar, ['categories' => config('category')[0]]);
         $options = array(
             'followed' => 'Most Followed', 
@@ -22,35 +25,46 @@ class FilterProjects extends Controller
             'Newest' => 'Newest',
         );
         $projectDataVar = array_merge($projectDataVar, ['options' => $options]);
-        $final = $this->_getPreferences('followed');
-        return view('pages.display_projects')->with(['ProjArg'=> $projectDataVar, 'item' => $final]);
+        return view('pages.display_projects')->with(['ProjArg'=> $projectDataVar]);
     }
 
-    public function Filter(string $selected){
-        if($selected == 'Newest'){
-            $final = null;
-            $projectDataVar = Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+    public function Filter(Request $request){
+        $selected = $request->option;
+        $category = $request->category;
+        // get projects
+        if($category){
+            $hold = Projects::where('category', '=', $category)
+                                        ->select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+                                        ->orderBy('created_at', 'desc')
+                                        ->get()
+                                        ->toArray();
+        }else{
+            $hold = Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
                                     ->orderBy('created_at', 'desc')
                                     ->get()
-                                    ->toArray();     
-        }else{
-            $final = $this->_getPreferences($selected);
-            $projectDataVar = Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
-                                    ->get()
-                                    ->toArray();           
+                                    ->toArray(); 
         }
-        $viewRender = view('formats.filter')->with(['items'=> $final, 'ProjArg' => $projectDataVar])->render();
-        $json_data = array('item' => $viewRender);
-        echo json_encode($json_data);
-    }
-
-    public function Category(string $selected){
-        $final = null;
-        $projectDataVar = Projects::where('category', '=', $selected)
-                                ->select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
-                                ->get()
-                                ->toArray();           
-        $viewRender = view('formats.filter')->with(['items'=> $final, 'ProjArg' => $projectDataVar])->render();
+        
+        if($selected != 'Newest'){
+            $projectDataVar = $this->sort($selected, $hold);
+            // foreach($hold as $item){
+            //     $item[$selected] = 0;
+            //     array_push($hold1, $item);
+            // }
+            // $order = $this->_getPreferences($selected);
+            // foreach($hold1 as $id => $project){
+            //     foreach($order as $key => $value){
+            //         if($key == $project['id'])
+            //             $project[$selected] = $value;
+            //     }
+            //     array_push($projectDataVar, $project);
+            // }
+            // // sort array by count of selected
+            // array_multisort (array_column($projectDataVar, $selected), SORT_DESC, $projectDataVar);
+        }else{
+            $projectDataVar = $hold;
+        }
+        $viewRender = view('formats.filter')->with(['ProjArg' => $projectDataVar])->render();
         $json_data = array('item' => $viewRender);
         echo json_encode($json_data);
     }
@@ -66,6 +80,27 @@ class FilterProjects extends Controller
         $final = array_count_values($pref);
         arsort($final);
         return $final;
+    }
+
+    private function sort(string $selected, array $projects){
+        $projectDataVar = []; $hold1 = [];
+        
+        // pre assign values
+        foreach($projects as $item){
+            $item[$selected] = 0;
+            array_push($hold1, $item);
+        }
+        $order = $this->_getPreferences($selected);
+        foreach($hold1 as $id => $project){
+            foreach($order as $key => $value){
+                if($key == $project['id'])
+                    $project[$selected] = $value;
+            }
+            array_push($projectDataVar, $project);
+        }
+        // sort array by count of selected
+        array_multisort (array_column($projectDataVar, $selected), SORT_DESC, $projectDataVar);
+        return $projectDataVar;
     }
 
 }

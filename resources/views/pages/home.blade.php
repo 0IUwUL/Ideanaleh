@@ -46,7 +46,9 @@
                       <div class="col-md-4 mb-3">
                         <div class="card img-hover shadow-sm bg-body rounded">
                           <div class="img-holder">
-                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                            <a href={{ url('project/view/'.$mode['recommend'][$index]['id']) }}>
+                              <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                            </a>
                           </div>
                             <div class="card-body text-dark">
                               <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
@@ -69,7 +71,9 @@
                           <div class="col-md-4 mb-3">
                             <div class="card img-hover shadow-sm bg-body rounded">
                               <div class="img-holder">
-                                <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                                <a href={{ url('project/view/'.$mode['popular'][$index]['id']) }}>
+                                  <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                                </a>
                               </div>
                                 <div class="card-body text-dark">
                                   <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
@@ -96,7 +100,9 @@
                     <div class="col-md-4 mb-3">
                       <div class="card img-hover shadow-sm bg-body rounded">
                         <div class="img-holder">
-                          <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          <a href={{ url('project/view/'.$mode['recommend'][$index]['id']) }}>
+                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          </a>
                         </div>
                           <div class="card-body text-dark">
                             <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
@@ -119,7 +125,9 @@
                     <div class="col-md-4 mb-3">
                       <div class="card img-hover shadow-sm bg-body rounded">
                         <div class="img-holder">
-                          <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                          <a href={{ url('project/view/'.$mode['popular'][$index]['id']) }}>
+                            <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                          </a>
                         </div>
                           <div class="card-body text-dark">
                             <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
@@ -147,7 +155,9 @@
                     <div class="col-md-4 mb-3">
                       <div class="card img-hover shadow-sm bg-body rounded">
                         <div class="img-holder">
-                          <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          <a href={{ url('project/view/'.$mode['recommend'][$index]['id']) }}>
+                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          </a>
                         </div>
                           <div class="card-body text-dark">
                             <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
@@ -170,7 +180,9 @@
                       <div class="col-md-4 mb-3">
                         <div class="card img-hover shadow-sm bg-body rounded">
                           <div class="img-holder">
-                            <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                            <a href={{ url('project/view/'.$mode['popular'][$index]['id']) }}>
+                              <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                            </a>
                           </div>
                             <div class="card-body text-dark">
                               <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>

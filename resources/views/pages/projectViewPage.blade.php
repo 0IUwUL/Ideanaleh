@@ -214,7 +214,9 @@
                           <div class="col-md-4 mb-3">
                             <div class="card img-hover shadow-sm bg-body rounded">
                               <div class="img-holder">
-                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                <a href={{ url('project/view/'.$category['id']) }}>
+                                  <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                </a>
                               </div>
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
@@ -239,7 +241,9 @@
                           <div class="col-md-4 mb-3">
                             <div class="card img-hover shadow-sm bg-body rounded">
                               <div class="img-holder">
-                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                <a href={{ url('project/view/'.$category['id']) }}>
+                                  <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                                </a>
                               </div>
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
@@ -264,7 +268,9 @@
                         <div class="col-md-4 mb-3">
                           <div class="card img-hover shadow-sm bg-body rounded">
                             <div class="img-holder">
-                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                              <a href={{ url('project/view/'.$category['id']) }}>
+                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                              </a>
                             </div>
                             <div class="card-body text-dark">
                               <h4 class="card-title">{{$category['title']}}</h4>

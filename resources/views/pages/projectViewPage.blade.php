@@ -212,54 +212,10 @@
                         @foreach($project['recommend'][0] as $index => $category)
                         @if($index<3) 
                           <div class="col-md-4 mb-3">
-                              <div class="card shadow-sm bg-body rounded">
+                            <div class="card img-hover shadow-sm bg-body rounded">
+                              <div class="img-holder">
                                 <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
-                                <div class="card-body text-dark">
-                                  <h4 class="card-title">{{$category['title']}}</h4>
-                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
-                                </div>
-                                <div class="d-flex justify-content-between p-3">
-                                    <div class="btn-group">
-                                        <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
-                                        
-                                    </div>
-                                    <div class="text-muted">{{$category['date']}}</div>
-                                </div>
                               </div>
-                          </div>
-                        @endif
-                        @endforeach
-                    </div><br>
-                    <div class="row">
-                      <h2>Other Projects That You May Like</h1>
-                        @foreach($project['recommend'][1] as $index => $category)
-                        @if($index < 3)
-                          <div class="col-md-4 mb-3">
-                              <div class="card shadow-sm bg-body rounded">
-                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
-                                <div class="card-body text-dark">
-                                  <h4 class="card-title">{{$category['title']}}</h4>
-                                    <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
-                                </div>
-                                <div class="d-flex justify-content-between p-3">
-                                    <div class="btn-group">
-                                        <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
-                                        
-                                    </div>
-                                    <div class="text-muted">{{$category['date']}}</div>
-                                </div>
-                            </div>
-                          </div>
-                        @endif
-                        @endforeach
-                  @else
-                  <div class="row">
-                    <h2>Popular Projects</h1>
-                      @foreach($project['popular'][0] as $index => $category)
-                      @if($index<3) 
-                        <div class="col-md-4 mb-3">
-                            <div class="card shadow-sm bg-body rounded">
-                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
                               <div class="card-body text-dark">
                                 <h4 class="card-title">{{$category['title']}}</h4>
                                   <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
@@ -272,7 +228,57 @@
                                   <div class="text-muted">{{$category['date']}}</div>
                               </div>
                             </div>
+                          </div>
+                        @endif
+                        @endforeach
+                    </div><br>
+                    <div class="row">
+                      <h2>Other Projects That You May Like</h1>
+                        @foreach($project['recommend'][1] as $index => $category)
+                        @if($index < 3)
+                          <div class="col-md-4 mb-3">
+                            <div class="card img-hover shadow-sm bg-body rounded">
+                              <div class="img-holder">
+                                <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                              </div>
+                              <div class="card-body text-dark">
+                                <h4 class="card-title">{{$category['title']}}</h4>
+                                  <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                              </div>
+                              <div class="d-flex justify-content-between p-3">
+                                  <div class="btn-group">
+                                      <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
+                                      
+                                  </div>
+                                  <div class="text-muted">{{$category['date']}}</div>
+                              </div>
+                          </div>
                         </div>
+                        @endif
+                        @endforeach
+                  @else
+                  <div class="row">
+                    <h2>Popular Projects</h1>
+                      @foreach($project['popular'][0] as $index => $category)
+                      @if($index<3) 
+                        <div class="col-md-4 mb-3">
+                          <div class="card img-hover shadow-sm bg-body rounded">
+                            <div class="img-holder">
+                              <img src="{{asset('storage/'.$category['banner']);}} " loading="lazy">
+                            </div>
+                            <div class="card-body text-dark">
+                              <h4 class="card-title">{{$category['title']}}</h4>
+                                <p class="card-text text-truncate" style="max-height: 10vh">{{$category['description']}}</p>
+                            </div>
+                            <div class="d-flex justify-content-between p-3">
+                                <div class="btn-group">
+                                    <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
+                                    
+                                </div>
+                                <div class="text-muted">{{$category['date']}}</div>
+                            </div>
+                          </div>
+                      </div>
                       @endif
                       @endforeach
                   </div><br>

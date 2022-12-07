@@ -55,7 +55,7 @@
                                     <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     
                                 </div>
-                                <div class="text-muted">9 mins</div>
+                                <div class="text-muted">{{$mode['recommend'][$index]['date']}}</div>
                             </div>
                         </div>
                       </div>
@@ -75,7 +75,7 @@
                                     <div class="btn-group">
                                         <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     </div>
-                                    <div class="text-muted">9 mins</div>
+                                    <div class="text-muted">{{$mode['popular'][$index]['date']}}</div>
                                 </div>
                             </div>
                           </div>
@@ -101,7 +101,7 @@
                                   <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="text-muted">{{$mode['recommend'][$index]['date']}}</div>
                           </div>
                       </div>
                     </div>
@@ -122,7 +122,7 @@
                                   <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="text-muted">{{$mode['popular'][$index]['date']}}</div>
                           </div>
                       </div>
                     </div>
@@ -148,7 +148,7 @@
                                   <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="text-muted">{{$mode['recommend'][$index]['date']}}</div>
                           </div>
                       </div>
                     </div>
@@ -169,7 +169,7 @@
                                     <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     
                                 </div>
-                                <div class="text-muted">9 mins</div>
+                                <div class="text-muted">{{$mode['popular'][$index]['date']}}</div>
                             </div>
                         </div>
                       </div>

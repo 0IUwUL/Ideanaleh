@@ -223,7 +223,7 @@
                                         <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                         
                                     </div>
-                                    <div class="text-muted">9 mins</div>
+                                    <div class="text-muted">{{$category['date']}}</div>
                                 </div>
                               </div>
                           </div>
@@ -246,7 +246,7 @@
                                         <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                         
                                     </div>
-                                    <div class="text-muted">9 mins</div>
+                                    <div class="text-muted">{{$category['date']}}</div>
                                 </div>
                             </div>
                           </div>
@@ -269,7 +269,7 @@
                                       <a type="button" href={{ url('project/view/'.$category['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                       
                                   </div>
-                                  <div class="text-muted">9 mins</div>
+                                  <div class="text-muted">{{$category['date']}}</div>
                               </div>
                             </div>
                         </div>

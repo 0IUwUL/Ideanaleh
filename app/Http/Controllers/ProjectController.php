@@ -206,12 +206,12 @@ class ProjectController extends Controller
         // get rules + confidence
         // $assoc = $associator->getRules();
         // for ($i = 0; $i < count($assoc); $i++) {
-        //     $aturan[$i]['Association_Rule'] = implode(",",$assoc[$i]['antecedent']);
-        //     $aturan[$i]['result'] = implode(",",$assoc[$i]['consequent']);
-        //     $aturan[$i]['support_AUB'] = $assoc[$i]['support'];
-        //     $aturan[$i]['confidence'] = $assoc[$i]['confidence'];
+        //     $rules[$i]['Association_Rule'] = implode(",",$assoc[$i]['antecedent']);
+        //     $rules[$i]['result'] = implode(",",$assoc[$i]['consequent']);
+        //     $rules[$i]['support_AUB'] = $assoc[$i]['support'];
+        //     $rules[$i]['confidence'] = $assoc[$i]['confidence'];
         // }
-        // echo"<pre>"; print_r($aturan); die();
+        // echo"<pre>"; print_r($rules); die();
 
 
         // //get support/frequency

@@ -203,6 +203,41 @@ class ProjectController extends Controller
         $associator->train($prefList, $labels);
         $frequent = $associator->apriori();
         
+        // get rules + confidence
+        // $assoc = $associator->getRules();
+        // for ($i = 0; $i < count($assoc); $i++) {
+        //     $aturan[$i]['Association_Rule'] = implode(",",$assoc[$i]['antecedent']);
+        //     $aturan[$i]['result'] = implode(",",$assoc[$i]['consequent']);
+        //     $aturan[$i]['support_AUB'] = $assoc[$i]['support'];
+        //     $aturan[$i]['confidence'] = $assoc[$i]['confidence'];
+        // }
+        // echo"<pre>"; print_r($aturan); die();
+
+
+        // //get support/frequency
+        // for ($i = 0; $i <= count($frequent); $i++) {
+        //     if (!empty($frequent[$i])) {
+        //         for ($j = 0; $j <= count($frequent[$i]); $j++) {
+        //             if (!empty($frequent[$i][$j])) {
+        //                 $tempVar = $frequent[$i][$j];
+        //                 $iteration[$i][$j]['itemset'] = implode(",", $tempVar);
+        //                 $iteration[$i][$j]['support'] = $associator->support($tempVar);
+        //                 $iteration[$i][$j]['frequency'] = $associator->frequency($tempVar);
+                        
+        //             }
+        //         }
+        //     }
+        // }
+        // echo "<pre>"; print_r($iteration);
+        // echo "<pre>"; print_r($frequent[1][0]); print_r($frequent[4][0]);
+        // print_r($associator->confidence($frequent[1][0],$frequent[4][0]));
+        // echo "<pre>"; print_r($frequent); print_r($associator->support($frequent[1][0])); die();
+
+
+        //support = Freq(X,Y)/N
+        //Confidence = Freq(X,Y)/Freq(X)
+        //Lift = Support / Sup(X) * Sup(Y)
+
         //store frequent itemsets for recommendation
         $predict = $associator->predict(reset($frequent[count($frequent[count($frequent)])])); 
 

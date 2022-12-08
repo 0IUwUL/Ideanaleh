@@ -31,9 +31,9 @@
         </nav>
     </div>
     <hr>
-    <div class="container">
-        <div class="row gy-3" id="content_projects">
-            @foreach($ProjArg['projects'] as $project)
+    <div class="container mt-5">
+        <div class="row gy-5" id="content_projects">
+            @foreach($ProjArg['projects']->items() as $project)
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
@@ -49,6 +49,7 @@
             @endforeach
         </div>
     </div>
+        {{$ProjArg['projects']->links()}}
 </div>
 
 @endsection

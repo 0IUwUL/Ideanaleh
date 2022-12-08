@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Projects; 
 use App\Http\Controllers\UserPreferenceController;
-use Illuminate\Support\Arr;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FilterProjects extends Controller
 {
@@ -44,26 +46,12 @@ class FilterProjects extends Controller
                                     ->get()
                                     ->toArray(); 
         }
-        
         if($selected != 'Newest'){
             $projectDataVar = $this->sort($selected, $hold);
-            // foreach($hold as $item){
-            //     $item[$selected] = 0;
-            //     array_push($hold1, $item);
-            // }
-            // $order = $this->_getPreferences($selected);
-            // foreach($hold1 as $id => $project){
-            //     foreach($order as $key => $value){
-            //         if($key == $project['id'])
-            //             $project[$selected] = $value;
-            //     }
-            //     array_push($projectDataVar, $project);
-            // }
-            // // sort array by count of selected
-            // array_multisort (array_column($projectDataVar, $selected), SORT_DESC, $projectDataVar);
         }else{
-            $projectDataVar = $hold;
+            $projectDataVar = $this->paginate($hold);
         }
+
         $viewRender = view('formats.filter')->with(['ProjArg' => $projectDataVar])->render();
         $json_data = array('item' => $viewRender);
         echo json_encode($json_data);
@@ -100,7 +88,16 @@ class FilterProjects extends Controller
         }
         // sort array by count of selected
         array_multisort (array_column($projectDataVar, $selected), SORT_DESC, $projectDataVar);
+        $projectDataVar = $this->paginate($projectDataVar);
+        $projectDataVar->withPath('/main');
         return $projectDataVar;
+    }
+    // paginate
+    public function paginate($items, $perPage = 6, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
 }

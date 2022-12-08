@@ -654,6 +654,10 @@ hr.create{
   padding: 1rem;
 }
 
+.Filter ul .disabled:hover{
+  cursor:not-allowed;
+}
+
 /* card image */
 .img-hover {
   overflow: hidden;

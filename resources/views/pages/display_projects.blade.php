@@ -33,7 +33,7 @@
     <hr>
     <div class="container mt-5">
         <div class="row g-5" id="content_projects">
-            @foreach($ProjArg['projects']->items() as $project)
+            @foreach($ProjArg['projects'] as $project)
                 <div class="col-md-6">
                     <div class="card h-100">
                         <div class="card-img">
@@ -68,7 +68,6 @@
             </div>
         </div>
     </div>
-        {{$ProjArg['projects']->links()}}
 </div>
 
 @endsection

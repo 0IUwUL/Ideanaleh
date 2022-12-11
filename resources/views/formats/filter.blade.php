@@ -1,4 +1,4 @@
-@foreach($ProjArg->items() as $project)
+@foreach($ProjArg as $project)
     <div class="col-md-6">
         <div class="card h-100">
             <div class="card-img">

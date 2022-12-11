@@ -49,7 +49,7 @@ class FilterProjects extends Controller
         if($selected != 'Newest'){
             $projectDataVar = $this->sort($selected, $hold);
         }else{
-            $projectDataVar = $this->paginate($hold);
+            $projectDataVar = $hold;
         }
 
         $viewRender = view('formats.filter')->with(['ProjArg' => $projectDataVar])->render();
@@ -88,16 +88,7 @@ class FilterProjects extends Controller
         }
         // sort array by count of selected
         array_multisort (array_column($projectDataVar, $selected), SORT_DESC, $projectDataVar);
-        $projectDataVar = $this->paginate($projectDataVar);
-        $projectDataVar->withPath('/main');
         return $projectDataVar;
-    }
-    // paginate
-    public function paginate($items, $perPage = 6, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
 }

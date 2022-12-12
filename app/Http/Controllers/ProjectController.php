@@ -112,6 +112,10 @@ class ProjectController extends Controller
                         ->get()
                 ),
                 true);
+            if(!empty(array_filter($products[$list]))) {
+                $timeForHumans = array('date' => Carbon::createFromTimeStamp(strtotime($products[$list][0]['created_at']))->diffForHumans());
+                $products[$list][0] = array_merge($products[$list][0], $timeForHumans);
+            }
             $popular = array_merge($popular,$products[$list]);
             
         }
@@ -127,6 +131,7 @@ class ProjectController extends Controller
 
         //get all project under the visited page category
         //id,!=,Auth::id();
+        //for home page
         if($projectDataArg==null){
             $project = json_decode(
                 json_encode(
@@ -137,7 +142,7 @@ class ProjectController extends Controller
                 ),
                 true);
         }
-        else{
+        else{ //for project view page
             $project = json_decode(
                 json_encode(
                     DB::table('projects')
@@ -203,6 +208,41 @@ class ProjectController extends Controller
         $associator->train($prefList, $labels);
         $frequent = $associator->apriori();
         
+        // get rules + confidence
+        // $assoc = $associator->getRules();
+        // for ($i = 0; $i < count($assoc); $i++) {
+        //     $rules[$i]['Association_Rule'] = implode(",",$assoc[$i]['antecedent']);
+        //     $rules[$i]['result'] = implode(",",$assoc[$i]['consequent']);
+        //     $rules[$i]['support_AUB'] = $assoc[$i]['support'];
+        //     $rules[$i]['confidence'] = $assoc[$i]['confidence'];
+        // }
+        // echo"<pre>"; print_r($rules); die();
+
+
+        // //get support/frequency
+        // for ($i = 0; $i <= count($frequent); $i++) {
+        //     if (!empty($frequent[$i])) {
+        //         for ($j = 0; $j <= count($frequent[$i]); $j++) {
+        //             if (!empty($frequent[$i][$j])) {
+        //                 $tempVar = $frequent[$i][$j];
+        //                 $iteration[$i][$j]['itemset'] = implode(",", $tempVar);
+        //                 $iteration[$i][$j]['support'] = $associator->support($tempVar);
+        //                 $iteration[$i][$j]['frequency'] = $associator->frequency($tempVar);
+                        
+        //             }
+        //         }
+        //     }
+        // }
+        // echo "<pre>"; print_r($iteration);
+        // echo "<pre>"; print_r($frequent[1][0]); print_r($frequent[4][0]);
+        // print_r($associator->confidence($frequent[1][0],$frequent[4][0]));
+        // echo "<pre>"; print_r($frequent); print_r($associator->support($frequent[1][0])); die();
+
+
+        //support = Freq(X,Y)/N
+        //Confidence = Freq(X,Y)/Freq(X)
+        //Lift = Support / Sup(X) * Sup(Y)
+
         //store frequent itemsets for recommendation
         $predict = $associator->predict(reset($frequent[count($frequent[count($frequent)])])); 
 
@@ -316,7 +356,7 @@ class ProjectController extends Controller
         }
         
         //get all info of the recommended project
-
+        // for home page
         if($projectDataArg==null){
             foreach ($final_rec as $rec) {
                 $others[$rec] = json_decode(
@@ -327,10 +367,18 @@ class ProjectController extends Controller
                                 ->get()
                         ),
                         true);
+                //get date timestamp for view
+                if(!empty(array_filter($others[$rec]))) {
+                    $timeForHumans = array('date' => Carbon::createFromTimeStamp(strtotime($others[$rec][0]['created_at']))->diffForHumans());
+                    $others[$rec][0] = array_merge($others[$rec][0], $timeForHumans);
+                }
+                
                 $other_recomendation_list = array_merge($other_recomendation_list,$others[$rec]);
             }
+           
             return $other_recomendation_list;
         }
+        // for project view page
         foreach ($final_rec as $rec) {
             $products[$rec] = json_decode(
                 json_encode(
@@ -348,9 +396,19 @@ class ProjectController extends Controller
                             ->get()
                     ),
                     true);
+            //get date timestamp for view
+            if(!empty(array_filter($products[$rec]))) {
+                $timeForHumans = array('date' => Carbon::createFromTimeStamp(strtotime($products[$rec][0]['created_at']))->diffForHumans());
+                $products[$rec][0] = array_merge($products[$rec][0], $timeForHumans);
+            }
+            if(!empty(array_filter($others[$rec]))) {
+                $timeForHumans = array('date' => Carbon::createFromTimeStamp(strtotime($others[$rec][0]['created_at']))->diffForHumans());
+                $others[$rec][0] = array_merge($others[$rec][0], $timeForHumans);
+            }
             $final_recomendation_list = array_merge($final_recomendation_list,$products[$rec]);
             $other_recomendation_list = array_merge($other_recomendation_list,$others[$rec]);
         }
+        
         return array($final_recomendation_list, $other_recomendation_list);
     }
 
@@ -410,6 +468,9 @@ class ProjectController extends Controller
         $dataVar->target_amt = $requestArg->ProjTarget;
         $dataVar->target_milestone = $requestArg->ProjMilestone;
         if($requestArg->ProjVideo) $dataVar->yt_link = $this->_getYoutubeId($requestArg->ProjVideo);
+        else $dataVar->yt_link = null;
+        $dataVar->logo = null;
+        $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
 
@@ -497,8 +558,9 @@ class ProjectController extends Controller
                                 ->toArray();
             $project[$categories] = $sample;
         }
-        
-        $json_data = array("response" => $project);
+        $viewRender = view('formats.projects')->with(['items'=> $project])->render();
+        $json_data = array('item' => $viewRender);
+        // $json_data = array("response" => $project);
         echo json_encode($json_data);
     }
 

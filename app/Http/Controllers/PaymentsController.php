@@ -54,35 +54,39 @@ class PaymentsController extends Controller
 
 
     public function createSource(Request $requestArg){
-        $input = (float)$requestArg->TierAmount;
+        if(Auth::check()){
+            $input = (float)$requestArg->TierAmount;
         
-        $sourceVar = Paymongo::source()->create([
-            'type' => 'gcash',
-            'amount' => $input,
-            'currency' => 'PHP',
-            'redirect' => [
-                'success' => (string)url('/payment/status/'.$requestArg->ProjectId.'/success'),
-                'failed' => (string)url('payment/status/'.$requestArg->ProjectId.'/failed')
-            ],
-            'metadata' => [
-                'project_id' => (string)$requestArg->ProjectId,
-                'user_id' => (string)Auth::id(),
-            ]
-        ]);
-        // https://stackoverflow.com/a/71292930
-        $encodeVar = json_encode((array)$sourceVar);
-        $responseVar = json_decode(str_replace('\u0000*\u0000','',$encodeVar));
-
-        $json_data = array(
-            "response" => "success",
-            'checkout_url' => $responseVar->attributes->redirect->checkout_url,
-            'succes_url' => $responseVar->attributes->redirect->success,
-            'failed_url' => $responseVar->attributes->redirect->failed,
-            'project_id' => $responseVar->attributes->metadata->project_id,
-            'user_id' => $responseVar->attributes->metadata->user_id,
-            'data' => $responseVar,
-        );
-
+            $sourceVar = Paymongo::source()->create([
+                'type' => 'gcash',
+                'amount' => $input,
+                'currency' => 'PHP',
+                'redirect' => [
+                    'success' => (string)url('/payment/status/'.$requestArg->ProjectId.'/success'),
+                    'failed' => (string)url('payment/status/'.$requestArg->ProjectId.'/failed')
+                ],
+                'metadata' => [
+                    'project_id' => (string)$requestArg->ProjectId,
+                    'user_id' => (string)Auth::id(),
+                ]
+            ]);
+            // https://stackoverflow.com/a/71292930
+            $encodeVar = json_encode((array)$sourceVar);
+            $responseVar = json_decode(str_replace('\u0000*\u0000','',$encodeVar));
+    
+            $json_data = array(
+                "response" => "success",
+                'checkout_url' => $responseVar->attributes->redirect->checkout_url,
+                'succes_url' => $responseVar->attributes->redirect->success,
+                'failed_url' => $responseVar->attributes->redirect->failed,
+                'project_id' => $responseVar->attributes->metadata->project_id,
+                'user_id' => $responseVar->attributes->metadata->user_id,
+                'data' => $responseVar,
+            );
+        }
+        else{
+            $json_data = array("response" => "error");
+        }
 
         echo json_encode($json_data);
     }

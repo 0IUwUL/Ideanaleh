@@ -68,6 +68,10 @@
             </div>
         </div>
     </div>
+        <div id="links">
+            {{$ProjArg['projects']->links()}}
+        </div>
+        
 </div>
 
 @endsection

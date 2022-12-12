@@ -19,7 +19,7 @@ class FilterProjects extends Controller
                                                     ->get()
                                                     ->toArray()
         );
-        $projectDataVar['projects'] = $this->sort('followed', $projectDataVar['projects']);
+        $projectDataVar['projects'] = $this->sort('followed', $projectDataVar['projects'], null);
         $projectDataVar = array_merge($projectDataVar, ['categories' => config('category')[0]]);
         $options = array(
             'followed' => 'Most Followed', 
@@ -33,6 +33,7 @@ class FilterProjects extends Controller
     public function Filter(Request $request){
         $selected = $request->option;
         $category = $request->category;
+        $page = $request->page;
         // get projects
         if($category){
             $hold = Projects::where('category', '=', $category)
@@ -47,13 +48,14 @@ class FilterProjects extends Controller
                                     ->toArray(); 
         }
         if($selected != 'Newest'){
-            $projectDataVar = $this->sort($selected, $hold);
+            $projectDataVar = $this->sort($selected, $hold, $page);
         }else{
-            $projectDataVar = $hold;
+            $projectDataVar = $this->paginate($hold, 6, $page);
         }
 
         $viewRender = view('formats.filter')->with(['ProjArg' => $projectDataVar])->render();
-        $json_data = array('item' => $viewRender);
+        $link = $projectDataVar->links()->render();
+        $json_data = array('item' => $viewRender, 'link' => $link);
         echo json_encode($json_data);
     }
 
@@ -70,7 +72,7 @@ class FilterProjects extends Controller
         return $final;
     }
 
-    private function sort(string $selected, array $projects){
+    private function sort(string $selected, array $projects, $page){
         $projectDataVar = []; $hold1 = [];
         
         // pre assign values
@@ -88,6 +90,8 @@ class FilterProjects extends Controller
         }
         // sort array by count of selected
         array_multisort (array_column($projectDataVar, $selected), SORT_DESC, $projectDataVar);
+        $projectDataVar = $this->paginate($projectDataVar, 6, $page);
+        $projectDataVar->withPath('/main');
         return $projectDataVar;
     }
 

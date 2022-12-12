@@ -636,20 +636,87 @@ hr.create{
 .filter_row{
   padding: 0 2rem;
 }
-/* 
-@media (width < 471px) {
-  .filter_row{
-    margin-bottom: 4rem!important;
-  }
-  .form-select{
-    width: 100%!important;
-  }
-} */
 
-.form-select{
+.nav_filter .select .form-select{
   width: 100%!important;
 }
 
-.select{
+.nav_filter .select{
   padding: 1rem;
+}
+
+.Filter ul .disabled:hover{
+  cursor:not-allowed;
+}
+
+#content_projects .card .card-img img{
+  height: 30vh!important;
+}
+
+#content_projects .card .card-img{
+  overflow: hidden;
+}
+
+#content_projects .card img:hover{
+  -webkit-filter: brightness(80%);
+  transform: scale3d(1.2, 1.2, 1.2);
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#content_projects .card .card-body .row .title_img img{
+  display: flex!important;
+  justify-content: center!important;
+  height: 200px!important;
+  width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#content_projects .card .card-body .row .title_img{
+  top: -100px;
+  position: relative;
+  height: 25vh;
+}
+
+#content_projects .card .card-body .row .content h5{
+  color: var(--bg);
+}
+
+#content_projects .card .card-body .row .content .card-text{
+  accent-color: #005e7d!important;
+}
+
+#content_projects .card:hover{
+  cursor:default;
+}
+
+#content_projects .card .card-body .row .title_img img:hover{
+  -webkit-filter: brightness(80%);
+  transform: scale3d(1.2, 1.2, 1.2);
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+
+/* card image */
+.img-hover {
+  overflow: hidden;
+}
+.img-holder{
+  max-height: 200px;
+  overflow: hidden;
+}
+.img-hover img{
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  transition: all 0.3s ease-out;
+  transform: scale3d(1.0, 1.0, 1.0);
+  -webkit-filter: brightness(100%);
+}
+.img-hover:hover img{
+  -webkit-filter: brightness(80%);
+  transform: scale3d(1.2, 1.2, 1.2);
 }

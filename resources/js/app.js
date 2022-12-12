@@ -382,38 +382,29 @@ function DetValid(e){
 }
 
 $('#options').on('change', function(){
-    var selected = $('#options option:selected').val()
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        url: "main/filter/"+selected,
-        type:'get',
-        data: {
-            selected : selected,
-        },
-        success: function(result){
-            let data = JSON.parse(result);
-            $('#content_projects').html(data.item)
-        }
-
-    });
+    var category = $('#category option:selected').val()
+    var options = $('#options option:selected').val()
+    filterSend(category, options)
 })
 
 $('#category').on('change', function(){
-    var selected = $('#category option:selected').val()
+    var category = $('#category option:selected').val()
+    var options = $('#options option:selected').val()
+    filterSend(category, options)
+})
+
+function filterSend(category, option){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: "main/category/"+selected,
-        type:'get',
+        url: "main/filter",
+        type:'post',
         data: {
-            selected : selected,
+            category: category,
+            option : option,
         },
         success: function(result){
             let data = JSON.parse(result);
@@ -421,7 +412,7 @@ $('#category').on('change', function(){
         }
 
     });
-})
+}
 
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);

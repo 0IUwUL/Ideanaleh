@@ -44,8 +44,12 @@
                     @foreach($mode['recommend'] as $index => $category)
                       @if($index<3)
                       <div class="col-md-4 mb-3">
-                        <div class="card shadow-sm bg-body rounded">
-                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                        <div class="card img-hover shadow-sm bg-body rounded">
+                          <div class="img-holder">
+                            <a href={{ url('project/view/'.$mode['recommend'][$index]['id']) }}>
+                              <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                            </a>
+                          </div>
                             <div class="card-body text-dark">
                               <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
                                 <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['recommend'][$index]['description']}}</p>
@@ -55,7 +59,7 @@
                                     <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     
                                 </div>
-                                <div class="text-muted">9 mins</div>
+                                <div class="text-muted">{{$mode['recommend'][$index]['date']}}</div>
                             </div>
                         </div>
                       </div>
@@ -65,8 +69,12 @@
                       @foreach($mode['popular'] as $index => $category)
                         @if($index<3)
                           <div class="col-md-4 mb-3">
-                            <div class="card shadow-sm bg-body rounded">
-                                <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                            <div class="card img-hover shadow-sm bg-body rounded">
+                              <div class="img-holder">
+                                <a href={{ url('project/view/'.$mode['popular'][$index]['id']) }}>
+                                  <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                                </a>
+                              </div>
                                 <div class="card-body text-dark">
                                   <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
                                     <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['popular'][$index]['description']}}</p>
@@ -75,7 +83,7 @@
                                     <div class="btn-group">
                                         <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     </div>
-                                    <div class="text-muted">9 mins</div>
+                                    <div class="text-muted">{{$mode['popular'][$index]['date']}}</div>
                                 </div>
                             </div>
                           </div>
@@ -90,8 +98,12 @@
                   @foreach($mode['recommend'] as $index => $category)
                     @if($index>2 && $index<6)
                     <div class="col-md-4 mb-3">
-                      <div class="card shadow-sm bg-body rounded">
-                          <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                      <div class="card img-hover shadow-sm bg-body rounded">
+                        <div class="img-holder">
+                          <a href={{ url('project/view/'.$mode['recommend'][$index]['id']) }}>
+                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          </a>
+                        </div>
                           <div class="card-body text-dark">
                             <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
                               <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['recommend'][$index]['description']}}</p>
@@ -101,7 +113,7 @@
                                   <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="text-muted">{{$mode['recommend'][$index]['date']}}</div>
                           </div>
                       </div>
                     </div>
@@ -111,8 +123,12 @@
                   @foreach($mode['popular'] as $index => $category)
                     @if($index>2 && $index<6)
                     <div class="col-md-4 mb-3">
-                      <div class="card shadow-sm bg-body rounded">
-                          <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                      <div class="card img-hover shadow-sm bg-body rounded">
+                        <div class="img-holder">
+                          <a href={{ url('project/view/'.$mode['popular'][$index]['id']) }}>
+                            <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                          </a>
+                        </div>
                           <div class="card-body text-dark">
                             <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
                               <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['popular'][$index]['description']}}</p>
@@ -122,7 +138,7 @@
                                   <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="text-muted">{{$mode['popular'][$index]['date']}}</div>
                           </div>
                       </div>
                     </div>
@@ -137,8 +153,12 @@
                   @foreach($mode['recommend'] as $index => $category)
                     @if($index>5 && $index<9)
                     <div class="col-md-4 mb-3">
-                      <div class="card shadow-sm bg-body rounded">
-                          <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                      <div class="card img-hover shadow-sm bg-body rounded">
+                        <div class="img-holder">
+                          <a href={{ url('project/view/'.$mode['recommend'][$index]['id']) }}>
+                            <img src="{{asset('storage/'.$mode['recommend'][$index]['banner']);}} " loading="lazy">
+                          </a>
+                        </div>
                           <div class="card-body text-dark">
                             <h4 class="card-title">{{$mode['recommend'][$index]['title']}}</h4>
                               <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['recommend'][$index]['description']}}</p>
@@ -148,7 +168,7 @@
                                   <a type="button" href={{ url('project/view/'.$mode['recommend'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                   
                               </div>
-                              <div class="text-muted">9 mins</div>
+                              <div class="text-muted">{{$mode['recommend'][$index]['date']}}</div>
                           </div>
                       </div>
                     </div>
@@ -158,8 +178,12 @@
                   @foreach($mode['popular'] as $index => $category)
                     @if($index>5 && $index<9)
                       <div class="col-md-4 mb-3">
-                        <div class="card shadow-sm bg-body rounded">
-                            <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                        <div class="card img-hover shadow-sm bg-body rounded">
+                          <div class="img-holder">
+                            <a href={{ url('project/view/'.$mode['popular'][$index]['id']) }}>
+                              <img src="{{asset('storage/'.$mode['popular'][$index]['banner']);}} " loading="lazy">
+                            </a>
+                          </div>
                             <div class="card-body text-dark">
                               <h4 class="card-title">{{$mode['popular'][$index]['title']}}</h4>
                                 <p class="card-text text-truncate" style="max-height: 10vh">{{$mode['popular'][$index]['description']}}</p>
@@ -169,7 +193,7 @@
                                     <a type="button" href={{ url('project/view/'.$mode['popular'][$index]['id']) }} class="btn btn-sm btn-outline-secondary">View</a>
                                     
                                 </div>
-                                <div class="text-muted">9 mins</div>
+                                <div class="text-muted">{{$mode['popular'][$index]['date']}}</div>
                             </div>
                         </div>
                       </div>

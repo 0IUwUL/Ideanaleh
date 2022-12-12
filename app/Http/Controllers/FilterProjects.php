@@ -94,5 +94,12 @@ class FilterProjects extends Controller
         $projectDataVar->withPath('/main');
         return $projectDataVar;
     }
+    // paginate
+    public function paginate($items, $perPage = 6, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
 
 }

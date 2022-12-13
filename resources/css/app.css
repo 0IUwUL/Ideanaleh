@@ -650,6 +650,7 @@ hr.create{
 }
 
 #content_projects .card .card-img img{
+  object-fit: cover;
   height: 30vh!important;
 }
 

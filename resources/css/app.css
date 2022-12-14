@@ -650,6 +650,7 @@ hr.create{
 }
 
 #content_projects .card .card-img img{
+  object-fit: cover;
   height: 30vh!important;
 }
 
@@ -661,8 +662,11 @@ hr.create{
   -webkit-filter: brightness(80%);
   transform: scale3d(1.2, 1.2, 1.2);
   transition: all 0.3s ease-out;
-  cursor: pointer;
   overflow: hidden;
+}
+
+#content_projects .col-md-6 a{
+  text-decoration: none;
 }
 
 #content_projects .card .card-body .row .title_img img{
@@ -680,23 +684,26 @@ hr.create{
   height: 25vh;
 }
 
-#content_projects .card .card-body .row .content h5{
+#content_projects a .card h5{
   color: var(--bg);
 }
 
-#content_projects .card .card-body .row .content .card-text{
-  accent-color: #005e7d!important;
+#content_projects a .card span{
+  color: #005e7d!important;
+}
+
+#content_projects a .card p{
+  color: #005e7d!important;
 }
 
 #content_projects .card:hover{
-  cursor:default;
+  cursor:pointer;
 }
 
 #content_projects .card .card-body .row .title_img img:hover{
   -webkit-filter: brightness(80%);
   transform: scale3d(1.2, 1.2, 1.2);
   transition: all 0.3s ease-out;
-  cursor: pointer;
 }
 
 /* card image */

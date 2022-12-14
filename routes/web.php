@@ -34,7 +34,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 // Settings routes
-Route::middleware('auth')->controller(SettingsController::class)->group(function () {
+Route::middleware('auth', 'selected')->controller(SettingsController::class)->group(function () {
     Route::get('/settings', 'index')->name('settings');
     Route::post('/change-name', 'changeName')->name('change-name');
     Route::post('/change-pass', 'changePass')->name('change-pass');
@@ -47,7 +47,7 @@ Route::middleware('auth')->controller(SettingsController::class)->group(function
 // Admin routes
 Route::get('/admin', function () {
     return view('pages.adminPage');
-});
+})->name('admin');
 
 // User registration routes
 Route::controller(RegistrationController::class)->group(function () {
@@ -64,10 +64,10 @@ Route::controller(UserPreferenceController::class)->prefix('user-preference')->n
 
 // Project routes
 Route::controller(ProjectController::class)->prefix('project')->name('project.')->group(function () {
-    Route::middleware('auth')->get('/create', 'index')->name('create');
+    Route::middleware('auth', 'selected')->get('/create', 'index')->name('create');
     Route::get('/view/{id}', 'view')->name('view');
-    Route::middleware('auth')->get('edit/{id}', 'edit')->name('edit');
-    Route::middleware('auth')->post('/save', 'saveCreatedProject')->name('save');
+    Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
+    Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
     Route::post('/categs', '_getProjects')->name('categs');
 });
 

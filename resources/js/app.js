@@ -426,18 +426,18 @@ $(document).on('click', '.pagination .page-link', function(event){
     filterSend(category, options, page)
 });
 
-$('#LoginModal').on('show.bs.modal',  loadBtn);
-$('#SignUpModal').on('show.bs.modal',  loadBtn);
+// Rendering the google button
+$('#LoginModal, #SignUpModal').on('show.bs.modal',  loadBtn);
+
 // Normal Auth
-$('.next').click(validate);
-$("#submit").on("click",validate);
+$('.next, #submit').click(validate);
+
 // Google Auth
-$('.Gnext').click(GoogleForm);
-$("#Gsubmit").on("click",GoogleForm);
-$("#modeToast").on("click", activateToast);
-$("#modeToast2").on("click", activateToast);
-$("#modeToast3").on("click", activateToast);
-$("#modeToast4").on("click", activateToast);
+$('.Gnext, #Gsubmit').click(GoogleForm);
+
+// Toast
+$("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click", activateToast);
+
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
 $('.tab_next').on('click', DetValid);

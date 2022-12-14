@@ -158,8 +158,8 @@ $("#updateSubmit").click(function(){
       }
     });
     $.ajax({
-      url: "/updates/create",
-      type:'post',
+      url: "/update",
+      type:'POST',
       data: {
         ProjectId : id,
         UpdateTitle : title,
@@ -170,9 +170,8 @@ $("#updateSubmit").click(function(){
           var update = data.update
           var options = {year: 'numeric', month: 'long', day: 'numeric' };
           let date  = new Date(update['created_at']);
-          
+         
           // Change the current update text
-          document.getElementById("update-current-id").value = update['id']
           document.getElementById("update-current-title").textContent = update['title']
           document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
           document.getElementById("update-current-description").textContent = update['description']
@@ -194,21 +193,20 @@ $("#updateSubmit").click(function(){
             // Insert previous update list accordion
             $("#previous-update-accordion").prepend(data.prevUpdateHTML)
           }
-          let currentUpdate = $("#update-current-dropdown")
-          currentUpdate.find("button").show()
 
+          // Set the dropdown button for first time
           var menu = $('#update-current-dropdown')
           if (menu.find('div').length == 0){
             menu.html(`
             <a class="btn circle ms-auto align-self-center " data-bs-toggle="dropdown" aria-expanded="false" disabled><i class="fa-solid fa-ellipsis"></i></a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item editCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateEditModal" data-type="current">Edit</a></li>
-                <li><a class="dropdown-item deleteUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateDeleteModal" data-type="current">Delete</a></li>
+                <li><a class="dropdown-item deleteCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateDeleteModal" data-type="current">Delete</a></li>
             </ul>`)
           }
+          $(".editCurrentUpdate, .deleteCurrentUpdate").attr('data-id', update['id'])
 
           form[0].reset();
-           
       }
     });
   }
@@ -238,11 +236,10 @@ function setEditModal(e){
 // Save comment edit
 $('#updateEditSubmit').click(function(){
   let form = $('#updateEditForm')
-  let type = $('#updateEditType').val()
   var id = $('#updateEditId').val()
   var title = $('#updateEditTitle').val()
   var desc = $('#updateEditDesc').val()
-
+   console.log(id )
   if(form.valid() === true){
     $("#updateEditModal").modal('hide');
     $.ajaxSetup({
@@ -250,16 +247,17 @@ $('#updateEditSubmit').click(function(){
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
         }
     });
+   
     $.ajax({
-      url: "/updates/edit",
-      type:'post',
+      url: "/update/" + id,
+      type:'PATCH',
       data: {
-        UpdateId : id,
         UpdateTitle : title,
         UpdateDesc : desc,
       },
       success: function(){
-        // Change the current update text
+        let type = $('#updateEditType').val()
+
         if (type == 'current'){
           document.getElementById("update-current-title").textContent = title
           document.getElementById("update-current-description").textContent = desc
@@ -268,35 +266,26 @@ $('#updateEditSubmit').click(function(){
           document.getElementById("update-title-" + id).textContent = title
           document.getElementById("update-desc-" + id).textContent = desc
         }
-         
-        
-      
       }
     });
   } 
 })
+$(document).on('click', '.deleteUpdate', setDeleteModal) 
+$(document).on('click', '.deleteCurrentUpdate', setDeleteModal)
 
-$(document).on('click', '.deleteUpdate', function (e){
-  var type = $(e.target).attr('data-type');
-  if (type == 'current'){
-    var id = $('#update-current-id').val();
-  }
-  else {
-    var id = $(e.target).attr('data-id');
-  }
+function setDeleteModal(e){
+  let type = $(e.target).attr('data-type');
+  let id = $(e.target).attr('data-id');  
+ 
   $('#updateDeleteId').val(id);
   $('#updateDeleteType').val(type);
   
-})
+}
 
 $('#updateDeleteSubmit').click(function(){
   var type = $('#updateDeleteType').val();
-  if (type == 'current'){
-    var id = $('#update-current-id').val();
-  }
-  else {
-    var id = $('#updateDeleteId').val();
-  }
+  var id = $('#updateDeleteId').val();
+
 
   $("#updateDeleteModal").modal('hide');
   $.ajaxSetup({
@@ -305,11 +294,8 @@ $('#updateDeleteSubmit').click(function(){
       }
   });
   $.ajax({
-    url: "/updates/delete",
-    type:'post',
-    data: {
-      UpdateId : id,
-    },
+    url: "/update/" + id,
+    type:'DELETE',
     success: function(result){
       let data = JSON.parse(result);
       var latestUpdate = data.latestUpdate
@@ -319,7 +305,7 @@ $('#updateDeleteSubmit').click(function(){
         var options = {year: 'numeric', month: 'long', day: 'numeric' };
         let date  = new Date(latestUpdate['created_at']);
 
-        document.getElementById("update-current-id").value = latestUpdate['id']
+        $(".editCurrentUpdate, .deleteCurrentUpdate").attr('data-id', latestUpdate['id'])
         document.getElementById("update-current-title").textContent = latestUpdate['title']
         document.getElementById("update-current-date").textContent = `(${date.toLocaleDateString("en-US", options)})`
         document.getElementById("update-current-description").textContent = latestUpdate['description']
@@ -336,8 +322,7 @@ $('#updateDeleteSubmit').click(function(){
         document.getElementById("update-current-date").textContent = ''
         document.getElementById("update-current-description").textContent = 'The developer has just started the project'
 
-        let currentUpdate = $("#update-current-dropdown")
-        currentUpdate.find("a").hide()
+        $("#update-current-dropdown").html('')
       }
       else {
         document.getElementById('previous-update-' + id).remove()
@@ -383,8 +368,8 @@ $('#comment-box').keypress(function(e) {
       }
     });
     $.ajax({
-      url: "/comments/project/create",
-      type:'post',
+      url: "/project/comment",
+      type:'POST',
       data: {
         ProjectId : id,
         ProjectComment : comment,
@@ -433,10 +418,9 @@ $('.saveChanges').click(function(){
         }
     });
     $.ajax({
-      url: "/comments/project/edit",
-      type:'post',
+      url: "/project/comment/" + id,
+      type:'PATCH',
       data: {
-        CommentId : id,
         ProjectComment : comment,
       },
       success: function(result){
@@ -471,19 +455,11 @@ $('.confirmDelete').click(function(){
       }
   });
   $.ajax({
-    url: "/comments/project/delete",
-    type:'post',
-    data: {
-      CommentId : id,
-    },
-    success: function(result){
-      let data = JSON.parse(result);
-      
-      if (data.response == "success"){
-        // Delete comment
-        document.getElementById('project-comment-'+id).remove()
-        
-      }
+    url: "/project/comment/" + id,
+    type:'DELETE',
+    success: function(){ 
+      // Delete comment html
+      document.getElementById('project-comment-'+id).remove()
     }
   });
   

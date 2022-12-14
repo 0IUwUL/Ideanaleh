@@ -11,9 +11,9 @@ use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
-use App\Http\Controllers\UpdatesController;
+use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\PaymentsController;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FilterProjects;
 /*
 |--------------------------------------------------------------------------
@@ -63,27 +63,23 @@ Route::controller(UserPreferenceController::class)->prefix('user-preference')->n
 });
 
 // Project routes
-Route::controller(ProjectController::class)->prefix('project')->name('project.')->group(function () {
-    Route::middleware('auth', 'selected')->get('/create', 'index')->name('create');
-    Route::get('/view/{id}', 'view')->name('view');
-    Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
-    Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
-    Route::post('/categs', '_getProjects')->name('categs');
+Route::prefix('project')->name('project.')->group(function () {
+    Route::controller(ProjectController::class)->group(function(){
+        Route::middleware('auth', 'selected')->get('/create', 'index')->name('create');
+        Route::get('/view/{id}', 'view')->name('view');
+        Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
+        Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
+        Route::post('/categs', '_getProjects')->name('categs');
+    });
+
+    // Project comments routes
+    Route::resource('comment', ProjectCommentController::class, 
+                    ['only' => ['index', 'store', 'update', 'destroy']]);
 });
 
 // Project updates routes
-Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')->group(function () {
-    Route::middleware('auth')->post('/create', 'create')->name('create');
-    Route::middleware('auth')->post('/edit', 'edit')->name('edit');
-    Route::middleware('auth')->post('/delete', 'delete')->name('delete');
-});
-
-// Project comments routes
-Route::controller(CommentsController::class)->prefix('comments')->name('comments.')->group(function () {
-    Route::middleware('auth')->post('project/create', 'createProjectComment')->name('project/create');
-    Route::middleware('auth')->post('project/edit', 'editProjectComment')->name('project/edit');
-    Route::middleware('auth')->post('project/delete', 'deleteProjectComment')->name('project/delete');
-});
+Route::resource('update', UpdateController::class, 
+                ['only' => ['index', 'store', 'update', 'destroy']]);
 
 // Google Routes
 Route::controller(GoogleAuthController::class)->prefix('google')->name('google.')->group(function(){

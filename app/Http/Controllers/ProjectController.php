@@ -71,7 +71,7 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isSupported' => (new UserPreferenceController)->checkIfSupported($idArg)]);
-        $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdatesController)->getAllUpdates($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdateController)->index($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['comments' => (new ProjectCommentController)->index($idArg)]);
         return $projectDataVar;
     }

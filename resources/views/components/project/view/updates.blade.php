@@ -16,15 +16,14 @@
                             <div id="update-current-date">{{$updates? ' ('.date('F d, Y', strtotime($updates[0]['created_at'])).')' : ''}}</div>
                         </h4>
                         
-                        <input type="hidden" id="update-current-id" value={{$updates ? $updates[0]['id'] : ''}}>
                         <div class="ms-auto dropdown" id="update-current-dropdown">
                             @if(Auth::check() && Auth::user()->id == $dev && $updates)
                             
                             
                                 <a class="btn circle ms-auto align-self-center " data-bs-toggle="dropdown" aria-expanded="false" disabled><i class="fa-solid fa-ellipsis"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item editCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateEditModal" data-type="current">Edit</a></li>
-                                    <li><a class="dropdown-item deleteUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateDeleteModal" data-type="current">Delete</a></li>
+                                    <li><a class="dropdown-item editCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateEditModal" data-type="current" data-id={{$updates[0]['id']}}>Edit</a></li>
+                                    <li><a class="dropdown-item deleteCurrentUpdate" type="button" data-bs-toggle="modal" data-bs-target="#updateDeleteModal" data-type="current" data-id={{$updates[0]['id']}}>Delete</a></li>
                                 </ul>
                             
                             @endif

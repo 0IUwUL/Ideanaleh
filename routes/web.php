@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\EmailController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserPreferenceController;
-use App\Http\Controllers\UpdatesController;
+use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FilterProjects;
@@ -78,12 +78,8 @@ Route::prefix('project')->name('project.')->group(function () {
 });
 
 // Project updates routes
-Route::controller(UpdatesController::class)->prefix('updates')->name('updates.')->group(function () {
-    Route::middleware('auth')->post('/create', 'create')->name('create');
-    Route::middleware('auth')->post('/edit', 'edit')->name('edit');
-    Route::middleware('auth')->post('/delete', 'delete')->name('delete');
-});
-
+Route::resource('update', UpdateController::class, 
+                ['only' => ['index', 'store', 'update', 'destroy']]);
 
 // Google Routes
 Route::controller(GoogleAuthController::class)->prefix('google')->name('google.')->group(function(){

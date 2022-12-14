@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('icon')->nullable();
-            $table->string('pref_categs')->nullable();
             $table->string('code')->nullable();
             $table->tinyInteger('dev_mode')->default('0');;
             $table->string('bookmarks')->nullable();

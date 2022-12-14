@@ -383,17 +383,19 @@ function DetValid(e){
 
 $('#options').on('change', function(){
     var category = $('#category option:selected').val()
-    var options = $('#options option:selected').val()
-    filterSend(category, options)
+    var options = $('#options option:selected').val()   
+    var page = null
+    filterSend(category, options, page)
 })
 
 $('#category').on('change', function(){
     var category = $('#category option:selected').val()
     var options = $('#options option:selected').val()
-    filterSend(category, options)
+    var page = null
+    filterSend(category, options, page)
 })
 
-function filterSend(category, option){
+function filterSend(category, option, page){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -405,14 +407,24 @@ function filterSend(category, option){
         data: {
             category: category,
             option : option,
+            page: page,
         },
         success: function(result){
             let data = JSON.parse(result);
             $('#content_projects').html(data.item)
+            $('#links').html(data.link)
         }
 
     });
 }
+
+$(document).on('click', '.pagination .page-link', function(event){
+    var category = $('#category option:selected').val()
+    var options = $('#options option:selected').val()
+    event.preventDefault(); 
+    var page = $(this).attr('href').split('page=')[1];
+    filterSend(category, options, page)
+});
 
 $('#LoginModal').on('show.bs.modal',  loadBtn);
 $('#SignUpModal').on('show.bs.modal',  loadBtn);

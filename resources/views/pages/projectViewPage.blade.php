@@ -162,7 +162,7 @@
 
   <section class="container-fluid info bg-brown-medium px-0" id="adt-info">
     <div class="container-lg py-5 px-0">
-      <h2 class="text-center title my-3 my-md-4 my-lg-5 px-2 px-sm-0">Additional Product Information</h2>
+      <h2 class="text-center title my-3 my-md-4 my-lg-5 px-2 px-sm-0">Additional Project Information</h2>
 
       <div class="container-lg pt-3 px-0">
         <ul class="nav nav-pills mb-0 overflow-auto flex-nowrap justify-content-start justify-content-md-center gap-1"

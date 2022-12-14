@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserPreferenceController;
 
 //Import model
-use App\Models\User; 
+use App\Models\User;
+use App\Models\UserPreference; 
 
 class GoogleAuthController extends Controller
 {
@@ -55,16 +56,22 @@ class GoogleAuthController extends Controller
     private function _loginUser(Request $request, Object $user) {
         //$request->session()->put('loginId', $user->id);
         Auth::loginUsingId($user->id);
-        $categories = User::where('id', '=', $user->id)
-                                ->select(array('pref_categs', 'dev_mode'))
+        $follow = UserPreference::where('user_id', '=', $user->id)
+                                ->select('followed')
                                 ->first()
                                 ->toArray();
-        if($categories['pref_categs'])
-            $request->session()->put('mode', $categories['dev_mode']);
+        $mode = User::where('id', '=', $user->id)
+                                ->select('dev_mode')
+                                ->first()
+                                ->toArray();
+
+        if($follow['followed'])
+            $request->session()->put('mode', $mode['dev_mode']);
             // return view('pages.home')->with('mode', $categories['dev_mode']);
         else
             $request->session()->put('mode', 3);
             // return view('pages.home')->with('mode', 3);
+
         return (redirect('/'));
     }
 }

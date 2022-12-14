@@ -383,8 +383,8 @@ $('#comment-box').keypress(function(e) {
       }
     });
     $.ajax({
-      url: "/comments/project/create",
-      type:'post',
+      url: "/project/comment",
+      type:'POST',
       data: {
         ProjectId : id,
         ProjectComment : comment,
@@ -433,10 +433,9 @@ $('.saveChanges').click(function(){
         }
     });
     $.ajax({
-      url: "/comments/project/edit",
-      type:'post',
+      url: "/project/comment/" + id,
+      type:'PATCH',
       data: {
-        CommentId : id,
         ProjectComment : comment,
       },
       success: function(result){
@@ -471,19 +470,11 @@ $('.confirmDelete').click(function(){
       }
   });
   $.ajax({
-    url: "/comments/project/delete",
-    type:'post',
-    data: {
-      CommentId : id,
-    },
-    success: function(result){
-      let data = JSON.parse(result);
-      
-      if (data.response == "success"){
-        // Delete comment
-        document.getElementById('project-comment-'+id).remove()
-        
-      }
+    url: "/project/comment/" + id,
+    type:'DELETE',
+    success: function(){ 
+      // Delete comment html
+      document.getElementById('project-comment-'+id).remove()
     }
   });
   

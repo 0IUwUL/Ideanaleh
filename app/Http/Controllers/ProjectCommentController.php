@@ -9,10 +9,11 @@ use App\Models\ProjectComments;
 
 use Auth;
 use DB;
+use Input;
 
-class CommentsController extends Controller
+class ProjectCommentController extends Controller
 {
-    public function getAllProjectComments(int $id)
+    public function index(int $id)
     {
         $query = json_decode(
             json_encode(
@@ -34,7 +35,7 @@ class CommentsController extends Controller
         return null;
     }
 
-    public function createProjectComment(Request $request)
+    public function store(Request $request)
     {
         $newComment = new ProjectComments;
         $newComment->user_id = Auth::id();
@@ -57,10 +58,11 @@ class CommentsController extends Controller
         echo json_encode($json_data);
     }
 
-    public function editProjectComment(Request $request)
+    public function update(ProjectComments $comment, Request $request)
     {
-        ProjectComments::where('id', $request->CommentId)->update(['content' => $request->ProjectComment]);
-        $comment =  ProjectComments::find($request->CommentId);
+        $comment->content = $request->ProjectComment;
+        $comment->save();
+
         $date = date('n/j/Y h:i:s A', strtotime($comment->updated_at));
 
         $json_data = array("commentDate" => $date);
@@ -68,14 +70,11 @@ class CommentsController extends Controller
         echo json_encode($json_data);
     }
 
-    public function deleteProjectComment(Request $request)
+    public function destroy(ProjectComments $comment)
     {
-        // Delete by ID
-        ProjectComments::destroy($request->CommentId);
-
-        $json_data = array("response" => "success");
-
-        echo json_encode($json_data);
+        // Laravel model binding, acts like Model::find($id)
+        
+        $comment->delete();
     }
 
 }

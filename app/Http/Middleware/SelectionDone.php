@@ -20,20 +20,10 @@ class SelectionDone
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-           if ($this->done())
+           if ($request->Followed)
                 return $next($request);
             return redirect('/');
         }
         return redirect('/');
-    }
-
-    private function done(){
-        $user_id = Auth::id();
-        $prefer = (UserPreference::select('followed')->where('user_id', '=', $user_id)->first());
-        $categories = (User::select('pref_categs')->where('id', '=', $user_id)->first());
-
-        if ($prefer->followed && $categories->pref_categs)
-            return true;
-        return false;
     }
 }

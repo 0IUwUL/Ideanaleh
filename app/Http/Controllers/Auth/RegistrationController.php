@@ -24,7 +24,6 @@ class RegistrationController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->icon = $request->icon;
-        $user->pref_categs = implode(',', $request->Categs);
 
         $followed = implode(',', $request->Followed);
         
@@ -43,12 +42,7 @@ class RegistrationController extends Controller
     public function GoogleRegisterUser(Request $request){
         
         $userId = Auth::id();
-        $categs = implode(',', $request->GCategs);
-        $user = array(
-            'pref_categs' => $categs
-        );
         $followed = implode(',', $request->Followed);
-        User::where('id', $userId)->update($user);
         $data = array(
             'id' => $userId,
             'pref_projs' => $followed,

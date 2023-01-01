@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 // Import Controllers
 use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdatesController;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\ProjectCommentController;
 
 // Import models
 use App\Models\Projects; 
@@ -71,8 +71,8 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['isSupported' => (new UserPreferenceController)->checkIfSupported($idArg)]);
-        $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdatesController)->getAllUpdates($idArg)]);
-        $projectDataVar = array_merge($projectDataVar, ['comments' => (new CommentsController)->getAllProjectComments($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdateController)->index($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['comments' => (new ProjectCommentController)->index($idArg)]);
         return $projectDataVar;
     }
     // public function popularProjects($projectDataArg, int $idArg)

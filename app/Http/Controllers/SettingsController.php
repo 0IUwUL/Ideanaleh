@@ -50,7 +50,7 @@ class SettingsController extends Controller
             $iconPath = $request->file('avatar')->storeAs(
                 'avatars',
                 // Set the name to id.imgExtension (e.g 1.jpg)
-                $userId.'.'.$request->file('avatar')->getClientOriginalExtension(),
+                $userId.'.'.$request->file('avatar')->extension(),
                 'public',
             );
 

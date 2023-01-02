@@ -10,6 +10,7 @@ use App\Models\ProjectComments;
 use Auth;
 use DB;
 use Input;
+use App\Events\NewCommentCreated;
 
 class ProjectCommentController extends Controller
 {
@@ -54,6 +55,8 @@ class ProjectCommentController extends Controller
         $viewRender = view('formats.comment')->with('comment', $result)->render();
 
         $json_data = array("commentHTML" => $viewRender);
+        
+        NewCommentCreated::dispatch($viewRender, $newComment->proj_id)->toOthers(); // broadcast the new comment to other users
 
         echo json_encode($json_data);
     }

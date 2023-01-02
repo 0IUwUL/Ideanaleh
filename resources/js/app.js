@@ -426,24 +426,6 @@ $(document).on('click', '.pagination .page-link', function(event){
     filterSend(category, options, page)
 });
 
-$(document).ready(function(){
-    Echo.join(`chat`)
-        .here((users) => {
-            console.log(users);
-        })
-        .joining((user) => {
-            console.log("A user has joined");
-            console.log(user);
-        })
-        .leaving((user) => {
-            console.log("A user has logged out");
-            console.log(user);
-        })
-        .error((error) => {
-            console.log("Please login first");
-        });
-})
-    
     
 
 // Rendering the google button

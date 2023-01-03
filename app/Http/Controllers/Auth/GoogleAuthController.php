@@ -64,13 +64,13 @@ class GoogleAuthController extends Controller
                                 ->select('dev_mode')
                                 ->first()
                                 ->toArray();
+        // set session if admin
+        $request->session()->put('admin', $user->admin);
 
         if($follow['followed'])
             $request->session()->put('mode', $mode['dev_mode']);
-            // return view('pages.home')->with('mode', $categories['dev_mode']);
         else
             $request->session()->put('mode', 3);
-            // return view('pages.home')->with('mode', 3);
 
         return (redirect('/'));
     }

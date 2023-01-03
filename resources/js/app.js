@@ -443,5 +443,3 @@ $("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click", activateToast
 $("#register").on("click", showRegister);
 $("#login").on("click", showLogin);
 $('.tab_next').on('click', DetValid);
-
-

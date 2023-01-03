@@ -177,6 +177,18 @@ input[name="GCategs[]"]{
   vertical-align: middle!important;
 }
 
+@media screen and (max-width: 1365px){
+  .breadcrumb li a{
+    font-size: 1rem;
+    padding: .2rem .3rem;
+  }
+
+  .breadcrumb li a:hover{
+    background-color: transparent;
+    color: #f3ff82;
+  }
+}
+
 @media screen and (max-width: 1099px){
   .breadcrumb li a{
     font-size: 1rem;

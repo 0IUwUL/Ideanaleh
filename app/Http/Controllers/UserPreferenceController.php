@@ -25,6 +25,14 @@ class UserPreferenceController extends Controller
         return $pref;
     }
 
+    public function _getUserPreferences(int $id){
+        $pref = UserPreference::where('user_id', '=', $id)
+                                ->select('followed')
+                                ->get()
+                                ->toArray();
+        return $pref;
+    }
+
     public function googleUpdatepreferences(array $dataArg)
     {
         $user_id = $dataArg['id'];

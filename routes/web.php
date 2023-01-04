@@ -15,6 +15,7 @@ use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FilterProjects;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,9 +46,9 @@ Route::middleware('auth', 'selected')->controller(SettingsController::class)->gr
 });
 
 // Admin routes
-Route::get('/admin', function () {
-    return view('pages.adminPage');
-})->name('admin');
+Route::middleware('auth', 'admin')->controller(AdminController::class)->group(function () {
+    Route::get('/admin', 'index')->name('admin');
+});
 
 // User registration routes
 Route::controller(RegistrationController::class)->group(function () {

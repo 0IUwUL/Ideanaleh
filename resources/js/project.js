@@ -468,3 +468,13 @@ $('.confirmDelete').click(function(){
 $('.dropdown').hover(function(){ 
   $('.dropdown-toggle', this).trigger('click'); 
 });
+
+// Get project id from URL
+var pathArray = window.location.pathname.split('/');
+var projectId = pathArray[3]
+
+// Listen for new comments
+Echo.channel(`project.${projectId}`)
+    .listen('NewCommentCreated', (data) => {
+      $("#commentsList").prepend(data.commentHTML)
+    });

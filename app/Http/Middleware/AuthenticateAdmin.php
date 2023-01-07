@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
-use Illuminate\Support\Facades\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Http\Controllers\UserPreferenceController;
+use Session;
 
-class SelectionDone
+class AuthenticateAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,14 +17,8 @@ class SelectionDone
      */
     public function handle(Request $request, Closure $next)
     {
-        $userId = Auth::id();
-        $following = (new UserPreferenceController)->_getUserPreferences($userId);
-        // dd($following[0]['followed']);
-        if (Auth::check()) {
-           if ($following[0]['followed'])
-                return $next($request);
-            return redirect('/');
-        }
+        if(Session::get('admin'))
+            return $next($request);
         return redirect('/');
     }
 }

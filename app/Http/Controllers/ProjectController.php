@@ -482,7 +482,7 @@ class ProjectController extends Controller
         $pathVar = $requestArg->file($formNameArg)->storeAs(
             'project_'.$typeArg.'s', //Folder name
             //Naming Scheme: {{projectID}}._project_{{$typeArg}}_.{{originalFilename}}
-            'project_'.$projectIdArg.'_'.$typeArg.'.'.$requestArg->file($formNameArg)->getClientOriginalExtension(),
+            'project_'.$projectIdArg.'_'.$typeArg.'.'.$requestArg->file($formNameArg)->extension(),
             'public', //Disc (optional. It is like the root folder)
         );
         

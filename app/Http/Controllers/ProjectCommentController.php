@@ -14,7 +14,7 @@ use App\Events\NewCommentCreated;
 
 class ProjectCommentController extends Controller
 {
-    public function index(int $id)
+    public function index(int $id): array|null
     {
         $query = json_decode(
             json_encode(
@@ -28,15 +28,13 @@ class ProjectCommentController extends Controller
                     ->toArray()
             ),
             true);
-        //$query = ProjectComments::where('proj_id', $id)->orderBy('created_at', 'desc')->with('user')->get();
-        //$phone = ProjectComments::find(1)->user->toArray();
         
         if ($query) return $query;
 
         return null;
     }
 
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         $newComment = new ProjectComments;
         $newComment->user_id = Auth::id();
@@ -56,12 +54,13 @@ class ProjectCommentController extends Controller
 
         $json_data = array("commentHTML" => $viewRender);
         
-        NewCommentCreated::dispatch($viewRender, $newComment->proj_id)->toOthers(); // broadcast the new comment to other users
+        // broadcast the new comment to other users
+        broadcast(new NewCommentCreated($viewRender, $newComment->proj_id))->toOthers();
 
         echo json_encode($json_data);
     }
 
-    public function update(ProjectComments $comment, Request $request)
+    public function update(ProjectComments $comment, Request $request): void
     {
         $comment->content = $request->ProjectComment;
         $comment->save();
@@ -73,7 +72,7 @@ class ProjectCommentController extends Controller
         echo json_encode($json_data);
     }
 
-    public function destroy(ProjectComments $comment)
+    public function destroy(ProjectComments $comment): void
     {
         // Laravel model binding, acts like Model::find($id)
         

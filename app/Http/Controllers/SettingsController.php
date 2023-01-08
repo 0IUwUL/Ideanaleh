@@ -10,14 +10,16 @@ use App\Models\User;
 
 class SettingsController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request): Object
+    {
         // Get user info from session
         $user = Auth::user()->toArray();
         
         return view('pages.settings')->with('user', $user);
     }
     
-    public function changePass(Request $request){
+    public function changePass(Request $request): Object
+    {
         // Get user id
         $userId = Auth::id();
        
@@ -26,7 +28,8 @@ class SettingsController extends Controller
         return redirect('settings');
     }
 
-    public function changeName(Request $request){
+    public function changeName(Request $request): Object
+    {
         // Get user id
         $userId = Auth::id();
 
@@ -41,7 +44,8 @@ class SettingsController extends Controller
         return redirect('settings');
     }
 
-    public function uploadImage(Request $request){
+    public function uploadImage(Request $request): Object
+    {
         // Get user id
         $userId = Auth::id();
         
@@ -60,7 +64,8 @@ class SettingsController extends Controller
         return redirect('settings');
     }
     
-    public function checkPassword(Request $request){
+    public function checkPassword(Request $request): void
+    {
         // Get user id and search to db
         $userId = Auth::id();
         $user = User::find($userId);
@@ -76,7 +81,8 @@ class SettingsController extends Controller
    
     }
 
-    public function changeAddress(Request $request){
+    public function changeAddress(Request $request): Object
+    {
         // Get user id
         $userId = Auth::id();
 
@@ -89,7 +95,8 @@ class SettingsController extends Controller
         return redirect('settings');
     }
 
-    public function changeEmail(Request $request){
+    public function changeEmail(Request $request): Object
+    {
         // Get user id
         $userId = Auth::id();
 

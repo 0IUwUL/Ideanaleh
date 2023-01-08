@@ -15,7 +15,8 @@ use Auth;
 
 class RegistrationController extends Controller
 {
-    public function registerUser(Request $request){
+    public function registerUser(Request $request): Object
+    {
         $user = new User;
         $user->Lname = $request->Lname;
         $user->Fname = $request->Fname;
@@ -39,7 +40,8 @@ class RegistrationController extends Controller
         return redirect('/');
     }
 
-    public function GoogleRegisterUser(Request $request){
+    public function GoogleRegisterUser(Request $request): Object
+    {
         
         $userId = Auth::id();
         $followed = implode(',', $request->Followed);
@@ -57,7 +59,8 @@ class RegistrationController extends Controller
         return redirect('/');
     }
 
-    public function dupliEmail(Request $request){
+    public function dupliEmail(Request $request)
+    {
         $user = User::where('email', '=', $request->email)->first();
         if ($user){
             $json_data = array("response" => "duplicate");

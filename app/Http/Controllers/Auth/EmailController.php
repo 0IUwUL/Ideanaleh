@@ -16,7 +16,7 @@ class EmailController extends Controller
     // Temporary alternative before utilizing
     // the default VerificationController
 
-    public function sendCode(Request $request)
+    public function sendCode(Request $request): void
     { 
     $user = Auth::user();
     

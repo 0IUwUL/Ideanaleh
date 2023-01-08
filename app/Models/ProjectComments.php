@@ -10,9 +10,4 @@ class ProjectComments extends Model
 {
     use HasFactory;
 
-    public function user()
-    {
-        // https://stackoverflow.com/a/19860503
-        return $this->belongsTo(User::class)->select(['id', 'Lname','Fname','Mname','icon']);;
-    }
 }

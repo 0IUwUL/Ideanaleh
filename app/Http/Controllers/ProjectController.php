@@ -20,7 +20,7 @@ use Phpml\Association\Apriori;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(): Object
     {
         $userProjectVar = Projects::where('user_id', Auth::id())->first();
         if($userProjectVar != null){
@@ -38,13 +38,15 @@ class ProjectController extends Controller
     }
 
 
-    public function view(int $idArg){
+    public function view(int $idArg): Object
+    {
         $projectDataVar = $this->_getProjectData($idArg);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }
 
 
-    public function edit(int $idArg){
+    public function edit(int $idArg): Object
+    {
         $projectDataVar = [
             'project' => $this->_getProjectData($idArg),
             'categories' => config('category')[0]
@@ -59,7 +61,8 @@ class ProjectController extends Controller
     }
 
 
-    private function _getProjectData(int $idArg){
+    private function _getProjectData(int $idArg): array
+    {
         $projectDataVar = Projects::find($idArg)->toArray();
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
         if(Auth::check()){
@@ -76,7 +79,8 @@ class ProjectController extends Controller
         return $projectDataVar;
     }
     // public function popularProjects($projectDataArg, int $idArg)
-    public function popularProjects(){
+    public function popularProjects(): array
+    {
         
         //get all preferences of users
         $user_preferences = json_decode(
@@ -127,7 +131,8 @@ class ProjectController extends Controller
     /***
      * Private function to generate recommendations
      */
-    public function recommendation($projectDataArg, int $idArg){
+    public function recommendation(array|null $projectDataArg, int $idArg): array
+    {
 
         //get all project under the visited page category
         //id,!=,Auth::id();
@@ -413,7 +418,7 @@ class ProjectController extends Controller
     }
 
 
-    private function _getProjectTiers(int $projectIdArg)
+    private function _getProjectTiers(int $projectIdArg): array|null
     {
         $tiersVar = ProjectTiers::where('proj_id', '=', $projectIdArg)->get()->toArray();
 
@@ -432,7 +437,7 @@ class ProjectController extends Controller
     /***
      * Public function to get the input from the user
      */
-    public function saveCreatedProject(Request $requestArg)
+    public function saveCreatedProject(Request $requestArg): Object
     {
         $dataVar = $this->_saveNewProject($requestArg);
         
@@ -450,7 +455,8 @@ class ProjectController extends Controller
 
     }
 
-    private function _saveNewProject(Request $requestArg){
+    private function _saveNewProject(Request $requestArg): Object
+    {
         
         if($requestArg->ProjId != null){
             $dataVar = Projects::find($requestArg->ProjId);
@@ -477,7 +483,11 @@ class ProjectController extends Controller
         return $dataVar;
     }
 
-    private function _saveImage(Request $requestArg, string $projectIdArg, string $typeArg, string $formNameArg)
+    private function _saveImage(
+        Request $requestArg, 
+        string $projectIdArg, 
+        string $typeArg, 
+        string $formNameArg): void
     {
         $pathVar = $requestArg->file($formNameArg)->storeAs(
             'project_'.$typeArg.'s', //Folder name
@@ -490,7 +500,7 @@ class ProjectController extends Controller
     }
 
 
-    private function _saveTiers($projectIdVar, $requestArg)
+    private function _saveTiers(int $projectIdVar, Request $requestArg): void
     {
         $currentTierVar = 1;
         for ($index = 0; $index < count($requestArg->Tier); $index++)
@@ -514,42 +524,15 @@ class ProjectController extends Controller
         }
     }
 
-    private function _getYoutubeId($urlParams)
+    private function _getYoutubeId(string $urlParams): string
     {
-        // from https://stackoverflow.com/questions/3392993/php-regex-to-get-youtube-video-id
-        // Supported YT Links
-        // http://youtu.be/dQw4w9WgXcQ
-        // http://www.youtube.com/embed/dQw4w9WgXcQ
-        // http://www.youtube.com/watch?v=dQw4w9WgXcQ
-        // http://www.youtube.com/?v=dQw4w9WgXcQ
-        // http://www.youtube.com/v/dQw4w9WgXcQ
-        // http://www.youtube.com/e/dQw4w9WgXcQ
-        // http://www.youtube.com/user/username#p/u/11/dQw4w9WgXcQ
-        // http://www.youtube.com/sandalsResorts#p/c/54B8C800269D7C1B/0/dQw4w9WgXcQ
-        // http://www.youtube.com/watch?feature=player_embedded&v=dQw4w9WgXcQ
-        // http://www.youtube.com/?feature=player_embedded&v=dQw4w9WgXcQ
-        // It also works on the youtube-nocookie.com URL with the same above options.
-        // It will also pull the ID from the URL in an embed code (both iframe and object tags)
         preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $urlParams, $match);
         
         return $match[1];
     }
 
-
-    private static function _getEnumValues($column){
-        $type= Projects::select(Projects::raw("SHOW COLUMNS FROM projects WHERE Field = '{$column}'"))[0]->Type ;
-        preg_match('/^enum((.*))$/',$type,$matches)->get();
-        $enum=array();
-
-        foreach(explode(',',$matches[1])as$value){
-            $v=trim($value,"'");
-            $enum=array_add($enum,$v,$v);
-        }
-
-        return $enum;
-    }
-
-    public function _getProjects(Request $requestArg){
+    public function _getProjects(Request $requestArg): void
+    {
         $pref_categs = $requestArg->categs;
         foreach ($pref_categs as $key => $categories){
             $sample = Projects::where('category', '=', $categories)

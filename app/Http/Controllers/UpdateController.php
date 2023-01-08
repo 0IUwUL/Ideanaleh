@@ -9,7 +9,7 @@ use App\Models\ProjectUpdates;
 
 class UpdateController extends Controller
 {
-    public function index(int $id): array|null
+    public function index(int $id): ?array
     {
         $query = ProjectUpdates::where('proj_id', $id) ->orderBy('created_at', 'desc')->get();
 
@@ -55,7 +55,7 @@ class UpdateController extends Controller
         echo json_encode($json_data);
     }
 
-    private function getLatestUpdate(int $id): array|null
+    private function getLatestUpdate(int $id): ?array
     {
         $query = ProjectUpdates::where('proj_id', $id)
                                 ->latest()

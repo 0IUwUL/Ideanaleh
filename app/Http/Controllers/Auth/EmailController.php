@@ -37,7 +37,7 @@ class EmailController extends Controller
     
     }
 
-    public function verify(Request $request)
+    public function verify(Request $request): void
     {
         $user = Auth::user();
 

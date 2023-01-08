@@ -24,7 +24,7 @@ class LoginController extends Controller
         return (redirect('/'));
     }
 
-    public function verifyInput (Request $request)
+    public function verifyInput (Request $request): void
     {
         $user = User::where('email', '=', $request->email)->first();
         if ($user){

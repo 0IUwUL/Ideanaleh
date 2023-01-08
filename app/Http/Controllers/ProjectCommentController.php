@@ -8,30 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\ProjectComments;
 
 use Auth;
-use DB;
 use Input;
 use App\Events\NewCommentCreated;
 
 class ProjectCommentController extends Controller
 {
-    public function index(int $id): array|null
+    public function index(int $projectId): ?array
     {
-        $query = json_decode(
-            json_encode(
-                DB::table('project_comments')
-                    ->where('project_comments.proj_id', $id)
-                    ->orderBy('created_at', 'desc')
-                    ->join('users', 'project_comments.user_id', '=', 'users.id')
-                    ->join('projects', 'project_comments.proj_id', '=', 'projects.id')
-                    ->select('project_comments.*','users.id as user_id', 'users.Lname', 'users.Fname', 'users.Mname', 'users.icon', 'projects.user_id as dev_id')
-                    ->get() 
-                    ->toArray()
-            ),
-            true);
-        
-        if ($query) return $query;
-
-        return null;
+        return ProjectComments::getAll($projectId);
     }
 
     public function store(Request $request): void

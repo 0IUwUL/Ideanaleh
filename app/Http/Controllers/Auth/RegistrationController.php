@@ -59,7 +59,7 @@ class RegistrationController extends Controller
         return redirect('/');
     }
 
-    public function dupliEmail(Request $request)
+    public function dupliEmail(Request $request): void
     {
         $user = User::where('email', '=', $request->email)->first();
         if ($user){

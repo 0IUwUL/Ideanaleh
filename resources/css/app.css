@@ -410,17 +410,22 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 /* admin style */
 .admin_brand{
-  font-size: 2rem;
+  font-size: 2rem!important;
 }
 
 .admin_nav{
   background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(31,66,96));
+  padding: .5rem 0;
 }
 
 .admin_side{
-  max-width: 23rem;
-  right: .8rem;
-  height: 87.9vh;
+  top: 4.7rem!important;
+  max-width: 6rem;
+  right: .8rem!important;
+  display: flex!important;
+  justify-content: center!important;
+  border-radius: 0 20px 20px 0;
+  /* height: 100%; */
 }
 
 .admin_side ul li{
@@ -428,7 +433,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 }
 
 .admin_display{
-  display: flex;
+  display: flex!important;
   justify-content: space-evenly;
 }
 
@@ -439,6 +444,38 @@ h1, h2, h3, h4, h5, h6, .btn {
 .admin_chart{
   width: 50%;
   height: 65%; 
+}
+
+.admin_side .toggle{
+  justify-content: end;
+}
+
+.toggle .active{
+  display: flex;
+}
+
+.toggle .disable{
+  display: none;
+}
+
+@media(max-width: 575px){
+  .admin_display{
+    width: 200px;
+    margin: 0 auto;
+  }
+  .admin_content{
+    width: 100px;
+  }
+}
+
+@media(max-width: 280px){
+  .admin_brand{
+    width: 90px;
+  }
+  .admin_nav{
+    width: 10px;
+    padding: .5rem;
+  }
 }
 
 /* Create Project page */

@@ -131,7 +131,7 @@ class ProjectController extends Controller
     /***
      * Private function to generate recommendations
      */
-    public function recommendation(array|null $projectDataArg, int $idArg): array
+    public function recommendation(?array $projectDataArg, int $idArg): array
     {
 
         //get all project under the visited page category

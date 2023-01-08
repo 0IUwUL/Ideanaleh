@@ -109,7 +109,7 @@
         </div>
         <div class="collapse navbar-collapse pb-2" id="navbarTogglerLogged">
             <div class="d-block d-sm-none nav_home col">
-                <ul class="dropdown">
+                <ul class="dropdown ps-3">
                     @if (Session::get('admin'))
                         <li class="dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('admin') }}">Admin</a></li>
                     @endif

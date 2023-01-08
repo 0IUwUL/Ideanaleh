@@ -32,10 +32,11 @@
               <a role = "button" class ="link-primary" id = "register"> Not registered yet? Signup</a>
           </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" id="LoginSubmit" class="btn btn-primary">Login</button>
-
+    <div class="modal-footer d-flex justify-content-between">
+      <div>
+        <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="LoginSubmit" class="btn btn-primary">Login</button>
+      </div>
       <!-- Google button-->
       <div id="loginModalGSI"></div> 
     </div>
@@ -86,7 +87,7 @@
               <a role = "button" class ="link-primary" id = "login"> Already a user? Login</a>
           </div>
         </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-between mx-3">
         <button type="button" class="btn btn-success next" >Next</button>
         
         <!-- Google button-->
@@ -130,7 +131,7 @@
                 </div>
             </div>
         </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-between mx-3">
         <button type="button" class="btn btn-success" data-bs-target="#SignUpModal" data-bs-toggle="modal">Back</button>
         <button type="button" class="btn btn-success next" id="next">Next</button>
       </div>
@@ -196,7 +197,7 @@
                 <label for="Categs[]" class="error">Your error message will be display here.</label>
             </div>
         </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-between mx-3">
         <button type="button" class="btn btn-success" data-bs-target="#SignUpModal2" data-bs-toggle="modal">Back</button>
         <button type="button" class="btn btn-success next" id="button">Next</button>
       </div>

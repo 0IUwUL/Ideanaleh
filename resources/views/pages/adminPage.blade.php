@@ -5,39 +5,45 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class = "col-3">
-            <div class="card card-body admin_side">
-                <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-                        <i class="fa-solid fa-house me-3"></i>Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="v-pills-users-tab" data-bs-toggle="pill" data-bs-target="#v-pills-users" type="button" role="tab" aria-controls="v-pills-users" aria-selected="false">
-                        <i class="fa-solid fa-users-gear me-3"></i>Users
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">
-                        <i class="fa-solid fa-rectangle-list me-3"></i>Projects
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <button class = "btn nav-link" type = "submit" href="{{ route('logout') }}">
-                            <i class="fa-regular fa-share-from-square me-3"></i>Logout
-                        </button>
-                    </li>
-                </ul>
-            </div>
+        <div class = "col-2 col-md-2 p-0">
+            <nav class="navbar admin_side fixed-top">
+                <div class="toggle">
+                    <i class="fa-solid fa-bars fs-4 disable" name = "menu_open"></i>
+                    <i class="fa-solid fa-xmark fs-4 active" name = "menu_close"></i>
+                </div>
+                <div class="container-fluid p-0 admin_list">
+                    <ul class="col-1 nav flex-column admin_list text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <li class="admin_nav_list">
+                            <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <i class="fa-solid fa-house mx-3 fs-2"></i><p>Home</p>
+                            </a>
+                        </li>
+                        <li class="admin_nav_list">
+                            <a class="nav-link" id="v-pills-users-tab" data-bs-toggle="pill" data-bs-target="#v-pills-users" type="button" role="tab" aria-controls="v-pills-users" aria-selected="false">
+                            <i class="fa-solid fa-users-gear mx-3 fs-2"></i><p>Users</p> 
+                            </a>
+                        </li>
+                        <li class="admin_nav_list">
+                            <a class="nav-link" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">
+                            <i class="fa-solid fa-rectangle-list mx-3 fs-2"></i><p>Projects</p> 
+                            </a>
+                        </li>
+                        <li class="admin_nav_list">
+                            <a class = "nav-link" type = "submit" href="{{ route('logout') }}">
+                                <i class="fa-regular fa-share-from-square mx-3 fs-2"></i><p>Logout</p> 
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
         <!-- Dashboard -->
-        <div class="col" style = "overflow-y: scroll; height: 88vh; padding-bottom: 1rem">
-            <div class="tab-content" id="v-pills-tabContent">
+        <div class="col p-0" style = "overflow-y: scroll;">
+            <div class="tab-content pb-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
                     <div class="container-fluid mt-5">
-                        <div class="row admin_display">
-                            <div class="col-3 card admin_content">
+                        <div class="row col-sm-12 gy-3 admin_display mx-auto">
+                            <div class="col-lg-3 col-md-5 col-sm-8 card admin_content">
                                 <div class="card-body">
                                     <div class="card-title">
                                         User count:
@@ -47,7 +53,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 card admin_content">
+                            <div class="col-lg-3 col-md-5 col-sm-8 card admin_content">
                                 <div class="card-body">
                                     <div class="card-title">
                                         Project count:
@@ -57,7 +63,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 card admin_content">
+                            <div class="col-lg-3 col-md-5 col-sm-8 card admin_content">
                                 <div class="card-body">
                                     <div class="card-title">
                                         Report unresolved:
@@ -69,12 +75,12 @@
                                 
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="col-5 admin_chart"> 
+                        <div class="row">
+                            <div class="col-12 col-lg-6 admin_chart mt-5"> 
                             <!-- refer to chart.js -->
                                 <canvas id="Users"></canvas>
                             </div>
-                            <div class="col">
+                            <div class="col col-lg-6 mt-5">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-title text-center">
@@ -116,8 +122,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="col-5">
+                        <div class="row">
+                            <div class="col col-lg-6 mt-5">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-title text-center">
@@ -158,7 +164,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col admin_chart">
+                            <div class="col-12 col-lg-6 mt-5 admin_chart">
                                 <!-- refer to chart.js -->
                                 <canvas id="Proj"></canvas>
                             </div>

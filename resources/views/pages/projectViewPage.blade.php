@@ -185,7 +185,7 @@
           <li class="nav-item px-1" role="presentation">
             <button class="nav-link py-2 px-5" id="pills-backers-tab" data-bs-toggle="pill"
               data-bs-target="#pills-backers" type="button" role="tab" aria-controls="pills-backers"
-              aria-selected="false">Backers</button>
+              aria-selected="false">Supporters</button>
           </li>
         </ul>
 
@@ -196,8 +196,8 @@
           <x-project.view.updates :id="$project['id']" :dev="$project['user_id']" :updates="$project['updates']"/>
           <!-- comments item tab -->
           <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
-          <!-- Backers item tab -->
-          <x-project.view.backers/>
+          <!-- Supporters item tab -->
+          <x-project.view.backers :supportcount="$project['support_count']" :followcount="$project['follow_count']"/>
         </div>
     </div>
 

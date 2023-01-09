@@ -469,6 +469,7 @@ class ProjectController extends Controller
         $dataVar->user_id = Auth::id();
         $dataVar->title = $requestArg->ProjTitle;
         $dataVar->description = $requestArg->ProjDesc;
+        $dataVar->story = $requestArg->ProjStory;
         $dataVar->category = $requestArg->ProjCategory;
         $dataVar->tags = implode(',', $requestArg->Tags);
         $dataVar->target_amt = $requestArg->ProjTarget;

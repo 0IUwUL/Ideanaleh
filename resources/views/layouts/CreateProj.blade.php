@@ -122,5 +122,19 @@
                 }
             }
         </script>
+
+        {{-- CKEditor --}}
+        <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.ckeditor').ckeditor();
+
+                if ( dialogName == 'link' || dialogName == 'image' )
+                {
+                    // remove Upload tab
+                    dialogDefinition.removeContents( 'Upload' );
+                }
+            });
+        </script>
     </body>
 </html>

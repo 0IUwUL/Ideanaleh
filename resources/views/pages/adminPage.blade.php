@@ -46,9 +46,18 @@
                             <div class="col-lg-3 col-md-5 col-sm-8 card admin_content">
                                 <div class="card-body">
                                     <div class="card-title">
-                                        User count:
-                                        <div class="card-text mt-3">
-                                            <h3>1000</h3>   
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row d-flex justify-content-center">
+                                                    User count:
+                                                </div>
+                                                <div class="row card-text mt-3">
+                                                    <h3>1000</h3>   
+                                                </div>
+                                            </div>
+                                            <div class="col d-flex justify-content-center align-self-center p-0">
+                                                <i class="fa-solid fa-user admin_icon"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -56,9 +65,18 @@
                             <div class="col-lg-3 col-md-5 col-sm-8 card admin_content">
                                 <div class="card-body">
                                     <div class="card-title">
-                                        Project count:
-                                        <div class="card-text mt-3">
-                                            <h3>1000</h3>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row d-flex justify-content-center">
+                                                    Project count:
+                                                </div>
+                                                <div class="row card-text mt-3">
+                                                    <h3>1000</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col d-flex justify-content-center align-self-center p-0">
+                                                <i class="fa-solid fa-bars-progress admin_icon"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +84,20 @@
                             <div class="col-lg-3 col-md-5 col-sm-8 card admin_content">
                                 <div class="card-body">
                                     <div class="card-title">
-                                        Report unresolved:
-                                        <div class="card-text mt-3">
-                                            <h3>1000</h3>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row d-flex justify-content-center">
+                                                    Report unresolved:
+                                                </div>
+                                                <div class="row card-text mt-3">
+                                                    <h3>1000</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col d-flex justify-content-center align-self-center p-0">
+                                                <i class="fa-solid fa-triangle-exclamation admin_icon"></i>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 
@@ -173,7 +201,113 @@
                 </div>
                 <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab" tabindex="0">
                     <div class="container-fluid mt-5">
-                        <div class="row table-responsive">
+                        <div class="row table-responsive px-3">
+                            <label for="TableUser" class="admin_user_table">User Table</label>
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>User Number</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th class="dropwdown">
+                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Role
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">User</a></li>
+                                                <li><a class="dropdown-item" href="#">Developer</a></li>
+                                                <li><a class="dropdown-item" href="#">Admin</a></li>
+                                            </ul>
+                                        </th>
+                                        <th class="dropwdown">
+                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Status
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Activated</a></li>
+                                                <li><a class="dropdown-item" href="#">Deactivated</a></li>
+                                            </ul>
+                                        </th>
+                                        <th>Registered At</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_user">User</span></td> 
+                                        <td><span class="admin_status admin_active">Activated</span></td> 
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeactivateModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_developer">Developer</span></td> 
+                                        <td><span class="admin_status admin_active">Activated</span></td>
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeactivateModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_developer">Developer</span></td> 
+                                        <td><span class="admin_status admin_active">Activated</span></td>
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeactivateModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_admin">Admin</span></td> 
+                                        <td><span class="admin_status admin_active">Activated</span></td>
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeactivateModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_admin">Admin</span></td>
+                                        <td><span class="admin_status admin_deactive">Deactivated</span></td>
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ActivateModal" data-id=""><i class="fa-solid fa-circle-check"></i></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_user">User</span></td>
+                                        <td><span class="admin_status admin_deactive">Deactivated</span></td>
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ActivateModal" data-id=""><i class="fa-solid fa-circle-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>mark@gmail.com</td>
+                                        <td><span class="admin_role admin_developer">Developer</span></td>
+                                        <td><span class="admin_status admin_deactive">Deactivated</span></td>
+                                        <td>12/06/2000</td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ActivateModal" data-id=""><i class="fa-solid fa-circle-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row table-responsive mt-5 px-3">
+                            <label for="TableUserIssue" class="admin_user_table">User Issue Table</label>
                             <table class="table align-middle">
                                 <thead>
                                     <tr>
@@ -533,6 +667,57 @@
             <div class="modal-content border-success">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Is the issue false? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="DeactivateModal" tabindex="-1" aria-labelledby="DeactivateModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeactivateModalHeader">You will now deactivate this current account. <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="DeactivateModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-success">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeactivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeleteModalHeader">Are you sure to delete this user? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">

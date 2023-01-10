@@ -685,8 +685,55 @@ hr.create{
 
 .ckeditor{
   width: 100vw!important;
-
 }
+
+.admin_icon{
+  font-size: 4rem;
+  color: var(--bg);
+}
+
+.admin_user_table{
+  color: var(--bg);
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.admin_status{
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+}
+
+.admin_deactive{
+  background-color: red!important;
+}
+
+.admin_active{
+  background-color: var(--txt)!important;
+}
+
+.admin_role{
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.admin_user{
+  background-color: var(--hl)!important;
+  color: black;
+}
+
+.admin_developer{
+  background-color: var(--bg)!important;
+  color: white;
+}
+
+.admin_admin{
+  background-color: black!important;
+  color: white;
+}
+
 /* filter page */
 :root{
   --txt: #abeb88;

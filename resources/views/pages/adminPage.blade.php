@@ -201,10 +201,10 @@
                 </div>
                 <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab" tabindex="0">
                     <div class="container-fluid mt-5">
-                        <div class="row table-responsive px-3">
-                            <label for="TableUser" class="admin_user_table">User Table</label>
-                            <table class="table align-middle">
-                                <thead>
+                        <label for="TableUser" class="admin_user_table">User Table</label>
+                        <div class="row table-responsive px-3" id = "admin_user_table">
+                            <table class="table align-middle table-hover">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>User Number</th>
                                         <th>Last Name</th>
@@ -230,6 +230,7 @@
                                         </th>
                                         <th>Registered At</th>
                                         <th>Actions</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -306,10 +307,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="row table-responsive mt-5 px-3">
-                            <label for="TableUserIssue" class="admin_user_table">User Issue Table</label>
-                            <table class="table align-middle">
-                                <thead>
+                        <label for="TableUserIssue" class="admin_user_table mt-5">User Issue Table</label>
+                        <div class="row table-responsive mt-3 px-3">
+                            <table class="table align-middle table-hover">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>User Number</th>
                                         <th>Last Name</th>
@@ -324,7 +325,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -332,7 +333,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -340,7 +341,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -348,7 +349,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -356,7 +357,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -364,7 +365,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -372,7 +373,7 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
                                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
@@ -382,13 +383,74 @@
                     </div>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
-                <div class="container-fluid mt-5">
-                        <div class="row table-responsive" style = "max-height: 40vh; overflow-y: scroll">
-                            <table class="table align-middle">
-                                <thead>
+                    <div class="container-fluid mt-5">
+                        <label for="ProjectTable" class="admin_project_table">Project Table</label>
+                        <div class="row table-responsive px-3" id = "ProjectTable" style = "max-height: 40vh; overflow-y: scroll">
+                            <table class="table align-middle table-hover">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>Project Number</th>
                                         <th>Project Name</th>
+                                        <th>Developer Last Name</th>
+                                        <th class="dropwdown">
+                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Status
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Done</a></li>
+                                                <li><a class="dropdown-item" href="#">In Progress</a></li>
+                                                <li><a class="dropdown-item" href="#">Halted</a></li>
+                                            </ul>
+                                        </th>
+                                        <th>Date Started</th>
+                                        <th>Target Date</th>
+                                        <th>Action</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Project</td>
+                                        <td>Mark</td>
+                                        <td><span class="admin_project project_IP">In Progress</span></td>
+                                        <td>12/06/2000</td>
+                                        <td>1/1/2022</td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Project</td>
+                                        <td>Mark</td>
+                                        <td><span class="admin_project project_success">Completed</span></td>
+                                        <td>12/06/2000</td>
+                                        <td>1/1/2022</td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Project</td>
+                                        <td>Mark</td>
+                                        <td><span class="admin_project project_halt">Halt</span></td>
+                                        <td>12/06/2000</td>
+                                        <td>1/1/2022</td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <label for="ProjectIssueTable" class="admin_project_table mt-5">Project Issue Table</label>
+                        <div class="row table-responsive mt-3 px-3" id = "ProjectIssueTable" style = "max-height: 40vh; overflow-y: scroll">
+                            <table class="table align-middle table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Project Number</th>
+                                        <th>Project Name</th>
+                                        <th>Developer Last Name</th>
                                         <th>Issue/Report</th>
                                         <th>Action</th>
                                         <th></th>
@@ -397,52 +459,59 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
+                                        <td>Project</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -532,80 +601,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="row table-responsive" style = "max-height: 40vh; overflow-y: scroll">
-                                <table class="table align-middle">
-                                    <thead class = "table-dark sticky-top">
-                                        <tr>
-                                            <th>Project Name</th>
-                                            <th>Developer</th>
-                                            <th>
-                                                <button class = "btn btn-dark dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Genre
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Ascending</a></li>
-                                                    <li><a class="dropdown-item" href="#">Descending</a></li>
-                                                </ul>
-                                            </th>
-                                            <th>
-                                                <button class = "btn btn-dark dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Date
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Ascending</a></li>
-                                                    <li><a class="dropdown-item" href="#">Descending</a></li>
-                                                </ul>
-                                            </th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                            <td>12-06-2000</td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                            <td>12-06-2000</td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                            <td>12-06-2000</td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                            <td>12-06-2000</td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                            <td>12-06-2000</td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-warning"><i class="fa-solid fa-flag"></i></button></td>
-                                            <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -615,7 +610,7 @@
 </div>
 
 <div class="modal fade" id="FlagModal" tabindex="-1" aria-labelledby="FlagModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content border-warning">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="FlagModalHeader">Inform the issue to the developer</h1>
@@ -642,6 +637,34 @@
   </div>
 </div>
 
+<div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-warning">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+              <div class="mb-3">
+                  <label for="LabelSubject" class="form-label">Subject</label>
+                  <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
+              </div>
+              <div class="mb-3">
+                  <label for="LabelContentIssue" class="form-label">Message Content</label>
+                  <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
+              </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send to Developer</button>
+        </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
 
 <div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
     <form action="">
@@ -666,7 +689,7 @@
         <div class="modal-dialog">
             <div class="modal-content border-success">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Is the issue false? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
@@ -695,12 +718,12 @@
         </div>
 </div>
 
-<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="DeactivateModalLabel" aria-hidden="true">
+<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog">
             <div class="modal-content border-success">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeactivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
@@ -719,6 +742,69 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DeleteModalHeader">Are you sure to delete this user? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="DeleteFlagModal" tabindex="-1" aria-labelledby="DeleteFlagModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeleteFlagModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="DeleteProjectModal" tabindex="-1" aria-labelledby="DeleteProjectModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeleteProjectModalHeader">Are you sure to delete this project? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="ProjectFlagModal" tabindex="-1" aria-labelledby="ProjectFlagModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-warning">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ProjectFlagModalHeader">Assign status for the project</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Status
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">In Progress</a></li>
+                          <li><a class="dropdown-item" href="#">Completed</a></li>
+                          <li><a class="dropdown-item" href="#">Halt</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

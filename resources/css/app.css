@@ -695,7 +695,7 @@ hr.create{
 .admin_user_table{
   color: var(--bg);
   font-size: 2rem;
-  font-weight: 200;
+  font-weight: 800;
 }
 
 .admin_status{
@@ -732,6 +732,31 @@ hr.create{
 .admin_admin{
   background-color: black!important;
   color: white;
+}
+
+.admin_project_table{
+  font-size: 2rem;
+  color: var(--bg);
+  font-weight: 800;
+}
+
+.admin_project{
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: black;
+}
+
+.project_IP{
+  background-color: rgb(255, 217, 0)!important;
+}
+
+.project_success{
+  background-color: var(--txt)!important;
+}
+
+.project_halt{
+  background-color: rgb(255, 96, 96)!important;
 }
 
 /* filter page */

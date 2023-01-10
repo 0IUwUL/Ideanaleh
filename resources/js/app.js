@@ -426,8 +426,6 @@ $(document).on('click', '.pagination .page-link', function(event){
     filterSend(category, options, page)
 });
 
-    
-
 // Rendering the google button
 $('#LoginModal, #SignUpModal').on('show.bs.modal',  loadBtn);
 

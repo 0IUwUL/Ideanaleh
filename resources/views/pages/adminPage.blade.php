@@ -6,10 +6,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class = "col-2 col-md-2 p-0">
-            <nav class="navbar admin_side fixed-top">
+            <button class="btn admin_nav_open d-none"><i class="fa-solid fa-bars fs-4"></i></button>
+            <nav class="navbar admin_side fixed-top p-0">
                 <div class="toggle">
-                    <i class="fa-solid fa-bars fs-4 disable" name = "menu_open"></i>
-                    <i class="fa-solid fa-xmark fs-4 active" name = "menu_close"></i>
+                    <button class="btn close"><i class="fa-solid fa-xmark fs-4"></i></button>
                 </div>
                 <div class="container-fluid p-0 admin_list">
                     <ul class="col-1 nav flex-column admin_list text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -90,7 +90,7 @@
                                                     <thead class = "table-dark sticky-top">
                                                         <tr>
                                                             <th scope = "col">#</th>
-                                                            <th scope = "col">/{{name}/}</th>
+                                                            <th scope = "col">(Name)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -133,7 +133,7 @@
                                                     <thead class = "table-dark sticky-top">
                                                         <tr>
                                                             <th scope = "col">#</th>
-                                                            <th scope = "col">/{{title}/}</th>
+                                                            <th scope = "col">(Title)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -182,6 +182,7 @@
                                         <th>Issue/Report</th>
                                         <th>Action</th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -189,50 +190,57 @@
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>Mark</td>
                                         <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-success"><i class="fa-solid fa-check"></i></button></td>
-                                        <td class = "d-flex justify-content-center"><button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id=""><i class="fa-solid fa-check"></i></button></td>
+                                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -317,7 +325,7 @@
                                                     <thead class = "table-dark sticky-top">
                                                         <tr>
                                                             <th scope = "col">#</th>
-                                                            <th scope = "col">/{{Title}/}</th>
+                                                            <th scope = "col">(Title)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -358,7 +366,7 @@
                                                     <thead class = "table-dark sticky-top">
                                                         <tr>
                                                             <th scope = "col">#</th>
-                                                            <th scope = "col">/{{Genre}/}</th>
+                                                            <th scope = "col">(Genre)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -472,4 +480,67 @@
     
 </div>
 
+<div class="modal fade" id="FlagModal" tabindex="-1" aria-labelledby="FlagModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content border-warning">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="FlagModalHeader">Inform the issue to the developer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+            <div class="mb-3">
+                <label for="LabelSubject" class="form-label">Subject</label>
+                <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
+            </div>
+            <div class="mb-3">
+                <label for="LabelContentIssue" class="form-label">Message Content</label>
+                <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
+            </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send to Developer</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-success">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ResolvedModalHeader">Is the issue resolved? <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+
+<div class="modal fade" id="DeleteIssueModal" tabindex="-1" aria-labelledby="DeleteIssueModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog">
+            <div class="modal-content border-success">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Is the issue false? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
 @endsection

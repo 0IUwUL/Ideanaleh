@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-2">
+    <nav class="navbar navbar_default navbar-expand-lg navbar-dark fixed-top p-2">
         <div class="container-fluid d-flex justify-content-between">
             <div class = "col d-flex align-items-center">
                 <a class="navbar-brand" href="/">

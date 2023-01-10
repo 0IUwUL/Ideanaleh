@@ -25,6 +25,7 @@ class RegistrationController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->icon = $request->icon;
+        $user->admin = 0;
 
         $followed = implode(',', $request->Followed);
         

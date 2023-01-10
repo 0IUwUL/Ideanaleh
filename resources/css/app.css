@@ -92,7 +92,7 @@ html{
   padding: 2rem;
 }
 
-.navbar {
+.navbar_default {
   padding: 0.75rem 1.5rem;
   font-family: "Merriweather Sans", sans-serif;
   background-color: white;
@@ -409,6 +409,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 
 /* admin style */
+
 .admin_brand{
   font-size: 2rem!important;
 }
@@ -423,13 +424,23 @@ h1, h2, h3, h4, h5, h6, .btn {
   max-width: 6rem;
   right: .8rem!important;
   display: flex!important;
-  justify-content: center!important;
+  justify-content: end!important;
+  background-color: white;
   border-radius: 0 20px 20px 0;
-  /* height: 100%; */
+  border: #000 solid;
 }
 
 .admin_side ul li{
   margin-top: 1em;
+}
+
+.admin_list ul li a{
+  color: var(--txt);
+}
+
+.admin_list ul li a p{
+  color: var(--bg);
+  font-weight: 400
 }
 
 .admin_display{
@@ -448,13 +459,30 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 .admin_side .toggle{
   justify-content: end;
+  margin-left: 1rem;
 }
 
-.toggle .active{
+.admin_nav_open{
+  border: rgba(248, 250, 252, 1)!important;
+  border-color: #000!important;
+  border-style: solid!important;
+}
+
+.toggle button{
+  border: rgba(248, 250, 252, 1);
+  border-color: #000;
+  border-style: none none solid solid;
+}
+
+.toggle > .active{
   display: flex;
 }
 
-.toggle .disable{
+.admin_nav_list .active{
+  color: var(--bg)!important;
+}
+
+.toggle > .disable{
   display: none;
 }
 
@@ -655,6 +683,10 @@ hr.create{
   background: radial-gradient(#ffe995, #fa742b)!important;
 }
 
+.ckeditor{
+  width: 100vw!important;
+
+}
 /* filter page */
 :root{
   --txt: #abeb88;

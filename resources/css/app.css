@@ -409,9 +409,13 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 
 /* admin style */
+.admin_page{
+  margin-top: 4rem;
+}
 
 .admin_brand{
   font-size: 2rem!important;
+  padding: 0 1rem;
 }
 
 .admin_nav{
@@ -419,6 +423,161 @@ h1, h2, h3, h4, h5, h6, .btn {
   padding: .5rem 0;
 }
 
+.admin_header{
+  height: 1rem;
+}
+
+.sidebar{
+  display: flex!important;
+  flex-direction: column!important;
+  width: 77px;
+  border-right: 1px solid #dfdfdf;
+  margin-top: 3.85rem;
+  padding-top: 1rem;
+  height: calc(100vh - 1rem);
+  overflow-x: hidden;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: stretch;
+  transition: width 200ms ease-in-out
+}
+
+.sidebar .hidden_name{
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+  width: 0;
+  height: 0;
+}
+
+.sidebar .top_sidebar .hidden_name{
+  text-align: center;
+}
+
+.sidebar.open .hidden_name{
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar .top_sidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.middle_sidebar{
+  flex-grow: 1!important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.sidebar .admin_logo{
+  display: block;
+  width: 30px;
+  height: 30px;
+  transition: all 200ms ease-in-out;
+}
+
+.sidebar .admin_logo > img{
+  width: 100%;
+  height: 100%;
+}
+
+.admin_list ul li a{
+  color: grey;
+}
+
+.admin_list{
+  width: 100%!important;
+}
+
+.sidebar_icon{
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: .25rem 0;
+}
+
+.sidebar_link{
+  height: 10%;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
+
+.top_sidebar{
+  margin-bottom: 1rem;
+}
+
+.sidebar_link.active{
+  color: var(--bg)!important;
+  background-color: rgba(163, 163, 163, 0.15);
+}
+
+.admin_nav_list{
+  width: 100%;
+  justify-content: center;
+}
+
+.admin_nav_list:hover{
+  background-color: rgba(163, 163, 163, 0.15);
+}
+
+.sidebar_link.active::before{
+  content: "";
+  background-color: var(--bg);
+  height: calc(6% + .25rem);
+  left: 0;
+  width: 3px;
+  position: absolute;
+}
+
+.sidebar.open{
+  width: 152px;
+  display: flex!important;
+  flex-direction: column!important;
+  border-right: 1px solid #dfdfdf;
+  margin-top: 3.85rem;
+  padding-top: 1rem;
+  height: calc(100vh - 60px);
+  overflow-x: hidden;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.sidebar.open .sidebar_icon{
+  margin-right: 1rem;
+}
+
+.sidebar.open .sidebar_link{
+  justify-content: flex-start;
+}
+
+.sidebar.open .admin_logo{
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.sidebar.open .sidebar_icon{
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  padding: .5rem 0;
+}
+
+.sidebar .top_sidebar{
+  height: 30px;
+  transition: all 200ms ease-in-out;
+}
+
+.sidebar.open .top_sidebar{
+  height: 120px;
+}
+
+/* 
 .admin_side{
   top: 4.7rem!important;
   max-width: 6rem;
@@ -434,14 +593,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   margin-top: 1em;
 }
 
-.admin_list ul li a{
-  color: var(--txt);
-}
-
-.admin_list ul li a p{
-  color: var(--bg);
-  font-weight: 400
-}
+ */
 
 .admin_display{
   display: flex!important;
@@ -456,7 +608,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   width: 50%;
   height: 65%; 
 }
-
+/* 
 .admin_side .toggle{
   justify-content: end;
   margin-left: 1rem;
@@ -484,7 +636,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 
 .toggle > .disable{
   display: none;
-}
+} */
 
 @media(max-width: 575px){
   .admin_display{

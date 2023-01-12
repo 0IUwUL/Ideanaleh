@@ -1,6 +1,6 @@
 <div class="container-fluid mt-5">
     <label for="ProjectTable" class="admin_project_table">Project Table</label>
-    <div class="row table-responsive px-3" id = "ProjectTable" style = "max-height: 40vh; overflow-y: scroll">
+    <div class="row table-responsive px-3" id = "ProjectTable" style = "max-height: 40vh; overflow-y: auto">
         <table class="table align-middle table-hover">
             <thead class="table-dark">
                 <tr>
@@ -8,7 +8,7 @@
                     <th>Project Name</th>
                     <th>Developer Last Name</th>
                     <th class="dropwdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle btn-outline-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Status
                         </button>
                         <ul class="dropdown-menu">
@@ -28,7 +28,7 @@
                     <td>1</td>
                     <td>Project</td>
                     <td>Mark</td>
-                    <td><span class="admin_project project_IP">In Progress</span></td>
+                    <td><span class="admin_project project_IP text-nowrap">In Progress</span></td>
                     <td>12/06/2000</td>
                     <td>1/1/2022</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>

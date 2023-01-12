@@ -428,6 +428,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 }
 
 .sidebar{
+  background-color: whitesmoke;
   display: flex!important;
   flex-direction: column!important;
   width: 77px;
@@ -534,7 +535,8 @@ h1, h2, h3, h4, h5, h6, .btn {
 }
 
 .sidebar.open{
-  width: 152px;
+  background-color: whitesmoke;
+  width: 10rem;
   display: flex!important;
   flex-direction: column!important;
   border-right: 1px solid #dfdfdf;

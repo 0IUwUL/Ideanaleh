@@ -4,11 +4,11 @@
 <x-styles.adminnav/>
 
 <div class="container-fluid admin_page">
-    <div class="row">
+    <div class="row d-flex justify-content-evenly">
         <div class = "p-0 col-2" data-side-holder>
             <aside class="sidebar open fixed-top" data-side-bar>
                 <div class="top_sidebar">
-                    <a href="#" class="admin_logo" alt = "logo"><img src="{{asset('storage/avatars/default.png')}}"></a>
+                    <a href="{{ route('admin') }}" class="admin_logo" alt = "logo"><img src="{{asset('storage/avatars/default.png')}}"></a>
                     <div class="hidden_name">Ideanaleh</div>
                 </div>
                 <div class="middle_sidebar">
@@ -44,7 +44,7 @@
             </aside>
         </div>
         <!-- Dashboard -->
-        <div class="col p-0">
+        <div class="col-8 col-md-10 col-sm-10 p-0">
             <div class="tab-content pb-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
                     <x-admin.dashboard/>

@@ -16,6 +16,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FilterProjects;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfilePageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -123,4 +124,9 @@ Route::controller(PaymentsController::class)->group(function(){
 Route::controller(FilterProjects::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::post('/filter', 'Filter')->name('filter');
+});
+
+//Profile Page
+Route::controller(ProfilePageController::class)->prefix('profile')->group(function(){
+    Route::middleware('auth')->get('/', 'index')->name('profile');
 });

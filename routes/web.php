@@ -128,5 +128,5 @@ Route::controller(FilterProjects::class)->prefix('main')->group(function(){
 
 //Profile Page
 Route::controller(ProfilePageController::class)->prefix('profile')->group(function(){
-    Route::middleware('auth')->get('/', 'index')->name('profile');
+    Route::get('/', 'index')->name('profile');
 });

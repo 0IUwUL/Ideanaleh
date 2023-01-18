@@ -9,7 +9,7 @@ use App\Models\ProjectUpdates;
 
 class UpdateController extends Controller
 {
-    public function index(int $id)
+    public function index(int $id): ?array
     {
         $query = ProjectUpdates::where('proj_id', $id) ->orderBy('created_at', 'desc')->get();
 
@@ -18,7 +18,7 @@ class UpdateController extends Controller
         return null;
     }
 
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         $prevUpdate = $this->getLatestUpdate($request->ProjectId);
 
@@ -37,14 +37,14 @@ class UpdateController extends Controller
         echo json_encode($json_data);
     }
 
-    public function update(ProjectUpdates $update, Request $request)
+    public function update(ProjectUpdates $update, Request $request): void
     {
         $update->title = $request->UpdateTitle;
         $update->description = $request->UpdateDesc;
         $update->save();
     }
 
-    public function destroy(ProjectUpdates $update)
+    public function destroy(ProjectUpdates $update): void
     {
         $update->delete();
         
@@ -55,7 +55,7 @@ class UpdateController extends Controller
         echo json_encode($json_data);
     }
 
-    private function getLatestUpdate(int $id)
+    private function getLatestUpdate(int $id): ?array
     {
         $query = ProjectUpdates::where('proj_id', $id)
                                 ->latest()

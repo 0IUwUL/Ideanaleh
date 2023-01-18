@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request): Object
     {
         $dev_mode = array(
             'dev'=>false);
@@ -38,7 +38,7 @@ class HomeController extends Controller
             $dev_mode = array_merge($dev_mode, ['popular'=>(new ProjectController)->popularProjects()[0]]);
         }
         
-        
+
         return view('pages.home')->with('mode', $dev_mode);
     }
 }

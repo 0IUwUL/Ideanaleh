@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-2">
+    <nav class="navbar navbar_default navbar-expand-lg navbar-dark fixed-top p-2">
         <div class="container-fluid d-flex justify-content-between">
             <div class = "col d-flex align-items-center">
                 <a class="navbar-brand" href="/">
@@ -109,7 +109,7 @@
         </div>
         <div class="collapse navbar-collapse pb-2" id="navbarTogglerLogged">
             <div class="d-block d-sm-none nav_home col">
-                <ul class="dropdown">
+                <ul class="dropdown ps-3">
                     @if (Session::get('admin'))
                         <li class="dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('admin') }}">Admin</a></li>
                     @endif

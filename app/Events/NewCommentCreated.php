@@ -28,7 +28,7 @@ class NewCommentCreated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($commentHTML, $projectId)
+    public function __construct(string $commentHTML, int $projectId)
     {
         $this->projectId = $projectId;
         $this->commentHTML = $commentHTML;

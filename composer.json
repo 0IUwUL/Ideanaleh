@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
         "luigel/laravel-paymongo": "^2.2",
+        "mews/purifier": "^3.3",
         "php-ai/php-ml": "^0.10.0",
         "pusher/pusher-php-server": "^7.2",
         "twbs/bootstrap-icons": "^1.9"

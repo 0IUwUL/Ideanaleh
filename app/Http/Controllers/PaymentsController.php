@@ -11,12 +11,14 @@ use Auth;
 
 class PaymentsController extends Controller
 {
-    public function webhookPaymongo(){
+    public function webhookPaymongo(): Object
+    {
         return view('webhook.paymongo');
     }
 
 
-    public static function savePayment(array $requestArg){
+    public static function savePayment(array $requestArg): void
+    {
         if(!(Payments::where('payment_id', $requestArg['data']['attributes']['data']['id'])->first())){
             $dataVar = new Payments;
             $dataVar->proj_id = $requestArg['data']['attributes']['data']['attributes']['metadata']['project_id'];
@@ -30,7 +32,8 @@ class PaymentsController extends Controller
     }
 
 
-    public static function PaymentStatus(int $ProjId, string $status){
+    public static function PaymentStatus(int $ProjId, string $status): Object
+    {
         if($status == 'success'){
             (new UserPreferenceController)->updateSupported($ProjId);
             $data = array(
@@ -53,7 +56,8 @@ class PaymentsController extends Controller
     }
 
 
-    public function createSource(Request $requestArg){
+    public function createSource(Request $requestArg): void
+    {
         if(Auth::check()){
             $input = (float)$requestArg->TierAmount;
         
@@ -92,7 +96,8 @@ class PaymentsController extends Controller
     }
 
 
-    public function ValidInput(Request $requestArg){
+    public function ValidInput(Request $requestArg): void
+    {
         $input = (float)$requestArg->TierAmount;
         
         if ($input >= 100)

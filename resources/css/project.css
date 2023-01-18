@@ -576,3 +576,8 @@ input[name="GCategs[]"]{
   border-color:blue !important;
 }
 
+.dev_details img{
+  height: 250px;
+  width: 400px;
+}
+

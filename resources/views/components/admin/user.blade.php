@@ -8,7 +8,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th class="dropwdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Role
                         </button>
                         <ul class="dropdown-menu">
@@ -18,7 +18,7 @@
                         </ul>
                     </th>
                     <th class="dropwdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Status
                         </button>
                         <ul class="dropdown-menu">

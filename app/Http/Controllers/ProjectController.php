@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\ProjectCommentController;
+use App\Http\Controllers\SettingsController;
 
 // Import models
 use App\Models\Projects; 
@@ -41,6 +42,7 @@ class ProjectController extends Controller
     public function view(int $idArg): Object
     {
         $projectDataVar = $this->_getProjectData($idArg);
+        // dd($projectDataVar);
         return view('pages.projectViewPage')->with('project', $projectDataVar);
     }
 
@@ -63,7 +65,7 @@ class ProjectController extends Controller
 
     private function _getProjectData(int $idArg): array
     {
-        $projectDataVar = Projects::find($idArg)->toArray();
+        $projectDataVar = Projects::where('id', $idArg)->with(['dev'])->first()->toArray();
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
         if(Auth::check()){
             $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar, $idArg)]);

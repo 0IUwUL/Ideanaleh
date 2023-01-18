@@ -16,4 +16,9 @@ class Projects extends Model
     protected $casts = [
         'story'    => CleanHtml::class, // cleans when setting the value (prevents script injection and XSS)
     ];
+
+    public function dev()
+    {
+        return $this->belongsTo(User::class, 'user_id')->select(['id','Lname', 'Fname', 'Mname', 'email', 'icon', 'dev_mode']);
+    }
 }

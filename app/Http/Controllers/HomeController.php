@@ -30,8 +30,6 @@ class HomeController extends Controller
         if (Auth::check()){
             $dev_mode = array('dev' => Auth::user()->dev_mode);
             $dev_mode = array_merge($dev_mode, ['recommend' => (new ProjectController)->recommendation(null,0)]);
-            
-            // $dev_mode = array_merge($dev_mode, ['popular'=>(new ProjectController)->popularProjects()[0]]);
         }
         else{
             

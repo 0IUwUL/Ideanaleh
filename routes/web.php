@@ -134,5 +134,5 @@ Route::controller(FilterProjects::class)->prefix('main')->group(function(){
 
 //Profile Page
 Route::controller(ProfilePageController::class)->prefix('profile')->group(function(){
-    Route::get('/', 'index')->name('profile');
+    Route::get('/{id}', 'index')->name('profile');
 });

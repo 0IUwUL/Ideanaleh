@@ -390,19 +390,47 @@ $('#comment-box').keypress(function(e) {
 $(document).on('click', '.edit', function(e){
   let id = $(e.target).attr('data-id')
   let comment = document.getElementById('comment-'+id).textContent
-  
-  // Prevents submiting the same comment
-  $('#edit-comment-box').on('keyup',function(e){
-    if (comment == e.target.value)
-      $('.saveChanges').prop('disabled', true)
-    else
-      $('.saveChanges').prop('disabled', false)
 
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    url: "/project/comment/" + id + "/edit",
+    type:'GET',
+    data: {
+      ProjectComment : comment,
+    },
+    success: function(result){
+        let data = JSON.parse(result);
+
+        // Change comment modal id
+        if (data.status == "success"){
+          $('#CommentId').val(id)
+          $('#edit-comment-box').val(comment)
+          $("#editModal").modal('show');
+
+          // Prevents submiting the same comment
+          $('#edit-comment-box').on('keyup',function(e){
+            if (comment == e.target.value)
+              $('.saveChanges').prop('disabled', true)
+            else
+              $('.saveChanges').prop('disabled', false)
+
+          })
+        }
+        // Alert the user
+        else{ 
+          document.getElementById('project-comment-'+id).remove()
+                   
+          $('.DevToast').toast('show')
+          
+        }
+    }
   })
-  
-  $('#CommentId').val(id)
-  $('#edit-comment-box').val(comment)
 })
+
 
 // Save comment edit
 $('.saveChanges').click(function(){

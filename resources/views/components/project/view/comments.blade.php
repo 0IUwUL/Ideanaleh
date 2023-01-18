@@ -63,7 +63,7 @@
                                         <ul class="dropdown-menu">
                                             <!-- Show only the edit button to the comment owner -->
                                             @if(Auth::user()->id == $comment['user_id'])
-                                                <li><button class="dropdown-item edit" type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-id = {{$comment['id']}}>Edit</button></li>
+                                                <li><button class="dropdown-item edit" type="button" data-id = {{$comment['id']}}>Edit</button></li>
                                             @endif
                                             <li><button class="dropdown-item delete" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id  = {{$comment['id']}}>Delete</button></li>
                                             
@@ -139,3 +139,15 @@
         </div>
     </div>
 </div>
+
+<div aria-live="polite" aria-atomic="true" class="toast-container align-items-center mt-5 position-fixed bottom-0 end-0">
+    <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-danger text-white">
+        <strong class="me-auto">System</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body bg-dark text-white d-flex justify-content-start">
+        The comment does not exist
+      </div>
+    </div>
+</div> 

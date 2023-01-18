@@ -76,7 +76,7 @@ Route::prefix('project')->name('project.')->group(function () {
 
     // Project comments routes
     Route::resource('comment', ProjectCommentController::class, 
-                    ['only' => ['index', 'store', 'update', 'destroy']]);
+                    ['only' => ['store', 'edit', 'update', 'destroy']]);
 });
 
 // Project updates routes

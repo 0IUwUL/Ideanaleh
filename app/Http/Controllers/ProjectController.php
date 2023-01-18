@@ -7,11 +7,13 @@ use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ProjectStatController;
 
 // Import models
 use App\Models\Projects; 
 use App\Models\ProjectTiers;
-use App\Models\UserPreference; 
+use App\Models\UserPreference;
+use App\Models\ProjectStats;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -66,6 +68,8 @@ class ProjectController extends Controller
     private function _getProjectData(int $idArg): array
     {
         $projectDataVar = Projects::where('id', $idArg)->with(['dev'])->first()->toArray();
+
+        if(!$projectDataVar) return(abort(404));
         // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
         if(Auth::check()){
             $projectDataVar = array_merge($projectDataVar, ['recommend' => $this->recommendation($projectDataVar, $idArg)]);
@@ -78,6 +82,8 @@ class ProjectController extends Controller
         $projectDataVar = array_merge($projectDataVar, ['isSupported' => (new UserPreferenceController)->checkIfSupported($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdateController)->index($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['comments' => (new ProjectCommentController)->getComments($idArg)]);
+        $projectDataVar = array_merge($projectDataVar, ['stats' => (new ProjectStatController)->getProjectStats($idArg)]);
+        // dd($projectDataVar);
         return $projectDataVar;
     }
     // public function popularProjects($projectDataArg, int $idArg)
@@ -482,6 +488,12 @@ class ProjectController extends Controller
         $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
+
+        // creating new project stats row
+        if($requestArg->ProjId == null){
+            $newStats = new ProjectStats;
+            $newStats->proj_id = $dataVar->id();
+        }
 
         return $dataVar;
     }

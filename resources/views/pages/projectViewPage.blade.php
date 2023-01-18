@@ -197,7 +197,7 @@
           <!-- comments item tab -->
           <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
           <!-- Supporters item tab -->
-          <x-project.view.backers :supportcount="$project['support_count']" :followcount="$project['follow_count']"/>
+          <x-project.view.backers :supportcount="$project['stats']['support_count']" :followcount="$project['stats']['follow_count']"/>
         </div>
     </div>
 
@@ -334,20 +334,24 @@
         <h1 class="modal-title fs-3" id="displayAmt">Donation Modal</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body p-5">
-        <div class="mb-3">
-          <h4 class="text-warning h2"><i class="fa-solid fa-triangle-exclamation"></i> </h4>
-          <h5>There will be a tax of 2.5% for PayMongo services</h5>
+      <form method="post" action="{{ route('payment/create/payment') }}" accept-charset="UTF-8" id = "paymentForm">
+        @csrf
+        <div class="modal-body p-5">
+          <div class="mb-3">
+            <h4 class="text-warning h2"><i class="fa-solid fa-triangle-exclamation"></i> </h4>
+            <h5>You will be donating an amount of: </h5>
+          </div>
+          <div class="mb-3">
+            <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
+            <input type="hidden" name="ProjectId" value = {{$project['id']}}>
+            <input type="number" name="DonationAmount" class="form-control" id="FormControldisplayAmt" readonly>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
-          <input type="number" class="form-control" id="FormControldisplayAmt" readonly>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-target="#amtModal" data-bs-toggle="modal">Return</button>
+          <button type="submit" class="tier-button btn btn-success" data-projectId={{$project['id']}}>Confirm</button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-target="#amtModal" data-bs-toggle="modal">Return</button>
-        <button type="button" class="tier-button btn btn-success" data-projectId={{$project['id']}}>Confirm</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>

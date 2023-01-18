@@ -124,6 +124,11 @@ Route::controller(PaymentsController::class)->group(function(){
     Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
     Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
     Route::get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
+
+
+    Route::post('/payment/create/payment', 'createPayment')->name('payment/create/payment');
+    Route::get('/payment/success/{projectId}/{userId}', 'success')->name('payment/success');
+    Route::get('/payment/failed', 'failed')->name('payment/failed');
 });
 
 //Filter Projects

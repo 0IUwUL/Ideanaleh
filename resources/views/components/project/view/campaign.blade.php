@@ -10,5 +10,32 @@
         @endif
       </div>
       <p class="text-center">{{$project['target_date']}}</p>
+      <a href="{{route('profile')}}" class="row d-flex justify-content-center text-decoration-none text-dark">
+        <div class="row col-11 col-sm-10 col-lg-11 col-xl-9 col-xxl-8 border border-3 border-secondary d-flex justify-content-evenly p-3 rounded">
+          <div class="col-4">
+            <img src="{{asset('storage/avatars/default.png')}}" class="img-fluid rounded">
+          </div>
+          <div class="col-8 d-flex align-self-center">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fs-4 fw-bolder fst-italic">Name: </td>
+                  <td class="align-middle fw-semibold">{Developer Name}</td>
+                </tr>
+                <tr>
+                  <td class="fs-4 fw-bolder fst-italic">Email: </td>
+                  <td class="align-middle fw-semibold">{Developer@email.com}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </a>
     </div>
   </div>

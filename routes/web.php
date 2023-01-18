@@ -17,6 +17,7 @@ use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FilterProjects;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\ProfilePageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,7 +77,7 @@ Route::prefix('project')->name('project.')->group(function () {
 
     // Project comments routes
     Route::resource('comment', ProjectCommentController::class, 
-                    ['only' => ['index', 'store', 'update', 'destroy']]);
+                    ['only' => ['store', 'edit', 'update', 'destroy']]);
 });
 
 // Project updates routes
@@ -129,4 +130,9 @@ Route::controller(PaymentsController::class)->group(function(){
 Route::controller(FilterProjects::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::post('/filter', 'Filter')->name('filter');
+});
+
+//Profile Page
+Route::controller(ProfilePageController::class)->prefix('profile')->group(function(){
+    Route::get('/', 'index')->name('profile');
 });

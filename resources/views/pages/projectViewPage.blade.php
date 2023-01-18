@@ -208,7 +208,9 @@
                 <div class="carousel-item active">
                   @if(Auth::check())
                     <div class="row">
-                      <h2>Recommended Projects under this Category</h1>
+                      @if($project['recommend'][0])
+                        <h2>Recommended Projects under this Category</h2>
+                      @endif
                         @foreach($project['recommend'][0] as $index => $category)
                         @if($index<3) 
                           <div class="col-md-4 mb-3">

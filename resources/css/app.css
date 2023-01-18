@@ -228,6 +228,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   padding-right: 15px;
   text-align: center;
 }
+
 .hero-dark {
   color: white;
 }
@@ -247,6 +248,7 @@ h1, h2, h3, h4, h5, h6, .btn {
 }
 .hero__title {
   font-size: 2rem;
+  word-wrap: break-word;
 }
 .hero__text {
   color: rgba(255, 255, 255, 0.75);
@@ -288,7 +290,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 10rem;
+
 }
 .p1{
   background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(92, 77, 66, 0.9)), url("https://picsum.photos/750/1260");
@@ -1023,7 +1025,7 @@ hr.create{
 }
 .img-hover img{
   width: 100%;
-  height: auto;
+  height: 200px;
   display: block;
   margin: 0;
   transition: all 0.3s ease-out;
@@ -1033,4 +1035,28 @@ hr.create{
 .img-hover:hover img{
   -webkit-filter: brightness(80%);
   transform: scale3d(1.2, 1.2, 1.2);
+}
+
+/* terms and conditions */
+.hero2 {
+  padding-top: 8rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align:center;
+}
+
+.termsContainer{
+  width:300px;
+  background-color: rgba(255, 255, 255,1);
+  color:black; 
+  
+  padding: 10px;
+  padding-bottom: 10%;
+
+  box-sizing: border-box;
+  box-shadow:5px 5px rgba(0, 0, 0, 0.397);
+  border-radius:40px 40px 0 0;
+  text-align: justify;
+  overflow-wrap: break-word;
+
 }

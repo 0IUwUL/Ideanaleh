@@ -16,6 +16,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FilterProjects;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PolicyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,6 +90,11 @@ Route::controller(GoogleAuthController::class)->prefix('google')->name('google.'
 
 // Not utilized
 // Auth::routes();
+
+Route::controller(PolicyController::class)->group(function(){
+    Route::get('/terms-and-conditions', 'termsConditions')->name('terms-and-conditions');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+});
 
 /**
  * pag tinype ni user ang base_url/login ireredirect lang rin sa homepage

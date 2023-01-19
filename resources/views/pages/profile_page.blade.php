@@ -7,7 +7,7 @@
     <div class="row profile_page d-flex justify-content-evenly">
         <div class="col-sm-5 d-none d-sm-block left_block">
             <div class="row d-flex justify-content-center pt-3">
-                <img src={{asset('storage/'.$details['own']['dev']['icon'])}} class="profile_icon">
+                <img src={{asset('storage/'.$details['own']['icon'])}} class="profile_icon">
             </div>
             <div class="row my-5 prof_title">
                 Projects:<hr>
@@ -35,14 +35,14 @@
         </div>
         <div class="col-sm-6 right_block">
             <div class="row d-flex justify-content-center d-block d-sm-none">
-                <img src="{{asset('storage/avatars/default.png')}}" class="profile_icon">
-                <h3 class="text-center mt-3">{{$details['own']['dev']['Lname'] .', '. $details['own']['dev']['Fname'] .' '. $details['own']['dev']['Lname']}}</h3>
-                <h6 class="text-center">{{$details['own']['dev']['dev_mode']}}</h6>
+                <img src={{asset('storage/'.$details['own']['icon'])}} class="profile_icon">
+                <h3 class="text-center mt-3">{{$details['own']['Lname'] .', '. $details['own']['Fname'] .' '. $details['own']['Lname']}}</h3>
+                <h6 class="text-center">{{$details['own']['dev_mode']}}</h6>
             </div>
             <div class="row d-flex justify-content-between">
                 <div class="col">
-                    <h3 class="d-none d-sm-block">{{$details['own']['dev']['Lname'] .', '. $details['own']['dev']['Fname'] .' '. $details['own']['dev']['Lname']}}</h3>
-                    <h6 class="d-none d-sm-block {{$details['own']['dev']['status']}}">{{$details['own']['dev']['dev_mode']}}</h6>
+                    <h3 class="d-none d-sm-block">{{$details['own']['Lname'] .', '. $details['own']['Fname'] .' '. $details['own']['Lname']}}</h3>
+                    <h6 class="d-none d-sm-block {{$details['own']['status']}}">{{$details['own']['dev_mode']}}</h6>
                 </div>
                 <div class="col d-print-inline-block text-end">
                     <button type="button" class="btn btn-danger fs-5" data-bs-toggle="modal" data-bs-target="#ReportModal"><i class="fa-solid fa-triangle-exclamation"></i></button>
@@ -60,7 +60,7 @@
                         <div class="mb-3 row">
                             <label class="col-sm-4 col-lg-3 col-form-label fs-5">Email:</label>
                             <div class="col d-flex align-self-center">
-                                <span>{{$details['own']['dev']['email']}}</span>
+                                <span>{{$details['own']['email']}}</span>
                             </div>
                         </div>
                     </div>
@@ -70,10 +70,10 @@
                         <div class="mb-3 row">
                             <label class="col-sm-4 col-lg-3 col-form-label fs-5">Title:</label>
                             <div class="col d-flex align-self-center">
-                                <span>{{$details['own']['title']}}</span>
+                                <span>{{$details['own']['project']['title']}}</span>
                             </div>
                             <div class="d-flex justify-content-end mt-3">
-                                <a class="btn btn-primary" href={{url('project/view/'.$details['own']['id'])}} role="button">Visit Project</a>
+                                <a class="btn btn-primary" href={{url('project/view/'.$details['own']['project']['id'])}} role="button">Visit Project</a>
                             </div>
                             
                         </div>
@@ -85,25 +85,21 @@
                         <div class="row">
                             <span class="row_titles">Following:</span>
                             <div class="prof_projTitles">
-                                <a href="#"><span class="prof_projTitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur expedita sint repudiandae explicabo dignissimos est odio nisi quae nesciunt, praesentium quas, aperiam, dolores eum saepe natus quam odit facilis! Modi.</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
+                                @foreach($details['followed'] as $item)
+                                    <a href={{url('project/view/'.$item['id'])}}><span class="prof_projTitle">{{$item['title']}}</span></a>
+                                @endforeach
                             </div>
                         </div>
+                        @if(count($details) > 2)
                         <div class="row mt-5 prof_title">
                             <span class="row_titles">Supporting:</span>
                             <div class="prof_projTitles">
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
-                                <a href="#"><span class="prof_projTitle">hi</span></a><a href="#"><span class="prof_projTitle">hello</span></a>
+                                    @foreach($details['supported'] as $item)
+                                        <a href={{url('project/view/'.$item['id'])}}><span class="prof_projTitle">{{$item['title']}}</span></a>
+                                    @endforeach
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

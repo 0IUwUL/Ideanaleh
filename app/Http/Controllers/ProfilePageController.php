@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 
 use App\Models\UserPreference; 
 use App\Models\Projects;
+use App\Models\User;
 
 class ProfilePageController extends Controller
 {
@@ -29,15 +30,15 @@ class ProfilePageController extends Controller
             }
         }
         $ProjIds['own'] = $this->_getDevProjTitle($id);
-        if($ProjIds['own']['dev']['dev_mode']){
-            $ProjIds['own']['dev']['dev_mode'] = 'Developer';
-            $ProjIds['own']['dev']['status'] = 'dev';
+        // dd($ProjIds);
+        if($ProjIds['own']['dev_mode']){
+            $ProjIds['own']['dev_mode'] = 'Developer';
+            $ProjIds['own']['status'] = 'dev';
         }else{
-            $ProjIds['own']['dev']['dev_mode'] = 'User';
-            $ProjIds['own']['dev']['status'] = 'user';
+            $ProjIds['own']['dev_mode'] = 'User';
+            $ProjIds['own']['status'] = 'user';
         }
 
-        // dd(count($ProjIds));
         return view('pages.profile_page')->with('details', $ProjIds);
     }
 
@@ -60,9 +61,9 @@ class ProfilePageController extends Controller
 
     private function _getDevProjTitle(int $id): array
     {
-        $proj = Projects::where('user_id', '=', $id)
-                        ->select('id', 'user_id', 'title')
-                        ->with(['dev'])
+        $proj = User::where('id', '=', $id)
+                        ->select('id','Lname', 'Fname', 'Mname', 'email', 'icon', 'dev_mode')
+                        ->with(['project'])
                         ->first()
                         ->toArray();
         return $proj;

@@ -1,14 +1,16 @@
 <div class="container-fluid mt-5">
     <label for="ProjectTable" class="admin_project_table">Project Table</label>
-    <div class="row table-responsive px-3" id = "ProjectTable" style = "max-height: 40vh; overflow-y: auto">
+    <div class="row table-responsive px-3 admin_table" id = "ProjectTable">
         <table class="table align-middle table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>Project Number</th>
-                    <th>Project Name</th>
-                    <th>Developer Last Name</th>
+                    <th class="align-middle">Project Number</th>
+                    <th class="align-middle">Project Name</th>
+                    <th class="align-middle">Developer Last Name</th>
+                    <th class="align-middle">Date Started</th>
+                    <th class="align-middle">Target Date</th>
                     <th class="dropwdown">
-                        <button class="btn dropdown-toggle btn-outline-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Status
                         </button>
                         <ul class="dropdown-menu">
@@ -17,9 +19,7 @@
                             <li><a class="dropdown-item" href="#">Halted</a></li>
                         </ul>
                     </th>
-                    <th>Date Started</th>
-                    <th>Target Date</th>
-                    <th>Action</th>
+                    <th class="align-middle">Action</th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,9 +28,9 @@
                     <td>1</td>
                     <td>Project</td>
                     <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
                     <td><span class="admin_project project_IP text-nowrap">In Progress</span></td>
-                    <td>12/06/2000</td>
-                    <td>1/1/2022</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                     <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
@@ -38,9 +38,9 @@
                     <td>1</td>
                     <td>Project</td>
                     <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
                     <td><span class="admin_project project_success">Completed</span></td>
-                    <td>12/06/2000</td>
-                    <td>1/1/2022</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                     <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
@@ -48,9 +48,69 @@
                     <td>1</td>
                     <td>Project</td>
                     <td>Mark</td>
-                    <td><span class="admin_project project_halt">Halt</span></td>
                     <td>12/06/2000</td>
                     <td>1/1/2022</td>
+                    <td><span class="admin_project project_halt">Halt</span></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Project</td>
+                    <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
+                    <td><span class="admin_project project_IP text-nowrap">In Progress</span></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Project</td>
+                    <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
+                    <td><span class="admin_project project_success">Completed</span></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Project</td>
+                    <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
+                    <td><span class="admin_project project_halt">Halt</span></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Project</td>
+                    <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
+                    <td><span class="admin_project project_IP text-nowrap">In Progress</span></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Project</td>
+                    <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
+                    <td><span class="admin_project project_success">Completed</span></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Project</td>
+                    <td>Mark</td>
+                    <td>12/06/2000</td>
+                    <td>1/1/2022</td>
+                    <td><span class="admin_project project_halt">Halt</span></td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                     <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
@@ -59,15 +119,16 @@
     </div>
 
     <label for="ProjectIssueTable" class="admin_project_table mt-5">Project Issue Table</label>
-    <div class="row table-responsive mt-3 px-3" id = "ProjectIssueTable" style = "max-height: 40vh; overflow-y: scroll">
+    <div class="row table-responsive mt-3 px-3 admin_table" id = "ProjectIssueTable">
         <table class="table align-middle table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>Project Number</th>
-                    <th>Project Name</th>
-                    <th>Developer Last Name</th>
-                    <th>Issue/Report</th>
-                    <th>Action</th>
+                    <th class="py-3">Project Number</th>
+                    <th class="py-3">Project Name</th>
+                    <th class="py-3">Developer Last Name</th>
+                    <th class="py-3">Issue/Report</th>
+                    <th class="py-3">Action</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -78,7 +139,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -86,7 +148,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -94,7 +157,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -102,7 +166,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -110,7 +175,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -118,7 +184,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -126,7 +193,8 @@
                     <td>Mark</td>
                     <td>sdfgfdagweradgasdgaserawdgahfhaetrawfasdgawefweaa</td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
             </tbody>
         </table>

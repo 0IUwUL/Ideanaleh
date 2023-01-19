@@ -821,25 +821,26 @@ hr.create{
   background-color: var(--txt)!important;
 }
 
-.admin_role{
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: 700;
+#admin_user_table tbody tr td.admin_type{
+  font-weight: 1000;
+  font-size: 1.1rem;
+}
+
+.admin_table{
+  max-height: 40vh; 
+  overflow-y: auto;
 }
 
 .admin_user{
-  background-color: var(--hl)!important;
-  color: black;
+  color: rgb(12, 141, 0);
 }
 
 .admin_developer{
-  background-color: var(--bg)!important;
-  color: white;
+  color: rgb(27, 0, 126);
 }
 
 .admin_admin{
-  background-color: black!important;
-  color: white;
+  color: rgb(119, 0, 0);
 }
 
 .admin_project_table{

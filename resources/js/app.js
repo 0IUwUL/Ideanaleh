@@ -228,7 +228,7 @@ $('#LoginSubmit').on("click", function(){
         }
     });
     $.ajax({
-        url: "verify-log",
+        url: "/verify-log",
         type:'post',
         data: {
             email : email,

@@ -18,17 +18,9 @@ class RegistrationController extends Controller
 {
     public function registerUser(Request $request): Object
     {
-        $user = new User;
-        $user->Lname = $request->Lname;
-        $user->Fname = $request->Fname;
-        $user->Mname = $request->Mname;
-        $user->address = $request->address;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user = User::create($request->all());
 
         $followed = implode(',', $request->Followed);
-        
-        $user->save();
         $data = array(
             'id' => $user->id,
             'pref_projs' => $followed,

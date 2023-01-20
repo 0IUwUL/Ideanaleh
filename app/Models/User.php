@@ -52,4 +52,9 @@ class User extends Authenticatable
     public function pref(){
         return $this->hasOne(UserPreference::class, 'user_id')->select(['id', 'user_id', 'followed', 'supported']);
     }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

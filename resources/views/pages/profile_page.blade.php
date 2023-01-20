@@ -4,105 +4,129 @@
 <x-styles.defnav/>
 
 <div class="container-fluid">
-    <div class="row profile_page d-flex justify-content-evenly">
-        <div class="col-sm-5 d-none d-sm-block left_block">
-            <div class="row d-flex justify-content-center pt-3">
-                <img src={{asset('storage/'.$details['own']['icon'])}} class="profile_icon">
-            </div>
-            <div class="row my-5 prof_title">
-                Projects:<hr>
-                <div class="profile_Fprojects prof_title">
-                    <div class="row">
-                        <span class="row_titles">Following:</span>
-                        <div class="prof_projTitlesFollow">
-                            @foreach($details['followed'] as $item)
-                                <a href={{url('project/view/'.$item['id'])}}><span class="prof_projTitle">{{$item['title']}}</span></a>
-                            @endforeach
-                        </div>
-                    </div>
-                    @if(count($details) > 2)
-                        <div class="row mt-3 prof_title">
-                            <span class="row_titles">Supporting:</span>
-                            <div class="prof_projTitlesSupport">
-                                    @foreach($details['supported'] as $item)
-                                        <a href={{url('project/view/'.$item['id'])}}><span class="prof_projTitle">{{$item['title']}}</span></a>
-                                    @endforeach
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
+    <div class="row profile_bg"></div>
+    <div class="row profile_icon d-flex justify-content-center">
+        <div class="col d-flex justify-content-center align-content-center">
+            @if ($details['icon'])
+                <img src={{asset('storage/'.$details['icon'])}} class={{$details['status']}} alt="Avatar icon">
+            @else
+                <img src={{asset('storage/avatars/default.png')}} class={{$details['status']}} alt="Avatar icon">
+            @endif
         </div>
-        <div class="col-sm-6 right_block">
-            <div class="row d-flex justify-content-center d-block d-sm-none">
-                <img src={{asset('storage/'.$details['own']['icon'])}} class="profile_icon">
-                <h3 class="text-center mt-3">{{$details['own']['Lname'] .', '. $details['own']['Fname'] .' '. $details['own']['Lname']}}</h3>
-                <h6 class="text-center">{{$details['own']['dev_mode']}}</h6>
-            </div>
-            <div class="row d-flex justify-content-between">
-                <div class="col">
-                    <h3 class="d-none d-sm-block">{{$details['own']['Lname'] .', '. $details['own']['Fname'] .' '. $details['own']['Lname']}}</h3>
-                    <h6 class="d-none d-sm-block {{$details['own']['status']}}">{{$details['own']['dev_mode']}}</h6>
-                </div>
-                <div class="col d-print-inline-block text-end">
-                    <button type="button" class="btn btn-danger fs-5" data-bs-toggle="modal" data-bs-target="#ReportModal"><i class="fa-solid fa-triangle-exclamation"></i></button>
-                </div>
-            </div>
-            
-            <div class="row mt-5">
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-link" role="tab" aria-selected="true">About</a>
-                </div>
-                <div class="tab-content">
-                    <div class="row basic_user">
-                        <h4>Basic Information</h4>
-                        <hr>
-                        <div class="mb-3 row">
-                            <label class="col-sm-4 col-lg-3 col-form-label fs-5">Email:</label>
-                            <div class="col d-flex align-self-center">
-                                <span>{{$details['own']['email']}}</span>
+        <div class="row display_name">
+            <h3>{{$details['Lname']}}, {{$details['Fname']}} {{$details['Mname']}}</h3>
+            <h5 class={{$details['status']}}>{{$details['dev_mode']}}</h5>
+        </div>
+    </div>
+    <div class="row profile_content">
+        <ul class="nav nav-tabs d-flex justify-content-center p-0" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="follow-tab" data-bs-toggle="tab" data-bs-target="#follow-tab-pane" type="button" role="tab" aria-controls="follow-tab-pane" aria-selected="false">Following</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="support-tab" data-bs-toggle="tab" data-bs-target="#support-tab-pane" type="button" role="tab" aria-controls="support-tab-pane" aria-selected="false">Supporting</button>
+            </li>
+        </ul>
+    </div>
+    <div class="row profile_details">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <div class="row mt-5 d-flex">
+                    <h3>Contacts:</h3>
+                    <div class="col d-flex">
+                       
+                        <div class="ps-5 mb-3 row">
+                            <label for="staticEmail" class="col-3 col-form-label">Email</label>
+                            <div class="col">
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value={{$details['email']}}>
                             </div>
                         </div>
                     </div>
-                    @if ($details['own']['project'] != null)
-                        <div class="row basic_proj">
-                            <h4>Project Invovled:</h4>
-                            <hr>
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-lg-3 col-form-label fs-5">Title:</label>
-                                <div class="col d-flex align-self-center">
-                                    <span>{{$details['own']['project']['title']}}</span>
+                    <hr>
+                    @if($details['project'] != NULL)
+                        <h3>Project Involved:</h3>
+                        <div class="row col-6 projects ps-5">
+                            <a href={{url('project/view/'.$details['project']['id'])}} role = "button">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6 title_img">
+                                                <img src={{asset('storage/'.$details['project']['logo'])}} alt="project_logo">
+                                                <h5 class="card-title d-flex justify-content-center text-center mt-2">{{$details['project']['title']}}</h5>
+                                            </div>
+                                            <div class="col-12 col-lg-6 content">
+                                                <h5 class = "card-title">Category</h5>
+                                                <p class="card-text ms-3">{{$details['project']['category']}}</p>
+                                                <h5 class = "card-title">Description</h5>
+                                                <p class="card-text ms-3">{{$details['project']['description']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-flex justify-content-end mt-3">
-                                    <a class="btn btn-primary" href={{url('project/view/'.$details['own']['project']['id'])}} role="button">Visit Project</a>
-                                </div>
-                                
-                            </div>
+                            </a>
                         </div>
                     @endif
                 </div>
-                <div class="row my-5 prof_title d-block d-sm-none">
-                    Projects:<hr>
-                    <div class="profile_Fprojects prof_title">
-                        <div class="row">
-                            <span class="row_titles">Following:</span>
-                            <div class="prof_projTitles">
-                                @foreach($details['followed'] as $item)
-                                    <a href={{url('project/view/'.$item['id'])}}><span class="prof_projTitle">{{$item['title']}}</span></a>
-                                @endforeach
-                            </div>
+            </div>
+            <div class="tab-pane fade" id="follow-tab-pane" role="tabpanel" aria-labelledby="follow-tab" tabindex="0">
+                <div class="row g-5 mt-5 d-flex justify-content-center projects">
+                    @foreach($details['pref']['followed'] as $item)
+                        <div class="col-md-4">
+                            <a href={{url('project/view/'.$item['id'])}} role = "button">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6 title_img">
+                                                <img src={{asset('storage/'.$item['logo'])}} alt="project_logo">
+                                                <h5 class="card-title d-flex justify-content-center text-center mt-2">{{$item['title']}}</h5>
+                                            </div>
+                                            <div class="col-12 col-lg-6 content">
+                                                <h5 class = "card-title">Category</h5>
+                                                <p class="card-text ms-3">{{$item['category']}}</p>
+                                                <h5 class = "card-title">Description</h5>
+                                                <p class="card-text ms-3">{{$item['description']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                        @if(count($details) > 2)
-                        <div class="row mt-5 prof_title">
-                            <span class="row_titles">Supporting:</span>
-                            <div class="prof_projTitles">
-                                    @foreach($details['supported'] as $item)
-                                        <a href={{url('project/view/'.$item['id'])}}><span class="prof_projTitle">{{$item['title']}}</span></a>
-                                    @endforeach
+                    @endforeach
+                </div>
+            </div>
+            <div class="tab-pane fade" id="support-tab-pane" role="tabpanel" aria-labelledby="support-tab" tabindex="0">
+                <div class="row g-5 mt-5 d-flex justify-content-center projects">
+                    @if($details['pref']['supported'])
+                        @foreach($details['pref']['supported'] as $item)
+                            <div class="col-md-4">
+                                <a href={{url('project/view/'.$item['id'])}} role = "button">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 title_img">
+                                                    <img src={{asset('storage/'.$item['logo'])}} alt="project_logo">
+                                                    <h5 class="card-title d-flex justify-content-center text-center mt-2">{{$item['title']}}</h5>
+                                                </div>
+                                                <div class="col-12 col-lg-6 content">
+                                                    <h5 class = "card-title">Category</h5>
+                                                    <p class="card-text ms-3">{{$item['category']}}</p>
+                                                    <h5 class = "card-title">Description</h5>
+                                                    <p class="card-text ms-3">{{$item['description']}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                        @endif
-                    </div>
+                        @endforeach
+                    @else
+                            <div class="col d-flex justify-content-center text-center fs-4">
+                                None as of the moment.
+                            </div>
+                    @endif
                 </div>
             </div>
         </div>

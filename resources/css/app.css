@@ -1014,101 +1014,70 @@ hr.create{
 
 }
 /* profile page */
-.profile_page{
-  margin: 7rem 0 3rem 0!important;
+.profile_icon{
+  background-image: linear-gradient(var(--bg), rgba(255,0,0,0));
+  padding-top: 7rem;
 }
 
-.profile_page .left_block{
-  background-color: var(--txt);
-  border-radius: 5rem;
-  padding: .5rem 2.5rem;
-}
-
-.profile_page .right_block{
-  padding: 2rem 2.5rem;
-}
-
-.profile_page .right_block h6{
-  padding: .5rem 1rem;
-  display: inline-block!important;
-  border-radius: 2rem;
-  font-weight: 800;
-}
-
-.profile_page .right_block h6.dev{
-  background-color: #002d50;
-  color: whitesmoke;
-}
-
-.profile_page .right_block h6.user{
-  background-color: var(--hl);
-  color: var(--bg);
-}
-
-.profile_page .profile_icon{
-  width: 200px;
-  height: calc(width - 175px);
-  border-radius: 2rem;
-}
-
-.profile_page .profile_Fprojects{
-  margin-top: 1rem;
-  padding-left: 1rem;
-}
-
-.profile_page .prof_title{
-  font-size: 1.2rem;
-  font-weight: 900;
-}
-
-.profile_page .row_titles{
-  color: #1f4260;
-}
-
-.profile_page .prof_projTitlesFollow{
-  height:200px!important;
-}
-
-.profile_page .prof_projTitlesSupport{
-  height: 200px!important;
-}
-
-.profile_page .prof_projTitlesFollow,
-.profile_page .prof_projTitlesSupport{
-  overflow-y: auto;
-  padding: 0;
+.profile_icon .display img{
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
   margin: 0;
 }
 
-.profile_page .tab-content{
-  background-color: var(--txt);
+.profile_icon img.user{
+  border: 5px solid #00b633;
 }
 
-.profile_page .nav-link{
-  background-color: var(--txt)!important;
-  font-weight: 900;
-  border-width: 0;
-  color: black;
+.profile_icon img.dev{
+  border: 5px solid rgb(47, 0, 255);
 }
 
-.prof_projTitle{
-  display: inline-block;
-  background-color: #002d50;
-  color: whitesmoke;
-  padding: .5rem;
-  border-radius: 1rem;
-  margin: .4rem;
+.profile_icon img.admin{
+  border: 5px solid #db0000;
+}
+
+.profile_icon .display_name{
+  position:inherit;
+  text-align: center;
+  padding: 0;
+}
+
+.profile_icon .display_name h5{
+  font-weight: 500;
+}
+
+.profile_icon .display_name h5.dev{
+  color: var(--bg);
+}
+
+.profile_icon .display_name h5.user{
+  color: #00b633;
+}
+
+.profile_content{
+  padding-top: 3rem;
+}
+
+.profile_content ul{
   font-size: 1rem;
+  font-weight: 1000;
 }
 
-.profile_page .tab-content{
-  border-radius: 0 .5rem .5rem .5rem;
+.profile_details{
+  padding-bottom: 3rem;
 }
 
-.profile_page .tab-content .basic_user{
-  padding: 3rem 0 0 2rem;
+.profile_details .title_img img{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-self: center;
 }
 
-.profile_page .tab-content .basic_proj{
-  padding: .5rem 2rem;
+.profile_details .projects a{
+  text-decoration: none;
 }

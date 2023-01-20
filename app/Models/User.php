@@ -46,6 +46,10 @@ class User extends Authenticatable
     // ];
     public function project()
     {
-        return $this->hasOne(Projects::class, 'user_id')->select(['id','title', 'user_id']);
+        return $this->hasOne(Projects::class, 'user_id')->select(['id','title', 'user_id', 'logo', 'category', 'description']);
+    }
+
+    public function pref(){
+        return $this->hasOne(UserPreference::class, 'user_id')->select(['id', 'user_id', 'followed', 'supported']);
     }
 }

@@ -14,56 +14,52 @@ class ProfilePageController extends Controller
 {
     public function index(int $id): object
     {
-        $ProjIds = []; 
-        $dataVar = $this->_getUserPreferences($id)->toArray();
-
-        foreach($dataVar as $class => $items){
-            if(!(is_null($items)) || $items != ""){
+        // getting and project detail 
+        $dataVar = $this->_getDetails($id);
+        
+        // making preferences id to array
+        foreach($dataVar['pref'] as $class => $items){
+            if(!(is_null($items)) && $items != "" && $class != 'id' && $class != 'user_id'){
                 $ids = explode(',', $items);
-                $ProjIds[$class] = $ids;
+                $dataVar['pref'][$class] = $ids;
             }
         }
-        foreach($ProjIds as $class => $list){
-            foreach($list as $key => $proj){
-                $projVar = $this->_getProjTitle((int)$proj);
-                $ProjIds[$class][$key] = $projVar;
+
+        foreach($dataVar['pref'] as $class => $list){
+            if($class != 'id' && $class != 'user_id' && $list != NULL){
+                foreach($list as $key => $proj){
+                    $projVar = $this->_getProjTitle((int)$proj);
+                    $dataVar['pref'][$class][$key] = $projVar;
+                }
             }
         }
-        $ProjIds['own'] = $this->_getDevProjTitle($id);
-        // dd($ProjIds);
-        if($ProjIds['own']['dev_mode']){
-            $ProjIds['own']['dev_mode'] = 'Developer';
-            $ProjIds['own']['status'] = 'dev';
+
+        if($dataVar['dev_mode']){
+            $dataVar['dev_mode'] = 'Developer';
+            $dataVar['status'] = 'dev';
         }else{
-            $ProjIds['own']['dev_mode'] = 'User';
-            $ProjIds['own']['status'] = 'user';
+            $dataVar['dev_mode'] = 'User';
+            $dataVar['status'] = 'user';
         }
-
-        return view('pages.profile_page')->with('details', $ProjIds);
-    }
-
-    private function _getUserPreferences(int $id): Object
-    {
-        $pref = UserPreference::where('user_id', '=', $id)
-                                ->select('followed', 'supported')
-                                ->first();
-        return $pref;
+            // dd($dataVar);
+        return view('pages.profile_page')->with('details', $dataVar);
     }
 
     private function _getProjTitle(int $id): array
     {
         $proj = Projects::where('id', '=', $id)
-                        ->select('id', 'title')
+                        ->select('id','title', 'user_id', 'logo', 'category', 'description')
                         ->first()
                         ->toArray();
         return $proj;
     }
 
-    private function _getDevProjTitle(int $id): array
+    private function _getDetails(int $id): array
     {
         $proj = User::where('id', '=', $id)
                         ->select('id','Lname', 'Fname', 'Mname', 'email', 'icon', 'dev_mode')
                         ->with(['project'])
+                        ->with(['pref'])
                         ->first()
                         ->toArray();
         return $proj;

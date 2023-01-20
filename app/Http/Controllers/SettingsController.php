@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Hash;
 use Auth;
+
+use App\Http\Controllers\Auth\RegistrationController;
+
 //Import model
 use App\Models\User; 
 
@@ -46,20 +49,7 @@ class SettingsController extends Controller
 
     public function uploadImage(Request $request): Object
     {
-        // Get user id
-        $userId = Auth::id();
-        
-        if($request->hasFile('avatar')){
-            // Store the icon to avatars folder under public folder
-            $iconPath = $request->file('avatar')->storeAs(
-                'avatars',
-                // Set the name to id.imgExtension (e.g 1.jpg)
-                $userId.'.'.$request->file('avatar')->extension(),
-                'public',
-            );
-
-            User::where('id', $userId)->update(['icon' => $iconPath]);
-        }
+        (new RegistrationController)->saveAvatarPath(Auth::id(), $request);
        
         return redirect('settings');
     }

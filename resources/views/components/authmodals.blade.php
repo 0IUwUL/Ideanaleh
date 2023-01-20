@@ -46,7 +46,7 @@
 </div>
 
 <!-- SignUp -->
-<form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm">
+<form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm" enctype='multipart/form-data'>
 @csrf           
               
 <div class="modal fade p-0" id="SignUpModal" data-btn="signupModalGSI" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="InputIMG" class="form-label">Upload image as an icon:</label>
-                    <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
+                    <input type="file" name = "avatar" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
                 </div>
             </div>
         </div>

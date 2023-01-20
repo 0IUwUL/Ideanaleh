@@ -68,7 +68,7 @@ $('.next, #submit').click(function (){
                 }
             });
             $.ajax({
-                url: "verify-email",
+                url: "/verify-email",
                 type:'post',
                 data: {
                     email : email,
@@ -100,7 +100,7 @@ $('.next, #submit').click(function (){
                 }
             });
             $.ajax({
-                url: "project/categs",
+                url: "/project/categs",
                 type:'post',
                 data: {
                     categs : cate,

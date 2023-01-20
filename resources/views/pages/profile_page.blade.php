@@ -64,20 +64,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row basic_proj">
-                        <h4>Project Invovled:</h4>
-                        <hr>
-                        <div class="mb-3 row">
-                            <label class="col-sm-4 col-lg-3 col-form-label fs-5">Title:</label>
-                            <div class="col d-flex align-self-center">
-                                <span>{{$details['own']['project']['title']}}</span>
+                    @if ($details['own']['project'] != null)
+                        <div class="row basic_proj">
+                            <h4>Project Invovled:</h4>
+                            <hr>
+                            <div class="mb-3 row">
+                                <label class="col-sm-4 col-lg-3 col-form-label fs-5">Title:</label>
+                                <div class="col d-flex align-self-center">
+                                    <span>{{$details['own']['project']['title']}}</span>
+                                </div>
+                                <div class="d-flex justify-content-end mt-3">
+                                    <a class="btn btn-primary" href={{url('project/view/'.$details['own']['project']['id'])}} role="button">Visit Project</a>
+                                </div>
+                                
                             </div>
-                            <div class="d-flex justify-content-end mt-3">
-                                <a class="btn btn-primary" href={{url('project/view/'.$details['own']['project']['id'])}} role="button">Visit Project</a>
-                            </div>
-                            
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="row my-5 prof_title d-block d-sm-none">
                     Projects:<hr>

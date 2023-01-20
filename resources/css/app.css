@@ -162,7 +162,7 @@ input[name="GCategs[]"]{
   font-size: 1rem;
   color: whitesmoke!important;
   vertical-align: middle!important;
-  padding: .2rem 1rem .2rem 1rem;
+  padding: .2rem .5rem;
 }
 
 .breadcrumb li a:hover{
@@ -179,7 +179,7 @@ input[name="GCategs[]"]{
 @media screen and (max-width: 1365px){
   .breadcrumb li a{
     font-size: 1rem;
-    padding: .2rem .3rem;
+    padding: .1rem .05rem;
   }
 
   .breadcrumb li a:hover{
@@ -188,7 +188,7 @@ input[name="GCategs[]"]{
   }
 }
 
-@media screen and (max-width: 1099px){
+@media screen and (max-width: 1299px){
   .breadcrumb li a{
     font-size: 1rem;
     padding: 0;

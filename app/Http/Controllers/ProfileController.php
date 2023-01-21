@@ -10,7 +10,7 @@ use App\Models\UserPreference;
 use App\Models\Projects;
 use App\Models\User;
 
-class ProfilePageController extends Controller
+class ProfileController extends Controller
 {
     public function index(int $id): object
     {
@@ -42,7 +42,7 @@ class ProfilePageController extends Controller
             $dataVar['status'] = 'user';
         }
             // dd($dataVar);
-        return view('pages.profile_page')->with('details', $dataVar);
+        return view('pages.profile')->with('details', $dataVar);
     }
 
     private function _getProjTitle(int $id): array

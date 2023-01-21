@@ -18,7 +18,7 @@ class AdminController extends Controller
         
         
 
-        return view('pages.adminPage')->with('admin', $data);
+        return view('pages.admin')->with('admin', $data);
     }
 
     

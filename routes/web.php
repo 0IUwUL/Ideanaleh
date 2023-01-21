@@ -14,10 +14,10 @@ use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectCommentController;
-use App\Http\Controllers\FilterProjects;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PolicyController;
-use App\Http\Controllers\ProfilePageController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -132,12 +132,12 @@ Route::controller(PaymentsController::class)->group(function(){
 });
 
 //Filter Projects
-Route::controller(FilterProjects::class)->prefix('main')->group(function(){
+Route::controller(FilterController::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::post('/filter', 'Filter')->name('filter');
 });
 
 //Profile Page
-Route::controller(ProfilePageController::class)->prefix('profile')->group(function(){
+Route::controller(ProfileController::class)->prefix('profile')->group(function(){
     Route::get('/{id}', 'index')->name('profile');
 });

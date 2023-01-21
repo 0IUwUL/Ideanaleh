@@ -10,7 +10,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class FilterProjects extends Controller
+class FilterController extends Controller
 {
     public function index(): Object
     {

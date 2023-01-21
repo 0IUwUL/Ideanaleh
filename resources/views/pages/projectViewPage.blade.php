@@ -47,13 +47,13 @@
                     {{-- Note to future RamonDev: Get the code for the bars in the SE2 project -RamonDev --}}
                     <div class="progress-bars row g-0 mt-3">
                         <div class="progress mx-4 mt-5" style="width: 90%;">
-                            <div class="progress-bar" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            <div class="progress-bar" role="progressbar" style="width: {{$project['stats']['target_percentage']}}%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{$project['stats']['target_percentage']}}%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2" style>PHP 0.00 / {{number_format($project['target_amt'],2)}} Target Donations</p>
+                        <p class="product-price mx-4 mt-2" style>PHP {{$project['stats']['donation_count']}} / {{number_format($project['target_amt'],2)}} Target Donations</p>
                         <div class="progress mx-4" style="width: 90%;">
-                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{$project['stats']['milestone_percentage']}}%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{$project['stats']['milestone_percentage']}}%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2 mb-4" style>PHP 0.00 / {{number_format($project['target_milestone'],2)}} Milestone Donations</p>
+                        <p class="product-price mx-4 mt-2 mb-4" style>PHP {{$project['stats']['donation_count']}} / {{number_format($project['target_milestone'],2)}} Milestone Donations</p>
                     </div>
 
 
@@ -74,9 +74,9 @@
                   {{-- FOLLOW UNFOLLOW BUTTON --}}
                   <div name="ProjectFollowButton" id="ProjectFollowButton">
                       <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
-                        <span class="fa{{$project['isFollowed'] ? "-regular" : ""}} fa-heart"></span>
+                        <span class="fa{{$project['user']['isFollowed'] ? "-regular" : ""}} fa-heart"></span>
                         &nbsp 
-                        {{$project['isFollowed'] ? "UNFOLLOW" : "FOLLOW"}}
+                        {{$project['user']['isFollowed'] ? "UNFOLLOW" : "FOLLOW"}}
                       </button>
                   </div>
 
@@ -158,6 +158,11 @@
     @endforeach
     <!-- Tiers END -->
   </div>
+  @if(Auth::check())
+  <br>
+  <h2 class="tiers-title text-center text-light">Your Tier : {{$project['user']['tier_level']}} - {{$project['user']['tier_name']}}</h2>
+  <h4 class="tiers-title text-center text-light">Total Donated : PHP {{$project['user']['donationTotal']}}</h4>
+  @endif
 </div>
 
   <section class="container-fluid info bg-brown-medium px-0" id="adt-info">

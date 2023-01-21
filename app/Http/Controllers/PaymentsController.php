@@ -141,12 +141,29 @@ class PaymentsController extends Controller
     }
 
 
-    private function _updateProjectStatAmount(int $projectIdArg, float $amountArg){
+    private function _updateProjectStatAmount(int $projectIdArg, float $amountArg)
+    {
         $statsVar = ProjectStats::where('proj_id', $projectIdArg)->first();
 
         $initialAmountVar = (float)$statsVar->donation_count;
 
         $statsVar->donation_count = $initialAmountVar + $amountArg;
         $statsVar->save();
+    }
+
+
+    public function getUserProjectPayments(int $projectIdArg)
+    {
+        $userPayments = Payments::where(['user_id' => Auth::id(), 'proj_id' => $projectIdArg])
+        ->select('amount')->get()->toArray();
+
+        if(count($userPayments) == 0) return(0.0);
+        
+        $totalPayments = 0.0;
+        foreach($userPayments as $payment){
+            $totalPayments += $payment['amount'];
+        }
+
+        return($totalPayments);
     }
 }

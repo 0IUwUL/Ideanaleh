@@ -8,6 +8,7 @@ use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectStatController;
+use App\Http\Controllers\PaymentsController;
 
 // Import models
 use App\Models\Projects; 
@@ -68,7 +69,7 @@ class ProjectController extends Controller
         $projectDataVar = Projects::where('id', $idArg)->with(['dev'])->first()->toArray();
 
         if(!$projectDataVar) return(abort(404));
-        // $projCategory = Projects::where('category', '=', $projectDataVar["category"])->get()->toArray();
+
         if(Auth::check()){
             $projectDataVar = array_merge($projectDataVar, ['recommend' => (new ProjectService)->recommendation($projectDataVar, $idArg)]);
         }
@@ -76,12 +77,34 @@ class ProjectController extends Controller
             $projectDataVar = array_merge($projectDataVar, ['popular' => (new ProjectService)->popularProjects($projectDataVar, $idArg)]);
         }
         $projectDataVar = array_merge($projectDataVar, ['tiers' => $this->_getProjectTiers($idArg)]);
-        $projectDataVar = array_merge($projectDataVar, ['isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg)]);
-        $projectDataVar = array_merge($projectDataVar, ['isSupported' => (new UserPreferenceController)->checkIfSupported($idArg)]);
+
+        $projectDataVar = array_merge($projectDataVar, ['user' =>
+            [
+                'isFollowed' => (new UserPreferenceController)->checkIfFollowed($idArg),
+                'isSupported' => (new UserPreferenceController)->checkIfSupported($idArg),
+            ]
+        ]);
+
+        if(Auth::check()){
+            $projectDataVar['user']['donationTotal'] = (float)(new PaymentsController)->getUserProjectPayments($idArg);
+            
+            $projectDataVar['user']['tier_level'] = 0;
+            $projectDataVar['user']['tier_name'] = '';
+            foreach($projectDataVar['tiers'] as $tier){
+                if($projectDataVar['user']['donationTotal'] >= (float)$tier['amount']){
+                    $projectDataVar['user']['tier_level'] = $tier['level'];
+                    $projectDataVar['user']['tier_name'] = $tier['name'];
+                }
+            }
+        }
+
         $projectDataVar = array_merge($projectDataVar, ['updates' => (new UpdateController)->index($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['comments' => (new ProjectCommentController)->getComments($idArg)]);
         $projectDataVar = array_merge($projectDataVar, ['stats' => (new ProjectStatController)->getProjectStats($idArg)]);
-        // dd($projectDataVar);
+
+        $projectDataVar['stats']['target_percentage'] = $projectDataVar['stats']['donation_count']/$projectDataVar['target_amt']*100;
+        $projectDataVar['stats']['milestone_percentage'] = $projectDataVar['stats']['donation_count']/$projectDataVar['target_milestone']*100;
+        
         return $projectDataVar;
     }
     
@@ -201,7 +224,7 @@ class ProjectController extends Controller
         return $match[1];
     }
 
-    public function _getProjects(Request $requestArg): void
+    public function getProjects(Request $requestArg): void
     {
         $pref_categs = $requestArg->categs;
         foreach ($pref_categs as $key => $categories){

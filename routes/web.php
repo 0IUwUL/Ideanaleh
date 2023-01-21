@@ -72,8 +72,8 @@ Route::prefix('project')->name('project.')->group(function () {
         Route::get('/view/{id}', 'view')->name('view');
         Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
         Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
-        Route::post('/categs', '_getProjects')->name('categs');
-    });
+        Route::post('/categs', 'getProjects')->name('categs');
+    }); 
 
     // Project comments routes
     Route::resource('comment', ProjectCommentController::class, 
@@ -120,15 +120,15 @@ Route::controller(EmailController::class)->group(function () {
 
 //WEbhook
 Route::controller(PaymentsController::class)->group(function(){
-    Route::post('/webhook/paymongo', 'webhookPaymongo')->name('webhook/paymongo');
-    Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
-    Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
-    Route::get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
+    Route::middleware('auth')->post('/payment/valid', 'ValidInput')->name('payment/valid');
+    Route::middleware('auth')->get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
 
+    Route::middleware('auth')->post('/payment/create/payment', 'createPayment')->name('payment/create/payment');
+    Route::middleware('auth')->get('/payment/success/{projectId}/{userId}', 'success')->name('payment/success');
+    Route::middleware('auth')->get('/payment/failed', 'failed')->name('payment/failed');
 
-    Route::post('/payment/create/payment', 'createPayment')->name('payment/create/payment');
-    Route::get('/payment/success/{projectId}/{userId}', 'success')->name('payment/success');
-    Route::get('/payment/failed', 'failed')->name('payment/failed');
+    Route::middleware('auth')->get('/payment/getUserProjectPayments', 'getUserProjectPayments')->name('payment/getUserProjectPayments');
+
 });
 
 //Filter Projects

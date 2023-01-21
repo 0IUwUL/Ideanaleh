@@ -154,45 +154,11 @@
                 <label class="form-label">Choose preffered categories (3 at least): </label>
                 <label class="text-danger me-1">*</label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="IOT" aria-label="Checkbox for IOT"> IOT
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Communication" aria-label="Checkbox for Communication"> Communication
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Medical" aria-label="Checkbox for Medical"> Medical
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Transportation" aria-label="Checkbox for Transportation"> Transportation
-                    </div> 
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Education" aria-label="Checkbox for Education"> Education
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Security" aria-label="Checkbox for Security"> Security
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="VR/AR" aria-label="Checkbox for VR/AR"> VR/AR
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Others" aria-label="Checkbox for Others"> Others
-                    </div>
+                  @foreach(config('category')[0] as $category)
+                  <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = '{{$category}}' aria-label="Checkbox for {{$category}}"> {{$category}}
+                  </div>
+                  @endforeach
                 </div>
                 <label for="Categs[]" class="error">Your error message will be display here.</label>
             </div>

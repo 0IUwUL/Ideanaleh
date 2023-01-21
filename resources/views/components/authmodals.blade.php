@@ -188,6 +188,31 @@
           <div class="mt-5" id = "Category_content">
           </div>
           <label for="Followed[]" class="error">Your error message will be display here.</label>
+          <div class="row mt-3">
+            <div class="row">
+              <div class="col-12">
+                  <input type="checkbox" name="agree_terms" required>
+                  <label>
+                    I have read, understood, and agree to <i>Ideanaleh</i> <a href={{url('/terms-and-conditions')}} target="_blank">terms and conditions</a>
+                  </label>
+                  <div class="row p-3">
+                    <label for="agree_terms" class="error">Your error message will be display here.</label>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                  <input type="checkbox" name="agree_privacy" required>
+                  <label>
+                    I have read, understood, and agree to <i>Ideanaleh</i> <a href={{url('/privacy-policy')}} target="_blank">privacy policy</a>
+                  </label>
+                  <div class="row p-3">
+                    <label for="agree_privacy" class="error">Your error message will be display here.</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-target="#SignUpModal3" data-bs-toggle="modal">Back</button>

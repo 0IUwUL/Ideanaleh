@@ -162,7 +162,7 @@
                             </span>
                         @endforeach
                         @endif
-                           <input type="text" placeholder="Add tags...">
+                           <input type="text" class="input-tags" placeholder="Add tags...">
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end">

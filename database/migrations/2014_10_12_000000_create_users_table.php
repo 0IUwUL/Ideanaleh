@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->tinyInteger('admin')->default('0');
             $table->tinyInteger('dev_mode')->default('0');
+            $table->tinyInteger('active')->default('1');
             $table->string('bookmarks')->nullable();
             $table->timestamps();
         });

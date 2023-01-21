@@ -50,7 +50,7 @@
                     <x-admin.dashboard/>
                 </div>
                 <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab" tabindex="0">
-                    <x-admin.user/>
+                    <x-admin.user :users="$admin['users']" :issues="$admin['user_issues']"/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
                     <x-admin.project/>
@@ -61,131 +61,6 @@
     
 </div>
 
-<div class="modal fade" id="FlagModal" tabindex="-1" aria-labelledby="FlagModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-warning">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="FlagModalHeader">Inform the issue to the developer</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="">
-            <div class="mb-3">
-                <label for="LabelSubject" class="form-label">Subject</label>
-                <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
-            </div>
-            <div class="mb-3">
-                <label for="LabelContentIssue" class="form-label">Message Content</label>
-                <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
-            </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send to Developer</button>
-      </div>
-        </form>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content border-warning">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="">
-              <div class="mb-3">
-                  <label for="LabelSubject" class="form-label">Subject</label>
-                  <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
-              </div>
-              <div class="mb-3">
-                  <label for="LabelContentIssue" class="form-label">Message Content</label>
-                  <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
-              </div>
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send to Developer</button>
-        </div>
-          </form>
-      </div>
-    </div>
-  </div>
-
-
-<div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ResolvedModalHeader">Is the issue resolved? <i class="fa-solid fa-circle-check text-success"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
-
-<div class="modal fade" id="DeleteIssueModal" tabindex="-1" aria-labelledby="DeleteIssueModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
-<div class="modal fade" id="DeactivateModal" tabindex="-1" aria-labelledby="DeactivateModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-danger">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeactivateModalHeader">You will now deactivate this current account. <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
-<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
 
 <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
     <form action="">

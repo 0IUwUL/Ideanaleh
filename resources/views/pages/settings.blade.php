@@ -33,9 +33,9 @@
                                 </div>
                                 <div class="col">
                                     @if ($user['icon'])
-                                        <img src="{{asset('storage/'.$user['icon']);}} " width="100" height="100" >
+                                        <img src="{{asset('storage/'.$user['icon']);}} " alt="profile_icon" width="100" height="100" >
                                     @else
-                                        <i class="fa-solid fa-images display-2"></i>
+                                        <img src={{asset('storage/avatars/default.png')}} alt="profile_icon" width="100" height="100">
                                     @endif
                                 </div>
                             </div>

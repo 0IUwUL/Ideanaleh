@@ -13,9 +13,16 @@ use App\Events\NewCommentCreated;
 
 class ProjectCommentController extends Controller
 {
-    public function index(int $projectId): ?array
+
+    public function edit(int $id): void
     {
-        return ProjectComments::getAll($projectId);
+        $comment = ProjectComments::find($id);
+
+        $json_data = array("status" => "error");
+
+        if($comment) $json_data = array("status" => "success");
+
+        echo json_encode($json_data);
     }
 
     public function store(Request $request): void
@@ -56,11 +63,16 @@ class ProjectCommentController extends Controller
         echo json_encode($json_data);
     }
 
-    public function destroy(ProjectComments $comment): void
+    public function destroy(int $id): void
     {
-        // Laravel model binding, acts like Model::find($id)
+        $comment = ProjectComments::find($id);
         
-        $comment->delete();
+        $comment?->delete();
+    }
+
+    public function getComments(int $projectId): ?array
+    {
+        return ProjectComments::getAll($projectId);
     }
 
 }

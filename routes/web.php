@@ -14,9 +14,10 @@ use App\Http\Controllers\UserPreferenceController;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProjectCommentController;
-use App\Http\Controllers\FilterProjects;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfilePageController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,12 +72,12 @@ Route::prefix('project')->name('project.')->group(function () {
         Route::get('/view/{id}', 'view')->name('view');
         Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
         Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
-        Route::post('/categs', '_getProjects')->name('categs');
-    });
+        Route::post('/categs', 'getProjects')->name('categs');
+    }); 
 
     // Project comments routes
     Route::resource('comment', ProjectCommentController::class, 
-                    ['only' => ['index', 'store', 'update', 'destroy']]);
+                    ['only' => ['store', 'edit', 'update', 'destroy']]);
 });
 
 // Project updates routes
@@ -90,6 +91,11 @@ Route::controller(GoogleAuthController::class)->prefix('google')->name('google.'
 
 // Not utilized
 // Auth::routes();
+
+Route::controller(PolicyController::class)->group(function(){
+    Route::get('/terms-and-conditions', 'termsConditions')->name('terms-and-conditions');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+});
 
 /**
  * pag tinype ni user ang base_url/login ireredirect lang rin sa homepage
@@ -114,19 +120,25 @@ Route::controller(EmailController::class)->group(function () {
 
 //WEbhook
 Route::controller(PaymentsController::class)->group(function(){
-    Route::post('/webhook/paymongo', 'webhookPaymongo')->name('webhook/paymongo');
-    Route::post('/payment/valid', 'ValidInput')->name('payment/valid');
-    Route::post('/payment/create/source', 'createSource')->name('payment/create/source');
-    Route::get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
+    Route::middleware('auth')->post('/payment/valid', 'ValidInput')->name('payment/valid');
+    Route::middleware('auth')->get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
+
+    Route::middleware('auth')->post('/payment/create/payment', 'createPayment')->name('payment/create/payment');
+    Route::middleware('auth')->get('/payment/success/{projectId}/{userId}', 'paymentSuccess')->name('payment/success');
+
+    Route::middleware('auth')->get('/payment/getUserProjectPayments', 'getUserProjectPayments')->name('payment/getUserProjectPayments');
+    //Change to post when this is connected to the frontend;
+    Route::middleware('auth')->get('/payment/refund/{amount}/{transactionId}', 'refund')->name('payment/refund');
+
 });
 
 //Filter Projects
-Route::controller(FilterProjects::class)->prefix('main')->group(function(){
+Route::controller(FilterController::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::post('/filter', 'Filter')->name('filter');
 });
 
 //Profile Page
-Route::controller(ProfilePageController::class)->prefix('profile')->group(function(){
-    Route::get('/', 'index')->name('profile');
+Route::controller(ProfileController::class)->prefix('profile')->group(function(){
+    Route::get('/{id}', 'index')->name('profile');
 });

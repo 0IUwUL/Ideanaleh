@@ -44,13 +44,13 @@
             </aside>
         </div>
         <!-- Dashboard -->
-        <div class="col-8 col-md-10 col-sm-10 p-0">
+        <div class="col-8 col-md-10 col-sm-10 px-5 py-0">
             <div class="tab-content pb-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-                    <x-admin.dashboard/>
+                    <x-admin.dashboard :details="$admin['dashboard']"/>
                 </div>
                 <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab" tabindex="0">
-                    <x-admin.user/>
+                    <x-admin.user :users="$admin['users']" :issues="$admin['user_issues']"/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
                     <x-admin.project/>
@@ -61,135 +61,10 @@
     
 </div>
 
-<div class="modal fade" id="FlagModal" tabindex="-1" aria-labelledby="FlagModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-warning">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="FlagModalHeader">Inform the issue to the developer</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="">
-            <div class="mb-3">
-                <label for="LabelSubject" class="form-label">Subject</label>
-                <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
-            </div>
-            <div class="mb-3">
-                <label for="LabelContentIssue" class="form-label">Message Content</label>
-                <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
-            </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send to Developer</button>
-      </div>
-        </form>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content border-warning">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="">
-              <div class="mb-3">
-                  <label for="LabelSubject" class="form-label">Subject</label>
-                  <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
-              </div>
-              <div class="mb-3">
-                  <label for="LabelContentIssue" class="form-label">Message Content</label>
-                  <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
-              </div>
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send to Developer</button>
-        </div>
-          </form>
-      </div>
-    </div>
-  </div>
-
-
-<div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ResolvedModalHeader">Is the issue resolved? <i class="fa-solid fa-circle-check text-success"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
-
-<div class="modal fade" id="DeleteIssueModal" tabindex="-1" aria-labelledby="DeleteIssueModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
-<div class="modal fade" id="DeactivateModal" tabindex="-1" aria-labelledby="DeactivateModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog">
-            <div class="modal-content border-danger">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeactivateModalHeader">You will now deactivate this current account. <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
-<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog">
-            <div class="modal-content border-success">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
 
 <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
     <form action="">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DeleteModalHeader">Are you sure to delete this user? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
@@ -206,7 +81,7 @@
 
 <div class="modal fade" id="DeleteFlagModal" tabindex="-1" aria-labelledby="DeleteFlagModalLabel" aria-hidden="true">
     <form action="">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DeleteFlagModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
@@ -223,7 +98,7 @@
 
 <div class="modal fade" id="DeleteProjectModal" tabindex="-1" aria-labelledby="DeleteProjectModalLabel" aria-hidden="true">
     <form action="">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="DeleteProjectModalHeader">Are you sure to delete this project? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
@@ -240,7 +115,7 @@
 
 <div class="modal fade" id="ProjectFlagModal" tabindex="-1" aria-labelledby="ProjectFlagModalLabel" aria-hidden="true">
     <form action="">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-warning">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="ProjectFlagModalHeader">Assign status for the project</h1>
@@ -257,6 +132,23 @@
                           <li><a class="dropdown-item" href="#">Halt</a></li>
                         </ul>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="HaltProjectModal" tabindex="-1" aria-labelledby="HaltProjectModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Are you sure to halt this issue on the project? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

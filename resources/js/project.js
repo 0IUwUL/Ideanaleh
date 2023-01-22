@@ -97,12 +97,13 @@ $("#AmtDonate").click(function(){
       url: "/payment/valid/",
       type:'post',
       data: {
-        TierAmount : amount,
+        DonationAmount : amount,
       },
       success: function(result){
           let data = JSON.parse(result);
           if(data.response == "success") {
-            $('#FormControldisplayAmt').val(amount - (parseFloat(amount)*0.025))
+            // $('#FormControldisplayAmt').val(amount - (parseFloat(amount)*0.025))
+            $('#FormControldisplayAmt').val(amount);
             $('#displayAmt').modal('show');
             $('#amtModal').modal('hide');
           }else {
@@ -113,34 +114,35 @@ $("#AmtDonate").click(function(){
 });
 
 // Ajax for Follow and Unfollow functionality
-$(".tier-button").click(function(e){
-  var id = $(e.target).attr('data-projectId');
-  var amount_var = $('#FormControlAmt').val();
+// $(".tier-button").click(function(e){
+//   var id = $(e.target).attr('data-projectId');
+//   var amount_var = $('#FormControlAmt').val();
 
-  $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-      url: "/payment/create/source/",
-      type:'post',
-      data: {
-        ProjectId : id,
-        TierAmount : amount_var,
-      },
-      success: function(result){
-          let data = JSON.parse(result);
-          if(data.response == "success") {
-            window.location.href = data.checkout_url;
-          }
-          else{
-            // Note to future tell the user to login first.
-            location.reload();
-          }
-      }
-  });
-});
+//   $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+//     }
+//   });
+//   $.ajax({
+//       url: "/payment/create/payment/",
+//       type:'post',
+//       data: {
+//         ProjectId : id,
+//         DonationAmount : amount_var,
+//       },
+//       success: function(result){
+//           let data = JSON.parse(result);
+//           if(data.response == "success") {
+//             console.log(data.data);
+//             // window.location.href = data.checkout_url;
+//           }
+//           else{
+//             // Note to future tell the user to login first.
+//             location.reload();
+//           }
+//       }
+//   });
+// });
 
 
 // Ajax for posting project updates
@@ -390,19 +392,47 @@ $('#comment-box').keypress(function(e) {
 $(document).on('click', '.edit', function(e){
   let id = $(e.target).attr('data-id')
   let comment = document.getElementById('comment-'+id).textContent
-  
-  // Prevents submiting the same comment
-  $('#edit-comment-box').on('keyup',function(e){
-    if (comment == e.target.value)
-      $('.saveChanges').prop('disabled', true)
-    else
-      $('.saveChanges').prop('disabled', false)
 
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    url: "/project/comment/" + id + "/edit",
+    type:'GET',
+    data: {
+      ProjectComment : comment,
+    },
+    success: function(result){
+        let data = JSON.parse(result);
+
+        // Change comment modal id
+        if (data.status == "success"){
+          $('#CommentId').val(id)
+          $('#edit-comment-box').val(comment)
+          $("#editModal").modal('show');
+
+          // Prevents submiting the same comment
+          $('#edit-comment-box').on('keyup',function(e){
+            if (comment == e.target.value)
+              $('.saveChanges').prop('disabled', true)
+            else
+              $('.saveChanges').prop('disabled', false)
+
+          })
+        }
+        // Alert the user
+        else{ 
+          document.getElementById('project-comment-'+id).remove()
+                   
+          $('.DevToast').toast('show')
+          
+        }
+    }
   })
-  
-  $('#CommentId').val(id)
-  $('#edit-comment-box').val(comment)
 })
+
 
 // Save comment edit
 $('.saveChanges').click(function(){

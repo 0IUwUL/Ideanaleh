@@ -47,13 +47,13 @@
                     {{-- Note to future RamonDev: Get the code for the bars in the SE2 project -RamonDev --}}
                     <div class="progress-bars row g-0 mt-3">
                         <div class="progress mx-4 mt-5" style="width: 90%;">
-                            <div class="progress-bar" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            <div class="progress-bar" role="progressbar" style="width: {{$project['stats']['target_percentage']}}%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{$project['stats']['target_percentage']}}%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2" style>PHP 0.00 / {{number_format($project['target_amt'],2)}} Target Donations</p>
+                        <p class="product-price mx-4 mt-2" style>PHP {{$project['stats']['donation_count']}} / {{number_format($project['target_amt'],2)}} Target Donations</p>
                         <div class="progress mx-4" style="width: 90%;">
-                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 0%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: {{$project['stats']['milestone_percentage']}}%; height:20px; font-weight:bold;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{{$project['stats']['milestone_percentage']}}%</div>
                         </div>
-                        <p class="product-price mx-4 mt-2 mb-4" style>PHP 0.00 / {{number_format($project['target_milestone'],2)}} Milestone Donations</p>
+                        <p class="product-price mx-4 mt-2 mb-4" style>PHP {{$project['stats']['donation_count']}} / {{number_format($project['target_milestone'],2)}} Milestone Donations</p>
                     </div>
 
 
@@ -74,9 +74,9 @@
                   {{-- FOLLOW UNFOLLOW BUTTON --}}
                   <div name="ProjectFollowButton" id="ProjectFollowButton">
                       <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
-                        <span class="fa{{$project['isFollowed'] ? "-regular" : ""}} fa-heart"></span>
+                        <span class="fa{{$project['user']['isFollowed'] ? "-regular" : ""}} fa-heart"></span>
                         &nbsp 
-                        {{$project['isFollowed'] ? "UNFOLLOW" : "FOLLOW"}}
+                        {{$project['user']['isFollowed'] ? "UNFOLLOW" : "FOLLOW"}}
                       </button>
                   </div>
 
@@ -158,6 +158,11 @@
     @endforeach
     <!-- Tiers END -->
   </div>
+  @if(Auth::check())
+  <br>
+  <h2 class="tiers-title text-center text-light">Your Tier : {{$project['user']['tier_level']}} - {{$project['user']['tier_name']}}</h2>
+  <h4 class="tiers-title text-center text-light">Total Donated : PHP {{$project['user']['donationTotal']}}</h4>
+  @endif
 </div>
 
   <section class="container-fluid info bg-brown-medium px-0" id="adt-info">
@@ -197,7 +202,7 @@
           <!-- comments item tab -->
           <x-project.view.comments :id="$project['id']" :comments="$project['comments']"/>
           <!-- Supporters item tab -->
-          <x-project.view.backers :supportcount="$project['support_count']" :followcount="$project['follow_count']"/>
+          <x-project.view.backers :supportcount="$project['stats']['support_count']" :followcount="$project['stats']['follow_count']"/>
         </div>
     </div>
 
@@ -208,7 +213,9 @@
                 <div class="carousel-item active">
                   @if(Auth::check())
                     <div class="row">
-                      <h2>Recommended Projects under this Category</h1>
+                      @if($project['recommend'][0])
+                        <h2>Recommended Projects under this Category</h2>
+                      @endif
                         @foreach($project['recommend'][0] as $index => $category)
                         @if($index<3) 
                           <div class="col-md-4 mb-3">
@@ -332,20 +339,24 @@
         <h1 class="modal-title fs-3" id="displayAmt">Donation Modal</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body p-5">
-        <div class="mb-3">
-          <h4 class="text-warning h2"><i class="fa-solid fa-triangle-exclamation"></i> </h4>
-          <h5>There will be a tax of 2.5% for PayMongo services</h5>
+      <form method="post" action="{{ route('payment/create/payment') }}" accept-charset="UTF-8" id = "paymentForm">
+        @csrf
+        <div class="modal-body p-5">
+          <div class="mb-3">
+            <h4 class="text-warning h2"><i class="fa-solid fa-triangle-exclamation"></i> </h4>
+            <h5>You will be donating an amount of: </h5>
+          </div>
+          <div class="mb-3">
+            <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
+            <input type="hidden" name="ProjectId" value = {{$project['id']}}>
+            <input type="number" name="DonationAmount" class="form-control" id="FormControldisplayAmt" readonly>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
-          <input type="number" class="form-control" id="FormControldisplayAmt" readonly>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-target="#amtModal" data-bs-toggle="modal">Return</button>
+          <button type="submit" class="tier-button btn btn-success" data-projectId={{$project['id']}}>Confirm</button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-target="#amtModal" data-bs-toggle="modal">Return</button>
-        <button type="button" class="tier-button btn btn-success" data-projectId={{$project['id']}}>Confirm</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>

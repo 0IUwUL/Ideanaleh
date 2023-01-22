@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Auth;
 
 use App\Models\UserPreference; 
-use App\Models\Projects;
+use App\Models\ProjectStats;
 
 class UserPreferenceController extends Controller
 {
@@ -151,7 +151,7 @@ class UserPreferenceController extends Controller
     
     private function _updateFollowedCount(int $projectIdArg, int $amountArg): void
     {
-        $projectVar = Projects::where('id', $projectIdArg)->first();
+        $projectVar = ProjectStats::where('proj_id', $projectIdArg)->first();
         $initailFollowCountVar = (int)$projectVar->follow_count;
 
         $projectVar->follow_count = $initailFollowCountVar + $amountArg;
@@ -159,12 +159,12 @@ class UserPreferenceController extends Controller
     }
 
 
-    private function _updateSupportCount(int $projectIdArg, int $amountArg): void
+    public function _updateSupportCount(int $projectIdArg, int $amountArg): void
     {
-        $projectVar = Projects::where('id', $projectIdArg)->first();
+        $projectVar = ProjectStats::where('proj_id', $projectIdArg)->first();
         $initailSupportCountVar = (int)$projectVar->support_count;
 
-        $projectVar->follow_count = $initailSupportCountVar + $amountArg;
+        $projectVar->support_count = $initailSupportCountVar + $amountArg;
         $projectVar->save();
     }
 }

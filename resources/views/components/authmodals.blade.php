@@ -46,7 +46,7 @@
 </div>
 
 <!-- SignUp -->
-<form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm">
+<form method="post" action="{{route('register-user')}}" accept-charset="UTF-8" id="myForm" enctype='multipart/form-data'>
 @csrf           
               
 <div class="modal fade p-0" id="SignUpModal" data-btn="signupModalGSI" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel" tabindex="-1">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="InputIMG" class="form-label">Upload image as an icon:</label>
-                    <input type="file" name = "image" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
+                    <input type="file" name = "avatar" class="form-control border-info"  accept=".jpeg,.jpg,.png" id="InputIMG"/>
                 </div>
             </div>
         </div>
@@ -154,45 +154,11 @@
                 <label class="form-label">Choose preffered categories (3 at least): </label>
                 <label class="text-danger me-1">*</label>
                 <div class="input-group mb-3 d-flex justify-content-evenly">
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = 'Games' aria-label="Checkbox for Games"> Games
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Business" aria-label="Checkbox for Business"> Business
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="AI" aria-label="Checkbox for AI"> AI
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
-                    </div>
-                    <div class="input-group-text categs">
-                        <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Music" aria-label="Checkbox for Music"> Music
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="IOT" aria-label="Checkbox for IOT"> IOT
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Communication" aria-label="Checkbox for Communication"> Communication
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Medical" aria-label="Checkbox for Medical"> Medical
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Transportation" aria-label="Checkbox for Transportation"> Transportation
-                    </div> 
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Education" aria-label="Checkbox for Education"> Education
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Security" aria-label="Checkbox for Security"> Security
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="VR/AR" aria-label="Checkbox for VR/AR"> VR/AR
-                    </div>
-                    <div class="input-group-text categs">
-                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value="Others" aria-label="Checkbox for Others"> Others
-                    </div>
+                  @foreach(config('category')[0] as $category)
+                  <div class="input-group-text categs">
+                      <input class="form-check-input mt-0" type="checkbox" name="Categs[]" value = '{{$category}}' aria-label="Checkbox for {{$category}}"> {{$category}}
+                  </div>
+                  @endforeach
                 </div>
                 <label for="Categs[]" class="error">Your error message will be display here.</label>
             </div>
@@ -222,6 +188,31 @@
           <div class="mt-5" id = "Category_content">
           </div>
           <label for="Followed[]" class="error">Your error message will be display here.</label>
+          <div class="row mt-3">
+            <div class="row">
+              <div class="col-12">
+                  <input type="checkbox" name="agree_terms" required>
+                  <label>
+                    I have read, understood, and agree to <i>Ideanaleh</i> <a href={{url('/terms-and-conditions')}} target="_blank">terms and conditions</a>
+                  </label>
+                  <div class="row p-3">
+                    <label for="agree_terms" class="error">Your error message will be display here.</label>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                  <input type="checkbox" name="agree_privacy" required>
+                  <label>
+                    I have read, understood, and agree to <i>Ideanaleh</i> <a href={{url('/privacy-policy')}} target="_blank">privacy policy</a>
+                  </label>
+                  <div class="row p-3">
+                    <label for="agree_privacy" class="error">Your error message will be display here.</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-bs-target="#SignUpModal3" data-bs-toggle="modal">Back</button>

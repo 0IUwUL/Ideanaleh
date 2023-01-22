@@ -44,4 +44,17 @@ class User extends Authenticatable
     // protected $casts = [
     //     'email_verified_at' => 'datetime',
     // ];
+    public function project()
+    {
+        return $this->hasOne(Projects::class, 'user_id')->select(['id','title', 'user_id', 'logo', 'category', 'description']);
+    }
+
+    public function pref(){
+        return $this->hasOne(UserPreference::class, 'user_id')->select(['id', 'user_id', 'followed', 'supported']);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

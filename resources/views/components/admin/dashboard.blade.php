@@ -9,7 +9,7 @@
                                 User count:
                             </div>
                             <div class="row card-text mt-3">
-                                <h3>1000</h3>   
+                                <h3>{{$details['users']}}</h3>   
                             </div>
                         </div>
                         <div class="col d-flex justify-content-center align-self-center p-0">
@@ -28,7 +28,7 @@
                                 Project count:
                             </div>
                             <div class="row card-text mt-3">
-                                <h3>1000</h3>
+                                <h3>{{$details['project']}}</h3>
                             </div>
                         </div>
                         <div class="col d-flex justify-content-center align-self-center p-0">
@@ -47,7 +47,7 @@
                                 Report unresolved:
                             </div>
                             <div class="row card-text mt-3">
-                                <h3>1000</h3>
+                                <h3>{{$details['issues']}}</h3>
                             </div>
                         </div>
                         <div class="col d-flex justify-content-center align-self-center p-0">
@@ -75,30 +75,16 @@
                                 <thead class = "table-dark sticky-top">
                                     <tr>
                                         <th scope = "col">#</th>
-                                        <th scope = "col">(Name)</th>
+                                        <th scope = "col">Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($details['developers']['developer'] as $name)
                                     <tr>
-                                        <th scope = "col">1</th>
-                                        <th scope = "col">Mark</th>
+                                        <th scope = "col">{{$name['user_id']}}</th>
+                                        <th scope = "col"></th>
                                     </tr>
-                                    <tr>
-                                        <th scope = "col">2</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">3</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">4</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">5</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -118,30 +104,16 @@
                                 <thead class = "table-dark sticky-top">
                                     <tr>
                                         <th scope = "col">#</th>
-                                        <th scope = "col">(Title)</th>
+                                        <th scope = "col">Title</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($details['developers']['projects'] as $title)
                                     <tr>
-                                        <th scope = "col">1</th>
-                                        <th scope = "col">Wow</th>
+                                        <th scope = "col">{{$title['id']}}</th>
+                                        <th scope = "col">{{$title['title']}}</th>
                                     </tr>
-                                    <tr>
-                                        <th scope = "col">2</th>
-                                        <th scope = "col">Amazing</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">3</th>
-                                        <th scope = "col">Sugoi</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">4</th>
-                                        <th scope = "col">Ramen</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">5</th>
-                                        <th scope = "col">Shish</th>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -169,30 +141,16 @@
                                 <thead class = "table-dark sticky-top">
                                     <tr>
                                         <th scope = "col">#</th>
-                                        <th scope = "col">(Name)</th>
+                                        <th scope = "col">Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($details['donators'] as $name)
                                     <tr>
-                                        <th scope = "col">1</th>
-                                        <th scope = "col">Richard</th>
+                                        <th scope = "col">{{$name['user']['id']}}</th>
+                                        <th scope = "col">{{$name['user']['Lname']}}</th>
                                     </tr>
-                                    <tr>
-                                        <th scope = "col">2</th>
-                                        <th scope = "col">Rmoan</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">3</th>
-                                        <th scope = "col">Dev</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">4</th>
-                                        <th scope = "col">Sample</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">5</th>
-                                        <th scope = "col">Sample2</th>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

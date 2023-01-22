@@ -72,7 +72,7 @@ class PaymentsController extends Controller
                 'currency' => env('PAYPAL_CURRENCY'),
                 'description' => "Payment for Project: ".$request->ProjectId." From User: ".Auth::id(),
                 'returnUrl' => url('payment/success/'.$request->ProjectId.'/'.Auth::id()),
-                'cancelUrl' => url('payment/failed')
+                'cancelUrl' => url('payment/status/'.$request->ProjectId.'/error'),
             ))->send();
 
             if ($response->isRedirect()) {
@@ -88,7 +88,7 @@ class PaymentsController extends Controller
     }
 
 
-    public function success(Request $request, int $projectIdArg, int $userIdArg)
+    public function paymentSuccess(Request $request, int $projectIdArg, int $userIdArg)
     {
         // dd("Project ID: ".$projectIdArg." User ID: ".$userIdArg);
         if ($request->input('paymentId') && $request->input('PayerID')) {
@@ -106,6 +106,7 @@ class PaymentsController extends Controller
                 $paymentVar->proj_id = $projectIdArg;
                 $paymentVar->user_id = $userIdArg;
                 $paymentVar->payment_id = $dataVar['id'];
+                $paymentVar->transaction_id = $dataVar['transactions'][0]['related_resources'][0]['sale']['id'];
                 $paymentVar->amount = $dataVar['transactions'][0]['amount']['total'];
                 $paymentVar->save();
 
@@ -120,12 +121,6 @@ class PaymentsController extends Controller
         else{
             return(redirect('payment/status/'.$projectIdArg.'/error'));
         }
-    }
-
-
-    public function failed()
-    {
-        return 'User declined the payment!';
     }
 
 
@@ -165,5 +160,44 @@ class PaymentsController extends Controller
         }
 
         return($totalPayments);
+    }
+
+
+    public function refund(float $amountArg, string $transactionIdArg)
+    {
+        if(!$this->_checkPaymentOwner($transactionIdArg)) return(dd('Error Not Owner of the payment or is already refunded'));
+        $refundVar = $this->gateway->refund(array(
+            'amount' => (string)$amountArg,
+            'currency' => (string)env('PAYPAL_CURRENCY'),
+        ));
+
+        $refundVar->setTransactionReference($transactionIdArg);
+
+        $responseVar = $refundVar->send();
+        if($responseVar->isSuccessful()){
+            $this->_setPaymentRefunded($transactionIdArg);
+            dd("Payment Refunded");
+        }
+        else{
+            dd("Something went wrong. Refund Unsuccessful");
+        }
+    }
+
+
+    private function _setPaymentRefunded(string $transactionIdArg)
+    {
+        $paymentVar = Payments::where('transaction_id', $transactionIdArg)->first();
+
+        $paymentVar->is_refunded = true;
+        $paymentVar->save();
+    }
+
+
+    private function _checkPaymentOwner(string $transactionIdArg): bool
+    {
+        $paymentVar = Payments::where(['user_id' => Auth::id(), 'transaction_id' => $transactionIdArg, 'is_refunded' => false])->first();
+        if(!($paymentVar)) return false;
+
+        return true;
     }
 }

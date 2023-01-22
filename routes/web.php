@@ -124,10 +124,11 @@ Route::controller(PaymentsController::class)->group(function(){
     Route::middleware('auth')->get('/payment/status/{id}/{status}', 'PaymentStatus')->name('payment/success');
 
     Route::middleware('auth')->post('/payment/create/payment', 'createPayment')->name('payment/create/payment');
-    Route::middleware('auth')->get('/payment/success/{projectId}/{userId}', 'success')->name('payment/success');
-    Route::middleware('auth')->get('/payment/failed', 'failed')->name('payment/failed');
+    Route::middleware('auth')->get('/payment/success/{projectId}/{userId}', 'paymentSuccess')->name('payment/success');
 
     Route::middleware('auth')->get('/payment/getUserProjectPayments', 'getUserProjectPayments')->name('payment/getUserProjectPayments');
+    //Change to post when this is connected to the frontend;
+    Route::middleware('auth')->get('/payment/refund/{amount}/{transactionId}', 'refund')->name('payment/refund');
 
 });
 

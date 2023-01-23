@@ -79,10 +79,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($details['developers']['developer'] as $name)
+                                    @foreach($details['developers']['developer'] as $key => $name)
                                     <tr>
-                                        <th scope = "col">{{$name['user_id']}}</th>
-                                        <th scope = "col"></th>
+                                        <th scope = "col">{{$key + 1}}</th>
+                                        <th scope = "col">{{$name['name']['Lname']}}</th>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -108,9 +108,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($details['developers']['projects'] as $title)
+                                    @foreach($details['developers']['projects'] as $key => $title)
                                     <tr>
-                                        <th scope = "col">{{$title['id']}}</th>
+                                        <th scope = "col">{{$key + 1}}</th>
                                         <th scope = "col">{{$title['title']}}</th>
                                     </tr>
                                     @endforeach
@@ -145,9 +145,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($details['donators'] as $name)
+                                    @foreach($details['donators'] as $key => $name)
                                     <tr>
-                                        <th scope = "col">{{$name['user']['id']}}</th>
+                                        <th scope = "col">{{$key + 1}}</th>
                                         <th scope = "col">{{$name['user']['Lname']}}</th>
                                     </tr>
                                     @endforeach

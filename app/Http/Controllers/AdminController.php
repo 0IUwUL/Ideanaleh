@@ -22,7 +22,6 @@ class AdminController extends Controller
         ];
         
         $data['dashboard'] = $this->_getResults($data['projects']);
-        // dd($data);
         return view('pages.admin')->with('admin', $data);
     }
 
@@ -33,7 +32,7 @@ class AdminController extends Controller
         $data['issues'] = UserIssue::count(); // + ProjectIssue::count()
         $data['developers'] = $this->_SortDevelopers();
         // $data['top_dev'] = Projects::
-        // $data['shish'] = Projects::withCount('tags')->get();
+        // $data['charts'] = $this->_getCharts();
         $data['donators'] = $this->_Sortdonators();
         // $data['Donatedate'] = $this->_SortPerDate();
         return $data;
@@ -62,8 +61,9 @@ class AdminController extends Controller
             }
         }
         $data = $data->take(5)
-                    ->sortByDesc('amount');
-        $data = $data->toArray();
+                    ->sortByDesc('amount')
+                    ->values()
+                    ->toArray();
 
         return $data;
     }
@@ -74,6 +74,12 @@ class AdminController extends Controller
         $data = Projects::select('id','user_id', 'title')
                         ->with(['proj_stat'])
                         ->get();
+        foreach($data as $key => $dev){
+            $data[$key]['name'] = User::where('id', '=', $dev['user_id'])
+                                        ->select('id', 'Lname')
+                                        ->first()
+                                        ->toArray();
+        }
         // get total sum project donation, support, and follow count
         foreach($data as $key => $value){
             $data[$key]['average'] = ($value['proj_stat']['support_count'] + $value['proj_stat']['follow_count'])/2;
@@ -84,9 +90,11 @@ class AdminController extends Controller
         }
         $proj['developer'] = $data->sortByDesc('average')
                                 ->take(5)
+                                ->values()
                                 ->toArray();
         $proj['projects'] = $data->sortByDesc('donation')
                                 ->take(5)
+                                ->values()
                                 ->toArray();
         return $proj;
     }

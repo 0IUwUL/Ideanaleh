@@ -8,34 +8,24 @@ use Illuminate\Http\Request;
 use App\Models\ProjectComments;
 
 use Auth;
-use DB;
 use Input;
+use App\Events\NewCommentCreated;
 
 class ProjectCommentController extends Controller
 {
-    public function index(int $id)
-    {
-        $query = json_decode(
-            json_encode(
-                DB::table('project_comments')
-                    ->where('project_comments.proj_id', $id)
-                    ->orderBy('created_at', 'desc')
-                    ->join('users', 'project_comments.user_id', '=', 'users.id')
-                    ->join('projects', 'project_comments.proj_id', '=', 'projects.id')
-                    ->select('project_comments.*','users.id as user_id', 'users.Lname', 'users.Fname', 'users.Mname', 'users.icon', 'projects.user_id as dev_id')
-                    ->get() 
-                    ->toArray()
-            ),
-            true);
-        //$query = ProjectComments::where('proj_id', $id)->orderBy('created_at', 'desc')->with('user')->get();
-        //$phone = ProjectComments::find(1)->user->toArray();
-        
-        if ($query) return $query;
 
-        return null;
+    public function edit(int $id): void
+    {
+        $comment = ProjectComments::find($id);
+
+        $json_data = array("status" => "error");
+
+        if($comment) $json_data = array("status" => "success");
+
+        echo json_encode($json_data);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         $newComment = new ProjectComments;
         $newComment->user_id = Auth::id();
@@ -54,11 +44,14 @@ class ProjectCommentController extends Controller
         $viewRender = view('formats.comment')->with('comment', $result)->render();
 
         $json_data = array("commentHTML" => $viewRender);
+        
+        // broadcast the new comment to other users
+        broadcast(new NewCommentCreated($viewRender, $newComment->proj_id))->toOthers();
 
         echo json_encode($json_data);
     }
 
-    public function update(ProjectComments $comment, Request $request)
+    public function update(ProjectComments $comment, Request $request): void
     {
         $comment->content = $request->ProjectComment;
         $comment->save();
@@ -70,11 +63,16 @@ class ProjectCommentController extends Controller
         echo json_encode($json_data);
     }
 
-    public function destroy(ProjectComments $comment)
+    public function destroy(int $id): void
     {
-        // Laravel model binding, acts like Model::find($id)
+        $comment = ProjectComments::find($id);
         
-        $comment->delete();
+        $comment?->delete();
+    }
+
+    public function getComments(int $projectId): ?array
+    {
+        return ProjectComments::getAll($projectId);
     }
 
 }

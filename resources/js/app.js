@@ -26,7 +26,8 @@ $( window ).on( "load", function() {
     $('.page_content').fadeIn("slow");
 });
 
-function validate(){
+// Validate registration form for Normal Auth
+$('.next, #submit').click(function (){
     var form = $("#myForm");
     form.validate({
         rules: {
@@ -67,7 +68,7 @@ function validate(){
                 }
             });
             $.ajax({
-                url: "verify-email",
+                url: "/verify-email",
                 type:'post',
                 data: {
                     email : email,
@@ -99,7 +100,7 @@ function validate(){
                 }
             });
             $.ajax({
-                url: "project/categs",
+                url: "/project/categs",
                 type:'post',
                 data: {
                     categs : cate,
@@ -114,9 +115,10 @@ function validate(){
         }
     }
 
-};
+});
 
-function GoogleForm(){
+// Google Auth
+$('.Gnext, #Gsubmit').click( function(){
     var form = $("#GoogleForm");
     form.validate({
         rules: {
@@ -171,7 +173,7 @@ function GoogleForm(){
             });
         }
     }
-};
+});
 
 jQuery(document.body).on('click', '.btn_follow', function(e){
     var btnClass = $(e.target).parent();
@@ -182,7 +184,8 @@ jQuery(document.body).on('click', '.btn_follow', function(e){
     }
   });
 
-function activateToast(){
+// Activate Toast
+$("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click",  function(){
     var c = $("#modeToast").data('id');
     var insert
     if (c == 'logO' || c == 'logI'){
@@ -201,18 +204,19 @@ function activateToast(){
 
 
     $('.DevToast').toast('show');
-}
+})
 
-function showRegister(){
+// Show registration modal
+$("#register").on("click", function (){
     $('#LoginModal').modal('hide');
     $('#SignUpModal').modal('show');
-}
+})
 
-
-function showLogin(){
+// Show login modal
+$("#login").on("click", function(){
     $('#LoginModal').modal('show');
     $('#SignUpModal').modal('hide');
-}
+});
 
 $('#LoginSubmit').on("click", function(){
     var email = document.getElementById("InputEmail").value;
@@ -224,7 +228,7 @@ $('#LoginSubmit').on("click", function(){
         }
     });
     $.ajax({
-        url: "verify-log",
+        url: "/verify-log",
         type:'post',
         data: {
             email : email,
@@ -244,14 +248,15 @@ $('#LoginSubmit').on("click", function(){
     });
 });
 
-function loadBtn (e) {
+// Rendering the google button
+$('#LoginModal, #SignUpModal').on('show.bs.modal', function (e) {
     var btn = $(e.target).attr('data-btn');
 
     google.accounts.id.renderButton(
         document.getElementById(btn),
         { theme: "outline", size: "large", text: "continue_with"}  // customization attributes
     );
-}
+});
 
 $('.prog_tabs a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
@@ -295,7 +300,8 @@ $.validator.addMethod('yey', function (value, element, param) {
         return true;
 }, 'Invalid value');
 
-function DetValid(e){
+// DetValid - Validate user details
+$('.tab_next').on('click',function (e){
     var form = $("#ProjForm");
     var logo = $(e.target).attr('id');
     var btn = $(e.target).attr('data-next')
@@ -379,7 +385,7 @@ function DetValid(e){
             $('#nav-payment-tab').attr("data-bs-target", '')
         }
     }
-}
+})
 
 $('#options').on('change', function(){
     var category = $('#category option:selected').val()
@@ -425,21 +431,4 @@ $(document).on('click', '.pagination .page-link', function(event){
     var page = $(this).attr('href').split('page=')[1];
     filterSend(category, options, page)
 });
-
-// Rendering the google button
-$('#LoginModal, #SignUpModal').on('show.bs.modal',  loadBtn);
-
-// Normal Auth
-$('.next, #submit').click(validate);
-
-// Google Auth
-$('.Gnext, #Gsubmit').click(GoogleForm);
-
-// Toast
-$("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click", activateToast);
-
-$("#register").on("click", showRegister);
-$("#login").on("click", showLogin);
-$('.tab_next').on('click', DetValid);
-
 

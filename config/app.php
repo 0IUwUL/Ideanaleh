@@ -191,10 +191,13 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Mews\Purifier\PurifierServiceProvider::class,
+        
+        // Srmklive\PayPal\Providers\PayPalServiceProvider::class,
     ],
 
     /*
@@ -210,6 +213,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        
+        // 'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
     ])->toArray(),
 
 ];

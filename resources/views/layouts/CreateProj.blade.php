@@ -27,7 +27,9 @@
 
         <script type="text/javascript">
             // Tags js
-            const input_tags = document.querySelector(".tags input")
+            const input_tags = document.querySelector(".input-tags")
+            console.log("ito ang input_tags");
+            console.log(input_tags);
             var max_tags = 6;
             document.querySelector('.max-tags').innerText = max_tags
 
@@ -60,6 +62,7 @@
                     
                     let tag_value = input_tags.value.replace( /\s+/g, ' ');
                     if (tag_value.length > 1 && tags.length <= max_tags && !tags.includes(tag_value)){
+                        console.log("nice");
                         tags.push(...tag_value.split(',').filter(new_tag=>new_tag != ''));
 
                         let extra_tags = tags.length - max_tags;
@@ -71,6 +74,9 @@
                         createTag();
                     }
                     input_tags.value = '';
+                }
+                else{
+                    console.log("mali lods");
                 }
                 countTags();
             });
@@ -121,6 +127,20 @@
                     document.getElementById(tier_arg.concat('_benefits')).value = '';
                 }
             }
+        </script>
+
+        {{-- CKEditor --}}
+        <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.ckeditor').ckeditor();
+
+                if ( dialogName == 'link' || dialogName == 'image' )
+                {
+                    // remove Upload tab
+                    dialogDefinition.removeContents( 'Upload' );
+                }
+            });
         </script>
     </body>
 </html>

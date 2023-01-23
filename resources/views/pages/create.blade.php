@@ -49,7 +49,7 @@
                     <x-project.create.reward/>
                 </div>
                 <div class="tab-pane fade" id="nav-story" role="tabpanel" aria-labelledby="nav-story-tab" tabindex="0">
-                    <x-project.create.story/>
+                    <x-project.create.story :data="$data"/>
                 </div>
                 <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab" tabindex="0">
                     <x-project.create.paytab/> 

@@ -12,10 +12,12 @@ use App\Models\UserPreference;
 
 class GoogleAuthController extends Controller
 {
-    public function googleLoginUser(Request $request) {
+    public function googleLoginUser(Request $request): Object
+    {
         // Decode JWT token from google 
-        $userInfo = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $request->credential)[1]))));
         
+        $userInfo = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $request->credential)[1]))));
+
         $user = User::where('email', '=', $userInfo->email)->first();
 
         if ($user) {
@@ -28,7 +30,8 @@ class GoogleAuthController extends Controller
 
     }
 
-    private function registerUser($request, $userInfo) {
+    private function registerUser(Request $request, Object $userInfo): Object
+    {
         
         $user = new User;
         $user->Lname = $userInfo->family_name;
@@ -53,7 +56,8 @@ class GoogleAuthController extends Controller
      * Second parameter only accepts variable type of Object
      * Explicitly set to prevent errors
      */
-    private function _loginUser(Request $request, Object $user) {
+    private function _loginUser(Request $request, Object $user): Object
+    {
         //$request->session()->put('loginId', $user->id);
         Auth::loginUsingId($user->id);
         $follow = UserPreference::where('user_id', '=', $user->id)
@@ -64,13 +68,13 @@ class GoogleAuthController extends Controller
                                 ->select('dev_mode')
                                 ->first()
                                 ->toArray();
+        // set session if admin
+        $request->session()->put('admin', $user->admin);
 
         if($follow['followed'])
             $request->session()->put('mode', $mode['dev_mode']);
-            // return view('pages.home')->with('mode', $categories['dev_mode']);
         else
             $request->session()->put('mode', 3);
-            // return view('pages.home')->with('mode', 3);
 
         return (redirect('/'));
     }

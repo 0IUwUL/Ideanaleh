@@ -13,14 +13,19 @@ use Auth;
 
 class LoginController extends Controller
 {
-    public function loginUser(Request $request){
+    public function loginUser(Request $request): Object
+    {
         $user = User::where('email', '=', $request->LoginEmail)->first();
         // Saving user to a session
         Auth::loginUsingId($user->id);
+
+        // set session if admin
+        $request->session()->put('admin', $user->admin);
         return (redirect('/'));
     }
 
-    public function verifyInput (Request $request){
+    public function verifyInput (Request $request): void
+    {
         $user = User::where('email', '=', $request->email)->first();
         if ($user){
             if (Hash::check($request->pass, $user->password)) {
@@ -35,7 +40,8 @@ class LoginController extends Controller
     }
 
 
-    public function logout(){
+    public function logout(): Object
+    {
         if (Auth::check()) {
             Auth::logout();
 

@@ -6,13 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "beyondcode/laravel-websockets": "^1.13",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
+        "league/omnipay": "^3.2",
         "luigel/laravel-paymongo": "^2.2",
+        "mews/purifier": "^3.3",
+        "omnipay/paypal": "^3.0",
         "php-ai/php-ml": "^0.10.0",
+        "pusher/pusher-php-server": "^7.2",
         "twbs/bootstrap-icons": "^1.9"
     },
     "require-dev": {

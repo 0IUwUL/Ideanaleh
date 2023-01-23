@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-2">
+    <nav class="navbar navbar_default navbar-expand-lg navbar-dark fixed-top p-2">
         <div class="container-fluid d-flex justify-content-between">
             <div class = "col d-flex align-items-center">
                 <a class="navbar-brand" href="/">
@@ -50,6 +50,9 @@
                 <div class="navbread col p-0 d-none d-lg-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb d-flex justify-content-end align-self-center m-0">
+                        @if (Session::get('admin'))
+                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('admin') }}">Admin</a></li>
+                        @endif
                         @if (Request::segment(1) == 'settings')
                             <li class="breadcrumb-item"><a role = "fw-bolder" href="/">Home</a></li>
                         @else
@@ -66,6 +69,9 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end m-0">
+                        @if (Session::get('admin'))
+                            <li><a role = "button" class="dropdown-item" href="{{ route('admin') }}">Admin</a></li>
+                        @endif
                         @if (Request::segment(1) == 'settings')
                             <li><a role = "button" class = "dropdown-item" href="/">Home</a></li>
                         @else
@@ -103,14 +109,17 @@
         </div>
         <div class="collapse navbar-collapse pb-2" id="navbarTogglerLogged">
             <div class="d-block d-sm-none nav_home col">
-                <ul class="dropdown">
-                    @if (Request::segment(1) == 'settings')
-                        <li><a role = "button" class = "dropdown-item" href="/">Home</a></li>
-                    @else
-                        <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Profile</a></li>
+                <ul class="dropdown ps-3">
+                    @if (Session::get('admin'))
+                        <li class="dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('admin') }}">Admin</a></li>
                     @endif
-                        <li><a role = "button" class = "dropdown-item" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} href="{{ route('project.create') }}">My Project</a></li>
-                        <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Log out</a></li>
+                    @if (Request::segment(1) == 'settings')
+                        <li class = "dropdown-item"><a class = "dropdown-item" role = "button" href="/">Home</a></li>
+                    @else
+                        <li class = "dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('settings') }}">Profile</a></li>
+                    @endif
+                        <li class = "dropdown-item"><a class = "dropdown-item" role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} href="{{ route('project.create') }}">My Project</a></li>
+                        <li class = "dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('logout') }}">Log out</a></li>
                 </ul>
                 <form class="d-flex" role="search">
                     <div class="input-group">

@@ -10,9 +10,9 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class FilterProjects extends Controller
+class FilterController extends Controller
 {
-    public function index()
+    public function index(): Object
     {
         $projectDataVar = array('projects'=>Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
                                                     ->orderBy('created_at', 'desc')
@@ -30,7 +30,8 @@ class FilterProjects extends Controller
         return view('pages.display_projects')->with(['ProjArg'=> $projectDataVar]);
     }
 
-    public function Filter(Request $request){
+    public function Filter(Request $request): void
+    {
         $selected = $request->option;
         $category = $request->category;
         $page = $request->page;
@@ -59,7 +60,8 @@ class FilterProjects extends Controller
         echo json_encode($json_data);
     }
 
-    private function _getPreferences(string $selected){
+    private function _getPreferences(string $selected): array
+    {
         $arr = (new UserPreferenceController)->_getAllPreferences($selected);
         $pref = [];
         foreach($arr as $item){

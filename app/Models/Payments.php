@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Payments extends Model
 {
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id')->select(['id','Lname', 'Fname', 'Mname']);
+    }
 }

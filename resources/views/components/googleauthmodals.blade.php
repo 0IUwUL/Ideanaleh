@@ -14,45 +14,11 @@
                   <label class="form-label">Choose preffered categories (3 at least): </label>
                   <label class="text-danger me-1">*</label>
                   <div class="input-group mb-3 d-flex justify-content-evenly">
-                      <div class="input-group-text Gcategs">
-                          <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value = 'Games' aria-label="Checkbox for Games"> Games
-                      </div>
-                      <div class="input-group-text Gcategs">
-                          <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Business" aria-label="Checkbox for Business"> Business
-                      </div>
-                      <div class="input-group-text Gcategs">
-                          <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="AI" aria-label="Checkbox for AI"> AI
-                      </div>
-                      <div class="input-group-text Gcategs">
-                          <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Agriculture" aria-label="Checkbox for Agriculture"> Agriculture
-                      </div>
-                      <div class="input-group-text Gcategs">
-                          <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Music" aria-label="Checkbox for Music"> Music
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="IOT" aria-label="Checkbox for IOT"> IOT
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Communication" aria-label="Checkbox for Communication"> Communication
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Medical" aria-label="Checkbox for Medical"> Medical
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Transportation" aria-label="Checkbox for Transportation"> Transportation
-                      </div> 
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Education" aria-label="Checkbox for Education"> Education
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Security" aria-label="Checkbox for Security"> Security
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="VR/AR" aria-label="Checkbox for VR/AR"> VR/AR
-                      </div>
-                      <div class="input-group-text Gcategs">
-                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value="Others" aria-label="Checkbox for Others"> Others
-                      </div>
+                    @foreach(config('category')[0] as $category)
+                    <div class="input-group-text Gcategs">
+                        <input class="form-check-input mt-0" type="checkbox" name="GCategs[]" value = '{{$category}}' aria-label="Checkbox for {{$category}}"> {{$category}}
+                    </div>
+                    @endforeach
                   </div>
                   <label for="GCategs[]" class="error"></label>
               </div>
@@ -80,6 +46,30 @@
             <div class="mt-5" id = "GCategory_content">
             </div>
             <label for="Followed[]" class="error"></label>
+            <div class="row mt-3">
+              <div class="row">
+                <div class="col-12">
+                    <input type="checkbox" name="agree_terms" required>
+                    <label>
+                      I have read, understood, and agree to <i>Ideanaleh</i> <a href={{url('/terms-and-conditions')}} target="_blank">terms and conditions</a>
+                    </label>
+                    <div class="row p-3">
+                      <label for="agree_terms" class="error">Your error message will be display here.</label>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                    <input type="checkbox" name="agree_privacy" required>
+                    <label>
+                      I have read, understood, and agree to <i>Ideanaleh</i> <a href={{url('/privacy-policy')}} target="_blank">privacy policy</a>
+                    </label>
+                    <div class="row p-3">
+                      <label for="agree_privacy" class="error">Your error message will be display here.</label>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-target="#SignUpModal5" data-bs-toggle="modal">Back</button>

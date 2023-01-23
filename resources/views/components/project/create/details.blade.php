@@ -28,7 +28,7 @@
         </div>
         <div class="mb-3">
             <label for="Desc">Project Description</label>
-            <textarea class="form-control" placeholder="Short project description..." name = "ProjDesc" id="Desc" style="height: 150px"  required>{{array_key_exists('project', $data) ? $data['project']['title'] : ''}}</textarea>
+            <textarea class="form-control" placeholder="Short project description..." name = "ProjDesc" id="Desc" style="height: 150px"  required>{{array_key_exists('project', $data) ? $data['project']['description'] : ''}}</textarea>
             <section class="d-flex justify-content-end">
                 <span id ="limit">0</span><span>/200</span>
             </section>
@@ -162,7 +162,7 @@
                             </span>
                         @endforeach
                         @endif
-                           <input type="text" placeholder="Add tags...">
+                           <input type="text" class="input-tags" placeholder="Add tags...">
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end">

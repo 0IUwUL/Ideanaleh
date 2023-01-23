@@ -7,10 +7,11 @@ use Illuminate\Support\Str;
 use Auth;
 
 use App\Models\UserPreference; 
+use App\Models\ProjectStats;
 
 class UserPreferenceController extends Controller
 {
-    public function createInitialUserPreference(array $dataArg)
+    public function createInitialUserPreference(array $dataArg): void
     {
         $userPreferenceVar = new UserPreference;
         $userPreferenceVar->user_id = $dataArg['id'];
@@ -18,14 +19,27 @@ class UserPreferenceController extends Controller
         $userPreferenceVar->save();
     }
 
-    public function _getAllPreferences(string $var){
+    
+    public function _getAllPreferences(string $var): array
+    {
         $pref = UserPreference::select($var)
                                 ->get()
                                 ->toArray();
         return $pref;
     }
 
-    public function googleUpdatepreferences(array $dataArg)
+
+    public function _getUserPreferences(int $id): array
+    {
+        $pref = UserPreference::where('user_id', '=', $id)
+                                ->select('followed')
+                                ->get()
+                                ->toArray();
+        return $pref;
+    }
+
+
+    public function googleUpdatepreferences(array $dataArg): void
     {
         $user_id = $dataArg['id'];
         $followed = array(
@@ -35,8 +49,7 @@ class UserPreferenceController extends Controller
     }
 
 
-
-    public function updateFollowed(Request $requestArg)
+    public function updateFollowed(Request $requestArg): void
     {
         if(Auth::check()){
             $currentUserVar = $this->_getCurrentUser();
@@ -50,6 +63,7 @@ class UserPreferenceController extends Controller
                     $currentUserVar->followed = implode(',', $trimmedVar);
 
                     $json_data = array("response" => "unfollowed", "trrimed" => $trimmedVar);
+                    $this->_updateFollowedCount((int)$requestArg->ProjectId, -1);
                 }
                 else{
                     // Adding
@@ -58,6 +72,8 @@ class UserPreferenceController extends Controller
 
                     $currentUserVar->followed = implode(',', $mergedArrayVar);
                     $json_data = array("response" => "followed");
+
+                    $this->_updateFollowedCount((int)$requestArg->ProjectId, 1);
                 }
             }
             else{
@@ -75,7 +91,8 @@ class UserPreferenceController extends Controller
     }
 
 
-    public function updateSupported(int $projectIdArg){
+    public function updateSupported(int $projectIdArg): void
+    {
         // $userIdVar = Auth::id();
         $currentUserVar = $this->_getCurrentUser();
         if($currentUserVar->supported != null){
@@ -87,6 +104,8 @@ class UserPreferenceController extends Controller
                 sort($mergedArrayVar);
 
                 $currentUserVar->supported = implode(',', $mergedArrayVar);
+
+                $this->_updateSupportCount($projectIdArg, 1);
             }
         }
         else{
@@ -97,57 +116,55 @@ class UserPreferenceController extends Controller
     }
 
 
-    private function _getCurrentUser()
+    private function _getCurrentUser(): Object
     {
         $userIdVar = Auth::id();
         return(UserPreference::where('user_id', '=', $userIdVar)->first());
     }
 
 
-    public function checkIfFollowed(int $projectIdArg)
+    public function checkIfFollowed(int $projectIdArg): bool
     {
-        if(Auth::check()){
-            $currentUserVar = $this->_getCurrentUser();
-            if($currentUserVar->followed){
-                $initialFollowedVar = explode(',', $currentUserVar->followed);
-                if(in_array($projectIdArg, $initialFollowedVar)){
-                    return(true);
-                }
-                else{
-                    return(false);
-                }
-            }
-            else{
-                return(false);
-            }
-        }
-        else{
-            return(false);
-        }
+        if(!Auth::check()) return(false);
+
+        $currentUserVar = $this->_getCurrentUser();
+        if(!($currentUserVar->followed)) return(false);
+        $initialFollowedVar = explode(',', $currentUserVar->followed);
+
+        if(in_array($projectIdArg, $initialFollowedVar)) return(true);
+        return(false);
     }
 
-    public function checkIfSupported(int $projectIdArg)
+
+    public function checkIfSupported(int $projectIdArg): bool
     {
-        if(Auth::check()){
-            $currentUserVar = $this->_getCurrentUser();
-            if($currentUserVar->supported){
-                $initialSupportedVar = explode(',', $currentUserVar->supported);
-                if(in_array($projectIdArg, $initialSupportedVar)){
-                    return(true);
-                }
-                else{
-                    return(false);
-                }
-            }
-            else{
-                return(false);
-            }
-        }
-        else{
-            return(false);
-        }
+        if(!Auth::check()) return(false);
+
+        $currentUserVar = $this->_getCurrentUser();
+        if(!$currentUserVar->supported) return(false);
+        $initialSupportedVar = explode(',', $currentUserVar->supported);
+
+        if(in_array($projectIdArg, $initialSupportedVar)) return(true);
+        return(false);
     }
 
     
+    private function _updateFollowedCount(int $projectIdArg, int $amountArg): void
+    {
+        $projectVar = ProjectStats::where('proj_id', $projectIdArg)->first();
+        $initailFollowCountVar = (int)$projectVar->follow_count;
 
+        $projectVar->follow_count = $initailFollowCountVar + $amountArg;
+        $projectVar->save();
+    }
+
+
+    public function _updateSupportCount(int $projectIdArg, int $amountArg): void
+    {
+        $projectVar = ProjectStats::where('proj_id', $projectIdArg)->first();
+        $initailSupportCountVar = (int)$projectVar->support_count;
+
+        $projectVar->support_count = $initailSupportCountVar + $amountArg;
+        $projectVar->save();
+    }
 }

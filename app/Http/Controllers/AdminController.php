@@ -22,8 +22,7 @@ class AdminController extends Controller
             'user_issues' => UserIssue::with(['username'])?->get()->toArray(),
             'project_issues' => ProjectIssue::with(['project','username'])->get()->toArray(),
         ];
-        // dd($data['projects']);
-        
+
         $data['dashboard'] = $this->_getResults($data['projects']);
         return view('pages.admin')->with('admin', $data);
     }
@@ -34,17 +33,15 @@ class AdminController extends Controller
         $data['project'] = Projects::count();
         $data['issues'] = UserIssue::count(); // + ProjectIssue::count()
         $data['developers'] = $this->_SortDevelopers();
-        // $data['top_dev'] = Projects::
-        // $data['charts'] = $this->_getCharts();
+        $data['charts'] = $this->_getCharts();
         $data['donators'] = $this->_Sortdonators();
-        // $data['Donatedate'] = $this->_SortPerDate();
         return $data;
     }
 
     private function _Sortdonators(): Array
     {
         // get all donation with user data
-        $data = Payments::select('id', 'user_id', 'amount', 'updated_at')
+        $data = Payments::select('id', 'user_id', 'amount')
                         ->with(['user'])
                         ->get();
         // get total sum user's donated
@@ -87,7 +84,7 @@ class AdminController extends Controller
         foreach($data as $key => $value){
             $data[$key]['average'] = ($value['proj_stat']['support_count'] + $value['proj_stat']['follow_count'])/2;
         }
-        
+
         foreach($data as $key => $value){
             $data[$key]['donation'] = $value['proj_stat']['donation_count'];
         }
@@ -100,5 +97,48 @@ class AdminController extends Controller
                                 ->values()
                                 ->toArray();
         return $proj;
+    }
+
+    private function _getCharts(): array
+    {
+        $user = User::select('created_at')
+                    ->orderBy('created_at', 'desc')
+                    ->get()
+                    ->toArray();
+        $data['user'] = $this->_simplifyDate($user);
+        $project = Projects::select('created_at')
+                        ->orderBy('created_at', 'desc')
+                        ->get()
+                        ->toArray();
+        $data['project'] = $this->_simplifyDate($project);
+
+        $payment = Payments::select('created_at')
+                            ->orderBy('created_at', 'desc')
+                            ->get()
+                            ->toArray();
+        $data['donation'] = $this->_simplifyDate($payment);
+        return $data;
+    }
+
+    private function _simplifyDate(array $data): array
+    {
+        foreach($data as $key => $date)
+            $data[$key]['created_at'] = Carbon::parse($date['created_at'])->format('d F Y');
+        $data = collect($data);
+        $unique = $data->unique();
+        $unique = $unique->toArray();
+        $temp = 0;
+        foreach($unique as $key => $date){
+            foreach($data as $p_date){
+                if(strcmp($p_date['created_at'], $date['created_at']) == 0){
+                    $temp += 1;
+                }
+            }
+            $unique[$key]['total'] = $temp;
+            $temp = 0;
+        }
+        $unique = array_slice($unique, 0, 10);
+        $unique = array_reverse($unique);
+        return $unique;
     }
 }

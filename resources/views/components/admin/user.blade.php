@@ -11,10 +11,11 @@
                         <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Role
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">User</a></li>
-                            <li><a class="dropdown-item" href="#">Developer</a></li>
-                            <li><a class="dropdown-item" href="#">Admin</a></li>
+                        <ul class="role dropdown-menu" >
+                            <li><a class="dropdown-item">All</a></li>
+                            <li><a class="dropdown-item ">User</a></li>
+                            <li><a class="dropdown-item">Developer</a></li>
+                            <li><a class="dropdown-item">Admin</a></li>
                         </ul>
                     </th>
                     <th class="align-middle">Registered At</th>
@@ -22,16 +23,17 @@
                         <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Status
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Activated</a></li>
-                            <li><a class="dropdown-item" href="#">Deactivated</a></li>
+                        <ul class="status dropdown-menu">
+                            <li><a class="dropdown-item">All</a></li>
+                            <li><a class="dropdown-item">Active</a></li>
+                            <li><a class="dropdown-item">Deactivated</a></li>
                         </ul>
                     </th>
                     <th class="align-middle">Actions</th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="user_list">
                 @foreach ($users as $user)
                     <tr>
                         <td>{{$user['id']}}</td>
@@ -45,9 +47,9 @@
                             else 
                                 $role = 'user';
                         @endphp
-                        <td class="admin_type admin_{{$role}}">{{ucfirst($role)}}</td>
+                        <td class="admin_type admin_{{$role}} {{$user['active'] ? 'Active': 'Deactivated'}}">{{ucfirst($role)}}</td>
                         <td>{{date('n/j/Y', strtotime($user['created_at']))}}</td>
-                        <td><span class="admin_status admin_{{$user['active'] ? 'active' : 'deactive'}}" >{{$user['active'] ? 'Active' : 'Deactivated' }}</span></td> 
+                        <td><span class="admin_status {{$role.' admin_'}}{{$user['active'] ? 'active': 'deactive'}}" >{{$user['active'] ? 'Active' : 'Deactivated' }}</span></td> 
                         <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeactivateModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                         <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
                     </tr>

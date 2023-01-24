@@ -38,3 +38,45 @@ header.addEventListener("click", () => {
         holder.classList.toggle("col-1")      
     }
 })
+
+// Filter by user roles
+const user_type = document.querySelectorAll('.admin_type')
+var role = 'all'
+$('.role .dropdown-item').on('click', function(){
+    role = this.text.toLowerCase()
+
+    // Hide and show table elements
+    Object.values(user_type).forEach(element => {
+        if(element.classList[2] == status || status == 'All'){
+            if(role == 'all'){
+                element.parentElement.style.display = 'table-row';
+            }
+            else if(element.classList[1] != 'admin_' + role){
+                element.parentElement.style.display = 'none';
+            }else {
+                element.parentElement.style.display = 'table-row';
+            }
+        }
+    });
+})
+
+// Filter by user status
+const user_status = document.querySelectorAll('.admin_status')
+var status = 'All'
+$('.status .dropdown-item').on('click', function(){
+    status = this.text
+
+    // Hide and show table elements
+    Object.values(user_status).forEach(element => {
+        if(element.classList[1] == role || role == 'all'){
+            if(status == 'All'){
+                element.parentElement.parentElement.style.display = 'table-row';
+            }
+            else if(element.innerText != status){
+                element.parentElement.parentElement.style.display = 'none';
+            }else {
+                element.parentElement.parentElement.style.display = 'table-row';
+            } 
+        }
+    });
+})

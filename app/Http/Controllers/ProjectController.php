@@ -167,11 +167,11 @@ class ProjectController extends Controller
         $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
-
         // creating new project stats row
         if($requestArg->ProjId == null){
             $newStats = new ProjectStats;
-            $newStats->proj_id = $dataVar->id();
+            $newStats->proj_id = $dataVar->id;
+            $newStats->save();
         }
 
         return $dataVar;

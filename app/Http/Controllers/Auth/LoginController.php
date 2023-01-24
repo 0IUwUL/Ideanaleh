@@ -18,9 +18,10 @@ class LoginController extends Controller
         $user = User::where('email', '=', $request->LoginEmail)->first();
         // Saving user to a session
         Auth::loginUsingId($user->id);
-
+        // dd($user->toArray());
         // set session if admin
         $request->session()->put('admin', $user->admin);
+        $request->session()->put('mode', $user->dev_mode);
         return (redirect('/'));
     }
 

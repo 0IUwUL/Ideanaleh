@@ -31,8 +31,6 @@
                 return event.key != "Enter";
             });
             const input_tags = document.querySelector(".input-tags")
-            console.log("ito ang input_tags");
-            console.log(input_tags);
             var max_tags = 6;
             document.querySelector('.max-tags').innerText = max_tags
 

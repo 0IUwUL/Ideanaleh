@@ -58,7 +58,7 @@
                         @else
                             <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('settings') }}">Profile</a></li>
                         @endif
-                            <li class="breadcrumb-item"><a class = "fw-bolder" id = "modeToast2" data-id = {{Auth::check() ? 'logI' : 'logO'}} role = "button" href="{{ route('project.create') }}">My Project</a></li>
+                            <li class="breadcrumb-item"><a class = "fw-bolder" id = "modeToast2" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} role = "button" href="{{ route('project.create') }}">My Project</a></li>
                             <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('logout') }}">Log out</a></li>
                         </ol>
                     </nav>
@@ -77,7 +77,7 @@
                         @else
                             <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Profile</a></li>
                         @endif
-                            <li><a role = "button" class = "dropdown-item" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} href="{{ route('project.create') }}">My Project</a></li>
+                            <li><a role = "button" class = "dropdown-item" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
                             <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Log out</a></li>
                     </ul>
                 </div>
@@ -118,7 +118,7 @@
                     @else
                         <li class = "dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('settings') }}">Profile</a></li>
                     @endif
-                        <li class = "dropdown-item"><a class = "dropdown-item" role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} href="{{ route('project.create') }}">My Project</a></li>
+                        <li class = "dropdown-item"><a class = "dropdown-item" role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
                         <li class = "dropdown-item"><a class = "dropdown-item" role = "button" href="{{ route('logout') }}">Log out</a></li>
                 </ul>
                 <form class="d-flex" role="search">

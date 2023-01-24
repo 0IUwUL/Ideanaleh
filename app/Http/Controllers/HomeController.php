@@ -26,18 +26,11 @@ class HomeController extends Controller
      */
     public function index(Request $request, ProjectService $projectService): Object
     {
-        $dev_mode = array(
-            'dev'=>false);
-        if (Auth::check()){
-            $dev_mode = array('dev' => Auth::user()->dev_mode);
+        $dev_mode = array();
+        if (Auth::check())
             $dev_mode = array_merge($dev_mode, ['recommend' => $projectService->recommendation(null,0)]);
-        }
-        else{
-            
+        else
             $dev_mode = array_merge($dev_mode, ['popular'=>$projectService->popularProjects()[0]]);
-        }
-        
-
         return view('pages.home')->with('mode', $dev_mode);
     }
 }

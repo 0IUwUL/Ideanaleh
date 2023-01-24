@@ -193,17 +193,15 @@ $("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click",  function(){
         console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
-        if (!mode && c == 'logI'){
+        if (mode && c == 'logI'){
             insert = `Verify your email in your profile settings.`
             $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`
         }
+        into.innerHTML = insert
+        $('.DevToast').toast('show');
     }
-    into.innerHTML = insert
-
-
-    $('.DevToast').toast('show');
 })
 
 // Show registration modal

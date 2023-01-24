@@ -10,6 +10,7 @@ use App\Models\Projects;
 use App\Models\Payments;
 use App\Models\ProjectStats;
 use App\Models\UserIssue;
+use App\Models\ProjectIssue;
 
 class AdminController extends Controller
 {
@@ -17,9 +18,11 @@ class AdminController extends Controller
     {
         $data = [
             'users' => User::all()?->toArray(),
-            'projects' => Projects::all()?->toArray(),
+            'projects' => Projects::with(['username'])->get()->toArray(),
             'user_issues' => UserIssue::with(['username'])?->get()->toArray(),
+            'project_issues' => ProjectIssue::with(['project','username'])->get()->toArray(),
         ];
+        // dd($data['projects']);
         
         $data['dashboard'] = $this->_getResults($data['projects']);
         return view('pages.admin')->with('admin', $data);

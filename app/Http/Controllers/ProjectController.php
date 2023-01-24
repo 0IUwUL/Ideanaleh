@@ -141,6 +141,7 @@ class ProjectController extends Controller
 
     }
 
+    
     private function _saveNewProject(Request $requestArg): Object
     {
         
@@ -217,12 +218,14 @@ class ProjectController extends Controller
         }
     }
 
+
     private function _getYoutubeId(string $urlParams): string
     {
         preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $urlParams, $match);
         
         return $match[1];
     }
+
 
     public function getProjects(Request $requestArg): void
     {

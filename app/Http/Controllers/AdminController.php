@@ -141,4 +141,18 @@ class AdminController extends Controller
         $unique = array_reverse($unique);
         return $unique;
     }
+
+    public function changeStatus(Request $request): Object
+    {
+        $user = User::find($request->user_id);
+        
+        if ($user->active) 
+            $user->active = 0;
+        else 
+            $user->active = 1;
+        
+        $user->save();
+
+        return redirect()->back();
+    }
 }

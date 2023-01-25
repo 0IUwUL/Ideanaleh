@@ -80,3 +80,10 @@ $('.status .dropdown-item').on('click', function(){
         }
     });
 })
+
+// Change modal user-id
+$('.changeStatus').on('click', function(){
+    let user_id = $(this).attr('data-id')
+    console.log(user_id)
+    $('#user-id').val(user_id)
+})

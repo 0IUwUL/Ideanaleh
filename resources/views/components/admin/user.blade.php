@@ -50,7 +50,10 @@
                         <td class="admin_type admin_{{$role}} {{$user['active'] ? 'Active': 'Deactivated'}}">{{ucfirst($role)}}</td>
                         <td>{{date('n/j/Y', strtotime($user['created_at']))}}</td>
                         <td><span class="admin_status {{$role.' admin_'}}{{$user['active'] ? 'active': 'deactive'}}" >{{$user['active'] ? 'Active' : 'Deactivated' }}</span></td> 
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeactivateModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                        <td><button type="button" class="changeStatus btn btn-outline-{{$user['active'] ? 'danger' : 'success'}}" data-bs-toggle="modal" data-bs-target="#ChangeStatusModal" data-id="{{$user['id']}}">
+                                <i class="fa-solid fa-circle-{{$user['active'] ? 'xmark' : 'check'}}"></i>
+                            </button>
+                        </td>
                         <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
                     </tr>
                 @endforeach
@@ -114,103 +117,103 @@
           </form>
       </div>
     </div>
-  </div>
+</div>
   
-  <div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-warning">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <form action="">
-                <div class="mb-3">
-                    <label for="LabelSubject" class="form-label">Subject</label>
-                    <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="LabelSubject" class="form-label">Subject</label>
+                        <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="LabelContentIssue" class="form-label">Message Content</label>
+                        <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="LabelContentIssue" class="form-label">Message Content</label>
-                    <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send to Developer</button>
                 </div>
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send to Developer</button>
-          </div>
             </form>
         </div>
-      </div>
     </div>
-  
-  
-  <div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
-      <form action="">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content border-success">
-                  <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="ResolvedModalHeader">Is the issue resolved? <i class="fa-solid fa-circle-check text-success"></i></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success">Confirm</button>
-                  </div>
-      </form>
-              </div>
-          </div>
-  </div>
-  
-  
-  <div class="modal fade" id="DeleteIssueModal" tabindex="-1" aria-labelledby="DeleteIssueModalLabel" aria-hidden="true">
-      <form action="">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content border-success">
-                  <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-danger">Confirm</button>
-                  </div>
-      </form>
-              </div>
-          </div>
-  </div>
-  
-  <div class="modal fade" id="DeactivateModal" tabindex="-1" aria-labelledby="DeactivateModalLabel" aria-hidden="true">
-      <form action="">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content border-danger">
-                  <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="DeactivateModalHeader">You will now deactivate this current account. <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-danger">Confirm</button>
-                  </div>
-      </form>
-              </div>
-          </div>
-  </div>
-  
-  <div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
-      <form action="">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content border-success">
-                  <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success">Confirm</button>
-                  </div>
-      </form>
-              </div>
-          </div>
-  </div>
-  
+</div>
+
+
+<div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-success">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ResolvedModalHeader">Is the issue resolved? <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="modal fade" id="DeleteIssueModal" tabindex="-1" aria-labelledby="DeleteIssueModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-success">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeleteIssueModalHeader">Are you sure to delete this issue? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="ChangeStatusModal" tabindex="-1" aria-labelledby="ChangeStatusModalLabel" aria-hidden="true">
+    <form id="changeStatusForm" action="{{route('change-status')}}" method="POST">
+        @csrf
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ChangeStatusModalHeader">You will now deactivate this current account. <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <input id="user-id" type="hidden" name="user_id" value=""/>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-success">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

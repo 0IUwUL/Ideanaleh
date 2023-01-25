@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Notifications\UserDeactivation;
 
 use App\Models\User;
 use App\Models\Projects;
@@ -146,12 +147,14 @@ class AdminController extends Controller
     {
         $user = User::find($request->user_id);
         
-        if ($user->active) 
-            $user->active = 0;
+        if ($user->active)
+            $user->active = 0; 
         else 
             $user->active = 1;
-        
+            
         $user->save();
+
+        $user->notify(new UserDeactivation($user));
 
         return redirect()->back();
     }

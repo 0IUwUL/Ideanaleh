@@ -117,7 +117,7 @@
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="address"
-                                    data-address={{$user['address']}}>
+                                    data-address="{{$user['address']}}">
                                     </i>
                                 </a>
                             </div>

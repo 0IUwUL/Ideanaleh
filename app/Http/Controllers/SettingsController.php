@@ -65,7 +65,7 @@ class SettingsController extends Controller
         // Get password from DB since it is not store in session
         $user = User::find($this->user->id);
 
-        if (Hash::check($request->pass, $user->password)) {
+        if (Hash::check($request->password, $user->password)) {
             $json_data = array("response" => "success");
         }
         else {
@@ -78,7 +78,7 @@ class SettingsController extends Controller
 
     public function changeAddress(Request $request): Object
     {
-        User::where('id', $this->user->id)->update(['address', $request->inputAddress]);
+        User::where('id', $this->user->id)->update(['address'=> $request->inputAddress]);
       
         return redirect('settings');
     }

@@ -26,6 +26,10 @@ $( window ).on( "load", function() {
     $('.page_content').fadeIn("slow");
 });
 
+$(document).on("keydown", ":input:not(textarea)", function(event) { 
+    return event.key != "Enter";
+});
+
 // Validate registration form for Normal Auth
 $('.next, #submit').click(function (){
     var form = $("#myForm");

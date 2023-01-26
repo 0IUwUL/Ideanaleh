@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\User; 
+use App\Actions\Verification;
 
 // Import controller
 use App\Http\Controllers\HomeController;
@@ -18,6 +21,7 @@ use App\Http\Controllers\FilterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -116,8 +120,15 @@ Route::controller(LoginController::class)->group(function () {
 // Email routes
 Route::controller(EmailController::class)->group(function () {
     Route::post('/send-email', 'sendCode')->name('send-email');
-    Route::post('/verify', 'verify')->name('verify');
+    Route::post('/update-dev', 'updateDev')->name('update-dev');
 });
+
+Route::post('/verify-code', function(Request $request) {
+    if((new Verification)->handle($request)) $response = "success";
+    
+    echo json_encode(['response' => $response ?? null]);
+})->name('verify-code');
+
 
 //WEbhook
 Route::controller(PaymentsController::class)->group(function(){
@@ -142,4 +153,10 @@ Route::controller(FilterController::class)->prefix('main')->group(function(){
 //Profile Page
 Route::controller(ProfileController::class)->prefix('profile')->group(function(){
     Route::get('/{id}', 'index')->name('profile');
+});
+
+// Forgot Password Routes
+Route::controller(ForgotPasswordController::class)->name('recover.')->group(function () {
+    Route::post('/search-email', 'searchEmail')->name('search-email');
+    Route::post('/update-password', 'updatePassword')->name('update-password');
 });

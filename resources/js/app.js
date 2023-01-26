@@ -430,3 +430,100 @@ $(document).on('click', '.pagination .page-link', function(event){
     filterSend(category, options, page)
 });
 
+
+// Show registration modal
+$("#forgot_password").on("click", function (){
+    $('#LoginModal').modal('hide');
+    $('#ForgotPasswordModal').modal('show');
+})
+
+var recover_email
+$('#search').on("click", function(e){
+    $(e.target).prop('disabled', true)
+    recover_email = document.getElementById("recover_email").value;
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/search-email/",
+        type:'POST',
+        data: {
+            email : recover_email,
+        },
+        success: function(result){
+            $(e.target).prop('disabled', false)
+            let data = JSON.parse(result);
+
+            if (data.response == 'success'){
+                $('#ForgotPasswordModal').modal('hide');
+                $('#ForgotPasswordModal2').modal('show');
+            }
+            else{
+                document.getElementById("recover_email").value = ''
+                document.getElementById('errorSearch').innerHTML = "* Email is not found"  
+            }
+        }
+
+    });
+    
+});
+
+$('#verify').on("click", function(e){
+    $(e.target).prop('disabled', true)
+    var code = document.getElementById("code").value;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/verify-code",
+        type:'POST',
+        data: {
+            email: recover_email,
+            code: code,
+        },
+        success: function(result){
+            $(e.target).prop('disabled', false)
+            let data = JSON.parse(result);
+
+            if (data.response == 'success'){
+                $('#ForgotPasswordModal2').modal('hide');
+                $('#ForgotPasswordModal3').modal('show');
+            }
+            else{
+                document.getElementById("code").value = ''
+                document.getElementById('errorCode').innerHTML = "* Incorrect verification code"  
+            }
+        }
+    });
+});
+
+$("#save").on("click", function(){
+    var form = $("#ForgotPasswordForm3");
+
+    form.validate({
+        rules:{
+            newPass: {
+                required:true,
+            },
+            confirmPass: {
+                required:true,
+            },    
+        },
+        messages: {
+            confirmPass: {
+                equalTo: "Doesn't match with new password",
+            },
+        }
+    });
+
+    if (form.valid() === true){
+        $('#user_email').val(recover_email)
+        form.submit()
+    }
+}); 

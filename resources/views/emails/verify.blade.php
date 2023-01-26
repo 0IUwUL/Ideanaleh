@@ -17,7 +17,7 @@
                         <p style = "font-size: 2rem"> Hello , {{$details['header']}}</p> 
                     </div>
                     <div style = "color: black">
-                        <p>Here is your verification code: </p>
+                        <p>{{$details['body']}}</p>
                     </div>
                     <div style = "letter-spacing: 3em; text-align: center; text-indent: 3em; color: black">
                             <p style= "font-size: 50px">{{$details['code']}}</p>

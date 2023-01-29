@@ -1094,3 +1094,11 @@ hr.filter{
 .profile_details .projects a{
   text-decoration: none;
 }
+
+.profile_details .projects a h5{
+  color: var(--bg);
+}
+
+.profile_details .projects a p{
+  color: #d53c;
+}

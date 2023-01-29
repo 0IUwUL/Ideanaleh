@@ -35,7 +35,15 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 <div class="row mt-5 d-flex">
-                    <h3>Contacts:</h3>
+                    <div class="row">
+                        <div class="col d-flex">
+                            <h3 class="align-middle m-0 pe-3">Contacts:</h3>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ReportModal">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
                     <div class="col d-flex">
                        
                         <div class="ps-5 mb-3 row">
@@ -48,7 +56,7 @@
                     <hr>
                     @if($details['project'] != NULL)
                         <h3>Project Involved:</h3>
-                        <div class="row col-6 projects ps-5">
+                        <div class="row col col-sm-6 projects ps-5">
                             <a href={{url('project/view/'.$details['project']['id'])}} role = "button">
                                 <div class="card h-100">
                                     <div class="card-body">
@@ -136,8 +144,8 @@
 <!-- Modal -->
 <div class="modal fade" id="ReportModal" tabindex="-1" aria-labelledby="ReportModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
+      <div class="modal-content border-danger">
+        <div class="modal-header bg-danger text-white">
           <h1 class="modal-title fs-5" id="ReportModalLabel">Report Form</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

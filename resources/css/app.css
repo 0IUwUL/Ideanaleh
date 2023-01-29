@@ -3,6 +3,7 @@
 
 html{
   overflow-x: hidden;
+  height: 100%;
 }
 
 .error{
@@ -206,6 +207,7 @@ body {
   font-family: "Merriweather", serif;
   line-height: 1.5;
   overflow-x: hidden;
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, .btn {
@@ -874,15 +876,25 @@ hr.create{
   --bg: #002d50;
   --hl: #f3ff82;
 }
-.nav_filter{
-  margin-top: 4.5rem;
+.filter{
   font-family: 'Poppins', sans-serif;
 }
 
-.nav_filter nav{
-  height: 3rem;
+.filter_nav{
+  padding-top: 7rem;
+}
+
+hr.filter{
+  margin-top: 2rem;
+  padding: 0;
+}
+
+.filter .filter_nav nav{
+  height: 4rem;
   display: flex;
   justify-content: center;
+  background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(31,66,96));
+  margin: 0;
 }
 
 .F_list{
@@ -896,14 +908,15 @@ hr.create{
 }
 
 .filter_row{
-  padding: 0 2rem;
+  padding: 7rem 2rem 3rem 0;
+  width: 100%;
 }
 
-.nav_filter .select .form-select{
+.filter_row .select .form-select{
   width: 100%!important;
 }
 
-.nav_filter .select{
+.filter_row .select{
   padding: 1rem;
 }
 

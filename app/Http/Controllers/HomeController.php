@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request, ProjectService $projectService): Object
     {
+        $request->session()->put('search', null);
         $dev_mode = array();
         if (Auth::check())
             $dev_mode = array_merge($dev_mode, ['recommend' => $projectService->recommendation(null,0)]);

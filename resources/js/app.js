@@ -410,7 +410,7 @@ function filterSend(category, option, page){
         }
     });
     $.ajax({
-        url: "main/filter",
+        url: "/main/filter",
         type:'post',
         data: {
             category: category,

@@ -3,8 +3,8 @@
 @section('content')
 <x-styles.defnav/>
 
-<div class="nav_filter py-5">
-    <div class="container">
+<div class="filter">
+    <div class="container-fluid filter_nav p-0">
         <nav class="row filter_row">
             <div class="col F_display d-none d-sm-block d-flex justify-content-end align-self-center">
                 Category:
@@ -29,10 +29,23 @@
             </div>
             
         </nav>
+        <hr class="filter">
     </div>
-    <hr>
-    <div class="container mt-5">
-        <div class="row g-5" id="content_projects">
+    <div class="container mt-5" id="content_projects">
+        @if($ProjArg['search'])
+            <div class="row">
+                <h1>Search result:</h1>
+            @if(Session::get('search'))
+                <h5>Projects with title <b>"{{Session::get('search')}}"</b> ({{$ProjArg['projects']->total()}})</h5>
+            @else
+                <h5>There are no projects found with <b>"{{Session::get('search')}}"</b></h5>
+            @endif
+            </div>
+        @else
+            <h5>Project(s) found: ({{$ProjArg['projects']->total()}})</h5>
+        @endif
+        
+        <div class="row g-5 pt-5">
             @foreach($ProjArg['projects'] as $key => $project)
                 <div class="col-md-6">
                     <a href={{ url('project/view/'.$project['id']) }} role = "button">

@@ -9,6 +9,7 @@ use App\Http\Controllers\UserPreferenceController;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Session;
 
 class FilterController extends Controller
 {
@@ -26,6 +27,7 @@ class FilterController extends Controller
             'supported' => 'Most Supported',
             'Newest' => 'Newest',
         );
+        $projectDataVar['search'] = false;
         $projectDataVar = array_merge($projectDataVar, ['options' => $options]);
         return view('pages.display_projects')->with(['ProjArg'=> $projectDataVar]);
     }
@@ -35,13 +37,28 @@ class FilterController extends Controller
         $selected = $request->option;
         $category = $request->category;
         $page = $request->page;
+        $filter = false;
+        if($category && Session::get('search')){
+            $conditions = [
+                'category'=> $category,
+                ['title', 'LIKE', '%'.Session::get('search').'%'],
+            ];
+            $filter = true;
+        }elseif($category){
+            $conditions = ['category' => $category,];
+        }elseif(Session::get('search')){
+            $conditions = ['title'=> Session::get('search'),];
+            $filter = true;
+        }else{
+            $conditions = null;
+        }
         // get projects
-        if($category){
-            $hold = Projects::where('category', '=', $category)
-                                        ->select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
-                                        ->orderBy('created_at', 'desc')
-                                        ->get()
-                                        ->toArray();
+        if($conditions){
+            $hold = Projects::where($conditions)
+                                ->select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+                                ->orderBy('created_at', 'desc')
+                                ->get()
+                                ->toArray();
         }else{
             $hold = Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
                                     ->orderBy('created_at', 'desc')
@@ -53,11 +70,41 @@ class FilterController extends Controller
         }else{
             $projectDataVar = $this->paginate($hold, 6, $page);
         }
-
-        $viewRender = view('formats.filter')->with(['ProjArg' => $projectDataVar])->render();
+        $viewRender = view('formats.filter')->with(['ProjArg' => $projectDataVar, 'search' => $filter])->render();
         $link = $projectDataVar->links()->render();
         $json_data = array('item' => $viewRender, 'link' => $link);
         echo json_encode($json_data);
+    }
+
+    public function Search(Request $request): Object
+    {
+        // dd($request->search);
+        if($request->search){
+            $projectDataVar = array(
+                'projects'=>Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+                                    ->where('title', 'LIKE', '%'.$request->search.'%')
+                                    ->orderBy('created_at', 'desc')
+                                    ->get()
+                                    ->toArray()
+            );
+        }else{
+            $projectDataVar = array('projects'=>Projects::select('id','title', 'description', 'category', 'tags', 'logo', 'banner')
+                                                        ->orderBy('created_at', 'desc')
+                                                        ->get()
+                                                        ->toArray()
+            );
+        }
+        $request->session()->put('search', $request->search);
+        $projectDataVar['projects'] = $this->sort('followed', $projectDataVar['projects'], null);
+        $projectDataVar['search'] = true;
+        $projectDataVar = array_merge($projectDataVar, ['categories' => config('category')[0]]);
+        $options = array(
+            'followed' => 'Most Followed', 
+            'supported' => 'Most Supported',
+            'Newest' => 'Newest',
+        );
+        $projectDataVar = array_merge($projectDataVar, ['options' => $options]);
+        return view('pages.display_projects')->with(['ProjArg'=> $projectDataVar]);
     }
 
     private function _getPreferences(string $selected): array

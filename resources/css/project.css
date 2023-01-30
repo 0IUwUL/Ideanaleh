@@ -267,6 +267,18 @@ input[name="GCategs[]"]{
     box-shadow: 0 10px 4px -4px rgba(0, 0, 0,0.4);
     transition: all 0.2s ease-out;
   }
+
+  .product-form button.add-to-cart.report {
+    background-color: #ddff00;
+    color: black;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 20px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    box-shadow: 0 10px 4px -4px rgba(0, 0, 0,0.4);
+    transition: all 0.2s ease-out;
+  }
+
   .product-form button.add-to-cart:hover{
     transform: scale3d(1.1, 1.1, 1.1);
   }

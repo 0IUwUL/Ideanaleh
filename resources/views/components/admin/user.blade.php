@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
     <label for="TableUser" class="admin_user_table">User Table</label>
-    <div class="row table-responsive px-3 admin_table" id = "admin_user_table">
-        <table class="table align-middle table-hover">
+    <div class="row admin_table" id = "admin_user_table">
+        <table class="table table-responsive align-middle table-hover">
             <thead class="table-dark sticky-top">
                 <tr>
                     <th class="align-middle">User Number</th>

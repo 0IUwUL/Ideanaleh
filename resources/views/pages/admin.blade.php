@@ -158,4 +158,21 @@
             </div>
         </div>
 </div>
+
+<div class="modal fade" id="ProjectIssueFlagModal" tabindex="-1" aria-labelledby="ProjectIssueFlagModal" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Project Issue<i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
 @endsection

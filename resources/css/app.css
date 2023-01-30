@@ -793,8 +793,8 @@ hr.create{
   background: radial-gradient(#ffe995, #fa742b)!important;
 }
 
-.ckeditor{
-  width: 100vw!important;
+#cke_Story{
+  width: 100%!important;
 }
 
 .admin_icon{
@@ -829,7 +829,8 @@ hr.create{
 }
 
 .admin_table{
-  max-height: 40vh; 
+  max-height: 220px;
+  height: 50vh;
   overflow-y: auto;
 }
 

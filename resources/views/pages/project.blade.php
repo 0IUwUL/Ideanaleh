@@ -82,6 +82,12 @@
 
                   {{-- DONATE BUTTON --}}
                   <a href="http://localhost:8000/project/view/{{$project['id']}}#tiers-section"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                
+                  <div class="pt-3">
+                    <button type="button" id="ReportButton" data-bs-toggle="modal" data-bs-target="#ReportModal" class="btn add-to-cart report w-50" data-projectId={{$project['id']}}>
+                          <i class="fa-solid fa-triangle-exclamation"></i> Report
+                    </button>
+                  </div>
                 </div>  
             </div>
             
@@ -361,6 +367,32 @@
   </div>
 </div>
   
-
+<!-- Modal -->
+<div class="modal fade" id="ReportModal" tabindex="-1" aria-labelledby="ReportModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h1 class="modal-title fs-5" id="ReportModalLabel">Report Form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form action="">
+              <div class="mb-3">
+                  <label for="ReportModalFormControl1" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="ReportModalFormControl1" required>
+              </div>
+              <div class="mb-3">
+                  <label for="ReportModalFormTextarea1" class="form-label">Report in Detail</label>
+                  <textarea class="form-control" id="ReportModalFormTextarea1" rows="3" required></textarea>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Report</button>
+      </div>
+          </form>
+    </div>
+  </div>
+</div>
 
 @endsection

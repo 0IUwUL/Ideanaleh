@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
     <label for="ProjectTable" class="admin_project_table">Project Table</label>
-    <div class="row table-responsive px-3 admin_table" id = "ProjectTable">
-        <table class="table align-middle table-hover">
+    <div class="row admin_table" id = "ProjectTable">
+        <table class="table table-responsive align-middle table-hover">
             <thead class="table-dark">
                 <tr>
                     <th class="align-middle">Project Number</th>
@@ -42,7 +42,7 @@
                 @else
                 <tr>
                     <td>null</td>
-                    <td>No Projects Found}</td>
+                    <td>No Projects Found</td>
                     <td>null</td>
                     <td>null</td>
                     <td>null</td>
@@ -77,7 +77,7 @@
                     <td>{{$issue['project']['title']}}</td>
                     <td>{{$issue['username']['Lname']}}</td>
                     <td>{{$issue['content']}}</td>
-                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                     <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
                     <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
@@ -88,7 +88,7 @@
                     <td>null</td>
                     <td>null</td>
                     <td>No Issues Found</td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#FlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                     <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
                     <td><button disabled type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
@@ -103,7 +103,7 @@
                 <div class="card-body">
                     <div class="card-title text-center">
                         Top Supported Projects
-                        <div class="card-text table=responsive" style = "max-height: 30vh; overflow-y: scroll">
+                        <div class="card-text table=responsive" style = "max-height: 30vh; overflow-y: auto">
                             <table class="table">
                                 <thead class = "table-dark sticky-top">
                                     <tr>
@@ -144,7 +144,7 @@
                 <div class="card-body">
                     <div class="card-title text-center">
                         Top Genre Supported
-                        <div class="card-text table=responsive" style = "max-height: 30vh; overflow-y: scroll">
+                        <div class="card-text table=responsive" style = "max-height: 30vh; overflow-y: auto">
                             <table class="table">
                                 <thead class = "table-dark sticky-top">
                                     <tr>

@@ -9,7 +9,7 @@
         @vite(['resources/css/app.css'])
         
     </head>
-    <body style = "overflow-y: hidden">
+    <body>
 
         <div class="load">
             <div class="ring"></div>

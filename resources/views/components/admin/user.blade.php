@@ -84,7 +84,7 @@
                             <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
                             <td><button type="button" class="informUser btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id="{{$issue['user_id']}}"><i class="fa-solid fa-flag"></i></button></td>
                             <td><button type="button" class="resolveUserIssue btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['resolved']}}><i class="fa-solid fa-check"></i></button></td>
-                            <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                            <td><button type="button" class="deleteUserIssue btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
                         </tr>
                     @endif
                 @endforeach
@@ -113,7 +113,7 @@
                             <td>{{$issue['content']}}</td>
                             <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
                             <td><button type="button" class="resolveUserIssue btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['resolved']}}><i class="fa-solid fa-rotate"></i></button></td>
-                            <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}" ><i class="fa-solid fa-circle-xmark"></i></button></td>
+                            <td><button type="button" class="deleteUserIssue btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}" ><i class="fa-solid fa-circle-xmark"></i></button></td>
                         </tr>
                     @endif
                 @endforeach
@@ -181,7 +181,7 @@
 
 
 <div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
-    <form action="{{route('resolve-user-issue')}}" method="POST">'
+    <form action="{{route('resolve-user-issue')}}" method="POST">
         @csrf
         <input type="hidden" id="resolve-id" name="id" value="" required>
         <div class="modal-dialog modal-dialog-centered">
@@ -201,7 +201,9 @@
 
 
 <div class="modal fade" id="DeleteIssueModal" tabindex="-1" aria-labelledby="DeleteIssueModalLabel" aria-hidden="true">
-    <form action="">
+    <form action="{{route('delete-user-issue')}}" method="POST">
+        @csrf
+        <input type="hidden" id="delete-id" name="id" value="" required>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-success">
                 <div class="modal-header">
@@ -210,7 +212,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
+                    <button type="submit" class="btn btn-danger">Confirm</button>
                 </div>
             </div>
         </div>

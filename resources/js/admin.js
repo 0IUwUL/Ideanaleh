@@ -99,7 +99,7 @@ $('.informUser').on('click', function(){
 $('.resolveUserIssue').on('click', function(){
     let id = $(this).attr('data-id')
     let resolved = parseInt($(this).attr('data-status'))
-    console.log(typeof(resolved))
+    
     let message = "Is the issue resolved?"
     if (resolved){
         message = "Do you want to reopen this issue?"
@@ -107,4 +107,11 @@ $('.resolveUserIssue').on('click', function(){
     
     $('#resolve-id').val(id)
     $('#ResolvedModalHeader').text(message)
+})
+
+// Change modal issue id
+$('.deleteUserIssue').on('click', function(){
+    let id = $(this).attr('data-id')
+
+    $('#delete-id').val(id)
 })

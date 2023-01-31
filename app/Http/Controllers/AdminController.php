@@ -178,15 +178,22 @@ class AdminController extends Controller
 
     public function resolveUserIssue(Request $request): Object
     {
-        $user = UserIssue::find($request->id);
+        $issue = UserIssue::find($request->id);
         
-        if ($user->resolved)
-            $user->resolved = 0; 
+        if ($issue->resolved)
+            $issue->resolved = 0; 
         else 
-            $user->resolved = 1;
+            $issue->resolved = 1;
             
-        $user->save();
+        $issue->save();
 
+        return redirect()->back();
+    }
+
+    public function deleteUserIssue(Request $request): Object
+    {
+        UserIssue::find($request->id)?->delete();
+        
         return redirect()->back();
     }
 

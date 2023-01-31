@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Controllers\Auth\EmailController;
+use App\Services\EmailService;
 
 class ForgotPasswordController extends Controller
 {
@@ -37,7 +37,7 @@ class ForgotPasswordController extends Controller
             
             // Customize messagge
             $message = 'To reset your password, please enter the code below';
-            (new EmailController)->sendEmail($user, $message, $user->code);
+            (new EmailService)->verification($user, $message, $user->code);
 
             $response = 'success';
         }

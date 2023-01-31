@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserPreferenceController;
 use Str;
+use App\Services\EmailService;
 
 //Import model
 use App\Models\User;
@@ -51,7 +52,7 @@ class GoogleAuthController extends Controller
         (new UserPreferenceController)->createInitialUserPreference($data);
 
         $message = "Here is your temporary password. You can change it in Settings > Account tab";
-        (new EmailController)->sendEmail($user, $message, $temp_password);
+        (new EmailService)->verification($user, $message, $temp_password);
 
         // Auto Login the user when they sign up with google?
         $currentUser = User::where('email', '=', $userInfo->email)->first();

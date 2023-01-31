@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User; 
 use App\Actions\Verification;
+use App\Services\EmailService;
 
 // Import controller
 use App\Http\Controllers\HomeController;
@@ -55,6 +56,7 @@ Route::middleware('auth', 'selected')->controller(SettingsController::class)->gr
 Route::middleware('auth', 'admin')->controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin');
     Route::post('/change-status', 'changeStatus')->name('change-status');
+    Route::post('/inform-user', 'informUser')->name('inform-user');
 });
 
 // User registration routes

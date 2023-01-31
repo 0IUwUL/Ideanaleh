@@ -87,3 +87,45 @@ $('.changeStatus').on('click', function(){
     console.log(user_id)
     $('#user-id').val(user_id)
 })
+
+//Ajax for search
+$('#UserSearch').on('click', function(){
+    searchInput($('input[name="user"]').val(), 'user')
+})
+
+$('#UserIssueSearch').on('click', function(){
+    searchInput($('input[name="user_issue"]').val(), 'user_issue')
+})
+
+$('#ProjSearch').on('click', function(){
+    searchInput($('input[name="project"]').val(), 'proj')
+})
+
+$('#ProjIssueSearch').on('click', function(){
+    searchInput($('input[name="proj_issue"]').val(), 'proj_issue')
+})
+
+$('input[name="user"], input[name="user_issue"], input[name="proj"], input[name="proj_issue"]').keyup(function(e){
+    if(e.keyCode == 13){searchInput(e.target.value, e.target.name)}
+});
+
+function searchInput(inp, tar){
+    $.ajaxSetup({
+        headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+    });
+    $.ajax({
+        url: "/admin/search",
+        type:'post',
+        data: {
+            input : inp,
+            for: tar,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            $('#'+data.for+'_table').html(data.item)
+        }
+
+    });
+}

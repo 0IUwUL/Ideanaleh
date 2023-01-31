@@ -54,6 +54,7 @@ Route::middleware('auth', 'selected')->controller(SettingsController::class)->gr
 // Admin routes
 Route::middleware('auth', 'admin')->controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin');
+    Route::post('/admin/search', 'searchUser')->name('admin/search');
     Route::post('/change-status', 'changeStatus')->name('change-status');
 });
 

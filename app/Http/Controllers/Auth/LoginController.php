@@ -41,7 +41,7 @@ class LoginController extends Controller
     }
 
 
-    public function logout(): Object
+    public function logout(): object
     {
         if (Auth::check()) {
             Auth::logout();

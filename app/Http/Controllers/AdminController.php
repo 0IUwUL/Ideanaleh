@@ -31,6 +31,27 @@ class AdminController extends Controller
         return view('pages.admin')->with('admin', $data);
     }
 
+    public function searchUser(Request $request): void
+    {
+        $input = $request->input;
+        $for = $request->for;
+        if(is_null($input) && $for)
+            $result = $this->_DefaultTable($for);
+        elseif($for == 'user')
+            $result = $this->_UserTable($input);
+        elseif($for == 'user_issue')
+            $result = $this->_UserIssueTable($input);
+        elseif($for == 'proj')
+            $result = $this->_ProjectTable($input);
+        elseif($for == 'proj_issue')
+            $result = $this->_ProjIssueTable($input);
+        
+        $viewRender = view('formats.admin.'.$for)->with(['ArrArg' => $result])->render();
+        $json_data = array('item' => $viewRender, 'for'=>$for);
+        echo json_encode($json_data);
+        
+    }
+
     private function _getResults(array $projects): array
     {
         $data['users'] = User::count();
@@ -202,5 +223,72 @@ class AdminController extends Controller
 
         return($newArrayVar);
 
+    }
+
+    private function _UserTable(string $find): array
+    {
+        $users = User::select('id','Lname','email','admin','dev_mode','active', 'created_at')
+                    ->where('Lname', 'LIKE', '%'.$find.'%')
+                    ->orWhere('email', 'LIKE', '%'.$find.'%')
+                    ->get()
+                    ->toArray();
+        return $users;
+    }
+
+    private function _UserIssueTable(string $find): array
+    {
+        $UIssue = UserIssue::select('id','user_id','content','created_at')
+                    // ->where('subject', 'LIKE', '%'.$find.'%')
+                    ->where('content', 'LIKE', '%'.$find.'%')
+                    ->with(['username'])
+                    ->get()
+                    ->toArray();
+        return $UIssue;
+    }
+
+    private function _ProjectTable(string $find): array
+    {
+        $projects = Projects::select('id','user_id','title','created_at','target_date')
+                    ->where('title', 'LIKE', '%'.$find.'%')
+                    ->with(['username'])
+                    ->get()
+                    ->toArray();
+        return $projects;
+    }
+
+    private function _ProjIssueTable(string $find): array
+    {
+        $ProjIssues = ProjectIssue::select('id','project_id','user_id','content')
+                    ->where('content', 'LIKE', '%'.$find.'%')
+                    ->with(['project','username'])
+                    ->get()
+                    ->toArray();
+        return $ProjIssues;
+    }
+
+    private function _DefaultTable(string $table): array
+    {
+        if($table == 'user'){
+            $arr = User::select('id','Lname','email','admin','dev_mode','active', 'created_at')
+                            ->get()
+                            ->toArray();
+        }elseif($table == 'proj'){
+            $arr = Projects::select('id','user_id','title','created_at','target_date')
+                    ->with(['username'])
+                    ->get()
+                    ->toArray();
+        }elseif($table == 'user_issue'){
+            $arr = UserIssue::select('id','user_id','content','created_at')
+                    ->with(['username'])
+                    ->get()
+                    ->toArray();
+        }else{
+            $arr = ProjectIssue::select('id','project_id','user_id','content')
+                    ->with(['project','username'])
+                    ->get()
+                    ->toArray();
+        }
+
+        return $arr;
     }
 }

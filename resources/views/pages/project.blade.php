@@ -71,6 +71,7 @@
                   <a href="{{url('project/edit/'.$project['id'])}}"><button type="button" class="btn add-to-cart w-50 mb-3"><span class="fa fa-cart-shopping"></span>&nbsp EDIT</button></a>
                   @endif
 
+                  @if($project['user_id'] != Auth::id())
                   {{-- FOLLOW UNFOLLOW BUTTON --}}
                   <div name="ProjectFollowButton" id="ProjectFollowButton">
                       <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
@@ -88,6 +89,7 @@
                           <i class="fa-solid fa-triangle-exclamation"></i> Report
                     </button>
                   </div>
+                  @endif
                 </div>  
             </div>
             
@@ -154,8 +156,7 @@
               class="btn btn-outline-light" 
               data-bs-toggle="modal" 
               data-bs-target="#amtModal"
-              {{-- data-projectId={{$project['id']}} 
-              data-tierAmount={{$tier['amount']}} --}}
+              {{($project['user_id'] == Auth::id())?"disabled":""}}
           >
             Donate
           </button>
@@ -164,9 +165,9 @@
     @endforeach
     <!-- Tiers END -->
   </div>
-  @if(Auth::check())
+  @if(Auth::check() && $project['user_id'] != Auth::id())
   <br>
-  <h2 class="tiers-title text-center text-light">Your Tier : {{$project['user']['tier_level']}} - {{$project['user']['tier_name']}}</h2>
+  <h2 class="tiers-title text-center text-light">Your Tier :  {{($project['user']['tier_level'] == 0) ? "NONE" : $project['user']['tier_level'].' - '.$project['user']['tier_name']}}</h2>
   <h4 class="tiers-title text-center text-light">Total Donated : PHP {{$project['user']['donationTotal']}}</h4>
   @endif
 </div>
@@ -324,7 +325,7 @@
       </div>
       <div class="modal-body p-5">
         <div>
-          <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount: </label>
+          <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount (PHP): </label>
           <input type="number" class="form-control" id="FormControlAmt">
           <label for="FormControlAmt" id = "err_donation" class = "error"></label>
         </div>
@@ -353,7 +354,7 @@
             <h5>You will be donating an amount of: </h5>
           </div>
           <div class="mb-3">
-            <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
+            <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount (PHP): </label>
             <input type="hidden" name="ProjectId" value = {{$project['id']}}>
             <input type="number" name="DonationAmount" class="form-control" id="FormControldisplayAmt" readonly>
           </div>

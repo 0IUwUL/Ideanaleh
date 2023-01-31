@@ -19,12 +19,16 @@ class AdminController extends Controller
     {
         $data = [
             'users' => User::all()?->toArray(),
-            'projects' => Projects::with(['username'])->get()->toArray(),
+            'projects' => Projects::with(['username', 'proj_stat'])->get()->toArray(),
             'user_issues' => UserIssue::with(['username'])?->get()->toArray(),
             'project_issues' => ProjectIssue::with(['project','username'])->get()->toArray(),
         ];
 
+        $data['top']['donations'] = $this->_getTopProjects(10, 'donation_count');
+        $data['top']['categories'] = $this->_getTopSupportedCategory();
+
         $data['dashboard'] = $this->_getResults($data['projects']);
+        // dd($data);   
         return view('pages.admin')->with('admin', $data);
     }
 
@@ -157,5 +161,47 @@ class AdminController extends Controller
         $user->notify(new UserDeactivation($user));
 
         return redirect()->back();
+    }
+
+
+    private function _getTopProjects(int $projectAmountArg, string $columnArg)
+    {
+        $dataVar = Projects::join('project_stats', 'projects.id', '=', 'project_stats.proj_id')
+        ->select('projects.*', 'project_stats.follow_count')
+        ->orderBy($columnArg, 'desc')
+        ->get()->take($projectAmountArg)
+        ->toArray();
+
+        return($dataVar);
+    }
+
+
+
+    private function _getTopSupportedCategory()
+    {
+        foreach(config('category')[0] as $category){
+            $categoryVar[$category] = 0.0;
+        }
+
+        $dataVar = Projects::join('project_stats', 'projects.id', '=', 'project_stats.proj_id')
+                            ->select('projects.category', 'project_stats.donation_count')
+                            ->where('project_stats.donation_count', '>', 0)
+                            ->get()->toArray();
+
+        foreach($dataVar as $value){
+            $categoryVar[$value['category']] += $value['donation_count'];
+        }
+        
+        arsort($categoryVar);
+
+        foreach($categoryVar as $key => $value ){
+            $newArrayVar[] = array(
+                'name' => $key,
+                'total' =>$value,
+            );
+        }
+
+        return($newArrayVar);
+
     }
 }

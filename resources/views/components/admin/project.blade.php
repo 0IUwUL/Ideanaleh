@@ -112,26 +112,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($top['donations'] as $key => $project )
                                     <tr>
-                                        <th scope = "col">1</th>
-                                        <th scope = "col">Mark</th>
+                                        <th scope = "col">{{$key +1}}</th>
+                                        <th scope = "col">{{$project['title']}}</th>
                                     </tr>
-                                    <tr>
-                                        <th scope = "col">2</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">3</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">4</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">5</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -153,26 +139,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($top['categories'] as $key => $category)
                                     <tr>
-                                        <th scope = "col">1</th>
-                                        <th scope = "col">Mark</th>
+                                        <th scope = "col">{{$key + 1}}</th>
+                                        <th scope = "col">{{$category['name']}}</th>
                                     </tr>
-                                    <tr>
-                                        <th scope = "col">2</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">3</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">4</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope = "col">5</th>
-                                        <th scope = "col">Mark</th>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

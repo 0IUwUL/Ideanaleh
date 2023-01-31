@@ -53,7 +53,7 @@
                     <x-admin.user :users="$admin['users']" :issues="$admin['user_issues']"/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
-                    <x-admin.project :projects="$admin['projects']" :issues="$admin['project_issues']"/>
+                    <x-admin.project :projects="$admin['projects']" :issues="$admin['project_issues']" :top="$admin['top']"/>
                 </div>
             </div>
         </div>

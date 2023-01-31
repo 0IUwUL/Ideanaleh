@@ -176,6 +176,20 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function resolveUserIssue(Request $request): Object
+    {
+        $user = UserIssue::find($request->id);
+        
+        if ($user->resolved)
+            $user->resolved = 0; 
+        else 
+            $user->resolved = 1;
+            
+        $user->save();
+
+        return redirect()->back();
+    }
+
     private function _getTopProjects(int $projectAmountArg, string $columnArg): array
     {
         $dataVar = Projects::join('project_stats', 'projects.id', '=', 'project_stats.proj_id')

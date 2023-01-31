@@ -76,15 +76,46 @@
             </thead>
             <tbody>
                 @foreach ($issues as $issue)
-                    <tr>
-                        <td>{{$issue['user_id']}}</td>
-                        <td>{{$issue['username']['Lname']}}</td>
-                        <td>{{$issue['content']}}</td>
-                        <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
-                        <td><button type="button" class="informUser btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id="{{$issue['user_id']}}"><i class="fa-solid fa-flag"></i></button></td>
-                        <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}"><i class="fa-solid fa-check"></i></button></td>
-                        <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
-                    </tr>
+                    @if (!$issue['resolved'])
+                        <tr>
+                            <td>{{$issue['user_id']}}</td>
+                            <td>{{$issue['username']['Lname']}}</td>
+                            <td>{{$issue['content']}}</td>
+                            <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
+                            <td><button type="button" class="informUser btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id="{{$issue['user_id']}}"><i class="fa-solid fa-flag"></i></button></td>
+                            <td><button type="button" class="resolveUserIssue btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['resolved']}}><i class="fa-solid fa-check"></i></button></td>
+                            <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <label for="TableResolvedUserIssue" class="admin_user_table mt-5">Resolved User Issue Table</label>
+    <div class="row table-responsive mt-3 px-3 admin_table">
+        <table class="table align-middle table-hover">
+            <thead class="table-dark sticky-top">
+                <tr>
+                    <th class="py-3">User Number</th>
+                    <th class="py-3">Last Name</th>
+                    <th class="py-3">Issue/Report</th>
+                    <th class="py-3">Date</th>
+                    <th class="py-3">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($issues as $issue)
+                    @if ($issue['resolved'])
+                        <tr>
+                            <td>{{$issue['user_id']}}</td>
+                            <td>{{$issue['username']['Lname']}}</td>
+                            <td>{{$issue['content']}}</td>
+                            <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
+                            <td><button type="button" class="resolveUserIssue btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['resolved']}}><i class="fa-solid fa-rotate"></i></button></td>
+                            <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}" ><i class="fa-solid fa-circle-xmark"></i></button></td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
@@ -150,7 +181,9 @@
 
 
 <div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
-    <form action="">
+    <form action="{{route('resolve-user-issue')}}" method="POST">'
+        @csrf
+        <input type="hidden" id="resolve-id" name="id" value="" required>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-success">
                 <div class="modal-header">
@@ -159,7 +192,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
+                    <button type="submit" class="btn btn-success">Confirm</button>
                 </div>
             </div>
         </div>

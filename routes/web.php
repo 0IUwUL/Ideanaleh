@@ -57,6 +57,7 @@ Route::middleware('auth', 'admin')->controller(AdminController::class)->group(fu
     Route::get('/admin', 'index')->name('admin');
     Route::post('/change-status', 'changeStatus')->name('change-status');
     Route::post('/inform-user', 'informUser')->name('inform-user');
+    Route::post('/resolve-user-issue', 'resolveUserIssue')->name('resolve-user-issue');
 });
 
 // User registration routes

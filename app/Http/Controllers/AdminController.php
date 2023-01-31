@@ -9,7 +9,6 @@ use App\Notifications\UserDeactivation;
 use App\Models\User;
 use App\Models\Projects;
 use App\Models\Payments;
-use App\Models\ProjectStats;
 use App\Models\UserIssue;
 use App\Models\ProjectIssue;
 

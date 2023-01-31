@@ -19,15 +19,6 @@ class UserPreferenceController extends Controller
         $userPreferenceVar->save();
     }
 
-    
-    public function _getAllPreferences(string $var): array
-    {
-        $pref = UserPreference::select($var)
-                                ->get()
-                                ->toArray();
-        return $pref;
-    }
-
 
     public function _getUserPreferences(int $id): array
     {

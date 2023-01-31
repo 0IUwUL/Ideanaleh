@@ -3,7 +3,7 @@
 @section('content')
 <x-styles.defnav/>
 
-<div class="filter">
+<div class="filter pb-5">
     <div class="container-fluid filter_nav p-0">
         <nav class="row filter_row">
             <div class="col F_display d-none d-sm-block d-flex justify-content-end align-self-center">
@@ -36,7 +36,7 @@
             <div class="row">
                 <h1>Search result:</h1>
             @if(Session::get('search'))
-                <h5>Projects with title <b>"{{Session::get('search')}}"</b> ({{$ProjArg['projects']->total()}})</h5>
+                <h5>Projects with relation to <b>"{{Session::get('search')}}"</b> ({{$ProjArg['projects']->total()}})</h5>
             @else
                 <h5>There are no projects found with <b>"{{Session::get('search')}}"</b></h5>
             @endif

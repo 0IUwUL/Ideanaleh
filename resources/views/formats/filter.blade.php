@@ -2,7 +2,7 @@
     <div class="row">
         <h1>Search result:</h1>
     @if(Session::get('search'))
-        <h5>Projects with title <b>"{{Session::get('search')}}"</b> ({{$ProjArg->total()}})</h5>
+        <h5>Projects with relation to <b>"{{Session::get('search')}}"</b> ({{$ProjArg->total()}})</h5>
     @else
         <h5>There are no projects found with <b>"{{Session::get('search')}}"</b></h5>
     @endif

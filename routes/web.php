@@ -154,6 +154,7 @@ Route::controller(FilterController::class)->prefix('main')->group(function(){
 //Profile Page
 Route::controller(ProfileController::class)->prefix('profile')->group(function(){
     Route::get('/{id}', 'index')->name('profile');
+    Route::post('/report-user', 'reportUser')->name('report-user');
 });
 
 // Forgot Password Routes

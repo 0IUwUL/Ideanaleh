@@ -38,9 +38,11 @@
                     <div class="row">
                         <div class="col d-flex">
                             <h3 class="align-middle m-0 pe-3">Contacts:</h3>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ReportModal">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                            </button>
+                            @if (Auth::id() != $details['id'])
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ReportModal">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </button>
+                            @endif
                         </div>
                     </div>
                     
@@ -149,22 +151,24 @@
           <h1 class="modal-title fs-5" id="ReportModalLabel">Report Form</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <form action="">
+        <form action="{{route("report-user")}}" method="POST">
+            @csrf
+            <div class="modal-body">
+                <input type="hidden" name="user_id" value={{$details['id']}} required>
                 <div class="mb-3">
                     <label for="ReportModalFormControl1" class="form-label">Subject</label>
-                    <input type="text" class="form-control" id="ReportModalFormControl1" required>
+                    <input type="text" class="form-control" name="subject" id="ReportModalFormControl1" required>
                 </div>
                 <div class="mb-3">
                     <label for="ReportModalFormTextarea1" class="form-label">Report in Detail</label>
-                    <textarea class="form-control" id="ReportModalFormTextarea1" rows="3" required></textarea>
+                    <textarea class="form-control" name="content" id="ReportModalFormTextarea1" rows="3" required></textarea>
                 </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger">Report</button>
-        </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Report</button>
+            </div>
+        </form>
       </div>
     </div>
 </div>

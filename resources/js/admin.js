@@ -84,7 +84,7 @@ $('.status .dropdown-item').on('click', function(){
 // Change modal user-id
 $('.changeStatus').on('click', function(){
     let user_id = $(this).attr('data-id')
-    console.log(user_id)
+
     $('#user-id').val(user_id)
 })
 
@@ -129,3 +129,30 @@ function searchInput(inp, tar){
 
     });
 }
+// Change modal user-id
+$('.informUser').on('click', function(){
+    let user_id = $(this).attr('data-id')
+    
+    $('#dev-id').val(user_id)
+})
+
+// Change modal issue id
+$('.resolveUserIssue').on('click', function(){
+    let id = $(this).attr('data-id')
+    let resolved = parseInt($(this).attr('data-status'))
+    
+    let message = "Is the issue resolved?"
+    if (resolved){
+        message = "Do you want to reopen this issue?"
+    }
+    
+    $('#resolve-id').val(id)
+    $('#ResolvedModalHeader').text(message)
+})
+
+// Change modal issue id
+$('.deleteUserIssue').on('click', function(){
+    let id = $(this).attr('data-id')
+
+    $('#delete-id').val(id)
+})

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\User; 
 use App\Actions\Verification;
+use App\Services\EmailService;
 
 // Import controller
 use App\Http\Controllers\HomeController;
@@ -56,6 +57,9 @@ Route::middleware('auth', 'admin')->controller(AdminController::class)->group(fu
     Route::get('/admin', 'index')->name('admin');
     Route::post('/admin/search', 'searchUser')->name('admin/search');
     Route::post('/change-status', 'changeStatus')->name('change-status');
+    Route::post('/inform-user', 'informUser')->name('inform-user');
+    Route::post('/resolve-user-issue', 'resolveUserIssue')->name('resolve-user-issue');
+    Route::post('/delete-user-issue', 'deleteUserIssue')->name('delete-user-issue');
 });
 
 // User registration routes

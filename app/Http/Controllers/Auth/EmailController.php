@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\EmailVerification;
+use App\Services\EmailService;
 use Auth;
 use App\Actions\Verification;
 
@@ -26,24 +25,11 @@ class EmailController extends Controller
         $code = str_pad($code, 6, 0, STR_PAD_LEFT);
 
         $message = 'To verify your email, please enter the code below';
-        $this->sendEmail($user, $message, $code);
+        (new EmailService)->verification($user, $message, $temp_password);
 
         // Send the code to the database
         User::where('id', $user->id)->update(['code' => $code]);
     
-    }
-
-    public function sendEmail(Object $user, string $message, string $code): string
-    {
-        $emailDetails = [
-            'header' => $user->Fname,
-            'body' => $message,
-            'code' => $code,
-        ];
-        // Send email
-        Mail::to($user->email)->send(new EmailVerification($emailDetails));
-
-        return $code;
     }
 
     public function updateDev(Request $request): void

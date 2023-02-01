@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Notifications\UserDeactivation;
+use App\Services\EmailService;
 
 use App\Models\User;
 use App\Models\Projects;
@@ -183,8 +184,40 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function informUser(Request $request): Object
+    {
+        $user = User::find($request->user_id);
 
-    private function _getTopProjects(int $projectAmountArg, string $columnArg)
+        $subject = $request->subject;
+        $message = $request->content;
+        
+        (new EmailService)->inform($user, $subject, $message);
+
+        return redirect()->back();
+    }
+
+    public function resolveUserIssue(Request $request): Object
+    {
+        $issue = UserIssue::find($request->id);
+        
+        if ($issue->resolved)
+            $issue->resolved = 0; 
+        else 
+            $issue->resolved = 1;
+            
+        $issue->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteUserIssue(Request $request): Object
+    {
+        UserIssue::find($request->id)?->delete();
+        
+        return redirect()->back();
+    }
+
+    private function _getTopProjects(int $projectAmountArg, string $columnArg): array
     {
         $dataVar = Projects::join('project_stats', 'projects.id', '=', 'project_stats.proj_id')
         ->select('projects.*', 'project_stats.follow_count')
@@ -197,7 +230,7 @@ class AdminController extends Controller
 
 
 
-    private function _getTopSupportedCategory()
+    private function _getTopSupportedCategory(): array
     {
         foreach(config('category')[0] as $category){
             $categoryVar[$category] = 0.0;

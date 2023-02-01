@@ -17,6 +17,10 @@ class UserPreferenceController extends Controller
         $userPreferenceVar->user_id = $dataArg['id'];
         $userPreferenceVar->followed = $dataArg['pref_projs'];
         $userPreferenceVar->save();
+
+        if($dataArg['pref_projs'] != NULL){
+            $this->_registrationUpdateFollowedCount($dataArg['pref_projs']);
+        }
     }
 
 
@@ -36,7 +40,18 @@ class UserPreferenceController extends Controller
         $followed = array(
             'followed' => $dataArg['pref_projs'],
         );
+
+        $this->_registrationUpdateFollowedCount($dataArg['pref_projs']);
+        
         UserPreference::where('user_id', $user_id)->update($followed);
+    }
+
+    private function _registrationUpdateFollowedCount(string $preferredProjectsArg)
+    {
+        $followedProjectsVar = explode(',', $preferredProjectsArg);
+        foreach($followedProjectsVar as $projectIdVar){
+            $this->_updateFollowedCount((int)$projectIdVar, 1);
+        }
     }
 
 

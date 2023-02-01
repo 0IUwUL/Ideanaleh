@@ -40,6 +40,7 @@ class FilterController extends Controller
         }
         $request->session()->put('search', $request->search);
         $project = $this->_returnFormat($projectDataVar->toArray());
+        $project['search'] = true;
         return view('pages.display_projects')->with(['ProjArg'=> $project]);
     }
 

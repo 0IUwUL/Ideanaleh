@@ -57,7 +57,7 @@ class AdminController extends Controller
     {
         $data['users'] = User::count();
         $data['project'] = Projects::count();
-        $data['issues'] = UserIssue::count(); // + ProjectIssue::count()
+        $data['issues'] = UserIssue::count() + ProjectIssue::count();
         $data['developers'] = $this->_SortDevelopers();
         $data['charts'] = $this->_getCharts();
         $data['donators'] = $this->_Sortdonators();

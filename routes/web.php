@@ -83,6 +83,8 @@ Route::prefix('project')->name('project.')->group(function () {
         Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
         Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
         Route::post('/categs', 'getProjects')->name('categs');
+
+        Route::middleware('auth')->post('update-status/{method}', 'updateStatus')->name('update-status');
     }); 
 
     // Project comments routes

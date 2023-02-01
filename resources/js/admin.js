@@ -156,3 +156,93 @@ $('.deleteUserIssue').on('click', function(){
 
     $('#delete-id').val(id)
 })
+
+function updateModalInfo(modalTypeArg, link){
+    document.getElementById(modalTypeArg+"ModalProjectTitle").innerHTML = link.data("title");
+    document.getElementById(modalTypeArg+"ModalProjectCreator").innerHTML = "by: " + link.data("user");
+    document.getElementById(modalTypeArg+"ModalSubmitButton").dataset.id = link.data("id");
+}
+
+
+/**
+ * Confirm Modal on Show Function
+ * 
+ * Sets the Title, Creator, and Project ID
+ */
+$('#ApproveProjectModal').on('show.bs.modal', function(e) {
+    updateModalInfo("Approve", $(e.relatedTarget));
+});
+
+/**
+ * Ajax for Confirming Pending Projects
+ */
+$("#ApproveModalSubmitButton").click(function(e){
+    var id = $(e.target).attr('data-id');
+  
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+        url: "/project/update-status/approve",
+        type:'post',
+        data: {
+          ProjectId : id,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            
+            if(data.response == "success") {
+                document.getElementById("PendingProject"+id).remove();
+                document.getElementById("Project"+id+"Status").innerHTML = "In Progress";
+                document.getElementById("Project"+id+"Status").className = "admin_project project_inProgress text-nowrap";
+
+                alert("Project Approved");
+            }
+            $('#ApproveProjectModal').modal('hide');
+        }
+    });
+});
+
+
+/**
+ * Deny a Project
+ */
+$('#DenyProjectModal').on('show.bs.modal', function(e) {
+    updateModalInfo("Deny", $(e.relatedTarget));
+});
+
+
+/**
+ * Ajax for Denying Projects
+ * ***** Need to improve to have a reusable ajax function ****
+ */
+$("#DenyModalSubmitButton").click(function(e){
+    var id = $(e.target).attr('data-id');
+  
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+        url: "/project/update-status/deny",
+        type:'post',
+        data: {
+          ProjectId : id,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            
+            if(data.response == "success") {
+                document.getElementById("PendingProject"+id).remove();
+                document.getElementById("Project"+id+"Status").innerHTML = "Denied";
+                document.getElementById("Project"+id+"Status").className = "admin_project project_denied text-nowrap";
+
+                alert("Project Denied");
+            }
+            $('#DenyProjectModal').modal('hide');
+        }
+    });
+});

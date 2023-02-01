@@ -15,6 +15,7 @@ use App\Models\Projects;
 use App\Models\ProjectTiers;
 use App\Models\UserPreference;
 use App\Models\ProjectStats;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -241,6 +242,27 @@ class ProjectController extends Controller
         $json_data = array('item' => $viewRender);
         // $json_data = array("response" => $project);
         echo json_encode($json_data);
+    }
+
+
+    public function updateStatus(Request $requestArg, string $methodArg)
+    {
+        if(count(User::where([['id', '=', Auth::id()],['admin', '=', true]])->get()) == 0){
+            $json_data = array("response" => "fail");
+        }
+        else{
+
+            if($methodArg == "approve")
+                $statusVar = "In Progress";
+            elseif($methodArg == "deny")
+                $statusVar = "Denied";
+            
+            $projectVar = Projects::where('id', '=', $requestArg->ProjectId)->update(['status' => $statusVar]);
+            $json_data = array("response" => "success");
+        }
+        echo json_encode($json_data);
+        
+        
     }
 
 }

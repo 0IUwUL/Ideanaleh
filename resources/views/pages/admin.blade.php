@@ -142,6 +142,50 @@
         </div>
 </div>
 
+
+{{-- Approve Project Modal --}}
+<div class="modal fade" id="ApproveProjectModal" tabindex="-1" aria-labelledby="ApproveProjectModalLabel" aria-hidden="true">
+    {{-- <form action=""> --}}
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ApproveProjectModalHeader">Approve this Project?</h1>
+                </div>
+                <div class="modal-body">
+                    <h2 id="ApproveModalProjectTitle">Title Here</h2>
+                    <h5 id="ApproveModalProjectCreator">By: </h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="ApproveModalSubmitButton" data-id="">Approve</button>
+                </div>
+            </div>
+        </div>
+    {{-- </form> --}}
+</div>
+
+
+{{-- Deny Project Modal --}}
+<div class="modal fade" id="DenyProjectModal" tabindex="-1" aria-labelledby="DenyProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-danger">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="DenyProjectModalHeader">Are you sure to DENY this project?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 id="DenyModalProjectTitle">Title Here</h2>
+                <h5 id="DenyModalProjectCreator">By: </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="DenyModalSubmitButton">Deny</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="HaltProjectModal" tabindex="-1" aria-labelledby="HaltProjectModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog modal-dialog-centered">

@@ -859,8 +859,16 @@ hr.create{
   color: black;
 }
 
-.project_IP{
+.project_inProgress{
   background-color: rgb(255, 217, 0)!important;
+}
+
+.project_pending{
+  background-color: rgb(150, 150, 150)!important;
+}
+
+.project_denied{
+  background-color: rgb(255, 96, 96)!important;
 }
 
 .project_success{
@@ -868,7 +876,7 @@ hr.create{
 }
 
 .project_halt{
-  background-color: rgb(255, 96, 96)!important;
+  background-color: rgb(255, 173, 96)!important;
 }
 
 /* filter page */

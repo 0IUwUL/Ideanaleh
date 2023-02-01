@@ -1,4 +1,57 @@
 <div class="container-fluid mt-5">
+    <label for="PendingProjectTable" class="admin_project_table">Pending Projects</label>
+    
+    <div class="row admin_table" id = "PendingProjectTable">
+        <table class="table table-responsive align-middle table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th class="align-middle">Project Number</th>
+                    <th class="align-middle">Project Name</th>
+                    <th class="align-middle">Developer Last Name</th>
+                    <th class="align-middle">Date Started</th>
+                    <th class="align-middle">Target Date</th>
+                    <th></th>
+                    <th class="align-middle">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id = "pending_proj_table">
+                @if (!count($projects) == 0)
+                @foreach ($projects as $proj)
+                    @if ($proj['status'] == 'Pending')
+                    <tr id="PendingProject{{$proj['id']}}">
+                        <td>{{$proj['id']}}</td>
+                        <td>{{$proj['title']}}</td>
+                        <td>{{$proj['username']['Lname']}}</td>
+                        <td>{{$proj['created_at']}}</td>
+                        <td>{{$proj['target_date']}}</td>
+
+                        <td>
+                            <a href="{{ url('project/view/'.$proj['id']) }}" target="_blank">
+                                <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
+                            </a>
+                        </td>
+                        <td><button title="Approve Project" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ApproveProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-check"></i></button></td>
+                        <td><button title="Deny Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DenyProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    </tr>
+                    @endif
+                @endforeach
+                @else
+                <tr>
+                    <td>null</td>
+                    <td>No Projects Found</td>
+                    <td>null</td>
+                    <td>null</td>
+                    <td>null</td>
+                    <td><span class="admin_project project_IP text-nowrap">null</span></td>
+                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
+
     <label for="ProjectTable" class="admin_project_table">Project Table</label>
     <div class="row py-3 col col-sm-6">
         <div class="input-group">
@@ -24,11 +77,13 @@
                         Status
                         </button>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Pending</a></li>
                             <li><a class="dropdown-item" href="#">Done</a></li>
                             <li><a class="dropdown-item" href="#">In Progress</a></li>
                             <li><a class="dropdown-item" href="#">Halted</a></li>
                         </ul>
                     </th>
+                    <th></th>
                     <th class="align-middle">Action</th>
                     <th></th>
                 </tr>
@@ -42,11 +97,28 @@
                     <td>{{$proj['username']['Lname']}}</td>
                     <td>{{$proj['created_at']}}</td>
                     <td>{{$proj['target_date']}}</td>
-                    <td><span class="admin_project project_IP text-nowrap">In Progress</span></td>
-                    {{-- <td><span class="admin_project project_success">Completed</span></td> --}}
-                    {{-- <td><span class="admin_project project_halt">Halt</span></td> --}}
-                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td>
+                        {{-- Find a better way to solve this --}}
+                        @if ($proj['status'] == "Halt")
+                            <span id="Project{{$proj['id']}}Status" class="admin_project project_halt text-nowrap" >
+                        @elseif($proj['status'] == "In Progress")
+                            <span id="Project{{$proj['id']}}Status" class="admin_project project_inProgress text-nowrap" >
+                        @elseif($proj['status'] == "Pending")
+                            <span id="Project{{$proj['id']}}Status" class="admin_project project_pending text-nowrap" >
+                        @else
+                            <span id="Project{{$proj['id']}}Status" class="admin_project project_denied text-nowrap" >
+                        @endif
+                            {{$proj['status']}}
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="{{ url('project/view/'.$proj['id']) }}" target="_blank">
+                            <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
+                        </a>
+                    </td>
+                    <td><button title="Assign Status" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button title="Halt Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 @endforeach
                 @else

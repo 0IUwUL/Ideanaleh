@@ -47,6 +47,7 @@
                                         <li><a role = "button" class="dropdown-item" href="{{ route('admin') }}">Admin</a></li>
                                     @endif
                                     <li><a role = "button" class = "dropdown-item" data-bs-toggle="modal" data-bs-target="#SearchModal">Search</a></li>
+                                    <li><a role = "button" href={{ url('profile/'.Auth::id()) }}>Profile</a></li>
                                     <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Settings</a></li>
                                     <li><a role = "button" class = "dropdown-item" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
                                 </ul>
@@ -86,21 +87,22 @@
             <div class="d-block d-sm-none nav_home col">
                 <ul class="dropdown ps-3">
                     @if (Session::get('admin'))
-                        <li class="dropdown-item"><a role = "button" href="{{ route('admin') }}">Admin</a></li>
+                        <li class = "dropdown-item"><a class="text-decoration-none" role = "button" href="{{ route('admin') }}">Admin</a></li>
                     @endif
                     @if (Request::segment(1) == 'settings')
-                        <li class = "dropdown-item"><a role = "button" href="/">Home</a></li>
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href="/">Home</a></li>
                     @else
-                        <li class = "dropdown-item"><a role = "button" href="{{ route('settings') }}">Settings</a></li>
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href="{{ route('settings') }}">Settings</a></li>
                     @endif
-                        <li class = "dropdown-item"><a role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
-                        <li class = "dropdown-item"><a role = "button" href="{{ route('logout') }}">Log out</a></li>
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href={{ url('profile/'.Auth::id()) }}>Profile</a></li>
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href="{{ route('logout') }}">Log out</a></li>
                 </ul>
                 <form method="post" action={{ route('search') }} accept-charset="UTF-8" class="d-flex" role="search">
                     @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" id="search3" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" required>
-                        <button type="submit" class="btn input-group-text">
+                        <button type="submit" class="btn input-group-text text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                             </svg>
@@ -112,11 +114,11 @@
     </nav>
 </header>
 
-<div class="modal fade" id="SearchModal" tabindex="-1" aria-labelledby="SearchModalLabel" aria-hidden="true">
+<div class="modal fade" id="SearchModal"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SearchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-body p-3">
-                <form method="post" action={{ route('search') }} accept-charset="UTF-8" class="container-fluid p-0" role="search">
+            <div class="modal-body p-3" id="def_search">
+                <form method="post" action={{ route('search') }} id="SearchForm" accept-charset="UTF-8" class="container-fluid p-0" role="search">
                     @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" value = "{{Session::get('search')}}" placeholder="Search" id="search1" aria-label="Search" aria-describedby="search1" required>
@@ -125,9 +127,10 @@
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                             </svg>
                         </button>
-                        <button type="button" class="px-3 d-flex align-self-center btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" id="CloseSearch" class="px-3 d-flex align-self-center btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </form>
+                <div class="auto-com_box"></div>
             </div>
         </div>
     </div>

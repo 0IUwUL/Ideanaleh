@@ -200,6 +200,35 @@ input[name="GCategs[]"]{
   }
 }
 
+#def_search .auto-com_box li{
+  list-style: none;
+  padding: 8px 9px;
+  width: 100%;
+  cursor: default;
+  border-radius: 3px;
+  display: none;
+}
+
+#def_search .auto-com_box.active li{
+  display: block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#def_search .auto-com_box.active{
+  padding: 10px 5px;
+  max-height: 245px;
+  overflow-y: auto;
+}
+
+#def_search .auto-com_box li:hover{
+  background-color: #f3f3f3;
+}
+
 input[name="search"]{
   height: 3rem;
   border: solid var(--bg);

@@ -44,6 +44,21 @@ class FilterController extends Controller
         return view('pages.display_projects')->with(['ProjArg'=> $project]);
     }
 
+    public function SearchSuggestion(Request $request): void
+    {
+        $items = null;
+        if($request->input){
+            $items = Projects::select('title')
+                            ->where('title', 'LIKE', '%'.$request->input.'%')
+                            ->orWhere('tags', 'LIKE', '%'.$request->input.'%')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+        }
+        $viewRender = view('formats.suggestions')->with(['items' => $items])->render();
+        $json_data['item'] = $viewRender;
+        echo json_encode($json_data);
+    }
+
     private function _returnFormat(array $projectDataVar): array
     {
         $projects['projects'] = $this->sort('follow', $projectDataVar, null);

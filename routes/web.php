@@ -155,6 +155,7 @@ Route::controller(PaymentsController::class)->group(function(){
 Route::controller(FilterController::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::post('/filter', 'Filter')->name('filter');
+    Route::post('/search/suggestion', 'SearchSuggestion')->name('search/suggestion');
     Route::post('/search', 'Search')->name('search');
 });
 

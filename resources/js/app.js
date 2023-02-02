@@ -531,3 +531,38 @@ $("#save").on("click", function(){
         form.submit()
     }
 }); 
+
+// search
+jQuery(document.body).on('click', '.suggest', function(e){
+    console.log('hi')
+    $('input[name="search"]').val(e.target.id)
+    document.getElementById("SearchForm").submit();
+});
+
+$('input[name="search"]').on('keyup', function(e){
+    if(e.target.value){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "/main/search/suggestion",
+            type:'POST',
+            data: {
+                input : e.target.value
+            },
+            success: function(result){
+                let data = JSON.parse(result);
+                console.log(data.item)
+                $('.auto-com_box').html(data.item)
+            }
+        });
+        $('.auto-com_box').addClass('active')
+    }else
+        $('.auto-com_box').removeClass('active')
+})
+
+$('#CloseSearch').on('click', function(){
+    $('.auto-com_box').removeClass('active')
+})

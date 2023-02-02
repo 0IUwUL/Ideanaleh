@@ -1,7 +1,7 @@
 import './bootstrap';
 
 import '../sass/app.scss';
-import { conformsTo, templateSettings } from 'lodash';
+import { conformsTo, remove, templateSettings } from 'lodash';
 import { hide } from '@popperjs/core';
 
 const header = document.querySelector('[data-menu-icon-btn]')
@@ -164,6 +164,41 @@ function updateModalInfo(modalTypeArg, link){
 }
 
 
+function updatePendingProjectAjax(eArg, urlArg, statusArg, attributeArg){
+    var id = $(eArg.target).attr('data-id');
+
+  
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+        url: urlArg,
+        type:'post',
+        data: {
+          ProjectId : id,
+        },
+        success: function(result){
+            let data = JSON.parse(result);
+            
+            if(data.response == "success") {
+                if(statusArg != "Halt")
+                    document.getElementById("PendingProject"+id).remove();
+                
+                document.getElementById("Project"+id+"Status").innerHTML = statusArg;
+                document.getElementById("Project"+id+"Status").className = "admin_project text-nowrap "+attributeArg;
+            }
+        }
+    });
+}
+
+// Removing a specific row in the Pending Projects Table
+function removePendingProject(idArg, statusArg, attributeArg){
+    
+}
+
+
 /**
  * Confirm Modal on Show Function
  * 
@@ -177,32 +212,10 @@ $('#ApproveProjectModal').on('show.bs.modal', function(e) {
  * Ajax for Confirming Pending Projects
  */
 $("#ApproveModalSubmitButton").click(function(e){
-    var id = $(e.target).attr('data-id');
-  
-    $.ajaxSetup({
-      headers: {
-          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-        url: "/project/update-status/approve",
-        type:'post',
-        data: {
-          ProjectId : id,
-        },
-        success: function(result){
-            let data = JSON.parse(result);
-            
-            if(data.response == "success") {
-                document.getElementById("PendingProject"+id).remove();
-                document.getElementById("Project"+id+"Status").innerHTML = "In Progress";
-                document.getElementById("Project"+id+"Status").className = "admin_project project_inProgress text-nowrap";
+    updatePendingProjectAjax(e, "/project/update-status/approve", "In Progress", "project_inProgress");
 
-                alert("Project Approved");
-            }
-            $('#ApproveProjectModal').modal('hide');
-        }
-    });
+    alert("Project Approved");
+    $('#ApproveProjectModal').modal('hide');
 });
 
 
@@ -216,33 +229,28 @@ $('#DenyProjectModal').on('show.bs.modal', function(e) {
 
 /**
  * Ajax for Denying Projects
- * ***** Need to improve to have a reusable ajax function ****
  */
 $("#DenyModalSubmitButton").click(function(e){
-    var id = $(e.target).attr('data-id');
-  
-    $.ajaxSetup({
-      headers: {
-          'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-        url: "/project/update-status/deny",
-        type:'post',
-        data: {
-          ProjectId : id,
-        },
-        success: function(result){
-            let data = JSON.parse(result);
-            
-            if(data.response == "success") {
-                document.getElementById("PendingProject"+id).remove();
-                document.getElementById("Project"+id+"Status").innerHTML = "Denied";
-                document.getElementById("Project"+id+"Status").className = "admin_project project_denied text-nowrap";
+    updatePendingProjectAjax(e, "/project/update-status/deny", "Denied", "project_denied");
 
-                alert("Project Denied");
-            }
-            $('#DenyProjectModal').modal('hide');
-        }
-    });
+    alert("Project Denied");
+    $('#DenyProjectModal').modal('hide');
+});
+
+
+/**
+ * Halt a Project
+ */
+$('#HaltProjectModal').on('show.bs.modal', function(e) {
+    updateModalInfo("Halt", $(e.relatedTarget));
+});
+
+/**
+ * Ajax for Halting Projects
+ */
+$("#HaltModalSubmitButton").click(function(e){
+    updatePendingProjectAjax(e, "/project/update-status/halt", "Halt", "project_halt");
+
+    alert("Project Halted");
+    $('#HaltProjectModal').modal('hide');
 });

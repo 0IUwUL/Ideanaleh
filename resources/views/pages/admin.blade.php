@@ -96,23 +96,6 @@
         </div>
 </div>
 
-<div class="modal fade" id="DeleteProjectModal" tabindex="-1" aria-labelledby="DeleteProjectModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-danger">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeleteProjectModalHeader">Are you sure to delete this project? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
 <div class="modal fade" id="ProjectFlagModal" tabindex="-1" aria-labelledby="ProjectFlagModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog modal-dialog-centered">
@@ -140,6 +123,28 @@
     </form>
             </div>
         </div>
+</div>
+
+
+{{-- Halt Project Modal --}}
+<div class="modal fade" id="HaltProjectModal" tabindex="-1" aria-labelledby="HaltProjectModalLabel" aria-hidden="true">
+    {{-- <form action=""> --}}
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Halt this Project?</h1>
+                </div>
+                <div class="modal-body">
+                    <h2 id="HaltModalProjectTitle">Title Here</h2>
+                    <h5 id="HaltModalProjectCreator">By: </h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="HaltModalSubmitButton" data-id="">Halt</button>
+                </div>
+            </div>
+        </div>
+    {{-- </form> --}}
 </div>
 
 

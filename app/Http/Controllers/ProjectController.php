@@ -252,10 +252,13 @@ class ProjectController extends Controller
         }
         else{
 
+            // Improve this
             if($methodArg == "approve")
                 $statusVar = "In Progress";
             elseif($methodArg == "deny")
                 $statusVar = "Denied";
+            elseif($methodArg == "halt")
+                $statusVar = "Halt";
             
             $projectVar = Projects::where('id', '=', $requestArg->ProjectId)->update(['status' => $statusVar]);
             $json_data = array("response" => "success");

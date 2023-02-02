@@ -118,7 +118,7 @@
                         </a>
                     </td>
                     <td><button title="Assign Status" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button title="Halt Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button title="Halt Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 @endforeach
                 @else

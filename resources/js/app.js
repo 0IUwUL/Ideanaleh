@@ -243,6 +243,8 @@ $('#LoginSubmit').on("click", function(){
                 document.getElementById('err_pass').innerHTML = "* Incorrect password"
             } else if (data.response == 'err_mail')
                 document.getElementById('err_mail').innerHTML = "* Email is not yet registered"
+            else if (data.response == 'err_acc')
+                document.getElementById('err_pass').innerHTML = "* Sorry, your account is restricted from logging in due to being deactivated"
             else
                 document.getElementById("LogInForm").submit();
         }

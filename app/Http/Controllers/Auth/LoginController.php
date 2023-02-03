@@ -25,19 +25,17 @@ class LoginController extends Controller
         return (redirect('/'));
     }
 
-    public function verifyInput (Request $request): void
+    public function verifyInput (Request $request): string
     {
         $user = User::where('email', '=', $request->email)->first();
-        if ($user){
-            if (Hash::check($request->pass, $user->password)) {
-                $json_data = array("response" => "success");
-            } else {
-                $json_data = array("response" => "err_pass");
-            }
-        } else {
-            $json_data = array("response" => "err_mail");
-        }
-        echo json_encode($json_data);
+
+        if (empty($user))  return json_encode(["response" => "err_mail"]); 
+
+        if (!Hash::check($request->pass, $user->password)) return json_encode(["response" => "err_pass"]);
+
+        if(!$user->active) return json_encode(["response" => "err_acc"]);
+
+        return json_encode(["response" => "success"]);
     }
 
 

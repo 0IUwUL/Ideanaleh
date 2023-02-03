@@ -23,7 +23,11 @@ class GoogleAuthController extends Controller
         $user = User::where('email', '=', $userInfo->email)->first();
 
         if ($user) {
-            return $this->_loginUser($request, $user);
+            if ($user->active)
+                return $this->_loginUser($request, $user);
+            else
+                // Fix: Notify that the user is restricted using toasts
+                return redirect()->back();
         }
         else {
             // Register when the user is not yet registered when they try to sign in with google

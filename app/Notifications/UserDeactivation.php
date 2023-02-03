@@ -42,9 +42,9 @@ class UserDeactivation extends Notification
      */
     public function toMail($notifiable)
     {
-        $message = 'deactivated';
+        $message = 'deactivated. Your account will be restricted from logging in/';
         if ($this->user->active)
-            $message = 'activated';
+            $message = 'activated. Your login restriction is lifted.';
 
         // Tempory mail format
         return (new MailMessage)

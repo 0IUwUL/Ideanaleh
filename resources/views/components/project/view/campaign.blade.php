@@ -13,8 +13,11 @@
       <a href={{url('profile/'.$project['dev']['id'])}} class="row d-flex justify-content-center text-decoration-none text-dark dev_details">
         <div class="row col-11 col-sm-10 col-lg-11 col-xl-9 col-xxl-8 border border-3 border-secondary d-flex justify-content-evenly p-3 rounded">
           <div class="col-4">
-            {{-- <img src={{asset('storage/avatars/default.png')}} class="img-fluid rounded"> --}}
-            <img src={{asset('storage/'.$project['dev']['icon'])}} class="img-fluid rounded">
+            @if ($project['dev']['icon'])
+              <img src={{asset('storage/'.$project['dev']['icon'])}} class="img-fluid rounded">
+            @else
+              <img src={{asset('storage/avatars/default.png')}} class="img-fluid rounded">
+            @endif
           </div>
           <div class="col-8 d-flex align-self-center">
             <table class="table table-borderless">

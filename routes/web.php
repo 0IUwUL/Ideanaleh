@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\User; 
+use App\Actions\Verification;
+use App\Services\EmailService;
 
 // Import controller
 use App\Http\Controllers\HomeController;
@@ -18,6 +22,7 @@ use App\Http\Controllers\FilterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +55,11 @@ Route::middleware('auth', 'selected')->controller(SettingsController::class)->gr
 // Admin routes
 Route::middleware('auth', 'admin')->controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin');
+    Route::post('/admin/search', 'searchUser')->name('admin/search');
+    Route::post('/change-status', 'changeStatus')->name('change-status');
+    Route::post('/inform-user', 'informUser')->name('inform-user');
+    Route::post('/resolve-user-issue', 'resolveUserIssue')->name('resolve-user-issue');
+    Route::post('/delete-user-issue', 'deleteUserIssue')->name('delete-user-issue');
 });
 
 // User registration routes
@@ -73,6 +83,8 @@ Route::prefix('project')->name('project.')->group(function () {
         Route::middleware('auth', 'selected')->get('edit/{id}', 'edit')->name('edit');
         Route::middleware('auth', 'selected')->post('/save', 'saveCreatedProject')->name('save');
         Route::post('/categs', 'getProjects')->name('categs');
+
+        Route::middleware('auth')->post('update-status/{method}', 'updateStatus')->name('update-status');
     }); 
 
     // Project comments routes
@@ -115,8 +127,15 @@ Route::controller(LoginController::class)->group(function () {
 // Email routes
 Route::controller(EmailController::class)->group(function () {
     Route::post('/send-email', 'sendCode')->name('send-email');
-    Route::post('/verify', 'verify')->name('verify');
+    Route::post('/update-dev', 'updateDev')->name('update-dev');
 });
+
+Route::post('/verify-code', function(Request $request) {
+    if((new Verification)->handle($request)) $response = "success";
+    
+    echo json_encode(['response' => $response ?? null]);
+})->name('verify-code');
+
 
 //WEbhook
 Route::controller(PaymentsController::class)->group(function(){
@@ -136,9 +155,18 @@ Route::controller(PaymentsController::class)->group(function(){
 Route::controller(FilterController::class)->prefix('main')->group(function(){
     Route::get('/', 'index')->name('main');
     Route::post('/filter', 'Filter')->name('filter');
+    Route::post('/search/suggestion', 'SearchSuggestion')->name('search/suggestion');
+    Route::post('/search', 'Search')->name('search');
 });
 
 //Profile Page
 Route::controller(ProfileController::class)->prefix('profile')->group(function(){
     Route::get('/{id}', 'index')->name('profile');
+    Route::post('/report-user', 'reportUser')->name('report-user');
+});
+
+// Forgot Password Routes
+Route::controller(ForgotPasswordController::class)->name('recover.')->group(function () {
+    Route::post('/search-email', 'searchEmail')->name('search-email');
+    Route::post('/update-password', 'updatePassword')->name('update-password');
 });

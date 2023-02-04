@@ -53,7 +53,7 @@
                     <x-admin.user :users="$admin['users']" :issues="$admin['user_issues']"/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
-                    <x-admin.project/>
+                    <x-admin.project :projects="$admin['projects']" :issues="$admin['project_issues']" :top="$admin['top']"/>
                 </div>
             </div>
         </div>
@@ -96,23 +96,6 @@
         </div>
 </div>
 
-<div class="modal fade" id="DeleteProjectModal" tabindex="-1" aria-labelledby="DeleteProjectModalLabel" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-danger">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="DeleteProjectModalHeader">Are you sure to delete this project? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
-                </div>
-    </form>
-            </div>
-        </div>
-</div>
-
 <div class="modal fade" id="ProjectFlagModal" tabindex="-1" aria-labelledby="ProjectFlagModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog modal-dialog-centered">
@@ -142,12 +125,95 @@
         </div>
 </div>
 
+
+{{-- Halt Project Modal --}}
+<div class="modal fade" id="HaltProjectModal" tabindex="-1" aria-labelledby="HaltProjectModalLabel" aria-hidden="true">
+    {{-- <form action=""> --}}
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Halt this Project?</h1>
+                </div>
+                <div class="modal-body">
+                    <h2 id="HaltModalProjectTitle">Title Here</h2>
+                    <h5 id="HaltModalProjectCreator">By: </h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="HaltModalSubmitButton" data-id="">Halt</button>
+                </div>
+            </div>
+        </div>
+    {{-- </form> --}}
+</div>
+
+
+{{-- Approve Project Modal --}}
+<div class="modal fade" id="ApproveProjectModal" tabindex="-1" aria-labelledby="ApproveProjectModalLabel" aria-hidden="true">
+    {{-- <form action=""> --}}
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ApproveProjectModalHeader">Approve this Project?</h1>
+                </div>
+                <div class="modal-body">
+                    <h2 id="ApproveModalProjectTitle">Title Here</h2>
+                    <h5 id="ApproveModalProjectCreator">By: </h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="ApproveModalSubmitButton" data-id="">Approve</button>
+                </div>
+            </div>
+        </div>
+    {{-- </form> --}}
+</div>
+
+
+{{-- Deny Project Modal --}}
+<div class="modal fade" id="DenyProjectModal" tabindex="-1" aria-labelledby="DenyProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-danger">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="DenyProjectModalHeader">Are you sure to DENY this project?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 id="DenyModalProjectTitle">Title Here</h2>
+                <h5 id="DenyModalProjectCreator">By: </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="DenyModalSubmitButton">Deny</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="HaltProjectModal" tabindex="-1" aria-labelledby="HaltProjectModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Are you sure to halt this issue on the project? <i class="fa-solid fa-circle-xmark text-danger"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Confirm</button>
+                </div>
+    </form>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="ProjectIssueFlagModal" tabindex="-1" aria-labelledby="ProjectIssueFlagModal" aria-hidden="true">
+    <form action="">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Project Issue<i class="fa-solid fa-circle-xmark text-danger"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">

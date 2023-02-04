@@ -7,20 +7,21 @@
                 $icon = 'avatars/default.png';
             }
         @endphp
-        <a class="text-decoration-none" href={{url('profile/'.$comment['user_id'])}}>
-            <div class="px-4 py-2 col d-flex">
+        <div class="px-4 py-2 col d-flex">
+            <a class="text-decoration-none d-flex flex-row pe-auto text-dark" href={{url('profile/'.$comment['user_id'])}}>
                 <img class="avatar mr-2" src="{{asset('storage/'.$icon)}}">
                 <div class="d-flex flex-column">
                     <div class="fw-bold">{{$comment['Fname'].' '.$comment['Mname'].' '.$comment['Lname']}} </div>
                     <div class="text-secondary" id="comment-{{$comment['id']}}-date">{{date('n/j/Y h:i:s A', strtotime($comment['updated_at'])) }}</div>
                 </div>
-                <button type="button" class="btn circle ms-auto align-self-center" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
-                <ul class="dropdown-menu">
-                    <li><button class="dropdown-item edit" type="button" data-id = {{$comment['id']}}>Edit</button></li>
-                    <li><button class="dropdown-item delete" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id = {{$comment['id']}}>Delete</button></li>
-                </ul>
-            </div>
-        </a>
+            </a>
+            <button type="button" class="btn circle ms-auto align-self-center" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item edit" type="button" data-id = {{$comment['id']}}>Edit</button></li>
+                <li><button class="dropdown-item delete" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id = {{$comment['id']}}>Delete</button></li>
+            </ul>
+        </div>
+        
         <div class="col px-4 mx-2 py-2" id="comment-{{$comment['id']}}">{{$comment['content']}}</div>
     </div>
 </div>

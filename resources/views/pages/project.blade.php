@@ -71,6 +71,7 @@
                   <a href="{{url('project/edit/'.$project['id'])}}"><button type="button" class="btn add-to-cart w-50 mb-3"><span class="fa fa-cart-shopping"></span>&nbsp EDIT</button></a>
                   @endif
 
+                  @if($project['user_id'] != Auth::id())
                   {{-- FOLLOW UNFOLLOW BUTTON --}}
                   <div name="ProjectFollowButton" id="ProjectFollowButton">
                       <button type="button" id="FollowUnfollowButton" class="btn add-to-cart w-50" data-projectId={{$project['id']}}>
@@ -82,6 +83,13 @@
 
                   {{-- DONATE BUTTON --}}
                   <a href="http://localhost:8000/project/view/{{$project['id']}}#tiers-section"><button type="button" class="btn add-to-cart w-50 mt-3"><span class="fa fa-cart-shopping"></span>&nbsp Support the Project</button></a>
+                
+                  <div class="pt-3">
+                    <button type="button" id="ReportButton" data-bs-toggle="modal" data-bs-target="#ReportModal" class="btn add-to-cart report w-50" data-projectId={{$project['id']}}>
+                          <i class="fa-solid fa-triangle-exclamation"></i> Report
+                    </button>
+                  </div>
+                  @endif
                 </div>  
             </div>
             
@@ -148,8 +156,7 @@
               class="btn btn-outline-light" 
               data-bs-toggle="modal" 
               data-bs-target="#amtModal"
-              {{-- data-projectId={{$project['id']}} 
-              data-tierAmount={{$tier['amount']}} --}}
+              {{($project['user_id'] == Auth::id())?"disabled":""}}
           >
             Donate
           </button>
@@ -158,9 +165,9 @@
     @endforeach
     <!-- Tiers END -->
   </div>
-  @if(Auth::check())
+  @if(Auth::check() && $project['user_id'] != Auth::id())
   <br>
-  <h2 class="tiers-title text-center text-light">Your Tier : {{$project['user']['tier_level']}} - {{$project['user']['tier_name']}}</h2>
+  <h2 class="tiers-title text-center text-light">Your Tier :  {{($project['user']['tier_level'] == 0) ? "NONE" : $project['user']['tier_level'].' - '.$project['user']['tier_name']}}</h2>
   <h4 class="tiers-title text-center text-light">Total Donated : PHP {{$project['user']['donationTotal']}}</h4>
   @endif
 </div>
@@ -318,7 +325,7 @@
       </div>
       <div class="modal-body p-5">
         <div>
-          <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount: </label>
+          <label for="FormControlAmt" class="fs-5 form-label">Enter donation amount (PHP): </label>
           <input type="number" class="form-control" id="FormControlAmt">
           <label for="FormControlAmt" id = "err_donation" class = "error"></label>
         </div>
@@ -347,7 +354,7 @@
             <h5>You will be donating an amount of: </h5>
           </div>
           <div class="mb-3">
-            <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount: </label>
+            <label for="FormControldisplayAmt" class="fs-5 form-label">Total donation amount (PHP): </label>
             <input type="hidden" name="ProjectId" value = {{$project['id']}}>
             <input type="number" name="DonationAmount" class="form-control" id="FormControldisplayAmt" readonly>
           </div>
@@ -361,6 +368,32 @@
   </div>
 </div>
   
-
+<!-- Modal -->
+<div class="modal fade" id="ReportModal" tabindex="-1" aria-labelledby="ReportModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h1 class="modal-title fs-5" id="ReportModalLabel">Report Form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form action="">
+              <div class="mb-3">
+                  <label for="ReportModalFormControl1" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="ReportModalFormControl1" required>
+              </div>
+              <div class="mb-3">
+                  <label for="ReportModalFormTextarea1" class="form-label">Report in Detail</label>
+                  <textarea class="form-control" id="ReportModalFormTextarea1" rows="3" required></textarea>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Report</button>
+      </div>
+          </form>
+    </div>
+  </div>
+</div>
 
 @endsection

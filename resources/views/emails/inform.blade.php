@@ -11,17 +11,15 @@
                 </div>
             </div>
             <hr>
-            <div style = "display: flex; justify-content: center; margin-top: 2rem;">
+            <div style = "display: flex; justify-content: center; margin-top: 2rem; margin-right: 2rem;">
                 <div>
                     <div style = "color: black">
-                        <p style = "font-size: 2rem"> Hello , {{$details['header']}}</p> 
+                        <p style = "font-size: 1.5rem"> Hello , {{$details['header']}}</p> 
                     </div>
                     <div style = "color: black">
                         <p>{{$details['body']}}</p>
                     </div>
-                    <div style = "letter-spacing: 3em; text-align: center; text-indent: 3em; color: black">
-                            <p style= "font-size: 50px">{{$details['code']}}</p>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use App\Models\UserPreference; 
 use App\Models\Projects;
 use App\Models\User;
+use App\Models\UserIssue;
 
 class ProfileController extends Controller
 {
@@ -63,5 +64,12 @@ class ProfileController extends Controller
                         ->first()
                         ->toArray();
         return $proj;
+    }
+
+    public function reportUser(Request $request): Object
+    {
+        $issue = UserIssue::create($request->all());
+        
+        return redirect()->back();
     }
 }

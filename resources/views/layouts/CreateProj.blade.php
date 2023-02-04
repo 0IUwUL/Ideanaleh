@@ -27,9 +27,10 @@
 
         <script type="text/javascript">
             // Tags js
+            $(document).on("keydown", ".input-tags", function(event) { 
+                return event.key != "Enter";
+            });
             const input_tags = document.querySelector(".input-tags")
-            console.log("ito ang input_tags");
-            console.log(input_tags);
             var max_tags = 6;
             document.querySelector('.max-tags').innerText = max_tags
 
@@ -58,7 +59,7 @@
             $("#clear_tags").on("click", clearTags);
             
             input_tags.addEventListener('keyup', (e)=>{
-                if (e.key == "Enter" || e.key == ","){
+                if (e.key == ","){
                     
                     let tag_value = input_tags.value.replace( /\s+/g, ' ');
                     if (tag_value.length > 1 && tags.length <= max_tags && !tags.includes(tag_value)){

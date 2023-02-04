@@ -26,4 +26,8 @@ class Projects extends Model
     {
         return $this->hasOne(ProjectStats::class, 'proj_id')->select(['id', 'proj_id', 'support_count', 'follow_count', 'donation_count', 'updated_at']);
     }
+
+    public function username(){
+        return $this->belongsTo(User::class, 'user_id')->select(['id', 'Lname', 'Fname', 'Mname']);
+    }
 }

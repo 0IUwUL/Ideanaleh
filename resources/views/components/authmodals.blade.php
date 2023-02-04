@@ -31,6 +31,9 @@
           <div class="mb-3">
               <a role = "button" class ="link-primary" id = "register"> Not registered yet? Signup</a>
           </div>
+          <div>
+            <a role = "button" class ="link-primary" id = "forgot_password"> Forgot Password?</a>
+        </div>
     </div>
     <div class="modal-footer d-flex justify-content-between">
       <div>
@@ -43,6 +46,99 @@
     </form>
   </div>
 </div>
+</div>
+
+<!-- Forgot Password -->
+<div class="modal p-0" id="ForgotPasswordModal" data-btn="forgotPasswordModalGSI" tabindex="-1" aria-labelledby="ForgotPasswordLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-primary">
+      <div class="modal-header bg-primary text-white">
+        <h1 class="modal-title fs-3" id="ForgotPasswordLabel">Forgot Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form accept-charset="UTF-8" id = "ForgotPasswordForm">
+        @csrf
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <div class="row mb-3">
+              <div class="mb-3">Please enter the email address of your account</div>
+              <label for="inputCode" class="form-label"></label>
+              <div class="col input-group">
+                  <input name="recover_email" id="recover_email" type="text" class="form-control" placeholder="Email Address" required>
+              </div>
+              <div id="errorSearch" class="error"></div>
+            </div>
+          </div> 
+        </div>
+        <div class="modal-footer ">      
+          <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="search" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal p-0" id="ForgotPasswordModal2" data-btn="forgotPasswordModalGSI2" tabindex="-1" aria-labelledby="ForgotPasswordLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-primary">
+      <div class="modal-header bg-primary text-white">
+        <h1 class="modal-title fs-3" id="ForgotPasswordLabel2">Forgot Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form accept-charset="UTF-8" id = "ForgotPasswordForm2">
+        @csrf
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <div class="row mb-3">
+              <div class="mb-3">A verification code has been sent to your email. Please enter the 6-digit code</div>
+              <label for="inputCode" class="form-label"></label>
+              <div class="col input-group">
+                  <input name="code" id="code" type="text" class="form-control" placeholder="6-digit Verification Code">
+              </div>
+              <div id="errorCode" class="error"></div>
+            </div>
+          </div> 
+        </div>
+        <div class="modal-footer ">      
+          <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="verify" class="btn btn-primary">Verify</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal p-0" id="ForgotPasswordModal3" data-btn="forgotPasswordModalGSI2" tabindex="-1" aria-labelledby="ForgotPasswordLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-primary">
+      <div class="modal-header bg-primary text-white">
+        <h1 class="modal-title fs-3" id="ForgotPasswordLabel3">Forgot Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{{route('recover.update-password')}}" accept-charset="UTF-8" id = "ForgotPasswordForm3">
+        @csrf
+        <input id="user_email" type="hidden" name="email" value=""/>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <div class="mb-3">Please enter your new password</div>
+            <div class="mb-3">
+              <label for="InputPassword" class="form-label">Input Password</label>
+              <input type="password" name = "newPass" class="form-control border-info" id="newPass" minlength="8" required/>
+            </div>
+            <div class="mb-3">
+                <label for="InputRePassword" class="form-label">Re-Enter Password</label>
+                <input type="password" name = "confirmPass" class="form-control border-info" id="confirmPass" required data-rule-equalTo = '#newPass'/>
+            </div>
+          </div> 
+        </div>
+        <div class="modal-footer ">      
+          <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="save" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <!-- SignUp -->

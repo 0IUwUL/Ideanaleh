@@ -3,6 +3,7 @@
 
 html{
   overflow-x: hidden;
+  height: 100%;
 }
 
 .error{
@@ -91,6 +92,10 @@ html{
   padding: 2rem;
 }
 
+.dropdown-item{
+  font-weight: 100!important;
+}
+
 .navbar_default {
   padding: 0.75rem 1.5rem;
   font-family: "Merriweather Sans", sans-serif;
@@ -162,7 +167,7 @@ input[name="GCategs[]"]{
   font-size: 1rem;
   color: whitesmoke!important;
   vertical-align: middle!important;
-  padding: .2rem .5rem;
+  padding: .2rem 1.5rem;
 }
 
 .breadcrumb li a:hover{
@@ -173,39 +178,68 @@ input[name="GCategs[]"]{
 
 .breadcrumb-item::before{
   color: whitesmoke!important;
-  vertical-align: middle!important;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 1365px){
+.navbread ul li a{
+  color: var(--bg)!important;
+}
+
+.navbread ul li a:hover{
+  background-color: var(--bg);
+  border-radius: 20px;
+  color: whitesmoke!important;
+  cursor: pointer;
+}
+
+@media screen and (576px <= width <= 600px){
   .breadcrumb li a{
-    font-size: 1rem;
-    padding: .1rem .05rem;
-  }
-
-  .breadcrumb li a:hover{
-    background-color: transparent;
-    color: #f3ff82;
+    padding: .2rem .5rem;
   }
 }
 
-@media screen and (max-width: 1299px){
-  .breadcrumb li a{
-    font-size: 1rem;
-    padding: 0;
-  }
-
-  .breadcrumb li a:hover{
-    background-color: transparent;
-    color: #f3ff82;
-  }
+#def_search .auto-com_box li{
+  list-style: none;
+  padding: 8px 9px;
+  width: 100%;
+  cursor: default;
+  border-radius: 3px;
+  display: none;
 }
 
+#def_search .auto-com_box.active li{
+  display: block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#def_search .auto-com_box.active{
+  padding: 10px 5px;
+  max-height: 245px;
+  overflow-y: auto;
+}
+
+#def_search .auto-com_box li:hover{
+  background-color: #f3f3f3;
+}
+
+input[name="search"]{
+  height: 3rem;
+  border: solid var(--bg);
+}
 /* Main Page */
 
 body {
   font-family: "Merriweather", serif;
   line-height: 1.5;
   overflow-x: hidden;
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, .btn {
@@ -791,8 +825,8 @@ hr.create{
   background: radial-gradient(#ffe995, #fa742b)!important;
 }
 
-.ckeditor{
-  width: 100vw!important;
+#cke_Story{
+  width: 100%!important;
 }
 
 .admin_icon{
@@ -827,7 +861,8 @@ hr.create{
 }
 
 .admin_table{
-  max-height: 40vh; 
+  max-height: 220px;
+  height: 50vh;
   overflow-y: auto;
 }
 
@@ -856,8 +891,16 @@ hr.create{
   color: black;
 }
 
-.project_IP{
+.project_inProgress{
   background-color: rgb(255, 217, 0)!important;
+}
+
+.project_pending{
+  background-color: rgb(150, 150, 150)!important;
+}
+
+.project_denied{
+  background-color: rgb(255, 96, 96)!important;
 }
 
 .project_success{
@@ -865,7 +908,7 @@ hr.create{
 }
 
 .project_halt{
-  background-color: rgb(255, 96, 96)!important;
+  background-color: rgb(255, 173, 96)!important;
 }
 
 /* filter page */
@@ -874,15 +917,25 @@ hr.create{
   --bg: #002d50;
   --hl: #f3ff82;
 }
-.nav_filter{
-  margin-top: 4.5rem;
+.filter{
   font-family: 'Poppins', sans-serif;
 }
 
-.nav_filter nav{
-  height: 3rem;
+.filter_nav{
+  padding-top: 7rem;
+}
+
+hr.filter{
+  margin-top: 2rem;
+  padding: 0;
+}
+
+.filter .filter_nav nav{
+  height: 4rem;
   display: flex;
   justify-content: center;
+  background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(31,66,96));
+  margin: 0;
 }
 
 .F_list{
@@ -896,14 +949,15 @@ hr.create{
 }
 
 .filter_row{
-  padding: 0 2rem;
+  padding: 7rem 2rem 3rem 0;
+  width: 100%;
 }
 
-.nav_filter .select .form-select{
+.filter_row .select .form-select{
   width: 100%!important;
 }
 
-.nav_filter .select{
+.filter_row .select{
   padding: 1rem;
 }
 
@@ -1080,4 +1134,12 @@ hr.create{
 
 .profile_details .projects a{
   text-decoration: none;
+}
+
+.profile_details .projects a h5{
+  color: var(--bg);
+}
+
+.profile_details .projects a p{
+  color: #d53c;
 }

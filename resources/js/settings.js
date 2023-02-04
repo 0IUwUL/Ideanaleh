@@ -1,10 +1,11 @@
 const into = document.querySelector('.toast-body')
 // Send code in email
-$('#generateCode').on('click', function () {
+$('#generateCode').on('click', function (e) {
+    $("#submitChanges").prop( "disabled", false)
     if(document.getElementById("verifyCode"))
         document.getElementById("verifyCode").disabled = false;
 
-    disableResend();
+    disableResend(e);
     timer(60);
     $.ajaxSetup({
         headers: {
@@ -18,13 +19,13 @@ $('#generateCode').on('click', function () {
 
 });
 
-function disableResend()
+function disableResend(e)
 {
-    $("#regenerateOTP").attr("disabled", true);
+    $(e.target).attr("disabled", true);
     timer(60);
     setTimeout(function() {
     // enable click after 1 second
-    $('#regenerateOTP').removeAttr("disabled");
+    $(e.target).removeAttr("disabled");
     }, 60000); // 1 second delay
 }
 
@@ -54,7 +55,7 @@ function timer(remaining) {
 $('#verifyCode').on('click', function () {
     var code = document.getElementById("inputCode").value;
     $.ajax({
-        url: "verify",
+        url: "update-dev",
         type:'post',
         data: {
           code : code,
@@ -66,7 +67,19 @@ $('#verifyCode').on('click', function () {
                 // Store the id of account tab
                 localStorage.setItem('activeTab', 'v-pills-account-tab');
                 
-                // Reload to change the content to change pass
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "verify-code",
+                    type:'PATCH',
+                    data: {
+                        status : '1',
+                    }
+                })
+
                 location.reload();
                 } 
             else {
@@ -116,18 +129,18 @@ $("#confirmPass").on("keyup", function(){
             },
         }
     });
-
-    if (form.valid() === true){
-        document.getElementById("submitChanges").disabled = false;
-    }
-
 }); 
 
 $("#submitChanges").on("click", function(){
-    
     var code = document.getElementById("code").value;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
-        url: "verify",
+        url: "verify-code",
         type:'post',
         data: {
             code : code,
@@ -213,7 +226,7 @@ $("#verify").click(function(e){
         }
     });
     $.ajax({
-        url: "verify",
+        url: "verify-code",
         type:'post',
         data: {
           code : code,
@@ -255,7 +268,7 @@ $("#saveChanges").click(function(){
             url: "check-pass",
             type:'post',
             data: {
-              pass : pass,
+              password : pass,
             },
             success: function(result){
                 let data = JSON.parse(result);

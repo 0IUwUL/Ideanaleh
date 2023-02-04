@@ -15,6 +15,7 @@ use App\Models\Projects;
 use App\Models\ProjectTiers;
 use App\Models\UserPreference;
 use App\Models\ProjectStats;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -141,6 +142,7 @@ class ProjectController extends Controller
 
     }
 
+    
     private function _saveNewProject(Request $requestArg): Object
     {
         
@@ -166,11 +168,11 @@ class ProjectController extends Controller
         $dataVar->banner = null;
         $dataVar->target_date = $requestArg->ProjDate;
         $dataVar->save();
-
         // creating new project stats row
         if($requestArg->ProjId == null){
             $newStats = new ProjectStats;
-            $newStats->proj_id = $dataVar->id();
+            $newStats->proj_id = $dataVar->id;
+            $newStats->save();
         }
 
         return $dataVar;
@@ -217,12 +219,14 @@ class ProjectController extends Controller
         }
     }
 
+
     private function _getYoutubeId(string $urlParams): string
     {
         preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $urlParams, $match);
         
         return $match[1];
     }
+
 
     public function getProjects(Request $requestArg): void
     {
@@ -238,6 +242,30 @@ class ProjectController extends Controller
         $json_data = array('item' => $viewRender);
         // $json_data = array("response" => $project);
         echo json_encode($json_data);
+    }
+
+
+    public function updateStatus(Request $requestArg, string $methodArg)
+    {
+        if(count(User::where([['id', '=', Auth::id()],['admin', '=', true]])->get()) == 0){
+            $json_data = array("response" => "fail");
+        }
+        else{
+
+            // Improve this
+            if($methodArg == "approve")
+                $statusVar = "In Progress";
+            elseif($methodArg == "deny")
+                $statusVar = "Denied";
+            elseif($methodArg == "halt")
+                $statusVar = "Halt";
+            
+            $projectVar = Projects::where('id', '=', $requestArg->ProjectId)->update(['status' => $statusVar]);
+            $json_data = array("response" => "success");
+        }
+        echo json_encode($json_data);
+        
+        
     }
 
 }

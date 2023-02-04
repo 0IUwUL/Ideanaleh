@@ -117,7 +117,7 @@
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="address"
-                                    data-address={{$user['address']}}>
+                                    data-address="{{$user['address']}}">
                                     </i>
                                 </a>
                             </div>
@@ -240,7 +240,7 @@
                                             <label id="inputChangePass">Input New Password</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" name="newPass" class="form-control" id="newPass" minlength="8" required>
+                                            <input type="password" name="password" class="form-control" id="newPass" minlength="8" required>
                                         </div> 
                                     </div>
                                     <div class="mb-3 row">

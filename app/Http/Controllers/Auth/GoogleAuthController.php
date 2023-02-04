@@ -5,6 +5,8 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserPreferenceController;
+use Str;
+use App\Services\EmailService;
 
 //Import model
 use App\Models\User;
@@ -21,7 +23,11 @@ class GoogleAuthController extends Controller
         $user = User::where('email', '=', $userInfo->email)->first();
 
         if ($user) {
-            return $this->_loginUser($request, $user);
+            if ($user->active)
+                return $this->_loginUser($request, $user);
+            else
+                // Fix: Notify that the user is restricted using toasts
+                return redirect()->back();
         }
         else {
             // Register when the user is not yet registered when they try to sign in with google
@@ -37,15 +43,20 @@ class GoogleAuthController extends Controller
         $user->Lname = $userInfo->family_name;
         $user->Fname = $userInfo->given_name;
         $user->email = $userInfo->email;
+        $user->password = $temp_password = Str::random(6);
         $user->dev_mode = 1;
-        // Save in database
         $user->save();
+
         $data = array(
             'id' => $user->id,
             'pref_projs' => null
         );
+
         //Calling a function of a controller from a controller
         (new UserPreferenceController)->createInitialUserPreference($data);
+
+        $message = "Here is your temporary password. You can change it in Settings > Account tab";
+        (new EmailService)->verification($user, $message, $temp_password);
 
         // Auto Login the user when they sign up with google?
         $currentUser = User::where('email', '=', $userInfo->email)->first();

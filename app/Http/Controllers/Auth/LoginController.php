@@ -18,29 +18,28 @@ class LoginController extends Controller
         $user = User::where('email', '=', $request->LoginEmail)->first();
         // Saving user to a session
         Auth::loginUsingId($user->id);
-
+        // dd($user->toArray());
         // set session if admin
         $request->session()->put('admin', $user->admin);
+        $request->session()->put('mode', $user->dev_mode);
         return (redirect('/'));
     }
 
-    public function verifyInput (Request $request): void
+    public function verifyInput (Request $request): string
     {
         $user = User::where('email', '=', $request->email)->first();
-        if ($user){
-            if (Hash::check($request->pass, $user->password)) {
-                $json_data = array("response" => "success");
-            } else {
-                $json_data = array("response" => "err_pass");
-            }
-        } else {
-            $json_data = array("response" => "err_mail");
-        }
-        echo json_encode($json_data);
+
+        if (empty($user))  return json_encode(["response" => "err_mail"]); 
+
+        if (!Hash::check($request->pass, $user->password)) return json_encode(["response" => "err_pass"]);
+
+        if(!$user->active) return json_encode(["response" => "err_acc"]);
+
+        return json_encode(["response" => "success"]);
     }
 
 
-    public function logout(): Object
+    public function logout(): object
     {
         if (Auth::check()) {
             Auth::logout();

@@ -13,4 +13,7 @@ class PolicyController extends Controller
     public function privacyPolicy(){
         return view('pages.privacyPolicy');
     }
+    public function aboutUs(){
+        return view('pages.aboutUs');
+    }
 }

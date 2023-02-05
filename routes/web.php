@@ -107,6 +107,7 @@ Route::controller(GoogleAuthController::class)->prefix('google')->name('google.'
 Route::controller(PolicyController::class)->group(function(){
     Route::get('/terms-and-conditions', 'termsConditions')->name('terms-and-conditions');
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+    Route::get('/about-us', 'aboutUs')->name('about-us');
 });
 
 /**

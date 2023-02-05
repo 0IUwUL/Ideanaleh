@@ -5,7 +5,7 @@
 
   <section id="header-hero" class="hero hero-dark p1">
       <div class="hero__container">
-        <h1 class="hero__title">A Philippine-Based Crowdfunding Platform</h1>
+        <h1 class="hero__title" style="margin-top:70px">A Philippine-Based Crowdfunding Platform</h1>
         <hr class="hero__divider">
         <p class="hero__text">
           Start your Clever Innovative Projects with hopes of Bringing Joy and Excitement for Everyone
@@ -225,7 +225,7 @@
 
   <section id="header-hero" class="hero hero-dark p2">
     <div class="hero__container">
-      <h1 class="hero__title">Back Innovative Projects, <br> Join Our Ride </h1>
+      <h1 class="hero__title " style="margin-top:70px">Back Innovative Projects, <br> Join Our Ride </h1>
       <hr class="hero__divider">
       <p class="hero__text">
         Ideanaleh is your source for creative breakthroughs in technology, design, and other fields, frequently with special advantages and price for early Donators. Support a campaign, share your ideas and feedback with the project team, and share in the joys and risks of bringing innovative technologies to reality.

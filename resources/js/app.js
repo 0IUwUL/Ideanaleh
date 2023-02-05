@@ -568,3 +568,17 @@ $('input[name="search"]').on('keyup', function(e){
 $('#CloseSearch').on('click', function(){
     $('.auto-com_box').removeClass('active')
 })
+
+// fade in out
+const observer = new IntersectionObserver(entries => 
+    entries.forEach(entry => 
+      entry.target.classList.replace(
+        entry.isIntersecting ? 'fadeOut' : 'fadeIn', 
+        entry.isIntersecting ? 'fadeIn' : 'fadeOut'
+      )
+    ), {root: null, rootMargin: "0px", threshold: 0.1}
+  );
+  
+ document.querySelectorAll('.box').forEach(el => observer.observe(el));
+ document.querySelectorAll('.hero__title').forEach(el => observer.observe(el));
+ document.querySelectorAll('.user-profile').forEach(el => observer.observe(el));

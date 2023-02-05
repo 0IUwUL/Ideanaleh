@@ -108,6 +108,7 @@ Route::controller(PolicyController::class)->group(function(){
     Route::get('/terms-and-conditions', 'termsConditions')->name('terms-and-conditions');
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
     Route::get('/about-us', 'aboutUs')->name('about-us');
+    Route::get('/contact-us', 'contactUs')->name('contact-us');
 });
 
 /**

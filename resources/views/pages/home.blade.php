@@ -265,6 +265,15 @@
     </div>
   </section>
 
+  <div class="container-fluid m-0 p-0" style="display:flex; background-color:rgb(237, 230, 230);">
+    <div class="contact">
+      <div class="top-border left"></div>
+      <div class="top-border right"></div>
+      <h1>CONTACT US</h1>
+      <p>Get in touch with us anytime! Whether you have questions, concerns or feedback, we are here to listen and help. Contact us today and let us know how we can assist you.</p>
+        <a href="http://localhost:8000/contact-us">CONTACT US</a>
+    </div>
+  </div>
   <div aria-live="polite" aria-atomic="true" class="toast-container align-items-center mt-5">
     <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
@@ -275,5 +284,6 @@
       </div>
     </div>
   </div>
+<div class="divider"></div>
 <x-styles.footer/>  
 @endsection

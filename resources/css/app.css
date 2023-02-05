@@ -329,6 +329,92 @@ h1, h2, h3, h4, h5, h6, .btn {
   background-size: cover;
 }
 
+/* contact start */
+
+.contact {
+  position: relative;
+  width: 900px;
+  max-width: 80%;
+  border: 2px solid #333;
+  border-top: none;
+  text-align: center;
+  margin: 60px auto;
+}
+
+.contact h1 {
+  word-break: break-all;
+  position: relative;
+  margin-top: -14px;
+  display: inline-block;
+  letter-spacing: 4px;
+}
+
+.top-border{
+  position: absolute;
+  height: 2px;
+  width: 24%;
+  background-color: #333;
+}
+
+.right {
+  right: 0;
+}
+
+.left {
+  left: 0;
+}
+
+@media (max-width: 684px) {
+.top-border {	
+  width: 17%;
+	}
+}
+
+.contact p {
+  width: 61%;
+  margin: 18px auto 40px auto;
+  line-height: 30px;
+}
+
+.contact a {
+  width: 440px;
+  max-width: 80%;
+  word-break: break-all;
+  display: inline-block;
+  border-radius: 50px;
+  padding: 20px;
+  margin-bottom: 40px;
+  background-color: black;
+  color: white;
+  font-size: 23px;
+  letter-spacing: 4px;
+  transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+}
+
+.contact a:hover {
+  background-color: #1f4260;
+}
+
+.contact a:link, .contact a:visited, .contact a:link:hover, .contact a:visited:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+@media (max-width: 500px) {
+  .top-border {	
+    display: none;
+  }
+  .contact {
+  border-top: 2px solid #333;
+  }
+  .contact h1 {
+    margin: 18px 6px;
+  }
+}
+/* contact */
+
 .p1{
   background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(92, 77, 66, 0.9)), url("https://picsum.photos/750/1260");
 }

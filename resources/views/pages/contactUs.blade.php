@@ -2,25 +2,56 @@
 
 @section('content')
 <x-styles.defnav/>
-
   <section id="header-hero" class="header-hero-size hero2 hero-dark p2">
       <div class="hero__container">
-        <h1 class="hero__title fadeOut">About Us</h1>
+        <h1 class="hero__title fadeOut">Contact Us</h1>
         <hr class="hero__divider">
       </div>
-      <div class="container">
-        <div class="row">
-            <div class="section"></div>
-              <div class="container-fluid">
-                <div class="box color-green fadeOut">
-                  <div class="box-content">
-                    Ideanaleh is a platform that bridges the gap between creative visionaries and those who believe in their ideas. It's a place where people can come together to bring new and innovative projects to life. Whether you're an artist, designer, inventor, or entrepreneur, Ideanaleh gives you the opportunity to share your ideas with the world and secure the funding you need to bring them to life. With Ideanaleh, your dream projects can become a reality.
-
-                  </div>
-                </div>
+      <html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      .card {
+        background-color: #fff;
+        box-shadow: 0px 2px 5px #bbb;
+        border-radius: 10px;
+        animation: slide-up 0.5s ease;
+      }
+      @keyframes slide-up {
+        from {
+          transform: translateY(50%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card p-5">
+            <h3 class="text-center mb-4">Contact Us</h3>
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Name">
               </div>
-            </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+          </div>
         </div>
+      </div>
+    </div>
+  </body>
+</html>
+
       
   </section>
   <div class="divider"></div>

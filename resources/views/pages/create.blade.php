@@ -58,5 +58,6 @@
         </form>
     </div>
 </div>
+<div class="divider"></div>
 <x-styles.footer/>
 @endsection

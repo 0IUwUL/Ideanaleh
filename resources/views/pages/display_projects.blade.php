@@ -81,5 +81,5 @@
         </div>
         
 </div>
-
+<x-styles.footer/>
 @endsection

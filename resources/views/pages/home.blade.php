@@ -274,5 +274,6 @@
       <div class="toast-body bg-dark text-white d-flex justify-content-start">
       </div>
     </div>
-  </div>  
+  </div>
+<x-styles.footer/>  
 @endsection

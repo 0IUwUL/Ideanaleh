@@ -110,4 +110,5 @@ b{
       </div>
       
     </section>
+    <x-styles.footer/>
 @endsection

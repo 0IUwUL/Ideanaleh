@@ -10,12 +10,10 @@
       </div>
       <div class="container">
         <div class="row">
-            <div class="section"></div>
               <div class="container-fluid">
                 <div class="box color-green fadeOut">
                   <div class="box-content">
                     Ideanaleh is a platform that bridges the gap between creative visionaries and those who believe in their ideas. It's a place where people can come together to bring new and innovative projects to life. Whether you're an artist, designer, inventor, or entrepreneur, Ideanaleh gives you the opportunity to share your ideas with the world and secure the funding you need to bring them to life. With Ideanaleh, your dream projects can become a reality.
-
                   </div>
                 </div>
               </div>
@@ -31,7 +29,6 @@
     </div>
     <div class="container">
       <div class="row">
-          <div class="section"></div>
             <div class="container-fluid">
               <div class="box fadeOut">
                 <div class="box-content">
@@ -86,5 +83,6 @@
       </div>
       
     </section>
+    <div class="divider"></div>
     <x-styles.footer/>
 @endsection

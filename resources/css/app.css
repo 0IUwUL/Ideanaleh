@@ -1249,7 +1249,6 @@ hr.filter{
   
 }
 .box-content{ 
-  /* font-family: 'Rockwell Light', sans-serif; */
   font-size: 1.4rem;
   font-weight: 1000;
   width:75%;
@@ -1336,3 +1335,33 @@ hr.filter{
 .p4{
   background-image: linear-gradient(rgba(23, 183, 156,0.9), rgba(0, 94, 125,0.9)), url("https://picsum.photos/760/1260");
 }
+.form-border::after{
+  content: "";
+  display: block !important;
+  border-bottom: 2px solid rgba(204, 204, 204, 0.416) !important;
+  margin: 0 14px !important;
+}
+
+.form-border:active::after,.form-border:hover::after,.form-border:focus::after,.form-border:active::after{
+  border-bottom:2px solid #ccc !important; 
+}
+
+.form-floating > .form-control::placeholder {
+  color: revert !important;
+}
+
+.form-floating > .form-control:not(:focus)::placeholder {
+  color: transparent!important;
+}
+
+
+/* autocomplete white color */
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: #fff !important;
+} */
+
+

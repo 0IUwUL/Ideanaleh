@@ -13,7 +13,47 @@
         <a href="{{route('main')}}" class="hero__btn hero__btn--dark btn">Find Out More</a>
       </div>
   </section>
-  
+
+  <section class="pt-5 pb-5 text-light text-center" style="background-color:#007a9c">
+    <div class="container fluid">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center text-center">
+            <div class="mx-2">
+              <i class="fa-solid fa-seedling fa-2x mx-3"></i>
+            </div>
+            <div>
+              <h1 style="font-weight:800">20000</h1>
+              <p>Funded Projects</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center text-center ">
+            <div class="mx-2">
+              <i class="fa-solid fa-hand-holding-heart fa-2x mx-3"></i>
+            </div>
+            <div>
+              <h1 style="font-weight:800">₱10000</h1>
+              <p>Total Donation</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center text-center">
+            <div class="mx-2">
+              <i class="fa-solid fa-cube fa-2x mx-3"></i>
+            </div>
+            <div>
+              <h1 style="font-weight:800">10000</h1>
+              <p>Active Projects</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pt-5 pb-5">
     <div class="container">
       <div class="row">

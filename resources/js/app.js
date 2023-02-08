@@ -18,6 +18,16 @@ $(document).ready(function(){
                 tags.push(input.value);
         })
     }
+    
+    // Alerts restricted user that logins via Google
+    if($('#DevToast').attr('data-status') == 'show'){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-danger text-white')
+
+        into.textContent = `Your account is restricted from logging in` 
+
+        $('#DevToast').toast('show');
+    }
 });
 
 // function for loading

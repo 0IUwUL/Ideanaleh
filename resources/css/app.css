@@ -15,6 +15,7 @@ html{
 /* for loading screen */
 .page_content{
   display: none;
+  height: 100%;
 }
 
 .load{
@@ -173,7 +174,7 @@ input[name="GCategs[]"]{
 
 .breadcrumb li a:hover{
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
+  border-radius: 20px!important;
   cursor: pointer;
 }
 
@@ -235,6 +236,14 @@ input[name="search"]{
   border: solid var(--bg);
 }
 /* Main Page */
+
+.home_stats .row .d-flex h1,
+.home_stats .row .d-flex p{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 body {
   font-family: "Merriweather", serif;
@@ -1158,6 +1167,9 @@ hr.filter{
 
 }
 /* profile page */
+.profile{
+  height: 100vh;
+}
 .profile_icon{
   background-image: linear-gradient(var(--bg), rgba(255,0,0,0));
   padding-top: 7rem;

@@ -38,21 +38,21 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb col d-flex justify-content-end align-items-center m-0">
                             <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="/">Home</a></li>
-                            <li class="breadcrumb-item dropdown">
-                                <a class="btn h4 m-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <li class="breadcrumb-item"><a role = "button" class = "fw-bolder" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
+                            <li class="breadcrumb-item btn-group">
+                                <a class="btn h4 m-0 dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-bars-staggered"></i>
                                 </a>
-                                <ul class="dropdown-menu m-0 p-2">
+                                <ul class="dropdown-menu dropdown-menu-end m-0 p-2">
                                     @if (Session::get('admin'))
                                         <li><a role = "button" class="dropdown-item" href="{{ route('admin') }}">Admin</a></li>
                                     @endif
                                     <li><a role = "button" class = "dropdown-item" data-bs-toggle="modal" data-bs-target="#SearchModal">Search</a></li>
-                                    <li><a role = "button" href={{ url('profile/'.Auth::id()) }}>Profile</a></li>
+                                    <li><a role = "button" class = "dropdown-item" href={{ url('profile/'.Auth::id()) }}>Profile</a></li>
                                     <li><a role = "button" class = "dropdown-item" href="{{ route('settings') }}">Settings</a></li>
-                                    <li><a role = "button" class = "dropdown-item" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
+                                    <li><a role = "button" class = "dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                                 </ul>
                             </li>
-                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('logout') }}">Logout</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -89,16 +89,17 @@
                     @if (Session::get('admin'))
                         <li class = "dropdown-item"><a class="text-decoration-none" role = "button" href="{{ route('admin') }}">Admin</a></li>
                     @endif
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
+                        <li class = "dropdown-item"><a role = "button" class = "text-decoration-none" data-bs-toggle="modal" data-bs-target="#SearchModal">Search</a></li>
+                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href={{ url('profile/'.Auth::id()) }}>Profile</a></li>
                     @if (Request::segment(1) == 'settings')
                         <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href="/">Home</a></li>
                     @else
                         <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href="{{ route('settings') }}">Settings</a></li>
                     @endif
-                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href={{ url('profile/'.Auth::id()) }}>Profile</a></li>
-                        <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" id = "modeToast4" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
                         <li class = "dropdown-item"><a class = "text-decoration-none" role = "button" href="{{ route('logout') }}">Log out</a></li>
                 </ul>
-                <form method="post" action={{ route('search') }} accept-charset="UTF-8" class="d-flex" role="search">
+                {{-- <form method="post" action={{ route('search') }} accept-charset="UTF-8" class="d-flex" role="search">
                     @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" id="search3" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" required>
@@ -108,7 +109,7 @@
                             </svg>
                         </button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         </div>
     </nav>

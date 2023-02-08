@@ -3,7 +3,7 @@
 @section('content')
 <x-styles.defnav/>
 
-<div class="container-fluid">
+<div class="container-fluid profile">
     <div class="row profile_bg"></div>
     <div class="row profile_icon d-flex justify-content-center">
         <div class="col d-flex justify-content-center align-content-center">
@@ -142,7 +142,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="ReportModal" tabindex="-1" aria-labelledby="ReportModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

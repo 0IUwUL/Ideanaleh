@@ -198,7 +198,7 @@ $("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click",  function(){
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (mode && c == 'logI'){
-            insert = `Verify your email in your profile settings.`
+            insert = `Verify your email in the settings.`
             $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`

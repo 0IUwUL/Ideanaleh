@@ -14,7 +14,7 @@
       </div>
   </section>
 
-  <section class="pt-5 pb-5 text-light text-center" style="background-color:#007a9c">
+  <section class="pt-5 pb-5 text-light text-center home_stats" style="background-color:#007a9c">
     <div class="container fluid">
       <div class="row">
         <div class="col-12 col-md-4">

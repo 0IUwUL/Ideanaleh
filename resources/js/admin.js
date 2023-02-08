@@ -157,6 +157,13 @@ $('.deleteUserIssue').on('click', function(){
     $('#delete-id').val(id)
 })
 
+
+/**
+ * Changes the info showed on a certain modal
+ * 
+ * @param {string} modalTypeArg     - Type of modal that will be accessed ([Approve, Halt, Deny] modals)
+ * @param {object} link             - The button object containing the data- attributes
+ */
 function updateModalInfo(modalTypeArg, link){
     document.getElementById(modalTypeArg+"ModalProjectTitle").innerHTML = link.data("title");
     document.getElementById(modalTypeArg+"ModalProjectCreator").innerHTML = "by: " + link.data("user");
@@ -164,9 +171,17 @@ function updateModalInfo(modalTypeArg, link){
 }
 
 
-function updatePendingProjectAjax(eArg, urlArg, statusArg, attributeArg){
+/**
+ * Unified Function to setup the ajax for updating the status of a project
+ * 
+ * @param {object} eArg                 - Button object
+ * @param {string} urlArg               - URL to call the function to update the project's status. e.g.  "/project/update-status/denied"
+ * @param {string} statusArg            - The NEW status of the project
+ * @param {string} attributeArg         - Attribute (for CSS) of a row entry in the Project Table 
+ * @param {boolean} removePendingArg    - Remove a row in the Pending Projects Table
+ */
+function updatePendingProjectAjax(eArg, urlArg, statusArg, attributeArg, removePendingArg = false){
     var id = $(eArg.target).attr('data-id');
-
   
     $.ajaxSetup({
       headers: {
@@ -183,7 +198,7 @@ function updatePendingProjectAjax(eArg, urlArg, statusArg, attributeArg){
             let data = JSON.parse(result);
             
             if(data.response == "success") {
-                if(statusArg != "Halt")
+                if(removePendingArg)
                     document.getElementById("PendingProject"+id).remove();
                 
                 document.getElementById("Project"+id+"Status").innerHTML = statusArg;
@@ -193,64 +208,74 @@ function updatePendingProjectAjax(eArg, urlArg, statusArg, attributeArg){
     });
 }
 
-// Removing a specific row in the Pending Projects Table
-function removePendingProject(idArg, statusArg, attributeArg){
-    
-}
 
-
-/**
- * Confirm Modal on Show Function
- * 
- * Sets the Title, Creator, and Project ID
- */
+// Confirm Modal on Show Function
 $('#ApproveProjectModal').on('show.bs.modal', function(e) {
     updateModalInfo("Approve", $(e.relatedTarget));
 });
 
-/**
- * Ajax for Confirming Pending Projects
- */
+
+// Ajax for Confirming Pending Projects
 $("#ApproveModalSubmitButton").click(function(e){
-    updatePendingProjectAjax(e, "/project/update-status/approve", "In Progress", "project_inProgress");
+    updatePendingProjectAjax(e, "/project/update-status/approve", "In Progress", "project_inProgress", true);
 
     alert("Project Approved");
     $('#ApproveProjectModal').modal('hide');
 });
 
 
-/**
- * Deny a Project
- */
+// Deny a Project
 $('#DenyProjectModal').on('show.bs.modal', function(e) {
     updateModalInfo("Deny", $(e.relatedTarget));
 });
 
 
-/**
- * Ajax for Denying Projects
- */
+// Ajax for Denying Projects
 $("#DenyModalSubmitButton").click(function(e){
-    updatePendingProjectAjax(e, "/project/update-status/deny", "Denied", "project_denied");
+    updatePendingProjectAjax(e, "/project/update-status/denied", "Denied", "project_denied", true);
 
     alert("Project Denied");
     $('#DenyProjectModal').modal('hide');
 });
 
 
-/**
- * Halt a Project
- */
+// Halt a Project
 $('#HaltProjectModal').on('show.bs.modal', function(e) {
     updateModalInfo("Halt", $(e.relatedTarget));
 });
 
-/**
- * Ajax for Halting Projects
- */
+
+// Ajax for Halting Projects
 $("#HaltModalSubmitButton").click(function(e){
     updatePendingProjectAjax(e, "/project/update-status/halt", "Halt", "project_halt");
 
     alert("Project Halted");
     $('#HaltProjectModal').modal('hide');
+});
+
+
+// Flag a Project
+$('#ProjectFlagModal').on('show.bs.modal', function(e) {
+    // document.getElementById("FlagModalSubmitButton").dataset.id = $(e.relatedTarget).data("id");
+    updateModalInfo("Flag", $(e.relatedTarget));
+});
+
+
+// Changes the text of the button in the ProjectFlagModal
+$('#ProjectModalFlagDropDown li').on('click', function(){
+    $('#ProjectFlagModalInput').val($(this).text());
+    document.getElementById("ProjectFlagModalButton").innerText = $(this).text();
+});
+
+
+// Ajax for Flaggin the Project Status
+$("#FlagModalSubmitButton").click(function(e){
+    var methodVar = document.getElementById("ProjectFlagModalButton").innerText;
+    var urlMethodVar = methodVar.toLowerCase().replace(/\s/g, "")
+
+    updatePendingProjectAjax(e, "/project/update-status/" + urlMethodVar, methodVar, "project_"+urlMethodVar);
+    document.getElementById("ProjectFlagModalButton").innerText = "Set Status"
+
+    alert("Project Status Updated");
+    $('#ProjectFlagModal').modal('hide');
 });

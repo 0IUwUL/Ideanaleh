@@ -105,20 +105,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <h2 id="FlagModalProjectTitle">Title Here</h2>
+                    <h5 id="FlagModalProjectCreator">By: </h5>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Status
+                        <input hidden disabled id="ProjectFlagModalInput" type="text" value="">
+                        <button class="btn btn-secondary dropdown-toggle" id="ProjectFlagModalButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Set Status
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul id="ProjectModalFlagDropDown" class="dropdown-menu">
                           <li><a class="dropdown-item" href="#">In Progress</a></li>
+                          <li><a class="dropdown-item" href="#">Denied</a></li>
                           <li><a class="dropdown-item" href="#">Completed</a></li>
                           <li><a class="dropdown-item" href="#">Halt</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="FlagModalSubmitButton" data-id="">Assign</button>
                 </div>
     </form>
             </div>

@@ -79,8 +79,7 @@
         <div id="links">
             {{$ProjArg['projects']->links()}}
         </div>
-        
-</div>
 <div class="divider"></div>
-<x-styles.footer/>
+<x-styles.footer/>  
+</div>
 @endsection

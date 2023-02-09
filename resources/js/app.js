@@ -36,7 +36,8 @@ $( window ).on( "load", function() {
     $('.page_content').fadeIn("slow");
 });
 
-$(document).on("keydown", ":input:not(textarea)", function(event) { 
+//temporary fix for submit form on enter
+$(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) { 
     return event.key != "Enter";
 });
 
@@ -546,9 +547,8 @@ $("#save").on("click", function(){
 
 // search
 jQuery(document.body).on('click', '.suggest', function(e){
-    console.log('hi')
-    $('input[name="search"]').val(e.target.id)
-    document.getElementById("SearchForm").submit();
+    window.location = $('a', this).attr('href');
+    return false;
 });
 
 $('input[name="search"]').on('keyup', function(e){

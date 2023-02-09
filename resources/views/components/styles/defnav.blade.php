@@ -119,7 +119,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body p-3" id="def_search">
-                <form method="post" action={{ route('search') }} id="SearchForm" accept-charset="UTF-8" class="container-fluid p-0" role="search">
+                <form method="post" action={{ route('search') }} id="SearchForm" accept-charset="UTF-8" class="container-fluid p-0" role="search" autocomplete="off">
                     @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" value = "{{Session::get('search')}}" placeholder="Search" id="search1" aria-label="Search" aria-describedby="search1" required>

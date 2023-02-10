@@ -27,7 +27,7 @@ class GoogleAuthController extends Controller
                 return $this->_loginUser($request, $user);
             else
                 // https://stackoverflow.com/a/25078560
-                return redirect('/')->with( ['toast' => 'show'] );;
+                return redirect('/')->with( ['toast' => 'show'] );
         }
         else {
             // Register when the user is not yet registered when they try to sign in with google

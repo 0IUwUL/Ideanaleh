@@ -311,7 +311,7 @@
       <div class="top-border right"></div>
       <h1>CONTACT US</h1>
       <p>Get in touch with us anytime! Whether you have questions, concerns or feedback, we are here to listen and help. Contact us today and let us know how we can assist you.</p>
-        <a href="http://localhost:8000/contact-us">CONTACT US</a>
+        <a href="{{route('help.index')}}">CONTACT US</a>
     </div>
   </div>
   <div aria-live="polite" aria-atomic="true" class="toast-container align-items-center mt-5">

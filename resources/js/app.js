@@ -28,6 +28,16 @@ $(document).ready(function(){
 
         $('#DevToast').toast('show');
     }
+
+    // Alerts user after submitting the request
+    if($('#ContactToast').attr('data-status') == 'show'){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-success text-white')
+
+        into.textContent = `Your request has been submitted` 
+
+        $('#ContactToast').toast('show');
+    }
 });
 
 // function for loading

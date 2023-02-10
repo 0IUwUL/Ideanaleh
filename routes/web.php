@@ -23,6 +23,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\UserRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -172,3 +173,6 @@ Route::controller(ForgotPasswordController::class)->name('recover.')->group(func
     Route::post('/search-email', 'searchEmail')->name('search-email');
     Route::post('/update-password', 'updatePassword')->name('update-password');
 });
+
+// Feedback routes
+Route::resource('help', UserRequestController::class, ['only' => ['index', 'store']]);

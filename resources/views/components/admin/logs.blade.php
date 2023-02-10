@@ -14,23 +14,25 @@
             </form>
         </div>
         <hr>
-        <table class="table table-responsive align-middle table-hover">
-            <thead>
-                <tr>
-                    <th>Date and time</th>
-                    <th>Email</th>
-                    <th>User</th>
-                    <th>Activity</th>
-                </tr>
-            </th>
-            <tbody id="activity_log">
-                <tr>
-                    <td>1/02/2023 12:23:00:00</td>
-                    <td>example@gmail.com</td>
-                    <td>Mark</td>
-                    <td>Logged In</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row table-responsive">
+            <table class="table align-middle table-hover">
+                <thead>
+                    <tr>
+                        <th>Date and time</th>
+                        <th>Email</th>
+                        <th>User</th>
+                        <th>Activity</th>
+                    </tr>
+                </th>
+                <tbody id="activity_log">
+                    <tr>
+                        <td>1/02/2023 12:23:00:00</td>
+                        <td>example@gmail.com</td>
+                        <td>Mark</td>
+                        <td>Logged In</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

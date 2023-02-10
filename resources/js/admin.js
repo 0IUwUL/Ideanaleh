@@ -39,6 +39,15 @@ header.addEventListener("click", () => {
     }
 })
 
+// Request table frontend 
+jQuery(document.body).on('click', '#request_table .content', function(e){
+    if($(e.target).hasClass('truncate')){
+        $(e.target).removeClass('truncate')
+    }else{
+        $(e.target).addClass('truncate')
+    }
+});
+
 // Filter by user roles
 const user_type = document.querySelectorAll('.admin_type')
 var role = 'all'

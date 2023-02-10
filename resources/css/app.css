@@ -78,6 +78,24 @@ html{
 }
 
 /* for navbar */
+
+nav{
+  width: calc(100vw - 15px)!important;
+}
+
+.crumbs{
+  margin-left: -190px!important;
+}
+
+@media only screen and (hover: none) and (pointer: coarse){
+  nav{
+    width: 100%!important;
+  }
+  .crumbs{
+    margin-left: 0!important;
+  }
+}
+
 .navbar-brand{
   font-family: 'Brush Script MT';
 }
@@ -196,7 +214,7 @@ input[name="GCategs[]"]{
   cursor: pointer;
 }
 
-@media screen and (576px <= width <= 600px){
+@media screen and (576px <= width <= 657px){
   .breadcrumb li a{
     padding: .2rem .5rem;
   }
@@ -1129,6 +1147,27 @@ hr.filter{
   -webkit-filter: brightness(80%);
   transform: scale3d(1.2, 1.2, 1.2);
   transition: all 0.3s ease-out;
+}
+
+#request_table .content > a{
+  text-decoration: none;
+  color: #000;
+}
+
+#request_table .content:hover{
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#request_table .content > .truncate{
+  max-width: calc(100vw-350px)!important;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 /* card image */

@@ -35,7 +35,7 @@
             @else
             <div class="col d-flex justify-content-end">
                 <div class="navbread p-0 d-none d-sm-block">
-                    <nav aria-label="breadcrumb">
+                    <nav class="crumbs" aria-label="breadcrumb">
                         <ol class="breadcrumb col d-flex justify-content-end align-items-center m-0">
                             <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="/">Home</a></li>
                             <li class="breadcrumb-item"><a role = "button" class = "fw-bolder" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>

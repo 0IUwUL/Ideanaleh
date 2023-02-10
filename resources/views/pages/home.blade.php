@@ -34,7 +34,7 @@
               <i class="fa-solid fa-hand-holding-heart fa-2x mx-3"></i>
             </div>
             <div>
-              <h1 style="font-weight:800">₱10000</h1>
+              <h1 style="font-weight:800">₱ {{$mode['total_donation']}}</h1>
               <p>Total Donation</p>
             </div>
           </div>

@@ -33,6 +33,12 @@
                                 </a>
                             </li>
                             <li class="admin_nav_list">
+                                <a class="nav-link sidebar_link" id="v-pills-requests-tab" data-bs-toggle="pill" data-bs-target="#v-pills-requests" type="button" role="tab" aria-controls="v-pills-requests" aria-selected="false">
+                                    <i class="fa-solid fa-envelopes-bulk sidebar_icon"></i>
+                                    <div class="hidden_name">Requests</div> 
+                                </a>
+                            </li>
+                            <li class="admin_nav_list">
                                 <a class="nav-link sidebar_link" id="v-pills-logs-tab" data-bs-toggle="pill" data-bs-target="#v-pills-logs" type="button" role="tab" aria-controls="v-pills-logs" aria-selected="false">
                                     <i class="fa-solid fa-warehouse sidebar_icon"></i>
                                     <div class="hidden_name">Activity</div> 
@@ -60,6 +66,9 @@
                 </div>
                 <div class="tab-pane fade"  id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
                     <x-admin.project :projects="$admin['projects']" :issues="$admin['project_issues']" :top="$admin['top']"/>
+                </div>
+                <div class="tab-pane fade"  id="v-pills-requests" role="tabpanel" aria-labelledby="v-pills-requests-tab" tabindex="0">
+                    <x-admin.requests/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-logs" role="tabpanel" aria-labelledby="v-pills-logs-tab" tabindex="0">
                     <x-admin.logs/>

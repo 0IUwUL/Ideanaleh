@@ -39,11 +39,11 @@ class LoginController extends Controller
     }
 
 
-    public function logout(): object
+    public function logout(Request $request): object
     {
         if (Auth::check()) {
             Auth::logout();
-
+            $request->session()->flush();
             return (redirect('/'));
         }
     }

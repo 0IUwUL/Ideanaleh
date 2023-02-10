@@ -66,19 +66,6 @@ $('#verifyCode').on('click', function () {
             if(data.response == "success") {
                 // Store the id of account tab
                 localStorage.setItem('activeTab', 'v-pills-account-tab');
-                
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: "verify-code",
-                    type:'PATCH',
-                    data: {
-                        status : '1',
-                    }
-                })
 
                 location.reload();
                 } 
@@ -111,20 +98,20 @@ $(document).ready(function(){
 });
 
 
-$("#confirmPass").on("keyup", function(){
+$("#confirmPassword").on("keyup", function(){
     var form = $("#changePass");
 
     form.validate({
         rules:{
-            newPass: {
+            newPassword: {
                 required:true,
             },
-            confirmPass: {
+            confirmPassword: {
                 required:true,
             },    
         },
         messages: {
-            confirmPass: {
+            confirmPassword: {
                 equalTo: "Doesn't match with new password",
             },
         }
@@ -132,8 +119,7 @@ $("#confirmPass").on("keyup", function(){
 }); 
 
 $("#submitChanges").on("click", function(){
-    var code = document.getElementById("code").value;
-
+    var code = document.getElementById("verify-code").value;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -149,6 +135,7 @@ $("#submitChanges").on("click", function(){
             let data = JSON.parse(result);
 
             if(data.response == "success") {
+                localStorage.setItem('activeToast', 'DevToast');    
                 document.getElementById("changePass").submit();
             } 
             else {
@@ -214,11 +201,11 @@ $("#sendCode").click(function (e){
 $("#verifyModal").on("show.bs.modal", function(){
     document.getElementById("sendCode").disabled = false
     document.getElementById("sendCode").innerHTML = `Send code <i class="fa-solid fa-paper-plane"></i>`
-    document.getElementById("verify").disabled = true
+    document.getElementById("verifyBtn").disabled = true
 });
 
 // Verify code for change email
-$("#verify").click(function(e){
+$("#verifyBtn").click(function(e){
     var code = document.getElementById("inputCode2").value
     $.ajaxSetup({
         headers: {

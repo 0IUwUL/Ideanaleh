@@ -8,7 +8,7 @@ use App\Models\UserRequest;
 
 class UserRequestController extends Controller
 {
-    public function index(): View
+    public function index(): Object
     {
         return view('pages.contactUs');
     }
@@ -18,7 +18,9 @@ class UserRequestController extends Controller
     {
         UserRequest::create($request->all());
         
-        return redirect()->back()->with( ['toast' => 'show']);
+        $message = 'Your request has been submited';
+
+        return redirect()->back()->with( ['toast' => 'inform', 'message' => $message]);
     }
 
     /**

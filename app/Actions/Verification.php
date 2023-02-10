@@ -10,7 +10,7 @@ class Verification {
     
     public function handle(Request $request): bool
     {
-        $user =  Auth::user() ?? User::firstWhere('email', $request->email);
+        $user =  User::findOrFail(Auth::id()) ?? User::firstWhere('email', $request->email);
         
         if($request->code == $user->code) return true;
         

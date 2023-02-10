@@ -20,23 +20,19 @@ $(document).ready(function(){
     }
     
     // Alerts restricted user that logins via Google
-    if($('#DevToast').attr('data-status') == 'show'){
+    if($('#DevToast').attr('data-status') == 'restrict'){
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
-
-        into.textContent = `Your account is restricted from logging in` 
 
         $('#DevToast').toast('show');
     }
 
     // Alerts user after submitting the request
-    if($('#ContactToast').attr('data-status') == 'show'){
+    if($('#DevToast').attr('data-status') == 'inform'){
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-success text-white')
 
-        into.textContent = `Your request has been submitted` 
-
-        $('#ContactToast').toast('show');
+        $('#DevToast').toast('show');
     }
 });
 

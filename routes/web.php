@@ -175,4 +175,4 @@ Route::controller(ForgotPasswordController::class)->name('recover.')->group(func
 });
 
 // Feedback routes
-Route::resource('help', UserRequestController::class, ['only' => ['index', 'store']]);
+Route::resource('help', UserRequestController::class, ['only' => ['index', 'store','update','destroy']]);

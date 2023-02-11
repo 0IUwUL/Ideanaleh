@@ -68,7 +68,7 @@
                     <x-admin.project :projects="$admin['projects']" :issues="$admin['project_issues']" :top="$admin['top']"/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-requests" role="tabpanel" aria-labelledby="v-pills-requests-tab" tabindex="0">
-                    <x-admin.requests/>
+                    <x-admin.requests :requests="$admin['user_requests']"/>
                 </div>
                 <div class="tab-pane fade"  id="v-pills-logs" role="tabpanel" aria-labelledby="v-pills-logs-tab" tabindex="0">
                     <x-admin.logs/>
@@ -79,6 +79,35 @@
     
 </div>
 
+<div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-warning">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{route('inform-user')}}" method="POST">
+                @csrf
+                <input type="hidden" id="user-name" name="name" value="" required>
+                <input type="hidden" id="user-email" name="email" value="" required>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="LabelSubject" class="form-label">Subject</label>
+                        <input type="text" name = "subject" class="form-control" id="FormControlLabelSubject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="LabelContentIssue" class="form-label">Message Content</label>
+                        <textarea class="form-control" name = "content" id="FormControlLabelContentIssue" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="Submit" class="btn btn-primary">Send to Developer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
     <form action="">

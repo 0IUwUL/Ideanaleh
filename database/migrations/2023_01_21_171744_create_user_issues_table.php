@@ -21,7 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('subject');
             $table->string('content');
-            $table->tinyInteger('resolved')->default('0');
+            $table->tinyInteger('is_resolved')->default('0');
             $table->timestamps();
         });
     }

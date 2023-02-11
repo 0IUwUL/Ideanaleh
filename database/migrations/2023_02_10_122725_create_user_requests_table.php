@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('subject');
             $table->string('content');
+            $table->tinyInteger('is_resolved')->default('0');
             $table->timestamps();
         });
     }

@@ -16,6 +16,6 @@ class UserIssue extends Model
     ];
 
     public function username(){
-        return $this->belongsTo(User::class, 'user_id')->select(['id', 'Lname', 'Fname', 'Lname']);
+        return $this->belongsTo(User::class, 'user_id')->select(['id', 'Lname', 'Fname', 'Lname','email']);
     }
 }

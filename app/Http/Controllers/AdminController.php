@@ -12,6 +12,7 @@ use App\Models\Projects;
 use App\Models\Payments;
 use App\Models\UserIssue;
 use App\Models\ProjectIssue;
+use App\Models\UserRequest;
 
 class AdminController extends Controller
 {
@@ -22,6 +23,7 @@ class AdminController extends Controller
             'projects' => Projects::with(['username', 'proj_stat'])->get()->toArray(),
             'user_issues' => UserIssue::with(['username'])?->get()->toArray(),
             'project_issues' => ProjectIssue::with(['project','username'])->get()->toArray(),
+            'user_requests' => UserRequest::all()->toArray(),
         ];
 
         $data['top']['donations'] = $this->_getTopProjects(10, 'donation_count');
@@ -186,12 +188,12 @@ class AdminController extends Controller
 
     public function informUser(Request $request): Object
     {
-        $user = User::find($request->user_id);
-
+        $name = $request->name;
+        $email = $request->email;
         $subject = $request->subject;
         $message = $request->content;
         
-        (new EmailService)->inform($user, $subject, $message);
+        (new EmailService)->inform($name, $email, $subject, $message);
 
         return redirect()->back();
     }
@@ -200,10 +202,10 @@ class AdminController extends Controller
     {
         $issue = UserIssue::find($request->id);
         
-        if ($issue->resolved)
-            $issue->resolved = 0; 
+        if ($issue->is_resolved)
+            $issue->is_resolved = 0; 
         else 
-            $issue->resolved = 1;
+            $issue->is_resolved = 1;
             
         $issue->save();
 

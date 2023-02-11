@@ -23,15 +23,19 @@ class UserRequestController extends Controller
         return redirect()->back()->with( ['toast' => 'inform', 'message' => $message]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update(UserRequest $help, Request $request): Object
     {
-        //
+        $help->is_resolved = $request->status;
+        $help->save();
+
+        return redirect()->back();
+    }
+
+    public function destroy(UserRequest $help): Object
+    {
+        $help->delete();
+
+        return redirect()->back();
     }
 
    

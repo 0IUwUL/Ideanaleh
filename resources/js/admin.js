@@ -138,11 +138,11 @@ function searchInput(inp, tar){
 
     });
 }
-// Change modal user-id
+
+// Change modal user info
 $('.informUser').on('click', function(){
-    let user_id = $(this).attr('data-id')
-    
-    $('#dev-id').val(user_id)
+    $('#user-name').val($(this).attr('data-name'))
+    $('#user-email').val($(this).attr('data-email'))
 })
 
 // Change modal issue id
@@ -165,6 +165,34 @@ $('.deleteUserIssue').on('click', function(){
 
     $('#delete-id').val(id)
 })
+
+// Change modal form action and resolve status
+$('.resolveUserRequest').on('click', function(){
+    let id = $(this).attr('data-id')
+    let resolved = parseInt($(this).attr('data-status'))
+
+    $("#ResolvedRequestForm").attr("action", window.location.origin + "/help/" + id);
+
+    let message
+    if (resolved){
+        message = "Do you want to reopen this request?"
+        resolved = 0
+    } else {
+        message = "Is the request resolved?"
+        resolved = 1
+    }
+    
+    $('#request-status').val(resolved)
+    $('#ResolvedRequestModalHeader').text(message)
+})
+
+// Change modal form action
+$('.deleteUserRequest').on('click', function(){
+    let id = $(this).attr('data-id')
+
+    $("#DeleteRequestForm").attr("action", window.location.origin + "/help/" + id);
+})
+
 
 
 /**

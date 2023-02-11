@@ -37,9 +37,9 @@
                 <div class="navbread p-0 d-none d-sm-block">
                     <nav class="crumbs" aria-label="breadcrumb">
                         <ol class="breadcrumb col d-flex justify-content-end align-items-center m-0">
-                            <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="/">Home</a></li>
-                            <li class="breadcrumb-item"><a role = "button" class = "fw-bolder" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
-                            <li class="breadcrumb-item btn-group">
+                            <li class="breadcrumb-item home"><a class = "fw-bolder" role = "button" href="/">Home</a></li>
+                            <li class="breadcrumb-item home"><a role = "button" class = "fw-bolder" id = "modeToast3" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}} href="{{ route('project.create') }}">My Project</a></li>
+                            <li class="breadcrumb-item home btn-group">
                                 <a class="btn h4 m-0 dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-bars-staggered"></i>
                                 </a>

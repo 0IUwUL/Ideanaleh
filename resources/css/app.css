@@ -176,12 +176,6 @@ input[name="GCategs[]"]{
   border-radius: 20px!important;
 }
 
-.navbread{
-  display: flex!important;
-  align-content: center;
-  vertical-align: middle!important;
-}
-
 .breadcrumb li a{
   text-decoration: none!important;
   font-size: 1rem;
@@ -197,6 +191,10 @@ input[name="GCategs[]"]{
 }
 
 .breadcrumb-item::before{
+  color: whitesmoke!important;
+}
+
+.breadcrumb-item.home::before{
   color: whitesmoke!important;
   position: absolute;
   top: 50%;
@@ -215,7 +213,7 @@ input[name="GCategs[]"]{
 }
 
 @media screen and (576px <= width <= 657px){
-  .breadcrumb li a{
+  .breadcrumb .breadcrumb-item.home a{
     padding: .2rem .5rem;
   }
 }
@@ -579,6 +577,14 @@ h1, h2, h3, h4, h5, h6, .btn {
   height: 1rem;
 }
 
+nav.crumb{
+  width: auto!important;
+  min-width: 0;
+  margin: 0!important;
+  display: flex!important;
+  justify-content: end;
+}
+
 .sidebar{
   background-color: whitesmoke;
   display: flex!important;
@@ -645,6 +651,12 @@ h1, h2, h3, h4, h5, h6, .btn {
   width: 100%!important;
 }
 
+@media screen and (width <= 767px){
+  .breadcrumb-item.admin a{
+    padding: .2rem .5rem;
+  }
+}
+
 .sidebar_icon{
   font-size: 18px;
   display: flex;
@@ -692,7 +704,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   display: flex!important;
   flex-direction: column!important;
   border-right: 1px solid #dfdfdf;
-  margin-top: 3.85rem;
+  margin-top: 4rem;
   padding-top: 1rem;
   height: calc(100vh - 60px);
   overflow-x: hidden;
@@ -700,6 +712,7 @@ h1, h2, h3, h4, h5, h6, .btn {
   align-items: center;
   justify-content: stretch;
 }
+
 
 .sidebar.open .sidebar_icon{
   margin-right: 1rem;
@@ -755,25 +768,6 @@ input[name = 'activity']{
   margin-top: 1rem;
 }
 
-@media(max-width: 575px){
-  .admin_display{
-    width: 200px;
-    margin: 0 auto;
-  }
-  .admin_content{
-    width: 100px;
-  }
-}
-
-@media(max-width: 280px){
-  .admin_brand{
-    width: 90px;
-  }
-  .admin_nav{
-    width: 10px;
-    padding: .5rem;
-  }
-}
 
 /* Create Project page */
 .project_body{
@@ -1217,7 +1211,7 @@ hr.filter{
 }
 /* profile page */
 .profile{
-  height: 100vh;
+  height: 10vh;
 }
 .profile_icon{
   background-image: linear-gradient(var(--bg), rgba(255,0,0,0));

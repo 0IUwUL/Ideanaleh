@@ -56,7 +56,7 @@
             </aside>
         </div>
         <!-- Dashboard -->
-        <div class="col-8 col-md-10 col-sm-10 px-5 py-0">
+        <div class="col-8 col-md-10 col-sm-10 px-3 py-0">
             <div class="tab-content pb-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
                     <x-admin.dashboard :details="$admin['dashboard']"/>

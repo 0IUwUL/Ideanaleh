@@ -61,6 +61,7 @@ Route::middleware('auth', 'admin')->controller(AdminController::class)->group(fu
     Route::post('/inform-user', 'informUser')->name('inform-user');
     Route::post('/resolve-user-issue', 'resolveUserIssue')->name('resolve-user-issue');
     Route::post('/delete-user-issue', 'deleteUserIssue')->name('delete-user-issue');
+    Route::post('/change-role', 'changeUserRole')->name('change-role');
 });
 
 // User registration routes

@@ -68,7 +68,14 @@
                                     <i class="fa-solid fa-circle-{{$user['active'] ? 'xmark' : 'check'}}"></i>
                                 </button>
                             </td>
-                            <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                            <td> <button class="btn btn-outline-primary dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                </button>
+                                <ul class="changeRole dropdown-menu">
+                                    <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'user' ? 'disabled' : ""}}  data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">User</button></li>
+                                    <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'developer' ? 'disabled' : ""}} data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">Developer</button></li>
+                                    <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'admin' ? 'disabled' : ""}} data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">Admin</button></li>
+                                </ul> 
                         @endif
                     </tr>
                 @endforeach
@@ -208,17 +215,21 @@
     </form>
 </div>
 
-<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
-    <form action="">
+<div class="modal fade" id="ChangeRoleModal" tabindex="-1" aria-labelledby="ChangeRoleLabel" aria-hidden="true">
+    <form id="ChangeRoleForm" action="{{route('change-role')}}" method="POST">
+        @csrf
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-success">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <h1 class="modal-title fs-5" id="ChangeRoleHeader"><i class="fa-solid fa-circle-check text-success"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <input type="hidden" id="change-role-id" name="user_id" value="" required>
+                <input type="hidden" id="new-role" name="role" value="" required>
+                <div class="m-3 alert alert-warning" role="alert" id="ChangeRoleNote">Warning: This action cannot be undone</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
+                    <button type="submit" class="btn btn-success">Confirm</button>
                 </div>
             </div>
         </div>

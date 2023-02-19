@@ -326,4 +326,24 @@ class AdminController extends Controller
 
         return $arr;
     }
+
+    public function changeUserRole(Request $request): Object
+    {
+        $user = User::find($request->user_id);
+
+        if  ($request->role == "User")
+            $user->dev_mode = 0;
+
+        if  ($request->role == "Developer")
+            $user->dev_mode = 1;
+
+        if  ($request->role == "Admin"){
+            $user->dev_mode = 1;
+            $user->admin = 1;    
+        }
+
+        $user->save();
+
+        return redirect()->back();
+    }
 }

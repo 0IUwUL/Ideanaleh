@@ -316,3 +316,20 @@ $("#FlagModalSubmitButton").click(function(e){
     alert("Project Status Updated");
     $('#ProjectFlagModal').modal('hide');
 });
+
+// Change modal value for changing user roles
+$('.changeRole .dropdown-item').on('click', function(e){
+    let role = this.innerText
+    let user = $(this).attr('data-name')
+    let user_id = $(this).attr('data-id')
+    let message = `Change ${user} role to ${role}?`
+    
+    $('#ChangeRoleNote').hide()
+    if (role == 'Admin'){
+        $('#ChangeRoleNote').show()
+    }
+
+    $('#change-role-id').val(user_id)
+    $('#new-role').val(role)
+    $('#ChangeRoleHeader').text(message)
+})

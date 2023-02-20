@@ -102,7 +102,7 @@
                         @if ($proj['status'] == "Halt")
                             <span id="Project{{$proj['id']}}Status" class="admin_project project_halt text-nowrap" >
                         @elseif($proj['status'] == "In Progress")
-                            <span id="Project{{$proj['id']}}Status" class="admin_project project_inProgress text-nowrap" >
+                            <span id="Project{{$proj['id']}}Status" class="admin_project project_inprogress text-nowrap" >
                         @elseif($proj['status'] == "Pending")
                             <span id="Project{{$proj['id']}}Status" class="admin_project project_pending text-nowrap" >
                         @else
@@ -117,7 +117,7 @@
                             <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
                         </a>
                     </td>
-                    <td><button title="Assign Status" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button title="Assign Status" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-flag"></i></button></td>
                     <td><button title="Halt Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 @endforeach

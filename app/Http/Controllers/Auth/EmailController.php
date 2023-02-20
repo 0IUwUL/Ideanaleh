@@ -25,7 +25,7 @@ class EmailController extends Controller
         $code = str_pad($code, 6, 0, STR_PAD_LEFT);
 
         $message = 'To verify your email, please enter the code below';
-        (new EmailService)->verification($user, $message, $temp_password);
+        (new EmailService)->verification($user, $message, $code);
 
         // Send the code to the database
         User::where('id', $user->id)->update(['code' => $code]);

@@ -389,4 +389,6 @@ b{
       </div>
       
   </section>
+  <div class="divider"></div>
+  <x-styles.footer/>
 @endsection

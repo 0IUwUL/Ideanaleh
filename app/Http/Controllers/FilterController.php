@@ -48,13 +48,13 @@ class FilterController extends Controller
     {
         $items = null;
         if($request->input){
-            $items = Projects::select('title')
+            $items = Projects::select('id','title')
                             ->where('title', 'LIKE', '%'.$request->input.'%')
                             ->orWhere('tags', 'LIKE', '%'.$request->input.'%')
                             ->orderBy('created_at', 'desc')
                             ->get();
         }
-        $viewRender = view('formats.suggestions')->with(['items' => $items])->render();
+        $viewRender = view('formats.suggestions')->with(['items' => $items, 'input' => $request->input])->render();
         $json_data['item'] = $viewRender;
         echo json_encode($json_data);
     }

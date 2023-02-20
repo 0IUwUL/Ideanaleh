@@ -20,15 +20,15 @@ class EmailService {
         Mail::to($user->email)->send(new EmailVerification($emailDetails));
     }
 
-    public function inform(Object $user, string $subject, string $message): void
+    public function inform(string $name, string $email, string $subject, string $message): void
     {
         $emailDetails = [
             'subject' => $subject,
-            'header' => $user->Fname,
+            'header' => $name,
             'body' => $message,
         ];
 
         // Send email
-        Mail::to($user->email)->send(new InformUser($emailDetails));
+        Mail::to($email)->send(new InformUser($emailDetails));
     }
 }

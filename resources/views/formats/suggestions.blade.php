@@ -1,3 +1,4 @@
+<li>Search suggestions for "{{$input}}"</li>
 @foreach ($items as $title)
-<li><a role="button" class="suggest text-decoration-none text-dark" id = "{{$title['title']}}">{{$title['title']}}</a></li>
+<li class="suggest" id = "{{$title['title']}}"><a class="text-decoration-none text-dark" href = {{url('project/view/'.$title['id'])}}>{{$title['title']}}</a></li>
 @endforeach

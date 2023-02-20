@@ -133,7 +133,7 @@
                             </div>
                         @endforeach
                     @else
-                            <div class="col d-flex justify-content-center text-center fs-4">
+                            <div class="col d-flex justify-content-center text-center fs-4 profile">
                                 None as of the moment.
                             </div>
                     @endif
@@ -172,5 +172,6 @@
       </div>
     </div>
 </div>
-
+<div class="divider"></div>
+<x-styles.footer/>
 @endsection

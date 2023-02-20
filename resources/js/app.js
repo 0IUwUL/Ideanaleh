@@ -18,6 +18,22 @@ $(document).ready(function(){
                 tags.push(input.value);
         })
     }
+    
+    // Alerts restricted user that logins via Google
+    if($('#DevToast').attr('data-status') == 'restrict'){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-danger text-white')
+
+        $('#DevToast').toast('show');
+    }
+
+    // Alerts user after submitting the request
+    if($('#DevToast').attr('data-status') == 'inform'){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-success text-white')
+
+        $('#DevToast').toast('show');
+    }
 });
 
 // function for loading
@@ -26,7 +42,8 @@ $( window ).on( "load", function() {
     $('.page_content').fadeIn("slow");
 });
 
-$(document).on("keydown", ":input:not(textarea)", function(event) { 
+//temporary fix for submit form on enter
+$(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) { 
     return event.key != "Enter";
 });
 
@@ -198,7 +215,7 @@ $("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click",  function(){
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
         if (mode && c == 'logI'){
-            insert = `Verify your email in your profile settings.`
+            insert = `Verify your email in the settings.`
             $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`
@@ -536,9 +553,8 @@ $("#save").on("click", function(){
 
 // search
 jQuery(document.body).on('click', '.suggest', function(e){
-    console.log('hi')
-    $('input[name="search"]').val(e.target.id)
-    document.getElementById("SearchForm").submit();
+    window.location = $('a', this).attr('href');
+    return false;
 });
 
 $('input[name="search"]').on('keyup', function(e){
@@ -568,3 +584,17 @@ $('input[name="search"]').on('keyup', function(e){
 $('#CloseSearch').on('click', function(){
     $('.auto-com_box').removeClass('active')
 })
+
+// fade in out
+const observer = new IntersectionObserver(entries => 
+    entries.forEach(entry => 
+      entry.target.classList.replace(
+        entry.isIntersecting ? 'fadeOut' : 'fadeIn', 
+        entry.isIntersecting ? 'fadeIn' : 'fadeOut'
+      )
+    ), {root: null, rootMargin: "0px", threshold: 0.1}
+  );
+  
+ document.querySelectorAll('.box').forEach(el => observer.observe(el));
+ document.querySelectorAll('.hero__title').forEach(el => observer.observe(el));
+ document.querySelectorAll('.user-profile').forEach(el => observer.observe(el));

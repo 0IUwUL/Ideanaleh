@@ -1,38 +1,43 @@
 <header>
     <nav class="navbar p-0 fixed-top shadow admin_header">
-        <div class="container-fluid p-0 bg-light">
-            <div class="col-2 col-sm-2 mx-5 d-flex justify-content-center">
-                <button class="btn" data-menu-icon-btn>
-                    <i class="fa-solid fa-bars d-flex align-self-center fs-4 d-block"></i>
-                </button>
-                
-                <a class="navbar-brand admin_brand m-0" href="{{ route('admin') }}">
-                    Ideanaleh 
-                </a>
-            </div>
-            <div class="col admin_nav">
-                <div class="row py-2 mx-4 d-flex justify-content-end align-items-center">
-                    <div class="col-6 h5 d-none d-sm-block">
-                        Good Day, (Name)
+        <div class="container-fluid d-flex row justify-content-between p-0 bg-light">
+            <div class="col-8 col-sm-4 col-md-3 col-lg-2 row d-flex justify-content-center">
+                <div class="col d-flex ms-5 p-0 justify-content-center align-content-center">
+                    <div class="p-0 d-flex">
+                        <button class="btn p-0" data-menu-icon-btn>
+                            <i class="fa-solid fa-bars fs-4 d-block"></i>
+                        </button>
                     </div>
-                    <div class="navbread col p-0 d-none d-sm-block">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb d-flex justify-content-end align-self-center m-0">
-                                <li class="breadcrumb-item"><a class = "fw-bolder">Profile</a></li>
-                                <li class="breadcrumb-item"><a class = "fw-bolder" role = "button" href="{{ route('logout') }}">Log out</a></li>
+                    <div>
+                        <a class="navbar-brand admin_brand m-0" href="/">
+                            Ideanaleh 
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-8 col-md-9 col-lg-10 row p-0">
+                <div class="d-flex flex-row align-items-center admin_nav justify-content-end">
+                    <div class="col-3 h5 d-none d-sm-block align-middle m-0">
+                        Good Day, {{Auth::user()->Fname}}
+                    </div>
+                    <div class="col-9 d-none d-sm-block h5 align-middle m-0 fs-2">
+                        <nav class="crumb" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item admin"><a class = "text-decoration-none text-light fw-bolder" role = "button" href="/">Web page</a></li>
+                              <li class="breadcrumb-item admin"><a class = "text-decoration-none text-light fw-bolder" role = "button" href={{ url('settings') }}>Settings</a></li>
+                              <li class="breadcrumb-item admin"><a class = "text-decoration-none text-light fw-bolder" role = "button" href="{{ route('logout') }}">Log out</a></li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-3 d-block d-sm-none d-flex justify-content-end text-white p-0">
-                        <div class="dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <button class="btn text-white d-block d-sm-none">
-                                <i class="fa-solid fa-screwdriver-wrench fs-3"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a role = "button" type = "submit" class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-                            </ul>
-                        </div>
+                    <div class="dropdown d-block d-sm-none">
+                        <a class="btn btn-dark btn-outline-light gear_icon h4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gears"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end m-0">
+                            <li><a class="dropdown-item" role = "button" href="/">Web page</a></li>
+                            <li><a class="dropdown-item" role = "button" href={{ url('settings') }}>Settings</a></li>
+                            <li><a class="dropdown-item" role = "button" href="{{ route('logout') }}">Log out</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

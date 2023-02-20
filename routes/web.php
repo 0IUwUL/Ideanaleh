@@ -23,6 +23,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\UserRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,7 @@ Route::middleware('auth', 'admin')->controller(AdminController::class)->group(fu
     Route::post('/inform-user', 'informUser')->name('inform-user');
     Route::post('/resolve-user-issue', 'resolveUserIssue')->name('resolve-user-issue');
     Route::post('/delete-user-issue', 'deleteUserIssue')->name('delete-user-issue');
+    Route::post('/change-role', 'changeUserRole')->name('change-role');
 });
 
 // User registration routes
@@ -107,6 +109,8 @@ Route::controller(GoogleAuthController::class)->prefix('google')->name('google.'
 Route::controller(PolicyController::class)->group(function(){
     Route::get('/terms-and-conditions', 'termsConditions')->name('terms-and-conditions');
     Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+    Route::get('/about-us', 'aboutUs')->name('about-us');
+    Route::get('/contact-us', 'contactUs')->name('contact-us');
 });
 
 /**
@@ -170,3 +174,6 @@ Route::controller(ForgotPasswordController::class)->name('recover.')->group(func
     Route::post('/search-email', 'searchEmail')->name('search-email');
     Route::post('/update-password', 'updatePassword')->name('update-password');
 });
+
+// Feedback routes
+Route::resource('help', UserRequestController::class, ['only' => ['index', 'store','update','destroy']]);

@@ -68,7 +68,14 @@
                                     <i class="fa-solid fa-circle-{{$user['active'] ? 'xmark' : 'check'}}"></i>
                                 </button>
                             </td>
-                            <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-id=""><i class="fa-solid fa-trash-arrow-up"></i></button></td>
+                            <td> <button class="btn btn-outline-primary dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                </button>
+                                <ul class="changeRole dropdown-menu">
+                                    <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'user' ? 'disabled' : ""}}  data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">User</button></li>
+                                    <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'developer' ? 'disabled' : ""}} data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">Developer</button></li>
+                                    <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'admin' ? 'disabled' : ""}} data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">Admin</button></li>
+                                </ul> 
                         @endif
                     </tr>
                 @endforeach
@@ -101,14 +108,14 @@
             </thead>
             <tbody id="user_issue_table">
                 @foreach ($issues as $issue)
-                    @if (!$issue['resolved'])
+                    @if (!$issue['is_resolved'])
                         <tr>
                             <td>{{$issue['user_id']}}</td>
                             <td>{{$issue['username']['Lname']}}</td>
                             <td>{{$issue['content']}}</td>
                             <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
-                            <td><button type="button" class="informUser btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-id="{{$issue['user_id']}}"><i class="fa-solid fa-flag"></i></button></td>
-                            <td><button type="button" class="resolveUserIssue btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['resolved']}}><i class="fa-solid fa-check"></i></button></td>
+                            <td><button type="button" class="informUser btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-name="{{$issue['username']['Fname']}}" data-email="{{$issue['username']['email']}}"><i class="fa-solid fa-flag"></i></button></td>
+                            <td><button type="button" class="resolveUserIssue btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['is_resolved']}}><i class="fa-solid fa-check"></i></button></td>
                             <td><button type="button" class="deleteUserIssue btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
                         </tr>
                     @endif
@@ -131,13 +138,13 @@
             </thead>
             <tbody>
                 @foreach ($issues as $issue)
-                    @if ($issue['resolved'])
+                    @if ($issue['is_resolved'])
                         <tr>
                             <td>{{$issue['user_id']}}</td>
                             <td>{{$issue['username']['Lname']}}</td>
                             <td>{{$issue['content']}}</td>
                             <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
-                            <td><button type="button" class="resolveUserIssue btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['resolved']}}><i class="fa-solid fa-rotate"></i></button></td>
+                            <td><button type="button" class="resolveUserIssue btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['is_resolved']}}><i class="fa-solid fa-rotate"></i></button></td>
                             <td><button type="button" class="deleteUserIssue btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}" ><i class="fa-solid fa-circle-xmark"></i></button></td>
                         </tr>
                     @endif
@@ -146,63 +153,8 @@
         </table>
     </div>
 </div>
-
-<div class="modal fade" id="FlagModal" tabindex="-1" aria-labelledby="FlagModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content border-warning">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="FlagModalHeader">Inform the issue to the developer</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="">
-              <div class="mb-3">
-                  <label for="LabelSubject" class="form-label">Subject</label>
-                  <input type="text" name = "" class="form-control" id="FormControlLabelSubject">
-              </div>
-              <div class="mb-3">
-                  <label for="LabelContentIssue" class="form-label">Message Content</label>
-                  <textarea class="form-control" name = "" id="FormControlLabelContentIssue" rows="3"></textarea>
-              </div>
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send to Developer</button>
-        </div>
-          </form>
-      </div>
-    </div>
-</div>
   
-<div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content border-warning">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="UserFlagModalHeader">Inform the issue to the user</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{route('inform-user')}}" method="POST">
-                @csrf
-                <input type="hidden" id="dev-id" name="user_id" value="" required>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="LabelSubject" class="form-label">Subject</label>
-                        <input type="text" name = "subject" class="form-control" id="FormControlLabelSubject">
-                    </div>
-                    <div class="mb-3">
-                        <label for="LabelContentIssue" class="form-label">Message Content</label>
-                        <textarea class="form-control" name = "content" id="FormControlLabelContentIssue" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="Submit" class="btn btn-primary">Send to Developer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
 
 
 <div class="modal fade" id="ResolvedModal" tabindex="-1" aria-labelledby="ResolvedModalLabel" aria-hidden="true">
@@ -263,17 +215,21 @@
     </form>
 </div>
 
-<div class="modal fade" id="ActivateModal" tabindex="-1" aria-labelledby="ActivateModalLabel" aria-hidden="true">
-    <form action="">
+<div class="modal fade" id="ChangeRoleModal" tabindex="-1" aria-labelledby="ChangeRoleLabel" aria-hidden="true">
+    <form id="ChangeRoleForm" action="{{route('change-role')}}" method="POST">
+        @csrf
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-success">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ActivateModalHeader">You will now activate this current account. <i class="fa-solid fa-circle-check text-success"></i></h1>
+                    <h1 class="modal-title fs-5" id="ChangeRoleHeader"><i class="fa-solid fa-circle-check text-success"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <input type="hidden" id="change-role-id" name="user_id" value="" required>
+                <input type="hidden" id="new-role" name="role" value="" required>
+                <div class="m-3 alert alert-warning" role="alert" id="ChangeRoleNote">Warning: This action cannot be undone</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Confirm</button>
+                    <button type="submit" class="btn btn-success">Confirm</button>
                 </div>
             </div>
         </div>

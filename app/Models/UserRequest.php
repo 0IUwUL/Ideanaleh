@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserIssue extends Model
+class UserRequest extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'name',
+        'email',
         'subject',
         'content',
     ];
-
-    public function username(){
-        return $this->belongsTo(User::class, 'user_id')->select(['id', 'Lname', 'Fname', 'Lname','email']);
-    }
 }

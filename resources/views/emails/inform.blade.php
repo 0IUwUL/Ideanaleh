@@ -17,7 +17,7 @@
                         <p style = "font-size: 1.5rem"> Hello , {{$details['header']}}</p> 
                     </div>
                     <div style = "color: black">
-                        <p>{{$details['body']}}</p>
+                        <p>{!!$details['body']!!}</p>
                     </div>
                     
                 </div>

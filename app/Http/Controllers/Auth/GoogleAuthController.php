@@ -26,8 +26,8 @@ class GoogleAuthController extends Controller
             if ($user->active)
                 return $this->_loginUser($request, $user);
             else
-                // Fix: Notify that the user is restricted using toasts
-                return redirect()->back();
+                // https://stackoverflow.com/a/25078560
+                return redirect('/')->with( ['toast' => 'restrict', 'message' => 'Your account has been restricted from logging in'] );
         }
         else {
             // Register when the user is not yet registered when they try to sign in with google

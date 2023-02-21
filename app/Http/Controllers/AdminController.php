@@ -76,26 +76,42 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function informUser(Request $request): Object
-    {
+    private function _send_email(Request $request): Void{
         $name = $request->name;
         $email = $request->email;
         $subject = $request->subject;
         $message = $request->content;
         
         (new EmailService)->inform($name, $email, $subject, $message);
+    }
+
+    public function informUser(Request $request): Object
+    {
+        $this->_send_email($request);
 
         return redirect()->back();
+    }
+
+    public function informUserProjectIssue(Request $request): Void{
+
     }
 
     public function resolveUserIssue(Request $request): Object
     {
         $issue = UserIssue::find($request->id);
         
-        if ($issue->is_resolved)
-            $issue->is_resolved = 0; 
-        else 
-            $issue->is_resolved = 1;
+        $issue->is_resolved = !$issue->is_resolved;
+            
+        $issue->save();
+
+        return redirect()->back();
+    }
+
+    public function resolveProjectIssue(Request $request): Object
+    {
+        $issue = ProjectIssue::find($request->id);
+        
+        $issue->is_resolved = !$issue->is_resolved;
             
         $issue->save();
 

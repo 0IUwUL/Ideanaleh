@@ -155,6 +155,11 @@ $(document).on('click','.informUser', function(){
     $('#user-email').val($(this).attr('data-email'))
 })
 
+$('.informUserProjectIssue').on('click', function(){
+    $('#project-issue-user-name').val($(this).attr('data-name'))
+    $('#project-issue-user-email').val($(this).attr('data-email'))
+})
+
 // Change modal issue id
 $(document).on('click','.resolveUserIssue', function(){
     let id = $(this).attr('data-id')
@@ -174,6 +179,19 @@ $(document).on('click','.deleteUserIssue', function(){
     let id = $(this).attr('data-id')
 
     $('#delete-id').val(id)
+})
+
+$('.resolveProjectIssue').on('click', function(){
+    let id = $(this).attr('data-id')
+    let resolved = parseInt($(this).attr('data-status'))
+    
+    let message = "Is the project issue resolved?"
+    if (resolved){
+        message = "Do you want to reopen this project issue?"
+    }
+    
+    $('#resolve-id-project-issue').val(id)
+    $('#ResolveProjectIssueModalHeader').text(message)
 })
 
 // Change modal form action and resolve status
@@ -312,6 +330,12 @@ $('#ProjectFlagModal').on('show.bs.modal', function(e) {
 $('#ProjectModalFlagDropDown li').on('click', function(){
     $('#ProjectFlagModalInput').val($(this).text());
     document.getElementById("ProjectFlagModalButton").innerText = $(this).text();
+});
+
+// Changes the text of the button in the ProjectIssueFlagModal
+$('#ProjectIssueModalFlagDropDown li').on('click', function(){
+    $('#ProjectIssueFlagModalInput').val($(this).text());
+    document.getElementById("ProjectIssueFlagModalButton").innerText = $(this).text();
 });
 
 

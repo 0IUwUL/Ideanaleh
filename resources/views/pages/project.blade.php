@@ -376,22 +376,25 @@
         <h1 class="modal-title fs-5" id="ReportModalLabel">Report Form</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-          <form action="">
-              <div class="mb-3">
-                  <label for="ReportModalFormControl1" class="form-label">Subject</label>
-                  <input type="text" class="form-control" id="ReportModalFormControl1" required>
-              </div>
-              <div class="mb-3">
-                  <label for="ReportModalFormTextarea1" class="form-label">Report in Detail</label>
-                  <textarea class="form-control" id="ReportModalFormTextarea1" rows="3" required></textarea>
-              </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger">Report</button>
-      </div>
-          </form>
+      <form action="{{route("report-project")}}" method="POST">
+        @csrf
+        <input type="hidden" name="project_id" value={{$project['id']}} required>
+        <input type="hidden" name="user_id" value={{$project['user_id']}} required>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="ReportModalFormControl1" class="form-label">Subject</label>
+            <input type="text" class="form-control" name='subject' id="ReportModalFormControl1" required>
+          </div>
+          <div class="mb-3">
+            <label for="ReportModalFormTextarea1" class="form-label">Report in Detail</label>
+            <textarea class="form-control" name='content' id="ReportModalFormTextarea1" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Report</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

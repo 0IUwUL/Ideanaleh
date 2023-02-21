@@ -24,6 +24,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\UserRequestController;
+use App\Http\Controllers\ProjectIssueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +63,8 @@ Route::middleware('auth', 'admin')->controller(AdminController::class)->group(fu
     Route::post('/resolve-user-issue', 'resolveUserIssue')->name('resolve-user-issue');
     Route::post('/delete-user-issue', 'deleteUserIssue')->name('delete-user-issue');
     Route::post('/change-role', 'changeUserRole')->name('change-role');
+
+    Route::post('/resolve-project-issue', 'resolveProjectIssue')->name('resolve-project-issue');
 });
 
 // User registration routes
@@ -167,6 +170,10 @@ Route::controller(FilterController::class)->prefix('main')->group(function(){
 Route::controller(ProfileController::class)->prefix('profile')->group(function(){
     Route::get('/{id}', 'index')->name('profile');
     Route::post('/report-user', 'reportUser')->name('report-user');
+});
+
+Route::controller(ProjectIssueController::class)->prefix('project')->group(function(){
+    Route::post('/report-project' , 'reportProject')->name('report-project');
 });
 
 // Forgot Password Routes

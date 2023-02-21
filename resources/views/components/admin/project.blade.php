@@ -129,8 +129,8 @@
                     <td>null</td>
                     <td>null</td>
                     <td><span class="admin_project project_IP text-nowrap">null</span></td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
                 </tr>
                 @endif
             </tbody>
@@ -159,20 +159,28 @@
                     <th class="py-3">Action</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id = "proj_issue_table">
                 @if (!count($issues)==0)
                 @foreach ($issues as $issue)
+                @if(!$issue['is_resolved'])
                 <tr>
                     <td>{{$issue['project']['id']}}</td>
                     <td>{{$issue['project']['title']}}</td>
                     <td>{{$issue['username']['Lname']}}</td>
-                    <td class="content"><a class="truncate">{{$issue['content']}}</a></td>
-                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td>{{$issue['content']}}</td>
+                    <td>
+                        <a href="{{ url('project/view/'.$issue['project']['id']) }}" target="_blank">
+                            <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
+                        </a>
+                    </td>
+                    <td><button type="button" class="informUserProjectIssue btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#InformProjectIssueModal" data-name="{{$issue['username']['Fname']}}" data-email="{{$issue['username']['email']}}"><i class="fa-solid fa-envelope"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id="{{$issue['project']['id']}}" data-title="{{$issue['project']['title']}}" data-user="{{$issue['username']['Lname']}}""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="resolveProjectIssue btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ResolveProjectIssueModal" data-id="{{$issue['id']}}" data-status="{{$issue['is_resolved']}}" ><i class="fa-solid fa-check"></i></button></td>
                 </tr>
+                @endif
                 @endforeach
                 @else
                 <tr>
@@ -180,14 +188,61 @@
                     <td>null</td>
                     <td>null</td>
                     <td>No Issues Found</td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="" ><i class="fa-solid fa-eye"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target=""><i class="fa-solid fa-envelope"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-circle-check"></i></button></td>
                 </tr>
                 @endif
             </tbody>
         </table>
     </div>
+
+    <label for="ProjectIssueTable" class="admin_project_table mt-5">Resolved Project Issue Table</label>
+    <div class="row table-responsive mt-3 px-3 admin_table" id = "ProjectResolvedIssueTable">
+        <table class="table align-middle table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th class="py-3">Project Number</th>
+                    <th class="py-3">Project Name</th>
+                    <th class="py-3">Developer Last Name</th>
+                    <th class="py-3">Issue/Report</th>
+                    <th class="py-3">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id = "proj_resolved_issue_table">
+                @if (!count($issues)==0)
+                @foreach ($issues as $issue)
+                @if($issue['is_resolved'])
+                <tr>
+                    <td>{{$issue['project']['id']}}</td>
+                    <td>{{$issue['project']['title']}}</td>
+                    <td>{{$issue['username']['Lname']}}</td>
+                    <td class="content"><a class="truncate">{{$issue['content']}}</a></td>
+                    <td>
+                        <a href="{{ url('project/view/'.$issue['project']['id']) }}" target="_blank">
+                            <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
+                        </a>
+                    </td>
+                    <td><button type="button" class="resolveProjectIssue btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ResolveProjectIssueModal" data-id="{{$issue['id']}}" data-status="{{$issue['is_resolved']}}" ><i class="fa-solid fa-rotate"></i></button></td>
+                </tr>
+                @endif
+                @endforeach
+                @else
+                <tr>
+                    <td>null</td>
+                    <td>null</td>
+                    <td>null</td>
+                    <td>No Issues Found</td>
+                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-eye"></i></button></td>
+                    <td><button disabled type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-rotate"></i></button></td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
+
     <hr>
     <div class="row mt-5">
         <div class="col">

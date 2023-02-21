@@ -85,6 +85,7 @@ nav{
 
 .crumbs{
   margin-left: -190px!important;
+  width: auto!important;
 }
 
 @media only screen and (hover: none) and (pointer: coarse){

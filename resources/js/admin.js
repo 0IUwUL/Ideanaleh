@@ -40,7 +40,7 @@ header.addEventListener("click", () => {
 })
 
 // Request table frontend 
-jQuery(document.body).on('click', '#request_table .content', function(e){
+jQuery(document.body).on('click', '.content', function(e){
     if($(e.target).hasClass('truncate')){
         $(e.target).removeClass('truncate')
     }else{
@@ -49,9 +49,10 @@ jQuery(document.body).on('click', '#request_table .content', function(e){
 });
 
 // Filter by user roles
-const user_type = document.querySelectorAll('.admin_type')
+var user_type 
 var role = 'all'
 $('.role .dropdown-item').on('click', function(){
+    user_type = document.querySelectorAll('.admin_type')
     role = this.text.toLowerCase()
 
     // Hide and show table elements
@@ -70,9 +71,10 @@ $('.role .dropdown-item').on('click', function(){
 })
 
 // Filter by user status
-const user_status = document.querySelectorAll('.admin_status')
+var user_status
 var status = 'All'
 $('.status .dropdown-item').on('click', function(){
+    user_status = document.querySelectorAll('.admin_status')
     status = this.text
 
     // Hide and show table elements
@@ -91,7 +93,7 @@ $('.status .dropdown-item').on('click', function(){
 })
 
 // Change modal user-id
-$('.changeStatus').on('click', function(){
+$(document).on('click', '.changeStatus', function(){
     let user_id = $(this).attr('data-id')
 
     $('#user-id').val(user_id)
@@ -106,15 +108,23 @@ $('#UserIssueSearch').on('click', function(){
     searchInput($('input[name="user_issue"]').val(), 'user_issue')
 })
 
+$('#ResolvedUserSearch').on('click', function(){
+    searchInput($('input[name="resolve"]').val(), 'resolve')
+})
+
 $('#ProjSearch').on('click', function(){
-    searchInput($('input[name="project"]').val(), 'proj')
+    searchInput($('input[name="proj"]').val(), 'proj')
 })
 
 $('#ProjIssueSearch').on('click', function(){
     searchInput($('input[name="proj_issue"]').val(), 'proj_issue')
 })
 
-$('input[name="user"], input[name="user_issue"], input[name="proj"], input[name="proj_issue"]').keyup(function(e){
+$('#ReqSearch').on('click', function(){
+    searchInput($('input[name="req"]').val(), 'req')
+})
+
+$('input[name="user"], input[name="user_issue"], input[name="proj"], input[name="proj_issue"], input[name="req"], input[name="resolve"]').keyup(function(e){
     if(e.keyCode == 13){searchInput(e.target.value, e.target.name)}
 });
 
@@ -140,13 +150,13 @@ function searchInput(inp, tar){
 }
 
 // Change modal user info
-$('.informUser').on('click', function(){
+$(document).on('click','.informUser', function(){
     $('#user-name').val($(this).attr('data-name'))
     $('#user-email').val($(this).attr('data-email'))
 })
 
 // Change modal issue id
-$('.resolveUserIssue').on('click', function(){
+$(document).on('click','.resolveUserIssue', function(){
     let id = $(this).attr('data-id')
     let resolved = parseInt($(this).attr('data-status'))
     
@@ -160,14 +170,14 @@ $('.resolveUserIssue').on('click', function(){
 })
 
 // Change modal issue id
-$('.deleteUserIssue').on('click', function(){
+$(document).on('click','.deleteUserIssue', function(){
     let id = $(this).attr('data-id')
 
     $('#delete-id').val(id)
 })
 
 // Change modal form action and resolve status
-$('.resolveUserRequest').on('click', function(){
+$(document).on('click','.resolveUserRequest', function(){
     let id = $(this).attr('data-id')
     let resolved = parseInt($(this).attr('data-status'))
 
@@ -187,7 +197,7 @@ $('.resolveUserRequest').on('click', function(){
 })
 
 // Change modal form action
-$('.deleteUserRequest').on('click', function(){
+$(document).on('click','.deleteUserRequest', function(){
     let id = $(this).attr('data-id')
 
     $("#DeleteRequestForm").attr("action", window.location.origin + "/help/" + id);

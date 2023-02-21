@@ -1144,12 +1144,20 @@ hr.filter{
   transition: all 0.3s ease-out;
 }
 
-#request_table .content > a{
+#ResolvedUserIssue .content > a,
+#user_issue_table .content > a,
+#proj_issue_table .content > a,
+#resolve_table .content > a,
+#req_table .content > a{
   text-decoration: none;
   color: #000;
 }
 
-#request_table .content:hover{
+#ResolvedUserIssue .content:hover,
+#user_issue_table .content:hover,
+#proj_issue_table .content:hover,
+#resolve_table .content:hover,
+#req_table .content:hover{
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1157,8 +1165,12 @@ hr.filter{
   user-select: none;
 }
 
-#request_table .content > .truncate{
-  max-width: calc(100vw-350px)!important;
+#ResolvedUserIssue .content > .truncate,
+#user_issue_table .content > .truncate,
+#proj_issue_table .content > .truncate,
+#resolve_table .content > .truncate,
+#req_table .content > .truncate{
+  width: 500px!important;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;

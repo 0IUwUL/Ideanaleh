@@ -48,6 +48,10 @@ class AdminController extends Controller
             $result = (new AdminService)->getProjectTable($input);
         elseif($for == 'proj_issue')
             $result = (new AdminService)->getProjIssueTable($input);
+        elseif($for == 'req')
+            $result = (new AdminService)->getRequestTable($input);
+        elseif($for == 'resolve')
+            $result = (new AdminService)->getResolveTable($input);
         
         $viewRender = view('formats.admin.'.$for)->with(['ArrArg' => $result])->render();
         $json_data = array('item' => $viewRender, 'for'=>$for);
@@ -59,7 +63,7 @@ class AdminController extends Controller
     public function changeStatus(Request $request): Object
     {
         $user = User::find($request->user_id);
-        
+        // dd($request);
         if ($user->active)
             $user->active = 0; 
         else 

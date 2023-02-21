@@ -3,7 +3,7 @@
     
     <div class="row admin_table" id = "PendingProjectTable">
         <table class="table table-responsive align-middle table-hover">
-            <thead class="table-dark">
+            <thead class="table-dark sticky-top">
                 <tr>
                     <th class="align-middle">Project Number</th>
                     <th class="align-middle">Project Name</th>
@@ -65,7 +65,7 @@
     </div>
     <div class="row admin_table" id = "ProjectTable">
         <table class="table table-responsive align-middle table-hover">
-            <thead class="table-dark">
+            <thead class="table-dark sticky-top">
                 <tr>
                     <th class="align-middle">Project Number</th>
                     <th class="align-middle">Project Name</th>
@@ -168,7 +168,7 @@
                     <td>{{$issue['project']['id']}}</td>
                     <td>{{$issue['project']['title']}}</td>
                     <td>{{$issue['username']['Lname']}}</td>
-                    <td>{{$issue['content']}}</td>
+                    <td class="content"><a class="truncate">{{$issue['content']}}</a></td>
                     <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
                     <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id=""><i class="fa-solid fa-hand"></i></button></td>
                     <td><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>

@@ -31,22 +31,11 @@
                                 <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
                             </a>
                         </td>
-                        <td><button title="Approve Project" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ApproveProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-check"></i></button></td>
+                        <td><button title="Approve Project" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ApproveProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-check"></i></button></td>
                         <td><button title="Deny Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DenyProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
                     </tr>
                     @endif
                 @endforeach
-                @else
-                <tr>
-                    <td>null</td>
-                    <td>No Projects Found</td>
-                    <td>null</td>
-                    <td>null</td>
-                    <td>null</td>
-                    <td><span class="admin_project project_IP text-nowrap">null</span></td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteProjectModal" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
-                </tr>
                 @endif
             </tbody>
         </table>
@@ -118,20 +107,9 @@
                         </a>
                     </td>
                     <td><button title="Assign Status" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button title="Halt Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                    <td><button title="Halt Project" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#HaltProjectModal" data-id="{{$proj['id']}}" data-title="{{$proj['title']}}" data-user="{{$proj['username']['Lname']}}"><i class="fa-solid fa-hand"></i></button></td>
                 </tr>
                 @endforeach
-                @else
-                <tr>
-                    <td>null</td>
-                    <td>No Projects Found</td>
-                    <td>null</td>
-                    <td>null</td>
-                    <td>null</td>
-                    <td><span class="admin_project project_IP text-nowrap">null</span></td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-circle-xmark"></i></button></td>
-                </tr>
                 @endif
             </tbody>
         </table>
@@ -177,22 +155,11 @@
                         </a>
                     </td>
                     <td><button type="button" class="informUserProjectIssue btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#InformProjectIssueModal" data-name="{{$issue['username']['Fname']}}" data-email="{{$issue['username']['email']}}"><i class="fa-solid fa-envelope"></i></button></td>
-                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id="{{$issue['project']['id']}}" data-title="{{$issue['project']['title']}}" data-user="{{$issue['username']['Lname']}}""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button type="button" class="resolveProjectIssue btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ResolveProjectIssueModal" data-id="{{$issue['id']}}" data-status="{{$issue['is_resolved']}}" ><i class="fa-solid fa-check"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectFlagModal" data-id="{{$issue['project']['id']}}" data-title="{{$issue['project']['title']}}" data-user="{{$issue['username']['Lname']}}"><i class="fa-solid fa-flag"></i></button></td>
+                    <td><button type="button" class="resolveProjectIssue btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolveProjectIssueModal" data-id="{{$issue['id']}}" data-status="{{$issue['is_resolved']}}" ><i class="fa-solid fa-check"></i></button></td>
                 </tr>
                 @endif
                 @endforeach
-                @else
-                <tr>
-                    <td>null</td>
-                    <td>null</td>
-                    <td>null</td>
-                    <td>No Issues Found</td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="" ><i class="fa-solid fa-eye"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target=""><i class="fa-solid fa-envelope"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-flag"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="" data-id=""><i class="fa-solid fa-circle-check"></i></button></td>
-                </tr>
                 @endif
             </tbody>
         </table>
@@ -225,19 +192,10 @@
                             <button title="View Project" type="button" class="btn btn-outline-dark"  data-id=""><i class="fa-solid fa-eye"></i></button>
                         </a>
                     </td>
-                    <td><button type="button" class="resolveProjectIssue btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ResolveProjectIssueModal" data-id="{{$issue['id']}}" data-status="{{$issue['is_resolved']}}" ><i class="fa-solid fa-rotate"></i></button></td>
+                    <td><button type="button" class="resolveProjectIssue btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ResolveProjectIssueModal" data-id="{{$issue['id']}}" data-status="{{$issue['is_resolved']}}" ><i class="fa-solid fa-rotate"></i></button></td>
                 </tr>
                 @endif
                 @endforeach
-                @else
-                <tr>
-                    <td>null</td>
-                    <td>null</td>
-                    <td>null</td>
-                    <td>No Issues Found</td>
-                    <td><button disabled type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#ProjectIssueFlagModal" data-id=""><i class="fa-solid fa-eye"></i></button></td>
-                    <td><button disabled type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#DeleteFlagModal" data-id=""><i class="fa-solid fa-circle-rotate"></i></button></td>
-                </tr>
                 @endif
             </tbody>
         </table>
@@ -262,7 +220,9 @@
                                     @foreach($top['donations'] as $key => $project )
                                     <tr>
                                         <th scope = "col">{{$key +1}}</th>
-                                        <th scope = "col">{{$project['title']}}</th>
+                                        <th scope = "col"><a href="{{ url('project/view/'.$project['id']) }}" target="_blank">
+                                            {{$project['title']}}
+                                        </a></th>
                                     </tr>
                                     @endforeach
                                 </tbody>

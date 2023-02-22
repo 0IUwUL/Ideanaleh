@@ -156,6 +156,8 @@ $(document).on('click','.informUser', function(){
 })
 
 $('.informUserProjectIssue').on('click', function(){
+    document.getElementById("project-issue-display-name").innerHTML = "First name: " + $(this).attr('data-name')
+    document.getElementById("project-issue-display-email").innerHTML = "Email: " + $(this).attr('data-email')
     $('#project-issue-user-name').val($(this).attr('data-name'))
     $('#project-issue-user-email').val($(this).attr('data-email'))
 })

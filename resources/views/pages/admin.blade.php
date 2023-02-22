@@ -79,6 +79,7 @@
     
 </div>
 
+
 <div class="modal fade" id="UserFlagModal" tabindex="-1" aria-labelledby="UserFlagModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-warning">
@@ -109,48 +110,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="InformProjectIssueModal" tabindex="-1" aria-labelledby="InformProjectIssueModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content border-warning">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="InformProjectIssueModalHeader">Inform the Project Issue to the User</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{route('inform-user')}}" method="POST">
-                @csrf
-                <input type="hidden" id="project-issue-user-name" name="name" value="" required>
-                <input type="hidden" id="project-issue-user-email" name="email" value="" required>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="LabelSubject" class="form-label">Subject</label>
-                        <input type="text" name = "subject" class="form-control" id="FormControlLabelSubject">
-                    </div>
-                    <div class="mb-3">
-                        <label for="LabelContentIssue" class="form-label">Message Content</label>
-                        <textarea class="form-control" name = "content" id="FormControlLabelContentIssue" rows="3"></textarea>
-                    </div>
-
-                    {{-- <div class="dropdown">
-                        <input hidden disabled id="ProjectIssueFlagModalInput" type="text" value="">
-                        <button class="btn btn-secondary dropdown-toggle" id="ProjectIssueFlagModalButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Set Status
-                        </button>
-                        <ul id="ProjectIssueModalFlagDropDown" class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">In Progress</a></li>
-                          <li><a class="dropdown-item" href="#">Denied</a></li>
-                          <li><a class="dropdown-item" href="#">Completed</a></li>
-                          <li><a class="dropdown-item" href="#">Halt</a></li>
-                        </ul>
-                    </div> --}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="Submit" class="btn btn-primary">Send to Developer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
     <form action="">
@@ -169,6 +128,7 @@
         </div>
 </div>
 
+
 <div class="modal fade" id="DeleteFlagModal" tabindex="-1" aria-labelledby="DeleteFlagModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog modal-dialog-centered">
@@ -186,6 +146,8 @@
         </div>
 </div>
 
+
+{{-- Modal for Assigning a new Status for a Project --}}
 <div class="modal fade" id="ProjectFlagModal" tabindex="-1" aria-labelledby="ProjectFlagModalLabel" aria-hidden="true">
     <form action="">
         <div class="modal-dialog modal-dialog-centered">
@@ -222,7 +184,6 @@
 
 {{-- Halt Project Modal --}}
 <div class="modal fade" id="HaltProjectModal" tabindex="-1" aria-labelledby="HaltProjectModalLabel" aria-hidden="true">
-    {{-- <form action=""> --}}
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
                 <div class="modal-header">
@@ -238,13 +199,11 @@
                 </div>
             </div>
         </div>
-    {{-- </form> --}}
 </div>
 
 
 {{-- Approve Project Modal --}}
 <div class="modal fade" id="ApproveProjectModal" tabindex="-1" aria-labelledby="ApproveProjectModalLabel" aria-hidden="true">
-    {{-- <form action=""> --}}
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
                 <div class="modal-header">
@@ -260,7 +219,6 @@
                 </div>
             </div>
         </div>
-    {{-- </form> --}}
 </div>
 
 
@@ -284,6 +242,8 @@
     </div>
 </div>
 
+
+{{-- Modal for Resolving and Reopening a Project Issue --}}
 <div class="modal fade" id="ResolveProjectIssueModal" tabindex="-1" aria-labelledby="ResolveProjectIssueModalLabel" aria-hidden="true">
     <form action="{{route('resolve-project-issue')}}" method="POST">
         @csrf
@@ -303,20 +263,41 @@
     </form>
 </div>
 
-<div class="modal fade" id="ProjectIssueFlagModal" tabindex="-1" aria-labelledby="ProjectIssueFlagModal" aria-hidden="true">
-    <form action="">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-danger">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="HaltProjectModalHeader">Project Issue<i class="fa-solid fa-circle-xmark text-danger"></i></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{{-- Modal for Setting up the Contents of the email informing the user of their Project Issue --}}
+<div class="modal fade" id="InformProjectIssueModal" tabindex="-1" aria-labelledby="InformProjectIssueModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-warning">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="InformProjectIssueModalHeader">Inform the Project Issue to the User</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{route('inform-user')}}" method="POST">
+                @csrf
+                
+                
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h5 id="project-issue-display-name">username-here</h5>
+                        <input type="hidden" id="project-issue-user-name" name="name" value="" required>
+                        <h5 id="project-issue-display-email">email-here</h5>
+                        <input type="hidden" id="project-issue-user-email" name="email" value="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="LabelSubject" class="form-label">Subject</label>
+                        <input type="text" name = "subject" class="form-control" id="FormControlLabelSubject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="LabelContentIssue" class="form-label">Message Content</label>
+                        <textarea class="form-control" name = "content" id="FormControlLabelContentIssue" rows="3"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confirm</button>
+                    <button type="Submit" class="btn btn-primary">Send to Developer</button>
                 </div>
-    </form>
-            </div>
+            </form>
         </div>
+    </div>
 </div>
 @endsection

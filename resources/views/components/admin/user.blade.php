@@ -2,7 +2,7 @@
     <label for="TableUser" class="admin_user_table">User Table</label>
     <div class="row py-3 col col-sm-6">
         <div class="input-group">
-            <input type="text" class="form-control" name="user" placeholder="Search" id="" aria-label="Search" aria-describedby="" required>
+            <input type="text" class="form-control" name="user" placeholder="Search by last name or email" id="" aria-label="Search" aria-describedby="" required>
             <button type="button" id="UserSearch" class="input-group-text">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -76,6 +76,7 @@
                                     <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'developer' ? 'disabled' : ""}} data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">Developer</button></li>
                                     <li><button class="dropdown-item d-flex justify-content-between" {{$role == 'admin' ? 'disabled' : ""}} data-bs-toggle="modal" data-bs-target="#ChangeRoleModal" data-id={{$user['id']}} data-name="{{$user['Fname'].' '.$user['Lname']}}">Admin</button></li>
                                 </ul> 
+                            </td>
                         @endif
                     </tr>
                 @endforeach
@@ -85,7 +86,7 @@
     <label for="TableUserIssue" class="admin_user_table mt-5">User Issue Table</label>
     <div class="row py-3 col col-sm-6">
         <div class="input-group">
-            <input type="text" class="form-control" name="user_issue" placeholder="Search" aria-label="Search" aria-describedby="" required>
+            <input type="text" class="form-control" name="user_issue" placeholder="Search by last name" aria-label="Search" aria-describedby="" required>
             <button type="button" id="UserIssueSearch" class="input-group-text">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -112,7 +113,7 @@
                         <tr>
                             <td>{{$issue['user_id']}}</td>
                             <td>{{$issue['username']['Lname']}}</td>
-                            <td>{{$issue['content']}}</td>
+                            <td class="content"><a class="truncate">{{$issue['content']}}</a></td>
                             <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
                             <td><button type="button" class="informUser btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UserFlagModal" data-name="{{$issue['username']['Fname']}}" data-email="{{$issue['username']['email']}}"><i class="fa-solid fa-flag"></i></button></td>
                             <td><button type="button" class="resolveUserIssue btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['is_resolved']}}><i class="fa-solid fa-check"></i></button></td>
@@ -136,13 +137,13 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id = "ResolvedUserIssue">
                 @foreach ($issues as $issue)
                     @if ($issue['is_resolved'])
                         <tr>
                             <td>{{$issue['user_id']}}</td>
                             <td>{{$issue['username']['Lname']}}</td>
-                            <td>{{$issue['content']}}</td>
+                            <td class="content"><a class="truncate">{{$issue['content']}}</a></td>
                             <td>{{date('n/j/Y h:i:s A', strtotime($issue['created_at']))}}</td>
                             <td><button type="button" class="resolveUserIssue btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ResolvedModal" data-id="{{$issue['id']}}" data-status={{$issue['is_resolved']}}><i class="fa-solid fa-rotate"></i></button></td>
                             <td><button type="button" class="deleteUserIssue btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#DeleteIssueModal" data-id="{{$issue['id']}}" ><i class="fa-solid fa-circle-xmark"></i></button></td>

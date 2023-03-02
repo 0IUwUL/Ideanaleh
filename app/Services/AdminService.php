@@ -170,12 +170,33 @@ class AdminService {
 
     public function getUserTable(string $find): array
     {
-        $users = User::select('id','Lname','email','admin','dev_mode','active', 'created_at')
+        $users = User::select('id','Lname','Fname','email','admin','dev_mode','active', 'created_at')
                     ->where('Lname', 'LIKE', '%'.$find.'%')
                     ->orWhere('email', 'LIKE', '%'.$find.'%')
                     ->get()
                     ->toArray();
         return $users;
+    }
+
+    public function getRequestTable(string $find): array
+    {
+        $req = UserRequest::select('id','name','email','subject','content','is_resolved', 'created_at')
+                    ->where('name', 'LIKE', '%'.$find.'%')
+                    ->orWhere('email', 'LIKE', '%'.$find.'%')
+                    ->get()
+                    ->toArray();
+        return $req;
+    }
+
+    public function getResolveTable(string $find): array
+    {
+        $req = UserRequest::select('id','name','email','subject','content','is_resolved', 'created_at')
+                    ->where('name', 'LIKE', '%'.$find.'%')
+                    ->orWhere('email', 'LIKE', '%'.$find.'%')
+                    ->where('is_resolved', '=', '1')
+                    ->get()
+                    ->toArray();
+        return $req;
     }
 
     public function getUserIssueTable(string $find): array
@@ -212,7 +233,7 @@ class AdminService {
     public function getDefaultTable(string $table): array
     {
         if($table == 'user'){
-            $arr = User::select('id','Lname','email','admin','dev_mode','active', 'created_at')
+            $arr = User::select('id','Lname','Fname','email','admin','dev_mode','active', 'created_at')
                             ->get()
                             ->toArray();
         }elseif($table == 'proj'){
@@ -225,6 +246,10 @@ class AdminService {
                     ->with(['username'])
                     ->get()
                     ->toArray();
+        }elseif($table == 'req' || $table == 'resolve'){
+            $arr = UserRequest::select('id','name','email','subject','content','is_resolved', 'created_at')
+                            ->get()
+                            ->toArray();
         }else{
             $arr = ProjectIssue::select('id','project_id','user_id','content')
                     ->with(['project','username'])

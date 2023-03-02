@@ -1,10 +1,11 @@
 const into = document.querySelector('.toast-body')
 // Send code in email
-$('#generateCode').on('click', function () {
+$('#generateCode').on('click', function (e) {
+    $("#submitChanges").prop( "disabled", false)
     if(document.getElementById("verifyCode"))
         document.getElementById("verifyCode").disabled = false;
 
-    disableResend();
+    disableResend(e);
     timer(60);
     $.ajaxSetup({
         headers: {
@@ -18,13 +19,13 @@ $('#generateCode').on('click', function () {
 
 });
 
-function disableResend()
+function disableResend(e)
 {
-    $("#regenerateOTP").attr("disabled", true);
+    $(e.target).attr("disabled", true);
     timer(60);
     setTimeout(function() {
     // enable click after 1 second
-    $('#regenerateOTP').removeAttr("disabled");
+    $(e.target).removeAttr("disabled");
     }, 60000); // 1 second delay
 }
 
@@ -54,7 +55,7 @@ function timer(remaining) {
 $('#verifyCode').on('click', function () {
     var code = document.getElementById("inputCode").value;
     $.ajax({
-        url: "verify",
+        url: "update-dev",
         type:'post',
         data: {
           code : code,
@@ -65,8 +66,7 @@ $('#verifyCode').on('click', function () {
             if(data.response == "success") {
                 // Store the id of account tab
                 localStorage.setItem('activeTab', 'v-pills-account-tab');
-                
-                // Reload to change the content to change pass
+
                 location.reload();
                 } 
             else {
@@ -98,36 +98,35 @@ $(document).ready(function(){
 });
 
 
-$("#confirmPass").on("keyup", function(){
+$("#confirmPassword").on("keyup", function(){
     var form = $("#changePass");
 
     form.validate({
         rules:{
-            newPass: {
+            newPassword: {
                 required:true,
             },
-            confirmPass: {
+            confirmPassword: {
                 required:true,
             },    
         },
         messages: {
-            confirmPass: {
+            confirmPassword: {
                 equalTo: "Doesn't match with new password",
             },
         }
     });
-
-    if (form.valid() === true){
-        document.getElementById("submitChanges").disabled = false;
-    }
-
 }); 
 
 $("#submitChanges").on("click", function(){
-    
-    var code = document.getElementById("code").value;
+    var code = document.getElementById("verify-code").value;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax({
-        url: "verify",
+        url: "verify-code",
         type:'post',
         data: {
             code : code,
@@ -136,6 +135,7 @@ $("#submitChanges").on("click", function(){
             let data = JSON.parse(result);
 
             if(data.response == "success") {
+                localStorage.setItem('activeToast', 'DevToast');    
                 document.getElementById("changePass").submit();
             } 
             else {
@@ -201,11 +201,11 @@ $("#sendCode").click(function (e){
 $("#verifyModal").on("show.bs.modal", function(){
     document.getElementById("sendCode").disabled = false
     document.getElementById("sendCode").innerHTML = `Send code <i class="fa-solid fa-paper-plane"></i>`
-    document.getElementById("verify").disabled = true
+    document.getElementById("verifyBtn").disabled = true
 });
 
 // Verify code for change email
-$("#verify").click(function(e){
+$("#verifyBtn").click(function(e){
     var code = document.getElementById("inputCode2").value
     $.ajaxSetup({
         headers: {
@@ -213,7 +213,7 @@ $("#verify").click(function(e){
         }
     });
     $.ajax({
-        url: "verify",
+        url: "verify-code",
         type:'post',
         data: {
           code : code,
@@ -255,7 +255,7 @@ $("#saveChanges").click(function(){
             url: "check-pass",
             type:'post',
             data: {
-              pass : pass,
+              password : pass,
             },
             success: function(result){
                 let data = JSON.parse(result);

@@ -19,7 +19,9 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
+            $table->string('subject');
             $table->string('content');
+            $table->tinyInteger('is_resolved')->default('0');
             $table->timestamps();
         });
     }

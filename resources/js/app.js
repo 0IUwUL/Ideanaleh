@@ -18,12 +18,33 @@ $(document).ready(function(){
                 tags.push(input.value);
         })
     }
+    
+    // Alerts restricted user that logins via Google
+    if($('#DevToast').attr('data-status') == 'restrict'){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-danger text-white')
+
+        $('#DevToast').toast('show');
+    }
+
+    // Alerts user after submitting the request
+    if($('#DevToast').attr('data-status') == 'inform'){
+        $('.toast-container').addClass('position-fixed bottom-0 end-0')
+        $('.toast-header').addClass('bg-success text-white')
+
+        $('#DevToast').toast('show');
+    }
 });
 
 // function for loading
 $( window ).on( "load", function() {
     $('.load').fadeOut("slow");
     $('.page_content').fadeIn("slow");
+});
+
+//temporary fix for submit form on enter
+$(document).on("keydown", ":input:not(textarea):not(:submit)", function(event) { 
+    return event.key != "Enter";
 });
 
 // Validate registration form for Normal Auth
@@ -193,17 +214,15 @@ $("#modeToast, #modeToast2, #modeToast3, #modeToast4").on("click",  function(){
         console.log(mode)
         $('.toast-container').addClass('position-fixed bottom-0 end-0')
         $('.toast-header').addClass('bg-danger text-white')
-        if (!mode && c == 'logI'){
-            insert = `Verify your email in your profile settings.`
+        if (mode && c == 'logI'){
+            insert = `Verify your email in the settings.`
             $(this).removeAttr('href')
         }else{
             insert = `Register or Log In first`
         }
+        into.innerHTML = insert
+        $('.DevToast').toast('show');
     }
-    into.innerHTML = insert
-
-
-    $('.DevToast').toast('show');
 })
 
 // Show registration modal
@@ -241,6 +260,8 @@ $('#LoginSubmit').on("click", function(){
                 document.getElementById('err_pass').innerHTML = "* Incorrect password"
             } else if (data.response == 'err_mail')
                 document.getElementById('err_mail').innerHTML = "* Email is not yet registered"
+            else if (data.response == 'err_acc')
+                document.getElementById('err_pass').innerHTML = "* Sorry, your account is restricted from logging in due to being deactivated"
             else
                 document.getElementById("LogInForm").submit();
         }
@@ -408,7 +429,7 @@ function filterSend(category, option, page){
         }
     });
     $.ajax({
-        url: "main/filter",
+        url: "/main/filter",
         type:'post',
         data: {
             category: category,
@@ -432,3 +453,148 @@ $(document).on('click', '.pagination .page-link', function(event){
     filterSend(category, options, page)
 });
 
+
+// Show registration modal
+$("#forgot_password").on("click", function (){
+    $('#LoginModal').modal('hide');
+    $('#ForgotPasswordModal').modal('show');
+})
+
+var recover_email
+$('#search').on("click", function(e){
+    $(e.target).prop('disabled', true)
+    recover_email = document.getElementById("recover_email").value;
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/search-email/",
+        type:'POST',
+        data: {
+            email : recover_email,
+        },
+        success: function(result){
+            $(e.target).prop('disabled', false)
+            let data = JSON.parse(result);
+
+            if (data.response == 'success'){
+                $('#ForgotPasswordModal').modal('hide');
+                $('#ForgotPasswordModal2').modal('show');
+            }
+            else{
+                document.getElementById("recover_email").value = ''
+                document.getElementById('errorSearch').innerHTML = "* Email is not found"  
+            }
+        }
+
+    });
+    
+});
+
+$('#verify').on("click", function(e){
+    $(e.target).prop('disabled', true)
+    var code = document.getElementById("code").value;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/verify-code",
+        type:'POST',
+        data: {
+            email: recover_email,
+            code: code,
+        },
+        success: function(result){
+            $(e.target).prop('disabled', false)
+            let data = JSON.parse(result);
+
+            if (data.response == 'success'){
+                $('#ForgotPasswordModal2').modal('hide');
+                $('#ForgotPasswordModal3').modal('show');
+            }
+            else{
+                document.getElementById("code").value = ''
+                document.getElementById('errorCode').innerHTML = "* Incorrect verification code"  
+            }
+        }
+    });
+});
+
+$("#save").on("click", function(){
+    var form = $("#ForgotPasswordForm3");
+
+    form.validate({
+        rules:{
+            newPass: {
+                required:true,
+            },
+            confirmPass: {
+                required:true,
+            },    
+        },
+        messages: {
+            confirmPass: {
+                equalTo: "Doesn't match with new password",
+            },
+        }
+    });
+
+    if (form.valid() === true){
+        $('#user_email').val(recover_email)
+        form.submit()
+    }
+}); 
+
+// search
+jQuery(document.body).on('click', '.suggest', function(e){
+    window.location = $('a', this).attr('href');
+    return false;
+});
+
+$('input[name="search"]').on('keyup', function(e){
+    if(e.target.value){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "/main/search/suggestion",
+            type:'POST',
+            data: {
+                input : e.target.value
+            },
+            success: function(result){
+                let data = JSON.parse(result);
+                console.log(data.item)
+                $('.auto-com_box').html(data.item)
+            }
+        });
+        $('.auto-com_box').addClass('active')
+    }else
+        $('.auto-com_box').removeClass('active')
+})
+
+$('#CloseSearch').on('click', function(){
+    $('.auto-com_box').removeClass('active')
+})
+
+// fade in out
+const observer = new IntersectionObserver(entries => 
+    entries.forEach(entry => 
+      entry.target.classList.replace(
+        entry.isIntersecting ? 'fadeOut' : 'fadeIn', 
+        entry.isIntersecting ? 'fadeIn' : 'fadeOut'
+      )
+    ), {root: null, rootMargin: "0px", threshold: 0.1}
+  );
+  
+ document.querySelectorAll('.box').forEach(el => observer.observe(el));
+ document.querySelectorAll('.hero__title').forEach(el => observer.observe(el));
+ document.querySelectorAll('.user-profile').forEach(el => observer.observe(el));

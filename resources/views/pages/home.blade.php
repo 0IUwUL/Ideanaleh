@@ -5,7 +5,7 @@
 
   <section id="header-hero" class="hero hero-dark p1">
       <div class="hero__container">
-        <h1 class="hero__title">A Philippine-Based Crowdfunding Platform</h1>
+        <h1 class="hero__title" style="margin-top:70px">A Philippine-Based Crowdfunding Platform</h1>
         <hr class="hero__divider">
         <p class="hero__text">
           Start your Clever Innovative Projects with hopes of Bringing Joy and Excitement for Everyone
@@ -13,7 +13,47 @@
         <a href="{{route('main')}}" class="hero__btn hero__btn--dark btn">Find Out More</a>
       </div>
   </section>
-  
+
+  <section class="pt-5 pb-5 text-light text-center home_stats" style="background-color:#007a9c">
+    <div class="container fluid">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center text-center">
+            <div class="mx-2">
+              <i class="fa-solid fa-seedling fa-2x mx-3"></i>
+            </div>
+            <div>
+              <h1 style="font-weight:800">20000</h1>
+              <p>Funded Projects</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center text-center ">
+            <div class="mx-2">
+              <i class="fa-solid fa-hand-holding-heart fa-2x mx-3"></i>
+            </div>
+            <div>
+              <h1 style="font-weight:800">₱ {{$mode['total_donation']}}</h1>
+              <p>Total Donation</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="d-flex align-items-center text-center">
+            <div class="mx-2">
+              <i class="fa-solid fa-cube fa-2x mx-3"></i>
+            </div>
+            <div>
+              <h1 style="font-weight:800">10000</h1>
+              <p>Active Projects</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="pt-5 pb-5">
     <div class="container">
       <div class="row">
@@ -214,10 +254,10 @@
         <p class="hero__text">
           A Platform that serves to help Creators, Inventors, Innovators to Kickstart their Dream Projects.
         </p>
-        @if ($mode['dev'])
-        <a href="{{ route('project.create') }}" id = "modeToast" class="hero__btn hero__btn--light btn" data-mode = {{Session::get('mode')}}>Get Started!</a>
+        @if (Session::get('mode'))
+          <a href="{{ route('project.create') }}" id = "modeToast" data-mode = {{Session::get('mode')}} class="hero__btn hero__btn--light btn">Get Started!</a>
         @else
-        <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{Auth::check() ? 'logI' : 'logO'}}>Get Started!</a>
+          <button class="hero__btn hero__btn--light btn" id = "modeToast" data-id = {{Auth::check() ? 'logI' : 'logO'}} data-mode = {{Session::get('mode')}}>Get Started!</a>
         @endif
         
       </div>
@@ -225,7 +265,7 @@
 
   <section id="header-hero" class="hero hero-dark p2">
     <div class="hero__container">
-      <h1 class="hero__title">Back Innovative Projects, <br> Join Our Ride </h1>
+      <h1 class="hero__title " style="margin-top:70px">Back Innovative Projects, <br> Join Our Ride </h1>
       <hr class="hero__divider">
       <p class="hero__text">
         Ideanaleh is your source for creative breakthroughs in technology, design, and other fields, frequently with special advantages and price for early Donators. Support a campaign, share your ideas and feedback with the project team, and share in the joys and risks of bringing innovative technologies to reality.
@@ -265,14 +305,19 @@
     </div>
   </section>
 
-  <div aria-live="polite" aria-atomic="true" class="toast-container align-items-center mt-5">
-    <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="me-auto">System</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body bg-dark text-white d-flex justify-content-start">
-      </div>
+  <div class="container-fluid m-0 p-0" style="display:flex; background-color:rgb(237, 230, 230);">
+    <div class="contact">
+      <div class="top-border left"></div>
+      <div class="top-border right"></div>
+      <h1>CONTACT US</h1>
+      <p>Get in touch with us anytime! Whether you have questions, concerns or feedback, we are here to listen and help. Contact us today and let us know how we can assist you.</p>
+        <a href="{{route('help.index')}}">CONTACT US</a>
     </div>
-  </div>  
+  </div>
+
+  <x-toast/>
+
+  <div class="divider"></div>
+
+  <x-styles.footer/>
 @endsection

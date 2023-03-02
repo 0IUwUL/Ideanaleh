@@ -35,7 +35,17 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 <div class="row mt-5 d-flex">
-                    <h3>Contacts:</h3>
+                    <div class="row">
+                        <div class="col d-flex">
+                            <h3 class="align-middle m-0 pe-3">Contacts:</h3>
+                            @if (Auth::id() != $details['id'])
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ReportModal">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                    
                     <div class="col d-flex">
                        
                         <div class="ps-5 mb-3 row">
@@ -48,7 +58,7 @@
                     <hr>
                     @if($details['project'] != NULL)
                         <h3>Project Involved:</h3>
-                        <div class="row col-6 projects ps-5">
+                        <div class="row col col-sm-6 projects ps-5">
                             <a href={{url('project/view/'.$details['project']['id'])}} role = "button">
                                 <div class="card h-100">
                                     <div class="card-body">
@@ -123,7 +133,7 @@
                             </div>
                         @endforeach
                     @else
-                            <div class="col d-flex justify-content-center text-center fs-4">
+                            <div class="col d-flex justify-content-center text-center fs-4 profile">
                                 None as of the moment.
                             </div>
                     @endif
@@ -136,29 +146,32 @@
 <!-- Modal -->
 <div class="modal fade" id="ReportModal" tabindex="-1" aria-labelledby="ReportModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
+      <div class="modal-content border-danger">
+        <div class="modal-header bg-danger text-white">
           <h1 class="modal-title fs-5" id="ReportModalLabel">Report Form</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <form action="">
+        <form action="{{route("report-user")}}" method="POST">
+            @csrf
+            <div class="modal-body">
+                <input type="hidden" name="user_id" value={{$details['id']}} required>
                 <div class="mb-3">
                     <label for="ReportModalFormControl1" class="form-label">Subject</label>
-                    <input type="text" class="form-control" id="ReportModalFormControl1" required>
+                    <input type="text" class="form-control" name="subject" id="ReportModalFormControl1" required>
                 </div>
                 <div class="mb-3">
                     <label for="ReportModalFormTextarea1" class="form-label">Report in Detail</label>
-                    <textarea class="form-control" id="ReportModalFormTextarea1" rows="3" required></textarea>
+                    <textarea class="form-control" name="content" id="ReportModalFormTextarea1" rows="3" required></textarea>
                 </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger">Report</button>
-        </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Report</button>
+            </div>
+        </form>
       </div>
     </div>
 </div>
-
+<div class="divider"></div>
+<x-styles.footer/>
 @endsection

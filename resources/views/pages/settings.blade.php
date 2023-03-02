@@ -117,7 +117,7 @@
                                     data-bs-target="#editModal">
                                     <i class="fa-solid fa-pen-to-square"
                                     data-params="address"
-                                    data-address={{$user['address']}}>
+                                    data-address="{{$user['address']}}">
                                     </i>
                                 </a>
                             </div>
@@ -186,7 +186,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" id="verify" class="btn btn-primary ">Verify</button>
+                                            <button type="button" id="verifyBtn" class="btn btn-primary ">Verify</button>
                                         </div>
                                     </form>
                                 </div>
@@ -240,7 +240,7 @@
                                             <label id="inputChangePass">Input New Password</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" name="newPass" class="form-control" id="newPass" minlength="8" required>
+                                            <input type="password" name="password" class="form-control" id="newPassword" minlength="8" required>
                                         </div> 
                                     </div>
                                     <div class="mb-3 row">
@@ -248,13 +248,13 @@
                                             <label id="inputReChangePass">Re-enter New Password</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" name="confirmPass" class="form-control" id="confirmPass" required data-rule-equalTo = '#newPass'>
+                                            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required data-rule-equalTo = '#newPassword'>
                                         </div> 
                                     </div>
                                     <div class="row mb-3">
                                         <label for="inputCode" class="col-sm-4 col-form-label">Input verification code</label>
                                         <div class="col input-group">
-                                            <input name="code" id="code" type="text" class="form-control">
+                                            <input name="code" id="verify-code" type="text" class="form-control">
                                             <button type="button" id="generateCode" class = "btn btn-primary"><span id="timer">Send code</span></button>
                                         </div>
                                         <div id="errorMsg" class="error"></div>
@@ -272,16 +272,7 @@
             </div>
         </div>
     </div>
-    <div class="toast-container align-items-center mt-5">
-        <div class="DevToast toast" role="alert" id = "DevToast" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">System</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body bg-dark text-white d-flex justify-content-start">
-            </div>
-        </div>
-    </div>  
+    <x-toast/> 
 </div>
 @vite(['resources/js/settings.js'])
 

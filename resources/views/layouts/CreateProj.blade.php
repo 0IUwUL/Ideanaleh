@@ -19,7 +19,8 @@
         <div class="page_content">
             @yield('content')
         </div>
-
+        <div class="divider"></div>
+        <x-styles.footer/>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
@@ -27,9 +28,10 @@
 
         <script type="text/javascript">
             // Tags js
+            $(document).on("keydown", ".input-tags", function(event) { 
+                return event.key != "Enter";
+            });
             const input_tags = document.querySelector(".input-tags")
-            console.log("ito ang input_tags");
-            console.log(input_tags);
             var max_tags = 6;
             document.querySelector('.max-tags').innerText = max_tags
 
@@ -58,7 +60,7 @@
             $("#clear_tags").on("click", clearTags);
             
             input_tags.addEventListener('keyup', (e)=>{
-                if (e.key == "Enter" || e.key == ","){
+                if (e.key == ","){
                     
                     let tag_value = input_tags.value.replace( /\s+/g, ' ');
                     if (tag_value.length > 1 && tags.length <= max_tags && !tags.includes(tag_value)){
